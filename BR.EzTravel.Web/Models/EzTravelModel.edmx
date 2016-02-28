@@ -1,0 +1,901 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ExHolidayModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="lnkblogcomment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UpdateDT" Type="datetime" Precision="0" />
+          <Property Name="CancelDT" Type="datetime" Precision="0" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpackagetype">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberPostID" Type="int" Nullable="false" />
+          <Property Name="PackageTypeID" Type="int" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Price" Type="double" Nullable="false" />
+          <Property Name="Days" Type="int" Nullable="false" />
+          <Property Name="Nights" Type="int" Nullable="false" />
+          <Property Name="StartDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="EndDT" Type="datetime" Precision="0" />
+          <Property Name="ThumbnailImagePath" Type="varchar" MaxLength="500" />
+          <Property Name="PublishDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UpdateDT" Type="datetime" Precision="0" />
+          <Property Name="CancelDT" Type="datetime" Precision="0" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostcity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberPostID" Type="int" Nullable="false" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostcountry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberPostID" Type="int" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostimage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberPostID" Type="int" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="1000" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UpdateDT" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostpackageactivity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberPostID" Type="int" Nullable="false" />
+          <Property Name="PackageActivityID" Type="int" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberrenewal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberRenewalID" Type="int" Nullable="false" />
+          <Property Name="PackageID" Type="int" />
+          <Property Name="ProductDescription" Type="varchar" MaxLength="200" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="double" Nullable="false" />
+          <Property Name="SubTotal" Type="double" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CancelDT" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="lnkmemberreward">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="TransType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RewardPoint" Type="int" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkrating">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberPostID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="200" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="1000" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkrewardclaim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RewardSchemeID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refcategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refcity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refcountry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refpackage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="NoOfPost" Type="int" Nullable="false" />
+          <Property Name="Price" Type="double" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UpadteDT" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="refpackageactivity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refpackagetype">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refrewardscheme">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RewardPoint" Type="int" Nullable="false" />
+          <Property Name="Rewards" Type="double" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UpdateDT" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblmember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusinessRegNo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="PICName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PICContact" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PICEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OfficeContact" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Postcode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AvailablePost" Type="int" Nullable="false" />
+          <Property Name="RewardPoints" Type="int" Nullable="false" />
+          <Property Name="Roles" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ExpiryDT" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="trnblog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Body" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="PublishDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UpdateDT" Type="datetime" Precision="0" />
+          <Property Name="CancelDT" Type="datetime" Precision="0" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="trnmemberrenewal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="DiscountPrice" Type="double" />
+          <Property Name="TotalPrice" Type="double" />
+          <Property Name="StartDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="EndDT" Type="datetime" Precision="0" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CancelDT" Type="datetime" Precision="0" />
+          <Property Name="UpdateDT" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="trnroi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ContatNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ExHolidayModelStoreContainer">
+          <EntitySet Name="lnkblogcomment" EntityType="Self.lnkblogcomment" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberpackagetype" EntityType="Self.lnkmemberpackagetype" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberpost" EntityType="Self.lnkmemberpost" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberpostcity" EntityType="Self.lnkmemberpostcity" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberpostcountry" EntityType="Self.lnkmemberpostcountry" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberpostimage" EntityType="Self.lnkmemberpostimage" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberpostpackageactivity" EntityType="Self.lnkmemberpostpackageactivity" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberrenewal" EntityType="Self.lnkmemberrenewal" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberreward" EntityType="Self.lnkmemberreward" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkrating" EntityType="Self.lnkrating" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkrewardclaim" EntityType="Self.lnkrewardclaim" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="refcategory" EntityType="Self.refcategory" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="refcity" EntityType="Self.refcity" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="refcountry" EntityType="Self.refcountry" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="refpackage" EntityType="Self.refpackage" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="refpackageactivity" EntityType="Self.refpackageactivity" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="refpackagetype" EntityType="Self.refpackagetype" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="refrewardscheme" EntityType="Self.refrewardscheme" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="tblmember" EntityType="Self.tblmember" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="trnblog" EntityType="Self.trnblog" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="trnmemberrenewal" EntityType="Self.trnmemberrenewal" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="trnroi" EntityType="Self.trnroi" Schema="exholiday" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExHolidayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="lnkblogcomment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateDT" Type="DateTime" />
+          <Property Name="CancelDT" Type="DateTime" />
+          <Property Name="Language" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpackagetype">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberPostID" Type="Int32" Nullable="false" />
+          <Property Name="PackageTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Days" Type="Int32" Nullable="false" />
+          <Property Name="Nights" Type="Int32" Nullable="false" />
+          <Property Name="StartDT" Type="DateTime" Nullable="false" />
+          <Property Name="EndDT" Type="DateTime" />
+          <Property Name="ThumbnailImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PublishDT" Type="DateTime" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateDT" Type="DateTime" />
+          <Property Name="CancelDT" Type="DateTime" />
+          <Property Name="Language" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostcity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberPostID" Type="Int32" Nullable="false" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostcountry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberPostID" Type="Int32" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostimage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberPostID" Type="Int32" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateDT" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostpackageactivity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberPostID" Type="Int32" Nullable="false" />
+          <Property Name="PackageActivityID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberrenewal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberRenewalID" Type="Int32" Nullable="false" />
+          <Property Name="PackageID" Type="Int32" />
+          <Property Name="ProductDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Double" Nullable="false" />
+          <Property Name="SubTotal" Type="Double" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="CancelDT" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="lnkmemberreward">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="TransType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RewardPoint" Type="Int32" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkrating">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberPostID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkrewardclaim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RewardSchemeID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refcategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refcity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refcountry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refpackage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="NoOfPost" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="UpadteDT" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="refpackageactivity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refpackagetype">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="refrewardscheme">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RewardPoint" Type="Int32" Nullable="false" />
+          <Property Name="Rewards" Type="Double" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateDT" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="tblmember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessRegNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PICName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PICContact" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PICEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OfficeContact" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Postcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AvailablePost" Type="Int32" Nullable="false" />
+          <Property Name="RewardPoints" Type="Int32" Nullable="false" />
+          <Property Name="Roles" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="ExpiryDT" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="trnblog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Body" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PublishDT" Type="DateTime" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateDT" Type="DateTime" />
+          <Property Name="CancelDT" Type="DateTime" />
+          <Property Name="Language" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="trnmemberrenewal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="DiscountPrice" Type="Double" />
+          <Property Name="TotalPrice" Type="Double" />
+          <Property Name="StartDT" Type="DateTime" Nullable="false" />
+          <Property Name="EndDT" Type="DateTime" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="CancelDT" Type="DateTime" />
+          <Property Name="UpdateDT" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="trnroi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContatNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ExHolidayEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="lnkblogcomments" EntityType="Self.lnkblogcomment" />
+          <EntitySet Name="lnkmemberpackagetypes" EntityType="Self.lnkmemberpackagetype" />
+          <EntitySet Name="lnkmemberposts" EntityType="Self.lnkmemberpost" />
+          <EntitySet Name="lnkmemberpostcities" EntityType="Self.lnkmemberpostcity" />
+          <EntitySet Name="lnkmemberpostcountries" EntityType="Self.lnkmemberpostcountry" />
+          <EntitySet Name="lnkmemberpostimages" EntityType="Self.lnkmemberpostimage" />
+          <EntitySet Name="lnkmemberpostpackageactivities" EntityType="Self.lnkmemberpostpackageactivity" />
+          <EntitySet Name="lnkmemberrenewals" EntityType="Self.lnkmemberrenewal" />
+          <EntitySet Name="lnkmemberrewards" EntityType="Self.lnkmemberreward" />
+          <EntitySet Name="lnkratings" EntityType="Self.lnkrating" />
+          <EntitySet Name="lnkrewardclaims" EntityType="Self.lnkrewardclaim" />
+          <EntitySet Name="refcategories" EntityType="Self.refcategory" />
+          <EntitySet Name="refcities" EntityType="Self.refcity" />
+          <EntitySet Name="refcountries" EntityType="Self.refcountry" />
+          <EntitySet Name="refpackages" EntityType="Self.refpackage" />
+          <EntitySet Name="refpackageactivities" EntityType="Self.refpackageactivity" />
+          <EntitySet Name="refpackagetypes" EntityType="Self.refpackagetype" />
+          <EntitySet Name="refrewardschemes" EntityType="Self.refrewardscheme" />
+          <EntitySet Name="tblmembers" EntityType="Self.tblmember" />
+          <EntitySet Name="trnblogs" EntityType="Self.trnblog" />
+          <EntitySet Name="trnmemberrenewals" EntityType="Self.trnmemberrenewal" />
+          <EntitySet Name="trnrois" EntityType="Self.trnroi" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExHolidayModelStoreContainer" CdmEntityContainer="ExHolidayEntities">
+          <EntitySetMapping Name="lnkblogcomments">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkblogcomment">
+              <MappingFragment StoreEntitySet="lnkblogcomment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+                <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberpackagetypes">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpackagetype">
+              <MappingFragment StoreEntitySet="lnkmemberpackagetype">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberPostID" ColumnName="MemberPostID" />
+                <ScalarProperty Name="PackageTypeID" ColumnName="PackageTypeID" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberposts">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpost">
+              <MappingFragment StoreEntitySet="lnkmemberpost">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="Nights" ColumnName="Nights" />
+                <ScalarProperty Name="StartDT" ColumnName="StartDT" />
+                <ScalarProperty Name="EndDT" ColumnName="EndDT" />
+                <ScalarProperty Name="ThumbnailImagePath" ColumnName="ThumbnailImagePath" />
+                <ScalarProperty Name="PublishDT" ColumnName="PublishDT" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+                <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberpostcities">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpostcity">
+              <MappingFragment StoreEntitySet="lnkmemberpostcity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberPostID" ColumnName="MemberPostID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberpostcountries">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpostcountry">
+              <MappingFragment StoreEntitySet="lnkmemberpostcountry">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberPostID" ColumnName="MemberPostID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberpostimages">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpostimage">
+              <MappingFragment StoreEntitySet="lnkmemberpostimage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberPostID" ColumnName="MemberPostID" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberpostpackageactivities">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpostpackageactivity">
+              <MappingFragment StoreEntitySet="lnkmemberpostpackageactivity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberPostID" ColumnName="MemberPostID" />
+                <ScalarProperty Name="PackageActivityID" ColumnName="PackageActivityID" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberrenewals">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberrenewal">
+              <MappingFragment StoreEntitySet="lnkmemberrenewal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberRenewalID" ColumnName="MemberRenewalID" />
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberrewards">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberreward">
+              <MappingFragment StoreEntitySet="lnkmemberreward">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TransID" ColumnName="TransID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="TransType" ColumnName="TransType" />
+                <ScalarProperty Name="RewardPoint" ColumnName="RewardPoint" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkratings">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkrating">
+              <MappingFragment StoreEntitySet="lnkrating">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberPostID" ColumnName="MemberPostID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkrewardclaims">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkrewardclaim">
+              <MappingFragment StoreEntitySet="lnkrewardclaim">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RewardSchemeID" ColumnName="RewardSchemeID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="refcategories">
+            <EntityTypeMapping TypeName="ExHolidayModel.refcategory">
+              <MappingFragment StoreEntitySet="refcategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="refcities">
+            <EntityTypeMapping TypeName="ExHolidayModel.refcity">
+              <MappingFragment StoreEntitySet="refcity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="refcountries">
+            <EntityTypeMapping TypeName="ExHolidayModel.refcountry">
+              <MappingFragment StoreEntitySet="refcountry">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="refpackages">
+            <EntityTypeMapping TypeName="ExHolidayModel.refpackage">
+              <MappingFragment StoreEntitySet="refpackage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="NoOfPost" ColumnName="NoOfPost" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="UpadteDT" ColumnName="UpadteDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="refpackageactivities">
+            <EntityTypeMapping TypeName="ExHolidayModel.refpackageactivity">
+              <MappingFragment StoreEntitySet="refpackageactivity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="refpackagetypes">
+            <EntityTypeMapping TypeName="ExHolidayModel.refpackagetype">
+              <MappingFragment StoreEntitySet="refpackagetype">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="refrewardschemes">
+            <EntityTypeMapping TypeName="ExHolidayModel.refrewardscheme">
+              <MappingFragment StoreEntitySet="refrewardscheme">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RewardPoint" ColumnName="RewardPoint" />
+                <ScalarProperty Name="Rewards" ColumnName="Rewards" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblmembers">
+            <EntityTypeMapping TypeName="ExHolidayModel.tblmember">
+              <MappingFragment StoreEntitySet="tblmember">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BusinessRegNo" ColumnName="BusinessRegNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="PICName" ColumnName="PICName" />
+                <ScalarProperty Name="PICContact" ColumnName="PICContact" />
+                <ScalarProperty Name="PICEmail" ColumnName="PICEmail" />
+                <ScalarProperty Name="OfficeContact" ColumnName="OfficeContact" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="AvailablePost" ColumnName="AvailablePost" />
+                <ScalarProperty Name="RewardPoints" ColumnName="RewardPoints" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="ExpiryDT" ColumnName="ExpiryDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trnblogs">
+            <EntityTypeMapping TypeName="ExHolidayModel.trnblog">
+              <MappingFragment StoreEntitySet="trnblog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="PublishDT" ColumnName="PublishDT" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+                <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trnmemberrenewals">
+            <EntityTypeMapping TypeName="ExHolidayModel.trnmemberrenewal">
+              <MappingFragment StoreEntitySet="trnmemberrenewal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="StartDT" ColumnName="StartDT" />
+                <ScalarProperty Name="EndDT" ColumnName="EndDT" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trnrois">
+            <EntityTypeMapping TypeName="ExHolidayModel.trnroi">
+              <MappingFragment StoreEntitySet="trnroi">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ContatNo" ColumnName="ContatNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

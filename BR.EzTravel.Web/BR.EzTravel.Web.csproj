@@ -1,0 +1,1465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{00C4A403-D0F0-410F-9700-AD6DF9AB1660}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BR.EzTravel.Web</RootNamespace>
+    <AssemblyName>BR.EzTravel.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\EN\Controllers\HomeController.cs" />
+    <Compile Include="Areas\EN\ENAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EzTravelModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EzTravelModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EzTravelModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EzTravelModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EzTravelModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\lnkblogcomment.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkmemberpackagetype.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkmemberpost.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkmemberpostcity.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkmemberpostcountry.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkmemberpostimage.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkmemberpostpackageactivity.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkmemberrenewal.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkmemberreward.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkrating.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lnkrewardclaim.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\refcategory.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\refcity.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\refcountry.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\refpackage.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\refpackageactivity.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\refpackagetype.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\refrewardscheme.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblmember.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trnblog.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trnmemberrenewal.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trnroi.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="img\bath.png" />
+    <Content Include="img\beach\1.jpg" />
+    <Content Include="img\beach\2.jpg" />
+    <Content Include="img\beach\3.jpg" />
+    <Content Include="img\beach\4.gif" />
+    <Content Include="img\beach\4.jpg" />
+    <Content Include="img\bed.png" />
+    <Content Include="img\boat\boat_1.jpg" />
+    <Content Include="img\boat\boat_10.jpg" />
+    <Content Include="img\boat\boat_11.jpg" />
+    <Content Include="img\boat\boat_12.jpg" />
+    <Content Include="img\boat\boat_13.jpg" />
+    <Content Include="img\boat\boat_14.jpg" />
+    <Content Include="img\boat\boat_15.jpg" />
+    <Content Include="img\boat\boat_2.jpg" />
+    <Content Include="img\boat\boat_3.jpg" />
+    <Content Include="img\boat\boat_4.jpg" />
+    <Content Include="img\boat\boat_5.jpg" />
+    <Content Include="img\boat\boat_6.jpg" />
+    <Content Include="img\boat\boat_7.jpg" />
+    <Content Include="img\boat\boat_8.jpg" />
+    <Content Include="img\boat\boat_9.jpg" />
+    <Content Include="img\calendar_icon.png" />
+    <Content Include="img\calendar_icon_grey.png" />
+    <Content Include="img\cars\gal_1_b.jpg" />
+    <Content Include="img\cars\gal_1_s.jpg" />
+    <Content Include="img\cars\gal_2_b.jpg" />
+    <Content Include="img\cars\gal_2_s.jpg" />
+    <Content Include="img\cars\gal_3_b.jpg" />
+    <Content Include="img\cars\gal_3_s.jpg" />
+    <Content Include="img\cars\gal_4_b.jpg" />
+    <Content Include="img\cars\gal_4_s.jpg" />
+    <Content Include="img\cars\gal_5_b.jpg" />
+    <Content Include="img\cars\gal_5_s.jpg" />
+    <Content Include="img\cars\gal_6_b.jpg" />
+    <Content Include="img\cars\gal_6_s.jpg" />
+    <Content Include="img\car_1.png" />
+    <Content Include="img\car_2.png" />
+    <Content Include="img\car_3.png" />
+    <Content Include="img\car_4.png" />
+    <Content Include="img\car_5.png" />
+    <Content Include="img\car_6.png" />
+    <Content Include="img\car_7.png" />
+    <Content Include="img\car_8.png" />
+    <Content Include="img\car_icon_1.png" />
+    <Content Include="img\car_icon_2.png" />
+    <Content Include="img\car_icon_3.png" />
+    <Content Include="img\car_icon_4.png" />
+    <Content Include="img\car_icon_5.png" />
+    <Content Include="img\clock.png" />
+    <Content Include="img\comment_icon_grey.png" />
+    <Content Include="img\country\1.jpg" />
+    <Content Include="img\country\10.jpg" />
+    <Content Include="img\country\11.jpg" />
+    <Content Include="img\country\12.jpg" />
+    <Content Include="img\country\13.jpg" />
+    <Content Include="img\country\14.jpg" />
+    <Content Include="img\country\15.jpg" />
+    <Content Include="img\country\2.jpg" />
+    <Content Include="img\country\3.jpg" />
+    <Content Include="img\country\4.jpg" />
+    <Content Include="img\country\5.jpg" />
+    <Content Include="img\country\6.jpg" />
+    <Content Include="img\country\7.jpg" />
+    <Content Include="img\country\8.jpg" />
+    <Content Include="img\country\9.jpg" />
+    <Content Include="img\country\99.jpg" />
+    <Content Include="img\country\aboutus.jpg" />
+    <Content Include="img\country\banner.jpg" />
+    <Content Include="img\country\banner2.jpg" />
+    <Content Include="img\country\europe.jpg" />
+    <Content Include="img\country\j2.jpeg" />
+    <Content Include="img\country\j2.jpg" />
+    <Content Include="img\country\japan1.jpg" />
+    <Content Include="img\country\paris.jpg" />
+    <Content Include="img\country\profile1.jpg" />
+    <Content Include="img\country\profile2.jpg" />
+    <Content Include="img\country\profile3.jpg" />
+    <Content Include="img\country\profile4.jpeg" />
+    <Content Include="img\country\venice.jpg" />
+    <Content Include="img\de.png" />
+    <Content Include="img\detail\bar_1.jpg" />
+    <Content Include="img\detail\bar_2.jpg" />
+    <Content Include="img\detail\bar_3.jpg" />
+    <Content Include="img\detail\bar_4.jpg" />
+    <Content Include="img\detail\bg_1.jpg" />
+    <Content Include="img\detail\bg_2.jpg" />
+    <Content Include="img\detail\bg_3.jpg" />
+    <Content Include="img\detail\bg_4.jpg" />
+    <Content Include="img\detail\bg_5.jpg" />
+    <Content Include="img\detail\bg_6.jpg" />
+    <Content Include="img\detail\blog_1.jpg" />
+    <Content Include="img\detail\blog_2.jpg" />
+    <Content Include="img\detail\blog_gal_1.jpg" />
+    <Content Include="img\detail\blog_gal_2.jpg" />
+    <Content Include="img\detail\blog_gal_3.jpg" />
+    <Content Include="img\detail\blog_gal_4.jpg" />
+    <Content Include="img\detail\blog_gal_5.jpg" />
+    <Content Include="img\detail\blog_gal_6.jpg" />
+    <Content Include="img\detail\blog_nav_1.jpg" />
+    <Content Include="img\detail\blog_nav_2.jpg" />
+    <Content Include="img\detail\comment_1.jpg" />
+    <Content Include="img\detail\comment_2.jpg" />
+    <Content Include="img\detail\comment_3.jpg" />
+    <Content Include="img\detail\detail_logo.png" />
+    <Content Include="img\detail\detail_logo_2.png" />
+    <Content Include="img\detail\flight.jpg" />
+    <Content Include="img\detail\flightsl_small_1.jpg" />
+    <Content Include="img\detail\flightsl_small_2.jpg" />
+    <Content Include="img\detail\flightsl_small_3.jpg" />
+    <Content Include="img\detail\flight_2.jpg" />
+    <Content Include="img\detail\flight_3.jpg" />
+    <Content Include="img\detail\guide_1.jpg" />
+    <Content Include="img\detail\guide_2.jpg" />
+    <Content Include="img\detail\guide_3.jpg" />
+    <Content Include="img\detail\guide_4.jpg" />
+    <Content Include="img\detail\guide_5.jpg" />
+    <Content Include="img\detail\guide_6.jpg" />
+    <Content Include="img\detail\guide_7.jpg" />
+    <Content Include="img\detail\guide_8.jpg" />
+    <Content Include="img\detail\hotel_small_1.jpg" />
+    <Content Include="img\detail\hotel_small_2.jpg" />
+    <Content Include="img\detail\hotel_small_3.jpg" />
+    <Content Include="img\detail\interested.jpg" />
+    <Content Include="img\detail\letter-dark-2.png" />
+    <Content Include="img\detail\letter-dark.png" />
+    <Content Include="img\detail\letter-red.png" />
+    <Content Include="img\detail\letter.png" />
+    <Content Include="img\detail\m_slide_1.jpg" />
+    <Content Include="img\detail\m_slide_1s.jpg" />
+    <Content Include="img\detail\m_slide_2.jpg" />
+    <Content Include="img\detail\m_slide_2s.jpg" />
+    <Content Include="img\detail\m_slide_3.jpg" />
+    <Content Include="img\detail\m_slide_3s.jpg" />
+    <Content Include="img\detail\m_slide_4.jpg" />
+    <Content Include="img\detail\m_slide_4s.jpg" />
+    <Content Include="img\detail\m_slide_5.jpg" />
+    <Content Include="img\detail\m_slide_5s.jpg" />
+    <Content Include="img\detail\phone24-dark-2.png" />
+    <Content Include="img\detail\phone24-dark.png" />
+    <Content Include="img\detail\phone24-red.png" />
+    <Content Include="img\detail\phone24.png" />
+    <Content Include="img\detail\popular_1.jpg" />
+    <Content Include="img\detail\popular_2.jpg" />
+    <Content Include="img\detail\related_1.jpg" />
+    <Content Include="img\detail\related_2.jpg" />
+    <Content Include="img\detail\slide_1.jpg" />
+    <Content Include="img\detail\slide_1s.jpg" />
+    <Content Include="img\detail\slide_2.jpg" />
+    <Content Include="img\detail\slide_2s.jpg" />
+    <Content Include="img\detail\slide_3.jpg" />
+    <Content Include="img\detail\slide_3s.jpg" />
+    <Content Include="img\detail\slide_4.jpg" />
+    <Content Include="img\detail\slide_4s.jpg" />
+    <Content Include="img\detail\slide_5.jpg" />
+    <Content Include="img\detail\slide_5s.jpg" />
+    <Content Include="img\detail\slide_6.jpg" />
+    <Content Include="img\detail\slide_6s.jpg" />
+    <Content Include="img\detail\sport.jpg" />
+    <Content Include="img\detail\s_slide_1.jpg" />
+    <Content Include="img\detail\s_slide_1s.jpg" />
+    <Content Include="img\detail\s_slide_2.jpg" />
+    <Content Include="img\detail\s_slide_2s.jpg" />
+    <Content Include="img\detail\s_slide_3.jpg" />
+    <Content Include="img\detail\s_slide_3s.jpg" />
+    <Content Include="img\detail\s_slide_4.jpg" />
+    <Content Include="img\detail\s_slide_4s.jpg" />
+    <Content Include="img\detail\s_slide_5.jpg" />
+    <Content Include="img\detail\s_slide_5s.jpg" />
+    <Content Include="img\detail\tab_img.jpg" />
+    <Content Include="img\detail\tour_small_1.jpg" />
+    <Content Include="img\detail\tour_small_2.jpg" />
+    <Content Include="img\detail\tour_small_3.jpg" />
+    <Content Include="img\detail\widget_s.jpg" />
+    <Content Include="img\detail\w_gal_1.jpg" />
+    <Content Include="img\detail\w_gal_10.jpg" />
+    <Content Include="img\detail\w_gal_11.jpg" />
+    <Content Include="img\detail\w_gal_12.jpg" />
+    <Content Include="img\detail\w_gal_2.jpg" />
+    <Content Include="img\detail\w_gal_3.jpg" />
+    <Content Include="img\detail\w_gal_4.jpg" />
+    <Content Include="img\detail\w_gal_5.jpg" />
+    <Content Include="img\detail\w_gal_6.jpg" />
+    <Content Include="img\detail\w_gal_7.jpg" />
+    <Content Include="img\detail\w_gal_8.jpg" />
+    <Content Include="img\detail\w_gal_9.jpg" />
+    <Content Include="img\drag.png" />
+    <Content Include="img\en.png" />
+    <Content Include="img\favicon.png" />
+    <Content Include="img\flag_icon.png" />
+    <Content Include="img\flag_icon_aqua.png" />
+    <Content Include="img\flag_icon_grey.png" />
+    <Content Include="img\fr.png" />
+    <Content Include="img\gallery\arrow-left.jpg" />
+    <Content Include="img\gallery\bg_1.jpg" />
+    <Content Include="img\gallery\bg_2.jpg" />
+    <Content Include="img\gallery\bg_3.jpg" />
+    <Content Include="img\gallery\g_gal_1.jpg" />
+    <Content Include="img\gallery\g_gal_10.jpg" />
+    <Content Include="img\gallery\g_gal_11.jpg" />
+    <Content Include="img\gallery\g_gal_12.jpg" />
+    <Content Include="img\gallery\g_gal_13.jpg" />
+    <Content Include="img\gallery\g_gal_14.jpg" />
+    <Content Include="img\gallery\g_gal_15.jpg" />
+    <Content Include="img\gallery\g_gal_16.jpg" />
+    <Content Include="img\gallery\g_gal_17.jpg" />
+    <Content Include="img\gallery\g_gal_18.jpg" />
+    <Content Include="img\gallery\g_gal_19.jpg" />
+    <Content Include="img\gallery\g_gal_2.jpg" />
+    <Content Include="img\gallery\g_gal_20.jpg" />
+    <Content Include="img\gallery\g_gal_3.jpg" />
+    <Content Include="img\gallery\g_gal_4.jpg" />
+    <Content Include="img\gallery\g_gal_5.jpg" />
+    <Content Include="img\gallery\g_gal_6.jpg" />
+    <Content Include="img\gallery\g_gal_7.jpg" />
+    <Content Include="img\gallery\g_gal_8.jpg" />
+    <Content Include="img\gallery\g_gal_9.jpg" />
+    <Content Include="img\gallery\m_gal_1.jpg" />
+    <Content Include="img\gallery\m_gal_10.jpg" />
+    <Content Include="img\gallery\m_gal_11.jpg" />
+    <Content Include="img\gallery\m_gal_12.jpg" />
+    <Content Include="img\gallery\m_gal_13.jpg" />
+    <Content Include="img\gallery\m_gal_2.jpg" />
+    <Content Include="img\gallery\m_gal_3.jpg" />
+    <Content Include="img\gallery\m_gal_4.jpg" />
+    <Content Include="img\gallery\m_gal_5.jpg" />
+    <Content Include="img\gallery\m_gal_6.jpg" />
+    <Content Include="img\gallery\m_gal_7.jpg" />
+    <Content Include="img\gallery\m_gal_8.jpg" />
+    <Content Include="img\gallery\m_gal_9.jpg" />
+    <Content Include="img\gallery\slide_1.jpg" />
+    <Content Include="img\gallery\s_gal_1.jpg" />
+    <Content Include="img\gallery\s_gal_10.jpg" />
+    <Content Include="img\gallery\s_gal_11.jpg" />
+    <Content Include="img\gallery\s_gal_12.jpg" />
+    <Content Include="img\gallery\s_gal_13.jpg" />
+    <Content Include="img\gallery\s_gal_2.jpg" />
+    <Content Include="img\gallery\s_gal_3.jpg" />
+    <Content Include="img\gallery\s_gal_4.jpg" />
+    <Content Include="img\gallery\s_gal_5.jpg" />
+    <Content Include="img\gallery\s_gal_6.jpg" />
+    <Content Include="img\gallery\s_gal_7.jpg" />
+    <Content Include="img\gallery\s_gal_8.jpg" />
+    <Content Include="img\gallery\s_gal_9.jpg" />
+    <Content Include="img\gaz.png" />
+    <Content Include="img\guide_6.jpg" />
+    <Content Include="img\guide_7.jpg" />
+    <Content Include="img\guide_8.jpg" />
+    <Content Include="img\home_10\airlines_1.png" />
+    <Content Include="img\home_10\airlines_2.png" />
+    <Content Include="img\home_10\airlines_3.png" />
+    <Content Include="img\home_10\bg_1.jpg" />
+    <Content Include="img\home_10\city_1.jpg" />
+    <Content Include="img\home_10\city_2.jpg" />
+    <Content Include="img\home_10\city_3.jpg" />
+    <Content Include="img\home_10\company_1.jpg" />
+    <Content Include="img\home_10\company_2.jpg" />
+    <Content Include="img\home_10\company_3.jpg" />
+    <Content Include="img\home_10\company_4.jpg" />
+    <Content Include="img\home_10\company_5.jpg" />
+    <Content Include="img\home_10\company_6.jpg" />
+    <Content Include="img\home_10\flight_1.jpg" />
+    <Content Include="img\home_10\flight_2.jpg" />
+    <Content Include="img\home_10\flight_3.jpg" />
+    <Content Include="img\home_10\flight_4.jpg" />
+    <Content Include="img\home_10\f_logo.png" />
+    <Content Include="img\home_10\logo.png" />
+    <Content Include="img\home_10\slider.jpg" />
+    <Content Include="img\home_10\slide_icon.png" />
+    <Content Include="img\home_10\tour_1.jpg" />
+    <Content Include="img\home_10\tour_10.jpg" />
+    <Content Include="img\home_10\tour_11.jpg" />
+    <Content Include="img\home_10\tour_12.jpg" />
+    <Content Include="img\home_10\tour_2.jpg" />
+    <Content Include="img\home_10\tour_3.jpg" />
+    <Content Include="img\home_10\tour_4.jpg" />
+    <Content Include="img\home_10\tour_5.jpg" />
+    <Content Include="img\home_10\tour_6.jpg" />
+    <Content Include="img\home_10\tour_7.jpg" />
+    <Content Include="img\home_10\tour_8.jpg" />
+    <Content Include="img\home_10\tour_9.jpg" />
+    <Content Include="img\home_1\dropdown_item_1.jpg" />
+    <Content Include="img\home_1\dropdown_item_2.jpg" />
+    <Content Include="img\home_1\dropdown_item_3.jpg" />
+    <Content Include="img\home_1\dropdown_item_4.jpg" />
+    <Content Include="img\home_1\dropdown_item_5.jpg" />
+    <Content Include="img\home_1\dropdown_item_6.jpg" />
+    <Content Include="img\home_1\dropdown_item_7.jpg" />
+    <Content Include="img\home_1\inst_img_1.jpg" />
+    <Content Include="img\home_1\inst_img_10.jpg" />
+    <Content Include="img\home_1\inst_img_11.jpg" />
+    <Content Include="img\home_1\inst_img_12.jpg" />
+    <Content Include="img\home_1\inst_img_13.jpg" />
+    <Content Include="img\home_1\inst_img_14.jpg" />
+    <Content Include="img\home_1\inst_img_15.jpg" />
+    <Content Include="img\home_1\inst_img_2.jpg" />
+    <Content Include="img\home_1\inst_img_3.jpg" />
+    <Content Include="img\home_1\inst_img_4.jpg" />
+    <Content Include="img\home_1\inst_img_5.jpg" />
+    <Content Include="img\home_1\inst_img_6.jpg" />
+    <Content Include="img\home_1\inst_img_7.jpg" />
+    <Content Include="img\home_1\inst_img_8.jpg" />
+    <Content Include="img\home_1\inst_img_9.jpg" />
+    <Content Include="img\home_1\logo.png" />
+    <Content Include="img\home_1\main_slide_1.jpg" />
+    <Content Include="img\home_1\map_1.png" />
+    <Content Include="img\home_1\map_2.png" />
+    <Content Include="img\home_1\offers_slide_1.jpg" />
+    <Content Include="img\home_1\offers_slide_2.jpg" />
+    <Content Include="img\home_1\offers_slide_3.jpg" />
+    <Content Include="img\home_1\photo_1.jpg" />
+    <Content Include="img\home_1\photo_2.jpg" />
+    <Content Include="img\home_1\photo_3.jpg" />
+    <Content Include="img\home_1\photo_4.jpg" />
+    <Content Include="img\home_1\photo_5.jpg" />
+    <Content Include="img\home_1\photo_6.jpg" />
+    <Content Include="img\home_1\photo_7.jpg" />
+    <Content Include="img\home_1\photo_8.jpg" />
+    <Content Include="img\home_1\photo_9.jpg" />
+    <Content Include="img\home_1\popular_travel_img_1.jpg" />
+    <Content Include="img\home_1\popular_travel_img_2.jpg" />
+    <Content Include="img\home_1\popular_travel_img_3.jpg" />
+    <Content Include="img\home_1\popular_travel_img_4.jpg" />
+    <Content Include="img\home_1\popular_travel_img_5.jpg" />
+    <Content Include="img\home_1\popular_travel_img_6.jpg" />
+    <Content Include="img\home_1\popular_travel_img_7.jpg" />
+    <Content Include="img\home_1\popular_travel_img_8.jpg" />
+    <Content Include="img\home_1\sea_tour_img_1.jpg" />
+    <Content Include="img\home_1\sea_tour_img_2.jpg" />
+    <Content Include="img\home_1\sea_tour_img_3.jpg" />
+    <Content Include="img\home_1\sea_tour_img_4.jpg" />
+    <Content Include="img\home_1\sea_tour_img_5.jpg" />
+    <Content Include="img\home_1\sea_tour_img_6.jpg" />
+    <Content Include="img\home_1\tour_slider_bg.jpg" />
+    <Content Include="img\home_2\close.png" />
+    <Content Include="img\home_2\footer_logo.png" />
+    <Content Include="img\home_2\item_img_1.jpg" />
+    <Content Include="img\home_2\item_img_10.jpg" />
+    <Content Include="img\home_2\item_img_11.jpg" />
+    <Content Include="img\home_2\item_img_12.jpg" />
+    <Content Include="img\home_2\item_img_2.jpg" />
+    <Content Include="img\home_2\item_img_3.jpg" />
+    <Content Include="img\home_2\item_img_4.jpg" />
+    <Content Include="img\home_2\item_img_5.jpg" />
+    <Content Include="img\home_2\item_img_6.jpg" />
+    <Content Include="img\home_2\item_img_7.jpg" />
+    <Content Include="img\home_2\item_img_8.jpg" />
+    <Content Include="img\home_2\item_img_9.jpg" />
+    <Content Include="img\home_2\logo.png" />
+    <Content Include="img\home_2\main_image.jpg" />
+    <Content Include="img\home_2\people.png" />
+    <Content Include="img\home_2\play.png" />
+    <Content Include="img\home_2\tour_icon_1.png" />
+    <Content Include="img\home_2\tour_icon_2.png" />
+    <Content Include="img\home_2\tour_icon_3.png" />
+    <Content Include="img\home_3\f-logo.png" />
+    <Content Include="img\home_3\hotel-small_1.jpg" />
+    <Content Include="img\home_3\hotel-small_10.jpg" />
+    <Content Include="img\home_3\hotel-small_11.jpg" />
+    <Content Include="img\home_3\hotel-small_12.jpg" />
+    <Content Include="img\home_3\hotel-small_2.jpg" />
+    <Content Include="img\home_3\hotel-small_3.jpg" />
+    <Content Include="img\home_3\hotel-small_4.jpg" />
+    <Content Include="img\home_3\hotel-small_5.jpg" />
+    <Content Include="img\home_3\hotel-small_6.jpg" />
+    <Content Include="img\home_3\hotel-small_7.jpg" />
+    <Content Include="img\home_3\hotel-small_8.jpg" />
+    <Content Include="img\home_3\hotel-small_9.jpg" />
+    <Content Include="img\home_3\hotel_bg.jpg" />
+    <Content Include="img\home_3\hotel_bg2.jpg" />
+    <Content Include="img\home_3\hotel_big_1.jpg" />
+    <Content Include="img\home_3\hotel_big_2.jpg" />
+    <Content Include="img\home_3\hotel_big_3.jpg" />
+    <Content Include="img\home_3\hotel_big_img_1.jpg" />
+    <Content Include="img\home_3\hotel_big_img_2.jpg" />
+    <Content Include="img\home_3\hotel_big_main.jpg" />
+    <Content Include="img\home_3\hotel_sm_img_1.jpg" />
+    <Content Include="img\home_3\hotel_sm_img_2.jpg" />
+    <Content Include="img\home_3\hotel_sm_img_3.jpg" />
+    <Content Include="img\home_3\hotel_sm_img_4.jpg" />
+    <Content Include="img\home_3\hotel_sm_img_5.jpg" />
+    <Content Include="img\home_3\hotel_sm_img_6.jpg" />
+    <Content Include="img\home_3\hotel_sm_img_7.jpg" />
+    <Content Include="img\home_3\hotel_sm_img_8.jpg" />
+    <Content Include="img\home_3\hot_hotel_1.jpg" />
+    <Content Include="img\home_3\hot_hotel_2.jpg" />
+    <Content Include="img\home_3\hot_hotel_3.jpg" />
+    <Content Include="img\home_3\logo.png" />
+    <Content Include="img\home_3\main_slide_1.jpg" />
+    <Content Include="img\home_3\main_slide_2.jpg" />
+    <Content Include="img\home_3\main_slide_3.jpg" />
+    <Content Include="img\home_3\main_slide_4.jpg" />
+    <Content Include="img\home_3\main_slide_5.jpg" />
+    <Content Include="img\home_3\main_slide_6.jpg" />
+    <Content Include="img\home_3\mini_hotel_1.jpg" />
+    <Content Include="img\home_3\mini_hotel_2.jpg" />
+    <Content Include="img\home_3\mini_hotel_3.jpg" />
+    <Content Include="img\home_3\pop_hotel_1.jpg" />
+    <Content Include="img\home_3\pop_hotel_2.jpg" />
+    <Content Include="img\home_3\pop_hotel_3.jpg" />
+    <Content Include="img\home_3\pop_hotel_4.jpg" />
+    <Content Include="img\home_4\area_tours_01.jpg" />
+    <Content Include="img\home_4\area_tours_02.jpg" />
+    <Content Include="img\home_4\area_tours_03.jpg" />
+    <Content Include="img\home_4\area_tours_04.jpg" />
+    <Content Include="img\home_4\logo.png" />
+    <Content Include="img\home_4\offers-block_1.jpg" />
+    <Content Include="img\home_4\offers-block_2.jpg" />
+    <Content Include="img\home_4\offers-block_3.jpg" />
+    <Content Include="img\home_4\offers-block_4.jpg" />
+    <Content Include="img\home_4\propose_1.jpg" />
+    <Content Include="img\home_4\propose_2.jpg" />
+    <Content Include="img\home_4\propose_3.jpg" />
+    <Content Include="img\home_4\slide_1.jpg" />
+    <Content Include="img\home_4\slide_2.jpg" />
+    <Content Include="img\home_4\slide_3.jpg" />
+    <Content Include="img\home_4\slide_4.jpg" />
+    <Content Include="img\home_4\slide_5.jpg" />
+    <Content Include="img\home_4\tour-bg.jpg" />
+    <Content Include="img\home_4\tour-block_1.jpg" />
+    <Content Include="img\home_4\tour-block_2.jpg" />
+    <Content Include="img\home_4\tour-block_3.jpg" />
+    <Content Include="img\home_4\tour-block_4.jpg" />
+    <Content Include="img\home_4\tour_1.jpg" />
+    <Content Include="img\home_4\tour_2.jpg" />
+    <Content Include="img\home_4\tour_3.jpg" />
+    <Content Include="img\home_4\tour_4.jpg" />
+    <Content Include="img\home_4\tour_5.jpg" />
+    <Content Include="img\home_4\tour_6.jpg" />
+    <Content Include="img\home_5\bg-counter.jpg" />
+    <Content Include="img\home_5\city_1.jpg" />
+    <Content Include="img\home_5\city_2.jpg" />
+    <Content Include="img\home_5\city_3.jpg" />
+    <Content Include="img\home_5\country_1.png" />
+    <Content Include="img\home_5\country_2.png" />
+    <Content Include="img\home_5\country_3.png" />
+    <Content Include="img\home_5\country_4.png" />
+    <Content Include="img\home_5\country_5.png" />
+    <Content Include="img\home_5\country_6.png" />
+    <Content Include="img\home_5\c_icon_1.png" />
+    <Content Include="img\home_5\c_icon_2.png" />
+    <Content Include="img\home_5\c_icon_3.png" />
+    <Content Include="img\home_5\c_icon_4.png" />
+    <Content Include="img\home_5\f-logo.png" />
+    <Content Include="img\home_5\hotel_1.jpg" />
+    <Content Include="img\home_5\hotel_2.jpg" />
+    <Content Include="img\home_5\hotel_3.jpg" />
+    <Content Include="img\home_5\hotel_4.jpg" />
+    <Content Include="img\home_5\hotel_5.jpg" />
+    <Content Include="img\home_5\hotel_6.jpg" />
+    <Content Include="img\home_5\hotel_7.jpg" />
+    <Content Include="img\home_5\hotel_8.jpg" />
+    <Content Include="img\home_5\hotel_9.jpg" />
+    <Content Include="img\home_5\logo.png" />
+    <Content Include="img\home_5\people_1.jpg" />
+    <Content Include="img\home_5\people_2.jpg" />
+    <Content Include="img\home_5\people_3.jpg" />
+    <Content Include="img\home_5\people_4.jpg" />
+    <Content Include="img\home_5\slider.jpg" />
+    <Content Include="img\home_5\slide_1.jpg" />
+    <Content Include="img\home_5\slide_2.jpg" />
+    <Content Include="img\home_5\slide_3.jpg" />
+    <Content Include="img\home_5\slide_preview_1.jpg" />
+    <Content Include="img\home_5\slide_preview_2.jpg" />
+    <Content Include="img\home_5\slide_preview_3.jpg" />
+    <Content Include="img\home_5\small_hotel_1.jpg" />
+    <Content Include="img\home_5\small_hotel_2.jpg" />
+    <Content Include="img\home_5\small_hotel_3.jpg" />
+    <Content Include="img\home_5\small_hotel_4.jpg" />
+    <Content Include="img\home_5\small_hotel_5.jpg" />
+    <Content Include="img\home_5\small_hotel_6.jpg" />
+    <Content Include="img\home_5\small_hotel_7.jpg" />
+    <Content Include="img\home_5\small_hotel_8.jpg" />
+    <Content Include="img\home_5\small_hotel_9.jpg" />
+    <Content Include="img\home_5\testimonal_1.jpg" />
+    <Content Include="img\home_5\testimonal_2.jpg" />
+    <Content Include="img\home_5\testimonal_3.jpg" />
+    <Content Include="img\home_5\testimonal_4.jpg" />
+    <Content Include="img\home_5\tour_1.jpg" />
+    <Content Include="img\home_5\tour_2.jpg" />
+    <Content Include="img\home_5\tour_3.jpg" />
+    <Content Include="img\home_5\tour_4.jpg" />
+    <Content Include="img\home_5\tour_5.jpg" />
+    <Content Include="img\home_5\tour_6.jpg" />
+    <Content Include="img\home_6\footer_logo.png" />
+    <Content Include="img\home_6\logo.png" />
+    <Content Include="img\home_6\news_1.jpg" />
+    <Content Include="img\home_6\news_2.jpg" />
+    <Content Include="img\home_6\preview_1.jpg" />
+    <Content Include="img\home_6\preview_2.jpg" />
+    <Content Include="img\home_6\preview_3.jpg" />
+    <Content Include="img\home_6\slide_1.jpg" />
+    <Content Include="img\home_6\slide_10.jpg" />
+    <Content Include="img\home_6\slide_2.jpg" />
+    <Content Include="img\home_6\slide_3.jpg" />
+    <Content Include="img\home_6\slide_4.jpg" />
+    <Content Include="img\home_6\slide_5.jpg" />
+    <Content Include="img\home_6\slide_6.jpg" />
+    <Content Include="img\home_6\slide_7.jpg" />
+    <Content Include="img\home_6\slide_8.jpg" />
+    <Content Include="img\home_6\slide_9.jpg" />
+    <Content Include="img\home_7\footer_logo.png" />
+    <Content Include="img\home_7\gal_1.jpg" />
+    <Content Include="img\home_7\gal_2.jpg" />
+    <Content Include="img\home_7\gal_3.jpg" />
+    <Content Include="img\home_7\gal_4.jpg" />
+    <Content Include="img\home_7\gal_5.jpg" />
+    <Content Include="img\home_7\gal_6.jpg" />
+    <Content Include="img\home_7\gal_7.jpg" />
+    <Content Include="img\home_7\gal_8.jpg" />
+    <Content Include="img\home_7\gal_9.jpg" />
+    <Content Include="img\home_7\holiday_1.jpg" />
+    <Content Include="img\home_7\holiday_2.jpg" />
+    <Content Include="img\home_7\holiday_3.jpg" />
+    <Content Include="img\home_7\holiday_4.jpg" />
+    <Content Include="img\home_7\icon_1.png" />
+    <Content Include="img\home_7\icon_2.png" />
+    <Content Include="img\home_7\icon_3.png" />
+    <Content Include="img\home_7\icon_4.png" />
+    <Content Include="img\home_7\logo.png" />
+    <Content Include="img\home_7\partner_1.png" />
+    <Content Include="img\home_7\partner_2.png" />
+    <Content Include="img\home_7\partner_3.png" />
+    <Content Include="img\home_7\partner_4.png" />
+    <Content Include="img\home_7\partner_5.png" />
+    <Content Include="img\home_7\partner_6.png" />
+    <Content Include="img\home_7\slide_1.jpg" />
+    <Content Include="img\home_7\slide_preview_1.jpg" />
+    <Content Include="img\home_7\slide_preview_2.jpg" />
+    <Content Include="img\home_7\slide_preview_3.jpg" />
+    <Content Include="img\home_7\slide_preview_4.jpg" />
+    <Content Include="img\home_7\sl_1.jpg" />
+    <Content Include="img\home_7\sl_2.jpg" />
+    <Content Include="img\home_7\sl_3.jpg" />
+    <Content Include="img\home_7\small_hotel_1.jpg" />
+    <Content Include="img\home_7\small_hotel_2.jpg" />
+    <Content Include="img\home_7\small_hotel_3.jpg" />
+    <Content Include="img\home_7\small_hotel_4.jpg" />
+    <Content Include="img\home_7\small_hotel_5.jpg" />
+    <Content Include="img\home_7\small_hotel_6.jpg" />
+    <Content Include="img\home_7\small_hotel_7.jpg" />
+    <Content Include="img\home_7\small_hotel_8.jpg" />
+    <Content Include="img\home_7\special.jpg" />
+    <Content Include="img\home_7\testimonals.jpg" />
+    <Content Include="img\home_8\bg_block_1.jpg" />
+    <Content Include="img\home_8\bg_block_2.jpg" />
+    <Content Include="img\home_8\f_logo.png" />
+    <Content Include="img\home_8\gal_1.jpg" />
+    <Content Include="img\home_8\gal_2.jpg" />
+    <Content Include="img\home_8\gal_3.jpg" />
+    <Content Include="img\home_8\gal_4.jpg" />
+    <Content Include="img\home_8\gal_5.jpg" />
+    <Content Include="img\home_8\gal_6.jpg" />
+    <Content Include="img\home_8\gal_7.jpg" />
+    <Content Include="img\home_8\gal_8.jpg" />
+    <Content Include="img\home_8\icon_1.png" />
+    <Content Include="img\home_8\icon_2.png" />
+    <Content Include="img\home_8\icon_3.png" />
+    <Content Include="img\home_8\icon_4.png" />
+    <Content Include="img\home_8\logo-2.png" />
+    <Content Include="img\home_8\logo.png" />
+    <Content Include="img\home_8\news_1.jpg" />
+    <Content Include="img\home_8\news_2.jpg" />
+    <Content Include="img\home_8\news_3.jpg" />
+    <Content Include="img\home_8\slide.jpg" />
+    <Content Include="img\home_8\small_hotel_1.jpg" />
+    <Content Include="img\home_8\small_hotel_2.jpg" />
+    <Content Include="img\home_8\small_hotel_3.jpg" />
+    <Content Include="img\home_8\small_hotel_4.jpg" />
+    <Content Include="img\home_8\small_hotel_5.jpg" />
+    <Content Include="img\home_8\small_hotel_6.jpg" />
+    <Content Include="img\home_8\small_hotel_7.jpg" />
+    <Content Include="img\home_8\small_hotel_8.jpg" />
+    <Content Include="img\home_8\small_hotel_9.jpg" />
+    <Content Include="img\home_8\team_1.jpg" />
+    <Content Include="img\home_8\team_2.jpg" />
+    <Content Include="img\home_8\team_3.jpg" />
+    <Content Include="img\home_8\tesiminals.jpg" />
+    <Content Include="img\home_8\tour_1.jpg" />
+    <Content Include="img\home_8\tour_2.jpg" />
+    <Content Include="img\home_8\tour_3.jpg" />
+    <Content Include="img\home_9\bg-tab.jpg" />
+    <Content Include="img\home_9\bg_1.jpg" />
+    <Content Include="img\home_9\bg_2.jpg" />
+    <Content Include="img\home_9\bg_3.jpg" />
+    <Content Include="img\home_9\city_1.jpg" />
+    <Content Include="img\home_9\city_2.jpg" />
+    <Content Include="img\home_9\city_3.jpg" />
+    <Content Include="img\home_9\city_4.jpg" />
+    <Content Include="img\home_9\country_1.png" />
+    <Content Include="img\home_9\country_2.png" />
+    <Content Include="img\home_9\country_3.png" />
+    <Content Include="img\home_9\country_4.png" />
+    <Content Include="img\home_9\cruise_1.jpg" />
+    <Content Include="img\home_9\cruise_2.jpg" />
+    <Content Include="img\home_9\cruise_3.jpg" />
+    <Content Include="img\home_9\cruise_4.jpg" />
+    <Content Include="img\home_9\cruise_5.jpg" />
+    <Content Include="img\home_9\cruise_6.jpg" />
+    <Content Include="img\home_9\cruise_7.jpg" />
+    <Content Include="img\home_9\cruise_8.jpg" />
+    <Content Include="img\home_9\f_logo.png" />
+    <Content Include="img\home_9\f_logo_2.png" />
+    <Content Include="img\home_9\f_slide.jpg" />
+    <Content Include="img\home_9\icon_1.jpg" />
+    <Content Include="img\home_9\icon_2.jpg" />
+    <Content Include="img\home_9\icon_3.jpg" />
+    <Content Include="img\home_9\icon_4.jpg" />
+    <Content Include="img\home_9\logo.png" />
+    <Content Include="img\home_9\preview_1.jpg" />
+    <Content Include="img\home_9\preview_2.jpg" />
+    <Content Include="img\home_9\preview_3.jpg" />
+    <Content Include="img\home_9\preview_4.jpg" />
+    <Content Include="img\home_9\preview_5.jpg" />
+    <Content Include="img\home_9\preview_6.jpg" />
+    <Content Include="img\home_9\preview_7.jpg" />
+    <Content Include="img\home_9\preview_8.jpg" />
+    <Content Include="img\home_9\slide_1.jpg" />
+    <Content Include="img\home_9\slide_icon.png" />
+    <Content Include="img\home_9\special.jpg" />
+    <Content Include="img\home_9\tour_1.jpg" />
+    <Content Include="img\home_9\tour_2.jpg" />
+    <Content Include="img\home_9\tour_3.jpg" />
+    <Content Include="img\home_9\tour_4.jpg" />
+    <Content Include="img\inner\about.jpg" />
+    <Content Include="img\inner\about_2.jpg" />
+    <Content Include="img\inner\about_3.jpg" />
+    <Content Include="img\inner\bg_1.jpg" />
+    <Content Include="img\inner\bg_2.jpg" />
+    <Content Include="img\inner\bg_3.jpg" />
+    <Content Include="img\inner\bg_4.jpg" />
+    <Content Include="img\inner\bg_5.jpg" />
+    <Content Include="img\inner\bg_6.jpg" />
+    <Content Include="img\inner\bg_7.jpg" />
+    <Content Include="img\inner\blog_grid_1.jpg" />
+    <Content Include="img\inner\blog_grid_10.jpg" />
+    <Content Include="img\inner\blog_grid_11.jpg" />
+    <Content Include="img\inner\blog_grid_12.jpg" />
+    <Content Include="img\inner\blog_grid_2.jpg" />
+    <Content Include="img\inner\blog_grid_3.jpg" />
+    <Content Include="img\inner\blog_grid_4.jpg" />
+    <Content Include="img\inner\blog_grid_5.jpg" />
+    <Content Include="img\inner\blog_grid_6.jpg" />
+    <Content Include="img\inner\blog_grid_7.jpg" />
+    <Content Include="img\inner\blog_grid_8.jpg" />
+    <Content Include="img\inner\blog_grid_9.jpg" />
+    <Content Include="img\inner\c_icon_1.png" />
+    <Content Include="img\inner\c_icon_2.png" />
+    <Content Include="img\inner\c_icon_3.png" />
+    <Content Include="img\inner\c_icon_4.png" />
+    <Content Include="img\inner\icon_1.png" />
+    <Content Include="img\inner\icon_2.png" />
+    <Content Include="img\inner\icon_3.png" />
+    <Content Include="img\inner\icon_4.png" />
+    <Content Include="img\inner\icon_5.png" />
+    <Content Include="img\inner\icon_6.png" />
+    <Content Include="img\inner\icon_7.png" />
+    <Content Include="img\inner\icon_8.png" />
+    <Content Include="img\inner\investors_1.png" />
+    <Content Include="img\inner\investors_10.png" />
+    <Content Include="img\inner\investors_11.png" />
+    <Content Include="img\inner\investors_12.png" />
+    <Content Include="img\inner\investors_2.png" />
+    <Content Include="img\inner\investors_3.png" />
+    <Content Include="img\inner\investors_4.png" />
+    <Content Include="img\inner\investors_5.png" />
+    <Content Include="img\inner\investors_6.png" />
+    <Content Include="img\inner\investors_7.png" />
+    <Content Include="img\inner\investors_8.png" />
+    <Content Include="img\inner\investors_9.png" />
+    <Content Include="img\inner\m_icon_1.png" />
+    <Content Include="img\inner\m_icon_2.png" />
+    <Content Include="img\inner\m_icon_3.png" />
+    <Content Include="img\inner\m_icon_4.png" />
+    <Content Include="img\inner\m_icon_5.png" />
+    <Content Include="img\inner\m_icon_6.png" />
+    <Content Include="img\inner\m_icon_7.png" />
+    <Content Include="img\inner\m_icon_8.png" />
+    <Content Include="img\inner\tariff_1.jpg" />
+    <Content Include="img\inner\tariff_2.jpg" />
+    <Content Include="img\inner\tariff_3.jpg" />
+    <Content Include="img\inner\tour_1.jpg" />
+    <Content Include="img\inner\tour_2.jpg" />
+    <Content Include="img\inner\tour_3.jpg" />
+    <Content Include="img\inner\tour_4.jpg" />
+    <Content Include="img\inner\tour_5.jpg" />
+    <Content Include="img\inner\tour_6.jpg" />
+    <Content Include="img\it.png" />
+    <Content Include="img\ja.png" />
+    <Content Include="img\ko.png" />
+    <Content Include="img\landing\ava_1.jpg" />
+    <Content Include="img\landing\ava_2.jpg" />
+    <Content Include="img\landing\ava_3.jpg" />
+    <Content Include="img\landing\ava_4.jpg" />
+    <Content Include="img\landing\ava_5.jpg" />
+    <Content Include="img\landing\ava_6.jpg" />
+    <Content Include="img\landing\bg_1.jpg" />
+    <Content Include="img\landing\bg_2.jpg" />
+    <Content Include="img\landing\bg_3.jpg" />
+    <Content Include="img\landing\footer_1.png" />
+    <Content Include="img\landing\footer_2.png" />
+    <Content Include="img\landing\footer_3.png" />
+    <Content Include="img\landing\footer_4.png" />
+    <Content Include="img\landing\footer_5.png" />
+    <Content Include="img\landing\header_1.png" />
+    <Content Include="img\landing\header_2.png" />
+    <Content Include="img\landing\header_3.png" />
+    <Content Include="img\landing\header_4.png" />
+    <Content Include="img\landing\header_5.png" />
+    <Content Include="img\landing\header_6.png" />
+    <Content Include="img\landing\header_7.png" />
+    <Content Include="img\landing\home1.jpg" />
+    <Content Include="img\landing\home10.jpg" />
+    <Content Include="img\landing\home11.jpg" />
+    <Content Include="img\landing\home12.jpg" />
+    <Content Include="img\landing\home13.jpg" />
+    <Content Include="img\landing\home14.jpg" />
+    <Content Include="img\landing\home15.jpg" />
+    <Content Include="img\landing\home16.jpg" />
+    <Content Include="img\landing\home17.jpg" />
+    <Content Include="img\landing\home2.jpg" />
+    <Content Include="img\landing\home3.jpg" />
+    <Content Include="img\landing\home4.jpg" />
+    <Content Include="img\landing\home5.jpg" />
+    <Content Include="img\landing\home6.jpg" />
+    <Content Include="img\landing\home7.jpg" />
+    <Content Include="img\landing\home8.jpg" />
+    <Content Include="img\landing\home9.jpg" />
+    <Content Include="img\landing\img54.jpg" />
+    <Content Include="img\landing\responsive.png" />
+    <Content Include="img\landing\screen_1.jpg" />
+    <Content Include="img\landing\screen_2.jpg" />
+    <Content Include="img\landing\screen_3.jpg" />
+    <Content Include="img\landing\screen_4.jpg" />
+    <Content Include="img\landing\screen_5.jpg" />
+    <Content Include="img\landing\service_1.png" />
+    <Content Include="img\landing\service_1_w.png" />
+    <Content Include="img\landing\service_2.png" />
+    <Content Include="img\landing\service_2_w.png" />
+    <Content Include="img\landing\service_3.png" />
+    <Content Include="img\landing\service_3_w.png" />
+    <Content Include="img\landing\service_4.png" />
+    <Content Include="img\landing\service_4_w.png" />
+    <Content Include="img\landing\service_5.png" />
+    <Content Include="img\landing\service_5_w.png" />
+    <Content Include="img\landing\service_6.png" />
+    <Content Include="img\landing\service_6_w.png" />
+    <Content Include="img\landing\service_7.png" />
+    <Content Include="img\landing\service_7_w.png" />
+    <Content Include="img\landing\service_8.png" />
+    <Content Include="img\landing\service_8_w.png" />
+    <Content Include="img\link.png" />
+    <Content Include="img\link_sm.png" />
+    <Content Include="img\loc_icon.png" />
+    <Content Include="img\loc_icon_2_dark.png" />
+    <Content Include="img\loc_icon_blue.png" />
+    <Content Include="img\loc_icon_dark.png" />
+    <Content Include="img\loc_icon_small.png" />
+    <Content Include="img\loc_icon_small_drak.png" />
+    <Content Include="img\loc_icon_small_grey.png" />
+    <Content Include="img\mail_icon.png" />
+    <Content Include="img\mail_icon_blue.png" />
+    <Content Include="img\mail_icon_b_blue.png" />
+    <Content Include="img\mail_icon_b_dark.png" />
+    <Content Include="img\mail_icon_dark.png" />
+    <Content Include="img\mail_icon_l_dark.png" />
+    <Content Include="img\mail_icon_red.png" />
+    <Content Include="img\marker.png" />
+    <Content Include="img\marker_2.png" />
+    <Content Include="img\marker_3.png" />
+    <Content Include="img\marker_4.png" />
+    <Content Include="img\marker_5.png" />
+    <Content Include="img\marker_6.png" />
+    <Content Include="img\people_icon.png" />
+    <Content Include="img\people_icon_grey.png" />
+    <Content Include="img\phone_icon.png" />
+    <Content Include="img\phone_icon_2_blue.png" />
+    <Content Include="img\phone_icon_2_dark.png" />
+    <Content Include="img\phone_icon_3_dark.png" />
+    <Content Include="img\phone_icon_blue.png" />
+    <Content Include="img\phone_icon_dark.png" />
+    <Content Include="img\phone_icon_red.png" />
+    <Content Include="img\plane.png" />
+    <Content Include="img\poster.jpg" />
+    <Content Include="img\quot.png" />
+    <Content Include="img\quote.png" />
+    <Content Include="img\rent_1.jpg" />
+    <Content Include="img\rent_10.jpg" />
+    <Content Include="img\rent_11.jpg" />
+    <Content Include="img\rent_12.jpg" />
+    <Content Include="img\rent_13.jpg" />
+    <Content Include="img\rent_14.jpg" />
+    <Content Include="img\rent_15.jpg" />
+    <Content Include="img\rent_16.jpg" />
+    <Content Include="img\rent_17.jpg" />
+    <Content Include="img\rent_18.jpg" />
+    <Content Include="img\rent_19.jpg" />
+    <Content Include="img\rent_2.jpg" />
+    <Content Include="img\rent_20.jpg" />
+    <Content Include="img\rent_3.jpg" />
+    <Content Include="img\rent_4.jpg" />
+    <Content Include="img\rent_5.jpg" />
+    <Content Include="img\rent_6.jpg" />
+    <Content Include="img\rent_7.jpg" />
+    <Content Include="img\rent_8.jpg" />
+    <Content Include="img\rent_9.jpg" />
+    <Content Include="img\search_icon.png" />
+    <Content Include="img\search_icon_small.png" />
+    <Content Include="img\search_icon_small_blue.png" />
+    <Content Include="img\search_icon_small_dark.png" />
+    <Content Include="img\search_icon_small_grey.png" />
+    <Content Include="img\search_icon_small_red.png" />
+    <Content Include="img\shop_icon.png" />
+    <Content Include="img\shop_icon_blue.png" />
+    <Content Include="img\shop_icon_dark.png" />
+    <Content Include="img\shop_icon_red.png" />
+    <Content Include="img\special\bg-1.jpg" />
+    <Content Include="img\special\bg-2.jpg" />
+    <Content Include="img\special\bg-3.jpg" />
+    <Content Include="img\special\bg-4.jpg" />
+    <Content Include="img\special\login.jpg" />
+    <Content Include="img\special\soon.jpg" />
+    <Content Include="img\speed.png" />
+    <Content Include="img\theme-1\country_1.png" />
+    <Content Include="img\theme-1\country_2.png" />
+    <Content Include="img\theme-1\country_3.png" />
+    <Content Include="img\theme-1\country_4.png" />
+    <Content Include="img\theme-1\country_5.png" />
+    <Content Include="img\theme-1\country_6.png" />
+    <Content Include="img\theme-1\c_icon_1.png" />
+    <Content Include="img\theme-1\c_icon_2.png" />
+    <Content Include="img\theme-1\c_icon_3.png" />
+    <Content Include="img\theme-1\c_icon_4.png" />
+    <Content Include="img\theme-1\logo.png" />
+    <Content Include="img\theme-1\logo_dark.png" />
+    <Content Include="img\theme-2\country_1.png" />
+    <Content Include="img\theme-2\country_2.png" />
+    <Content Include="img\theme-2\country_3.png" />
+    <Content Include="img\theme-2\country_4.png" />
+    <Content Include="img\theme-2\country_5.png" />
+    <Content Include="img\theme-2\country_6.png" />
+    <Content Include="img\theme-2\c_icon_1.png" />
+    <Content Include="img\theme-2\c_icon_2.png" />
+    <Content Include="img\theme-2\c_icon_3.png" />
+    <Content Include="img\theme-2\c_icon_4.png" />
+    <Content Include="img\theme-2\logo.png" />
+    <Content Include="img\theme-2\logo_dark.png" />
+    <Content Include="img\theme-3\country_1.png" />
+    <Content Include="img\theme-3\country_2.png" />
+    <Content Include="img\theme-3\country_3.png" />
+    <Content Include="img\theme-3\country_4.png" />
+    <Content Include="img\theme-3\country_5.png" />
+    <Content Include="img\theme-3\country_6.png" />
+    <Content Include="img\theme-3\c_icon_1.png" />
+    <Content Include="img\theme-3\c_icon_2.png" />
+    <Content Include="img\theme-3\c_icon_3.png" />
+    <Content Include="img\theme-3\c_icon_4.png" />
+    <Content Include="img\theme-3\logo.png" />
+    <Content Include="img\theme-3\logo_dark.png" />
+    <Content Include="img\theme-4\country_1.png" />
+    <Content Include="img\theme-4\country_2.png" />
+    <Content Include="img\theme-4\country_3.png" />
+    <Content Include="img\theme-4\country_4.png" />
+    <Content Include="img\theme-4\country_5.png" />
+    <Content Include="img\theme-4\country_6.png" />
+    <Content Include="img\theme-4\c_icon_1.png" />
+    <Content Include="img\theme-4\c_icon_2.png" />
+    <Content Include="img\theme-4\c_icon_3.png" />
+    <Content Include="img\theme-4\c_icon_4.png" />
+    <Content Include="img\theme-4\logo.png" />
+    <Content Include="img\theme-4\logo_dark.png" />
+    <Content Include="img\theme-5\country_1.png" />
+    <Content Include="img\theme-5\country_2.png" />
+    <Content Include="img\theme-5\country_3.png" />
+    <Content Include="img\theme-5\country_4.png" />
+    <Content Include="img\theme-5\country_5.png" />
+    <Content Include="img\theme-5\country_6.png" />
+    <Content Include="img\theme-5\c_icon_1.png" />
+    <Content Include="img\theme-5\c_icon_2.png" />
+    <Content Include="img\theme-5\c_icon_3.png" />
+    <Content Include="img\theme-5\c_icon_4.png" />
+    <Content Include="img\theme-5\logo.png" />
+    <Content Include="img\theme-5\logo_dark.png" />
+    <Content Include="img\theme-6\country_1.png" />
+    <Content Include="img\theme-6\country_2.png" />
+    <Content Include="img\theme-6\country_3.png" />
+    <Content Include="img\theme-6\country_4.png" />
+    <Content Include="img\theme-6\country_5.png" />
+    <Content Include="img\theme-6\country_6.png" />
+    <Content Include="img\theme-6\c_icon_1.png" />
+    <Content Include="img\theme-6\c_icon_2.png" />
+    <Content Include="img\theme-6\c_icon_3.png" />
+    <Content Include="img\theme-6\c_icon_4.png" />
+    <Content Include="img\theme-6\logo.png" />
+    <Content Include="img\theme-6\logo_dark.png" />
+    <Content Include="img\theme-7\country_1.png" />
+    <Content Include="img\theme-7\country_2.png" />
+    <Content Include="img\theme-7\country_3.png" />
+    <Content Include="img\theme-7\country_4.png" />
+    <Content Include="img\theme-7\country_5.png" />
+    <Content Include="img\theme-7\country_6.png" />
+    <Content Include="img\theme-7\c_icon_1.png" />
+    <Content Include="img\theme-7\c_icon_2.png" />
+    <Content Include="img\theme-7\c_icon_3.png" />
+    <Content Include="img\theme-7\c_icon_4.png" />
+    <Content Include="img\theme-7\logo.png" />
+    <Content Include="img\theme-7\logo_dark.png" />
+    <Content Include="img\theme-8\country_1.png" />
+    <Content Include="img\theme-8\country_2.png" />
+    <Content Include="img\theme-8\country_3.png" />
+    <Content Include="img\theme-8\country_4.png" />
+    <Content Include="img\theme-8\country_5.png" />
+    <Content Include="img\theme-8\country_6.png" />
+    <Content Include="img\theme-8\c_icon_1.png" />
+    <Content Include="img\theme-8\c_icon_2.png" />
+    <Content Include="img\theme-8\c_icon_3.png" />
+    <Content Include="img\theme-8\c_icon_4.png" />
+    <Content Include="img\theme-8\logo.png" />
+    <Content Include="img\theme-8\logo_dark.png" />
+    <Content Include="img\thx_icon.png" />
+    <Content Include="img\tour_list\bg_1.jpg" />
+    <Content Include="img\tour_list\bg_2.jpg" />
+    <Content Include="img\tour_list\bg_3.jpg" />
+    <Content Include="img\tour_list\bg_4.jpg" />
+    <Content Include="img\tour_list\cruise_grid_1.jpg" />
+    <Content Include="img\tour_list\cruise_grid_10.jpg" />
+    <Content Include="img\tour_list\cruise_grid_11.jpg" />
+    <Content Include="img\tour_list\cruise_grid_12.jpg" />
+    <Content Include="img\tour_list\cruise_grid_2.jpg" />
+    <Content Include="img\tour_list\cruise_grid_3.jpg" />
+    <Content Include="img\tour_list\cruise_grid_4.jpg" />
+    <Content Include="img\tour_list\cruise_grid_5.jpg" />
+    <Content Include="img\tour_list\cruise_grid_6.jpg" />
+    <Content Include="img\tour_list\cruise_grid_7.jpg" />
+    <Content Include="img\tour_list\cruise_grid_8.jpg" />
+    <Content Include="img\tour_list\cruise_grid_9.jpg" />
+    <Content Include="img\tour_list\cruise_logo_1.jpg" />
+    <Content Include="img\tour_list\cruise_logo_2.jpg" />
+    <Content Include="img\tour_list\cruise_logo_3.jpg" />
+    <Content Include="img\tour_list\flight_grid_1.jpg" />
+    <Content Include="img\tour_list\flight_grid_2.jpg" />
+    <Content Include="img\tour_list\flight_grid_3.jpg" />
+    <Content Include="img\tour_list\flight_grid_4.jpg" />
+    <Content Include="img\tour_list\flight_icon_1.png" />
+    <Content Include="img\tour_list\flight_icon_2.png" />
+    <Content Include="img\tour_list\hotel_grid_1.jpg" />
+    <Content Include="img\tour_list\hotel_grid_10.jpg" />
+    <Content Include="img\tour_list\hotel_grid_11.jpg" />
+    <Content Include="img\tour_list\hotel_grid_12.jpg" />
+    <Content Include="img\tour_list\hotel_grid_13.jpg" />
+    <Content Include="img\tour_list\hotel_grid_14.jpg" />
+    <Content Include="img\tour_list\hotel_grid_15.jpg" />
+    <Content Include="img\tour_list\hotel_grid_2.jpg" />
+    <Content Include="img\tour_list\hotel_grid_3.jpg" />
+    <Content Include="img\tour_list\hotel_grid_4.jpg" />
+    <Content Include="img\tour_list\hotel_grid_5.jpg" />
+    <Content Include="img\tour_list\hotel_grid_6.jpg" />
+    <Content Include="img\tour_list\hotel_grid_7.jpg" />
+    <Content Include="img\tour_list\hotel_grid_8.jpg" />
+    <Content Include="img\tour_list\hotel_grid_9.jpg" />
+    <Content Include="img\tour_list\hotel_icon_1.png" />
+    <Content Include="img\tour_list\hotel_icon_2.png" />
+    <Content Include="img\tour_list\hotel_icon_3.png" />
+    <Content Include="img\tour_list\hotel_icon_4.png" />
+    <Content Include="img\tour_list\hotel_icon_5.png" />
+    <Content Include="img\tour_list\inner_banner_1.jpg" />
+    <Content Include="img\tour_list\inner_banner_2.jpg" />
+    <Content Include="img\tour_list\inner_banner_3.jpg" />
+    <Content Include="img\tour_list\tour_1.jpg" />
+    <Content Include="img\tour_list\tour_2.jpg" />
+    <Content Include="img\tour_list\tour_3.jpg" />
+    <Content Include="img\tour_list\tour_4.jpg" />
+    <Content Include="img\tour_list\tour_5.jpg" />
+    <Content Include="img\tour_list\tour_6.jpg" />
+    <Content Include="img\tour_list\tour_7.jpg" />
+    <Content Include="img\tour_list\tour_8.jpg" />
+    <Content Include="img\tour_list\tour_9.jpg" />
+    <Content Include="img\tour_list\tour_grid_1.jpg" />
+    <Content Include="img\tour_list\tour_grid_10.jpg" />
+    <Content Include="img\tour_list\tour_grid_11.jpg" />
+    <Content Include="img\tour_list\tour_grid_12.jpg" />
+    <Content Include="img\tour_list\tour_grid_13.jpg" />
+    <Content Include="img\tour_list\tour_grid_14.jpg" />
+    <Content Include="img\tour_list\tour_grid_15.jpg" />
+    <Content Include="img\tour_list\tour_grid_2.jpg" />
+    <Content Include="img\tour_list\tour_grid_3.jpg" />
+    <Content Include="img\tour_list\tour_grid_4.jpg" />
+    <Content Include="img\tour_list\tour_grid_5.jpg" />
+    <Content Include="img\tour_list\tour_grid_6.jpg" />
+    <Content Include="img\tour_list\tour_grid_7.jpg" />
+    <Content Include="img\tour_list\tour_grid_8.jpg" />
+    <Content Include="img\tour_list\tour_grid_9.jpg" />
+    <Content Include="img\ui-bg_flat_0_ffffff_40x100.png" />
+    <Content Include="img\weather_icon.png" />
+    <Content Include="img\weather_icon_rain.png" />
+    <Content Include="img\weather_icon_rain_blue.png" />
+    <Content Include="img\weather_icon_small.png" />
+    <Content Include="img\weather_icon_small_blue.png" />
+    <Content Include="Models\EzTravelModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EzTravelModel.edmx</DependentUpon>
+      <LastGenOutput>EzTravelModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EzTravelModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EzTravelModel.edmx</DependentUpon>
+      <LastGenOutput>EzTravelModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\EzTravelModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EzTravelModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EzTravelModel.edmx.diagram">
+      <DependentUpon>EzTravelModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\all.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\idangerous.swiper.min.js" />
+    <Content Include="Scripts\isotope.pkgd.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="img\.DS_Store" />
+    <Content Include="img\country\.DS_Store" />
+    <Content Include="img\home_7\.DS_Store" />
+    <Content Include="Areas\EN\Views\web.config" />
+    <Content Include="Areas\EN\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\EN\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\EN\Views\Home\Index.cshtml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.mousewheel.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.viewportchecker.min.js" />
+    <Content Include="Scripts\map.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="video\video.mp4" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="video\video.ogv" />
+    <Content Include="video\video.webm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\EN\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64332</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64332/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
