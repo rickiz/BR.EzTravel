@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -178,6 +182,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\EN\Controllers\AdminBlogController.cs" />
     <Compile Include="Areas\EN\Controllers\HomeController.cs" />
     <Compile Include="Areas\EN\ENAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -187,6 +192,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin\BlogViewModels.cs" />
     <Compile Include="Models\EzTravelModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -282,6 +288,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\offcanvas.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -1363,6 +1370,8 @@
     <Content Include="Areas\EN\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\EN\Views\_ViewStart.cshtml" />
     <Content Include="Areas\EN\Views\Home\Index.cshtml" />
+    <Content Include="Areas\EN\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\EN\Views\AdminBlog\Create.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />

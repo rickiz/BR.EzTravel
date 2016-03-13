@@ -40,6 +40,12 @@ namespace BR.EzTravel.Web
                       "~/Content/jquery-ui.min.css",
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/offcanvas").Include(
+                      "~/Content/offcanvas.css"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+                      "~/Content/bootstrap.css"));
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model BR.EzTravel.Web.Models.Admin.BlogCreateViewModel
+@{
+    ViewBag.Title = "Create Blog";
+    Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="col-xs-12 col-sm-9">
+    <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+
+    <div class="row">
+        <div class="col-md-12" role="main">
+            <div class="bs-docs-section">
+                <h1 class="page-header">Create Blog</h1>
+                <p>
+                    <button type="button" class="btn btn-default">Publish</button>
+                    <button type="button" class="btn btn-default">Save</button>
+                    <button type="button" class="btn btn-default">Preview</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+
+                </p>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="InputTitle" class="control-label">Title</label>
+                        <input type="text" class="form-control col-md-12" id="InputTitle" placeholder="Title" />
+                    </div>
+                    <div class="form-group">
+                        <textarea name="editor1" id="editor1" rows="10" cols="80"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
