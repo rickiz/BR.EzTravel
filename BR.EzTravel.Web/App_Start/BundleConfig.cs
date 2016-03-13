@@ -26,6 +26,9 @@ namespace BR.EzTravel.Web
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
+                      "~/Scripts/tinymce/tinymce.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/all").Include(
                      "~/Scripts/idangerous.swiper.min.js",
                      "~/Scripts/jquery.viewportchecker.min.js",
@@ -33,6 +36,9 @@ namespace BR.EzTravel.Web
                      "~/Scripts/jquery.mousewheel.min.js",
                      //"~/Scripts/map.js",
                      "~/Scripts/all.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/eztravel").Include(
+                      "~/Scripts/eztravel.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -46,6 +52,9 @@ namespace BR.EzTravel.Web
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                       "~/Content/bootstrap.css"));
+
+            bundles.Add(new StyleBundle("~/Content/validation").Include(
+                      "~/Content/validation.css"));
         }
     }
 }

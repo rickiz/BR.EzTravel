@@ -1,4 +1,5 @@
-﻿@{
+﻿@using BR.EzTravel.Web.Helpers
+@{
     Layout = null;
 }
 
@@ -11,6 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    @Styles.Render("~/Content/validation")
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/offcanvas")
 
@@ -53,10 +55,8 @@
         <div class="row row-offcanvas row-offcanvas-right">
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
                 <div class="list-group">
-                    <a href="admin_blog_create.html" class="list-group-item active">Create entry</a>
-                    <a href="admin_blog_list.html" class="list-group-item">Manage list</a>
-                    <a href="#" class="list-group-item">Setting</a>
-
+                    @Html.ListGroupLink("Create entry", "Create", "AdminBlog", area: "EN")
+                    @Html.ListGroupLink("Manage list", "Index", "AdminBlog", area: "EN")
                 </div>
             </div><!--/.sidebar-offcanvas-->
 
@@ -70,8 +70,10 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/tinymce")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/eztravel")
 
     @RenderSection("scripts", required: false)
 </body>

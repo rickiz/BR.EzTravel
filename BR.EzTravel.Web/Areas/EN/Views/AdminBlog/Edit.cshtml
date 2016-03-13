@@ -1,0 +1,69 @@
+﻿@model BR.EzTravel.Web.Models.Admin.BlogEditViewModel
+@{
+    ViewBag.Title = "Edit Blog";
+    Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-9">
+    <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+
+    <div class="row">
+        <div class="col-md-12" role="main">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.ID)
+                <div class="bs-docs-section">
+                    <h1 class="page-header">Edit Blog</h1>
+                    <p>
+                        @*<button type="button" class="btn btn-default">Publish</button>
+                            <button type="submit" class="btn btn-default">Save</button>
+                            <button type="button" class="btn btn-default">Preview</button>
+                            <button type="button" class="btn btn-danger">Delete</button>*@
+                        <button type="submit" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-save"></i>
+                            Save
+                        </button>
+                        <a class="btn btn-danger" href="@Url.Action("Delete", new { id = Model.ID })" role="button">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            Delete
+                        </a>
+                    </p>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control col-md-12", placeholder = "Title" })
+                            @Html.ValidationMessageFor(m => m.Title)
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(m => m.Body, new { rows = "10", cols = "80" })
+                            @Html.ValidationMessageFor(m => m.Body)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Initialize your tinyMCE Editor with your preferred options
+            tinyMCE.init({
+                selector: "textarea",  // change this value according to your HTML
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table contextmenu paste code'
+                ],
+                theme_advanced_buttons3_add: 'code',
+                toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                paste_data_images: true,
+            });
+        });
+    </script>
+}

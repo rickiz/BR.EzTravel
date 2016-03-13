@@ -1,0 +1,50 @@
+﻿@model BR.EzTravel.Web.Models.Admin.BlogIndexViewModel
+@{
+    ViewBag.Title = "Blog List";
+    Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-9">
+    <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+
+    <div class="row">
+        <div class="col-md-12" role="main">
+            <h1>Blog List</h1>
+            <p>
+                <button type="button" class="btn btn-default">Publish</button>
+                <button type="button" class="btn btn-default">Revert to draft</button>
+                <button type="button" class="btn btn-default">Delete</button>
+            </p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">
+                            <input type="checkbox" id="chkAll">
+                        </th>
+                        <th class="col-md-8">Title</th>
+                        <th class="col-md-3">Last update</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Blogs)
+                    {
+                        <tr>
+                            <th scope="row">
+                                <input type="checkbox" id="chk_@(item.ID)" value="@item.ID">
+                            </th>
+                            <td>
+                                @Html.ActionLink(item.Title, "Edit", new { id = item.ID })
+                            </td>
+                            <td>@item.LastUpdateDT.ToString("dd MMM yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div><!--/row-->
+</div><!--/.col-xs-12.col-sm-9-->
+
