@@ -34,7 +34,7 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#about">Blog</a></li>
+                    @Html.MenuLink("Blog", "Index", "AdminBlog", area: "EN")
                     <li><a href="#contact">Holiday</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -55,8 +55,8 @@
         <div class="row row-offcanvas row-offcanvas-right">
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
                 <div class="list-group">
-                    @Html.ListGroupLink("Create entry", "Create", "AdminBlog", area: "EN")
-                    @Html.ListGroupLink("Manage list", "Index", "AdminBlog", area: "EN")
+                    @Html.ListGroupLink("Create entry", "Create", area: "EN")
+                    @Html.ListGroupLink("Manage list", "Index", area: "EN")
                 </div>
             </div><!--/.sidebar-offcanvas-->
 
