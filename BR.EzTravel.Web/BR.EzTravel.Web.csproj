@@ -1356,6 +1356,7 @@
     <Content Include="Areas\EN\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\EN\Views\_ViewStart.cshtml" />
     <Content Include="Areas\EN\Views\Home\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
