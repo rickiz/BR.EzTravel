@@ -113,5 +113,19 @@ namespace BR.EzTravel.Web.Helpers
 
             return value.Trim();
         }
+
+        public static string ToFormatString(this DateTime? target, string format)
+        {
+            if (!target.HasValue || target.Value == DateTime.MinValue)
+                return "";
+
+            return target.Value.ToString(format);
+        }
+
+        public static string ToFormatString(this DateTime target, string format)
+        {
+            DateTime? temp = target;
+            return temp.ToFormatString(format);
+        }
     }
 }

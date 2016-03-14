@@ -1,0 +1,123 @@
+﻿@model BR.EzTravel.Web.Models.Admin.PackageEditViewModel
+@{
+    ViewBag.Title = "Edit Holiday Package";
+    Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-9">
+    <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+
+    <div class="row">
+        <div class="col-md-12" role="main">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.ID)
+                <div class="bs-docs-section">
+                    <h1 class="page-header">@ViewBag.Title</h1>
+                    <p>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-save"></i>
+                            Save
+                        </button>
+                    </p>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control col-md-12" })
+                            @Html.ValidationMessageFor(m => m.Title)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Price, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Price, new { @class = "form-control col-md-12 numbersonly" })
+                            @Html.ValidationMessageFor(m => m.Price)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CountryID, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.CountryID, Model.Countries, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CategoryID, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.CategoryID, Model.Categories, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="file">Thumbnail</label>
+                            <input type="file" id="file" name="file" />
+                            <img id="img-preview" src="@(Url.Content(Model.ThumbnailImagePath))" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "15" })
+                            @Html.ValidationMessageFor(m => m.Description)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Rate, new { @class = "control-label" })
+                            @Html.EditorFor(m => m.Rate, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            @Html.ValidationMessageFor(m => m.Rate)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Days, new { @class = "control-label" })
+                            @Html.EditorFor(m => m.Days, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            @Html.ValidationMessageFor(m => m.Days)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Nights, new { @class = "control-label" })
+                            @Html.EditorFor(m => m.Nights, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            @Html.ValidationMessageFor(m => m.Nights)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.StartDT, new { @class = "control-label" })
+                            @Html.EditorFor(m => m.StartDT)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.EndDT, new { @class = "control-label" })
+                            @Html.EditorFor(m => m.EndDT)
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-save"></i>
+                        Save
+                    </button>
+                </p>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#file").change(function () {
+                readURL(this);
+            });
+
+            var startDateId = '#' + '@(Html.IdFor(m => m.StartDT))';
+            var endDateId = '#' + '@(Html.IdFor(m => m.EndDT))';
+
+            // Select a Date Range with datepicker
+            $(startDateId).datepicker("option", "onClose", function (selectedDate) {
+                $(endDateId).datepicker("option", "minDate", selectedDate);
+                $(this).valid();
+            });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}
+

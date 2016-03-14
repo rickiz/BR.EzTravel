@@ -1,6 +1,6 @@
-﻿@model BR.EzTravel.Web.Models.Admin.BlogIndexViewModel
+﻿@model BR.EzTravel.Web.Models.Admin.PackageIndexViewModel
 @{
-    ViewBag.Title = "Blog List";
+    ViewBag.Title = "Manage Holiday List";
     Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
 
-                    @foreach (var item in Model.Blogs)
+                    @foreach (var item in Model.Packages)
                     {
                         <tr>
                             <th scope="row">
@@ -47,4 +47,5 @@
         </div>
     </div><!--/row-->
 </div><!--/.col-xs-12.col-sm-9-->
+
 

@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="ImageUploadPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">~/App_Data/Images</Value>
+      <Value Profile="(Default)">~/UploadedImages</Value>
+    </Setting>
+    <Setting Name="DateFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dd/MM/yyyy</Value>
     </Setting>
   </Settings>
 </SettingsFile>

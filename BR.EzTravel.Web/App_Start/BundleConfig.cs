@@ -47,6 +47,9 @@ namespace BR.EzTravel.Web
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/jqueryui").Include(
+                      "~/Content/themes/base/all.css"));
+
             bundles.Add(new StyleBundle("~/Content/offcanvas").Include(
                       "~/Content/offcanvas.css"));
 

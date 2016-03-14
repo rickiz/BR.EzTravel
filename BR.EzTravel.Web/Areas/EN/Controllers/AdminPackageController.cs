@@ -45,7 +45,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HttpPostedFileBase[] files, PackageCreateViewModel viewModel)
+        public ActionResult Create(HttpPostedFileBase file, PackageCreateViewModel viewModel)
         {
             var post = new lnkmemberpost()
             {
@@ -57,12 +57,16 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Title = viewModel.Title,
                 CategoryID = viewModel.CategoryID,
                 Price = viewModel.Price,
-                StartDT = DateTime.Now,
+                StartDT = viewModel.StartDT,
+                EndDT = viewModel.EndDT,
+                Days = viewModel.Days,
+                Nights = viewModel.Nights,
+                Rate = viewModel.Rate
             };
 
-            if (!files.IsEmpty())
+            if (file != null)
             {
-                var fileName = FIleUploadManager.UploadAndSave(files[0]);
+                var fileName = FIleUploadManager.UploadAndSave(file);
                 post.ThumbnailImagePath = fileName;
             }
 
@@ -96,7 +100,12 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 CategoryID = package.CategoryID,
                 Categories = GetList(ListType.Category),
                 Countries = GetList(ListType.Country),
-                ThumbnailImagePath = Path.Combine(Settings.Default.ImageUploadPath, package.ThumbnailImagePath)
+                ThumbnailImagePath = Path.Combine(Settings.Default.ImageUploadPath, package.ThumbnailImagePath),
+                Days = package.Days,
+                Rate = package.Rate,
+                Nights = package.Nights,
+                StartDT = package.StartDT,
+                EndDT = package.EndDT
             };
 
             return View(viewModel);
@@ -104,7 +113,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(HttpPostedFileBase[] files, PackageEditViewModel viewModel)
+        public ActionResult Edit(HttpPostedFileBase file, PackageEditViewModel viewModel)
         {
             var package = db.lnkmemberposts.Single(a => a.ID == viewModel.ID);
             package.Title = viewModel.Title;
@@ -112,10 +121,15 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             package.UpdateDT = DateTime.Now;
             package.Price = viewModel.Price;
             package.CategoryID = viewModel.CategoryID;
+            package.StartDT = viewModel.StartDT;
+            package.EndDT = viewModel.EndDT;
+            package.Days = viewModel.Days;
+            package.Nights = viewModel.Nights;
+            package.Rate = viewModel.Rate;
 
-            if(!files.IsEmpty())
+            if (file != null)
             {
-                var fileName = FIleUploadManager.UploadAndSave(files[0]);
+                var fileName = FIleUploadManager.UploadAndSave(file);
                 package.ThumbnailImagePath = fileName;
             }
 

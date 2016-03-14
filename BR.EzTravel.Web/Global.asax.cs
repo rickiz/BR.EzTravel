@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using BR.EzTravel.Web.CustomModelBinders;
 
 namespace BR.EzTravel.Web
 {
@@ -18,6 +19,14 @@ namespace BR.EzTravel.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             log4net.Config.XmlConfigurator.Configure();
+
+            RegisterCustomModelBinders(ModelBinders.Binders);
+        }
+
+        public static void RegisterCustomModelBinders(ModelBinderDictionary modelBinders)
+        {
+            modelBinders.Add(typeof(DateTime), new DateTimeModelBinder());
+            modelBinders.Add(typeof(DateTime?), new DateTimeModelBinder());
         }
     }
 }

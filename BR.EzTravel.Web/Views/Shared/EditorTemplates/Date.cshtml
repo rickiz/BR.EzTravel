@@ -1,0 +1,13 @@
+﻿@using BR.EzTravel.Web.Helpers;
+@using BR.EzTravel.Web.Properties;
+
+@model DateTime?
+
+@{
+    var value = Model.ToFormatString(Settings.Default.DateFormat);
+}
+
+<div class="input-group">
+    @Html.TextBox("", value, new { @class = "form-control datepicker" })
+    <span class="input-group-addon" onclick="$(this).prev().datepicker('show');"><i class="glyphicon glyphicon-calendar"></i></span>
+</div>

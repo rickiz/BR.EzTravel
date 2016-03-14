@@ -191,6 +191,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="CustomAttributes\CustomDateDisplayFormatAttribute.cs" />
+    <Compile Include="CustomModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1390,9 +1392,12 @@
     <Content Include="Areas\EN\Views\AdminBlog\Create.cshtml" />
     <Content Include="Areas\EN\Views\AdminBlog\Index.cshtml" />
     <Content Include="Areas\EN\Views\AdminBlog\Edit.cshtml" />
+    <Content Include="Areas\EN\Views\AdminPackage\Create.cshtml" />
+    <Content Include="Areas\EN\Views\AdminPackage\Index.cshtml" />
+    <Content Include="Areas\EN\Views\AdminPackage\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1618,12 +1623,13 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\EN\Models\" />
-    <Folder Include="Areas\EN\Views\AdminPackage\" />
     <Folder Include="Areas\EN\Views\BaseEn\" />
+    <Folder Include="UploadedImages\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

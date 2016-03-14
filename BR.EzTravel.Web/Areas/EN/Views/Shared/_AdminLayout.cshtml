@@ -12,9 +12,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    @Styles.Render("~/Content/validation")
+    @Styles.Render("~/Content/validation")    
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/offcanvas")
+    @Styles.Render("~/Content/jqueryui")
 
     @RenderSection("styles", required: false)
 
@@ -70,9 +71,10 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/tinymce")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/eztravel")
 
     @RenderSection("scripts", required: false)

@@ -17,7 +17,7 @@
             {
                 @Html.AntiForgeryToken()
                 <div class="bs-docs-section">
-                    <h1 class="page-header">Create Blog</h1>
+                    <h1 class="page-header">@ViewBag.Title</h1>
                     <p>
                         @*<button type="button" class="btn btn-default">Publish</button>
                         <button type="submit" class="btn btn-default">Save</button>
@@ -47,6 +47,7 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/tinymce")
     <script type="text/javascript">
         $(document).ready(function () {
             // Initialize your tinyMCE Editor with your preferred options
