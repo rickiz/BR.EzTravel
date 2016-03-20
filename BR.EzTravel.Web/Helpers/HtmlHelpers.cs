@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using BR.EzTravel.Web.Properties;
 
 namespace BR.EzTravel.Web.Helpers
 {
@@ -54,5 +56,9 @@ namespace BR.EzTravel.Web.Helpers
             return new MvcHtmlString(builder.ToString());
         }
 
+        public static string UploadedImageContent(this UrlHelper urlHelper, string contentPath)
+        {
+            return urlHelper.Content(Path.Combine(Settings.Default.ImageUploadPath, contentPath));
+        }
     }
 }

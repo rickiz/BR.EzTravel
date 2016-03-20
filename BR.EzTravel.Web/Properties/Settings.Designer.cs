@@ -40,5 +40,14 @@ namespace BR.EzTravel.Web.Properties {
                 return ((string)(this["DateFormat"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12")]
+        public int MaxListPerPage {
+            get {
+                return ((int)(this["MaxListPerPage"]));
+            }
+        }
     }
 }

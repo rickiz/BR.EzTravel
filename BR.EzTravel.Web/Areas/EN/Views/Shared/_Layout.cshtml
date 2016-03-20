@@ -12,6 +12,17 @@
     <title>Ez > Travel</title>
 </head>
 <body data-color="theme-1">
+    <div class="loading red">
+        <div class="loading-center">
+            <div class="loading-center-absolute">
+                <div class="object object_four"></div>
+                <div class="object object_three"></div>
+                <div class="object object_two"></div>
+                <div class="object object_one"></div>
+            </div>
+        </div>
+    </div>
+
     <header class="color-3 hovered menu-3">
         <div class="top-header-bar">
             <div class="container">
@@ -234,6 +245,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/all")
 
     @RenderSection("scripts", required: false)

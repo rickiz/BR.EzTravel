@@ -186,6 +186,7 @@
     <Compile Include="Areas\EN\Controllers\AdminPackageController.cs" />
     <Compile Include="Areas\EN\Controllers\BaseEnController.cs" />
     <Compile Include="Areas\EN\Controllers\HomeController.cs" />
+    <Compile Include="Areas\EN\Controllers\PackageController.cs" />
     <Compile Include="Areas\EN\ENAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -254,6 +255,7 @@
       <DependentUpon>EzTravelModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PackageViewModels.cs" />
     <Compile Include="Models\refcategory.cs">
       <DependentUpon>EzTravelModel.tt</DependentUpon>
     </Compile>
@@ -1395,6 +1397,7 @@
     <Content Include="Areas\EN\Views\AdminPackage\Create.cshtml" />
     <Content Include="Areas\EN\Views\AdminPackage\Index.cshtml" />
     <Content Include="Areas\EN\Views\AdminPackage\Edit.cshtml" />
+    <Content Include="Areas\EN\Views\Package\Index.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -1624,6 +1627,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

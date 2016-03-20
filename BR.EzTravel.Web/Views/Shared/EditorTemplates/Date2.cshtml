@@ -1,0 +1,12 @@
+﻿@using BR.EzTravel.Web.Helpers;
+@using BR.EzTravel.Web.Properties;
+
+@model DateTime?
+
+@{
+    var value = Model.ToFormatString(Settings.Default.DateFormat);
+    var placeholder = ViewData.ModelMetadata.DisplayName;
+}
+
+<img src="~/img/calendar_icon_grey.png" alt="">
+@Html.TextBox("", value, new { @class = "datepicker", placeholder = placeholder })

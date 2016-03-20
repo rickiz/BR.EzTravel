@@ -53,7 +53,7 @@ namespace BR.EzTravel.Web.Models.Admin
         public string ThumbnailImagePath { get; set; }
     }
 
-    public class PackageIndexViewModel
+    public class AdminPackageIndexViewModel
     {
         public List<PackageIndexItem> Packages { get; set; }
     }

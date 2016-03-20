@@ -39,6 +39,7 @@ namespace BR.EzTravel.Web.Controllers
 
         protected List<SelectListItem> GetList(ListType type, string defaultValue = "", string defaultText = "default", bool defaultItem = true)
         {
+            var lang = language.ToString();
             var resultList = new List<SelectListItem>();
             if (defaultText == "default")
                 defaultText = "--Please select--";
@@ -62,6 +63,21 @@ namespace BR.EzTravel.Web.Controllers
                         {
                             Text = a.Name,
                             Value = a.ID.ToString()
+                        }).OrderBy(a => a.Text).ToList();
+                    break;
+
+                case ListType.PackageCategory:
+                    var packageCategories =
+                        (from a in db.lnkmemberposts
+                        join b in db.refcategories on a.CategoryID equals b.ID
+                        where a.Language == lang && !a.CancelDT.HasValue && b.Active
+                        group b by new { Name = b.Name, ID = b.ID } into c
+                        select c).ToList();
+                    resultList = packageCategories.Select(a =>
+                        new SelectListItem()
+                        {
+                            Text = a.Key.Name,
+                            Value = a.Key.ID.ToString()
                         }).OrderBy(a => a.Text).ToList();
                     break;
 

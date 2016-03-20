@@ -27,7 +27,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         LastUpdateDT = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT
                     })
                     .ToList();
-            var viewModel = new PackageIndexViewModel { Packages = packages };
+            var viewModel = new AdminPackageIndexViewModel { Packages = packages };
 
             return View(viewModel);
         }

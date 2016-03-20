@@ -481,8 +481,12 @@ $(function() {
 	}
 
 	//Datepiker	
-	if ($( ".datepicker" ).length){
-    $( ".datepicker" ).datepicker();
+	if ($(".datepicker").length) {
+	    $('.datepicker').datepicker({
+	        dateFormat: "dd/mm/yy",
+	        changeMonth: true,
+	        changeYear: true,
+	    });
 	}
 
 	//slider range
