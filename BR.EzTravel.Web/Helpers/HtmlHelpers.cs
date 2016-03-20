@@ -48,7 +48,7 @@ namespace BR.EzTravel.Web.Helpers
                 InnerHtml = actionLink.ToHtmlString()
             };
 
-            if (controllerName == currentController)
+            if (controllerName.ToLower() == currentController.ToLower())
                 builder.AddCssClass("active");
 
             return new MvcHtmlString(builder.ToString());
