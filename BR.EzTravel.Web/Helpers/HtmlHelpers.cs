@@ -60,5 +60,12 @@ namespace BR.EzTravel.Web.Helpers
         {
             return urlHelper.Content(Path.Combine(Settings.Default.ImageUploadPath, contentPath));
         }
+
+        public static string SetMenuActive(this HtmlHelper htmlHelper, string menuController)
+        {
+            var currentController = htmlHelper.ViewContext.RouteData.GetRequiredString("controller");
+
+            return menuController.ToLower() == currentController.ToLower() ? "active" : "";
+        }
     }
 }

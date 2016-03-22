@@ -1180,6 +1180,8 @@
     <Content Include="img\theme-1\c_icon_3.png" />
     <Content Include="img\theme-1\c_icon_4.png" />
     <Content Include="img\theme-1\logo.png" />
+    <Content Include="img\theme-1\logo1.png" />
+    <Content Include="img\theme-1\logo2.png" />
     <Content Include="img\theme-1\logo_dark.png" />
     <Content Include="img\theme-2\country_1.png" />
     <Content Include="img\theme-2\country_2.png" />

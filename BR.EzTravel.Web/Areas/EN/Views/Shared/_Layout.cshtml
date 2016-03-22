@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using BR.EzTravel.Web.Helpers
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -29,7 +31,8 @@
                 <div class="left-col">
                     <a href="#"><i class="fa fa-envelope"></i>Contact Us</a>
                     <a href="#"><i class="fa fa-suitcase"></i>Join the Travel</a>
-                    <a href="#"><i class="fa fa-envelope "></i>Sign in</a>
+                    <a href="#"><i class="fa fa-envelope"></i>Sign in</a>
+                    <a href="@Url.Action("Index", "AdminBlog")"><i class="fa fa-cog"></i>Back Office</a>
                 </div>
                 <div class="right-col">
                     <div class="folow">
@@ -49,25 +52,28 @@
                 <div class="col-md-12">
                     <div class="nav">
                         <a href="index.html" class="logo">
-                            <img src="~/img/theme-1/logo_dark.png" alt="ez travel">
+                            <img src="~/img/theme-1/logo2.png" alt="ez travel">
                         </a>
                         <div class="nav-menu-icon">
                             <a href="#"><i></i></a>
                         </div>
                         <nav class="menu">
                             <ul>
-                                <li class="type-1 active">
-                                    <a href="index.html">home<span class="fa fa-angle-down"></span></a>
+                                <li class="type-1 @(Html.SetMenuActive("Home"))">
+                                    <a href="@Url.Action("Index", "Home")">home<span class="fa fa-angle-down"></span></a>
 
                                 </li>
-                                <li class="type-1">
+                                <li class="type-1 @(Html.SetMenuActive("Package"))">
+                                    <a href="@Url.Action("Index", "Package")">Holidays<span class="fa fa-angle-down"></span></a>
+                                </li>
+                                @*<li class="type-1">
                                     <a href="#">Tours<span class="fa fa-angle-down"></span></a>
                                     <ul class="dropmenu">
                                         <li><a href="detail_4.html">Tour Details </a></li>
                                         <li><a href="hotel_list_2.html">Tour listing</a></li>
 
                                     </ul>
-                                </li>
+                                </li>*@
                                 <li class="type-1">
                                     <a href="#">Flights<span class="fa fa-angle-down"></span></a>
 
