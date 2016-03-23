@@ -220,6 +220,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EzTravelModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\lnkblogcomment.cs">
       <DependentUpon>EzTravelModel.tt</DependentUpon>
