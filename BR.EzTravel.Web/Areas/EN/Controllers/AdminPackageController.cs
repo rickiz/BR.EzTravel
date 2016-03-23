@@ -61,7 +61,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 EndDT = viewModel.EndDT,
                 Days = viewModel.Days,
                 Nights = viewModel.Nights,
-                Rate = viewModel.Rate
             };
 
             if (file != null)
@@ -102,7 +101,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Countries = GetList(ListType.Country),
                 ThumbnailImagePath = Path.Combine(Settings.Default.ImageUploadPath, package.ThumbnailImagePath),
                 Days = package.Days,
-                Rate = package.Rate,
                 Nights = package.Nights,
                 StartDT = package.StartDT,
                 EndDT = package.EndDT
@@ -125,7 +123,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             package.EndDT = viewModel.EndDT;
             package.Days = viewModel.Days;
             package.Nights = viewModel.Nights;
-            package.Rate = viewModel.Rate;
 
             if (file != null)
             {

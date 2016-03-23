@@ -1,5 +1,11 @@
-﻿@{
+﻿@using BR.EzTravel.Web.Helpers
+
+@model BR.EzTravel.Web.Models.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
+
+    var latestPackages = Model.LatestPackages;
+    var popularPackages = Model.PopularPackages;
 }
 
 <div class="full-height">
@@ -119,316 +125,99 @@
             <div class="col-md-12">
                 <div class="second-title">
                     <h2>Best deals of the month</h2>
-                    <p class="color-grey">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id tor.</p>
+                    @*<p class="color-grey">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id tor.</p>*@
                 </div>
             </div>
         </div>
         <div class="row">
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/1.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>royal Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
+            @for (int i = 0; i < 4 && i < latestPackages.Count; i++)
+            {
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="hotel-item">
+                        <div class="radius-top">
+                            <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
+                            <div class="price price-s-1">RM @latestPackages[i].Price</div>
                         </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
+                        <div class="title clearfix">
+                            <h4><b>@latestPackages[i].Title</b></h4>
+                            <div class="rate-wrap">
+                                <div class="rate">
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                </div>
+                                @*<i>485 rewies</i>*@
+                            </div>
+                            @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
+                            <p class="f-14">@latestPackages[i].Description</p>
+                            <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))' 
+                               class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/2.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>sheraton Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/3.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>royal Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/4.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>sheraton Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
+            }
         </div>
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/5.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>royal Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
+            @for (int i = 4; i < 8 && i < latestPackages.Count; i++)
+            {
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="hotel-item">
+                        <div class="radius-top">
+                            <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
+                            <div class="price price-s-1">RM @latestPackages[i].Price</div>
                         </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
+                        <div class="title clearfix">
+                            <h4><b>@latestPackages[i].Title</b></h4>
+                            <div class="rate-wrap">
+                                <div class="rate">
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                </div>
+                                @*<i>485 rewies</i>*@
+                            </div>
+                            @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
+                            <p class="f-14">@latestPackages[i].Description</p>
+                            <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))'
+                               class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/6.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>sheraton Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/7.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>royal Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/8.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>sheraton Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
+            }
         </div>
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/9.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>royal Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
+            @for (int i = 8; i < 12 && i < latestPackages.Count; i++)
+            {
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="hotel-item">
+                        <div class="radius-top">
+                            <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
+                            <div class="price price-s-1">RM @latestPackages[i].Price</div>
                         </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
+                        <div class="title clearfix">
+                            <h4><b>@latestPackages[i].Title</b></h4>
+                            <div class="rate-wrap">
+                                <div class="rate">
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                    <span class="fa fa-star color-yellow"></span>
+                                </div>
+                                @*<i>485 rewies</i>*@
+                            </div>
+                            @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
+                            <p class="f-14">@latestPackages[i].Description</p>
+                            <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))'
+                               class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/10.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>sheraton Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/8.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>royal Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="hotel-item">
-                    <div class="radius-top">
-                        <img src="~/img/country/4.jpg" alt="">
-                        <div class="price price-s-1">$273</div>
-                    </div>
-                    <div class="title clearfix">
-                        <h4><b>sheraton Hotel</b></h4>
-                        <div class="rate-wrap">
-                            <div class="rate">
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                                <span class="fa fa-star color-yellow"></span>
-                            </div>
-                            <i>485 rewies</i>
-                        </div>
-                        <span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>
-                        <p class="f-14">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
-                        <a href="detail_4.html" class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
-
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
@@ -439,137 +228,59 @@
                 <div class="second-title">
                     <h4 class="subtitle color-dark-2-light">popular destination</h4>
                     <h2>Special offers for You</h2>
-                    <p class="color-grey">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id tor.</p>
+                    @*<p class="color-grey">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id tor.</p>*@
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4">
                 <div class="item-block style-3 hover-sea underline-block">
-                    <img class="center-image" src="~/img/country/4.jpg" alt="">
-                    <div class="tour-layer delay-1"></div>
-                    <div class="vertical-align">
-                        <h3 class="ib-subtitle hover-it">sale <span class="color-sea">-20%</span></h3>
-                        <h3 class="hover-it underline">Paris for HONEYMOON</h3>
-                        <p>Cursus libero purus ac cursus ut sed.Nunc cursus libero purus ac  sed vitae pulvinar.</p>
-                    </div>
+                    <a href="@(Url.Action("Details", "Package", new { id = popularPackages[0].ID }))">
+                        <img class="center-image" src="@(Url.UploadedImageContent(popularPackages[0].ThumbnailImagePath))" alt="">
+                        <div class="tour-layer delay-1"></div>
+                        <div class="vertical-align">
+                            <h3 class="ib-subtitle hover-it"><span class="color-sea">RM @popularPackages[0].Price</span></h3>
+                            <h3 class="hover-it underline">@popularPackages[0].Title</h3>
+                            <p>@popularPackages[0].Description</p>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="hotel-small style-2 clearfix">
-                    <a class="hotel-img black-hover" href="#">
-                        <img class="img-responsive radius-0" src="~/img/country/1.jpg" alt="">
-                        <div class="tour-layer delay-1"></div>
-                    </a>
-                    <div class="hotel-desc">
-                        <h5>
-                            <span class="color-dark-2-light"><strong><s>$470</s></strong></span>
-                            <span class="color-red"><strong>$300</strong></span>
-                        </h5>
-                        <h4>mauritius from 5 days</h4>
-                        <div class="hotel-loc">Nunc cursus libero purus ac congue.</div>
+                @for (int i = 1; i < 5 && i < popularPackages.Count; i++)
+                {
+                    <div class="hotel-small style-2 clearfix">
+                        <a class="hotel-img black-hover" href="#">
+                            <img class="img-responsive radius-0" src="@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))" alt="">
+                            <div class="tour-layer delay-1"></div>
+                        </a>
+                        <div class="hotel-desc">
+                            <h5>
+                                <span class="color-red"><strong>RM @popularPackages[i].Price</strong></span>
+                            </h5>
+                            <h4>@popularPackages[i].Title</h4>
+                            <div class="hotel-loc">@popularPackages[i].Description</div>
+                        </div>
                     </div>
-                </div>
-                <div class="hotel-small style-2 clearfix">
-                    <a class="hotel-img black-hover" href="#">
-                        <img class="img-responsive radius-0" src="~/img/country/9.jpg" alt="">
-                        <div class="tour-layer delay-1"></div>
-                    </a>
-                    <div class="hotel-desc">
-                        <h5>
-                            <span class="color-dark-2-light"><strong><s>$470</s></strong></span>
-                            <span class="color-red"><strong>$300</strong></span>
-                        </h5>
-                        <h4>mauritius from 5 days</h4>
-                        <div class="hotel-loc">Nunc cursus libero purus ac congue.</div>
-                    </div>
-                </div>
-                <div class="hotel-small style-2 clearfix">
-                    <a class="hotel-img black-hover" href="#">
-                        <img class="img-responsive radius-0" src="~/img/country/10.jpg" alt="">
-                        <div class="tour-layer delay-1"></div>
-                    </a>
-                    <div class="hotel-desc">
-                        <h5>
-                            <span class="color-dark-2-light"><strong><s>$470</s></strong></span>
-                            <span class="color-red"><strong>$300</strong></span>
-                        </h5>
-                        <h4>mauritius from 5 days</h4>
-                        <div class="hotel-loc">Nunc cursus libero purus ac congue.</div>
-                    </div>
-                </div>
-                <div class="hotel-small style-2 clearfix">
-                    <a class="hotel-img black-hover" href="#">
-                        <img class="img-responsive radius-0" src="~/img/country/7.jpg" alt="">
-                        <div class="tour-layer delay-1"></div>
-                    </a>
-                    <div class="hotel-desc">
-                        <h5>
-                            <span class="color-dark-2-light"><strong><s>$470</s></strong></span>
-                            <span class="color-red"><strong>$300</strong></span>
-                        </h5>
-                        <h4>mauritius from 5 days</h4>
-                        <div class="hotel-loc">Nunc cursus libero purus ac congue.</div>
-                    </div>
-                </div>
+                }
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="hotel-small style-2 clearfix">
-                    <a class="hotel-img black-hover" href="#">
-                        <img class="img-responsive radius-0" src="~/img/country/8.jpg" alt="">
-                        <div class="tour-layer delay-1"></div>
-                    </a>
-                    <div class="hotel-desc">
-                        <h5>
-                            <span class="color-dark-2-light"><strong><s>$470</s></strong></span>
-                            <span class="color-red"><strong>$300</strong></span>
-                        </h5>
-                        <h4>mauritius from 5 days</h4>
-                        <div class="hotel-loc">Nunc cursus libero purus ac congue.</div>
+                @for (int i = 5; i < 9 && i < popularPackages.Count; i++)
+                {
+                    <div class="hotel-small style-2 clearfix">
+                        <a class="hotel-img black-hover" href="#">
+                            <img class="img-responsive radius-0" src="@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))" alt="">
+                            <div class="tour-layer delay-1"></div>
+                        </a>
+                        <div class="hotel-desc">
+                            <h5>
+                                <span class="color-red"><strong>RM @popularPackages[i].Price</strong></span>
+                            </h5>
+                            <h4>@popularPackages[i].Title</h4>
+                            <div class="hotel-loc">@popularPackages[i].Description</div>
+                        </div>
                     </div>
-                </div>
-                <div class="hotel-small style-2 clearfix">
-                    <a class="hotel-img black-hover" href="#">
-                        <img class="img-responsive radius-0" src="~/img/country/6.jpg" alt="">
-                        <div class="tour-layer delay-1"></div>
-                    </a>
-                    <div class="hotel-desc">
-                        <h5>
-                            <span class="color-dark-2-light"><strong><s>$470</s></strong></span>
-                            <span class="color-red"><strong>$300</strong></span>
-                        </h5>
-                        <h4>mauritius from 5 days</h4>
-                        <div class="hotel-loc">Nunc cursus libero purus ac congue.</div>
-                    </div>
-                </div>
-                <div class="hotel-small style-2 clearfix">
-                    <a class="hotel-img black-hover" href="#">
-                        <img class="img-responsive radius-0" src="~/img/country/5.jpg" alt="">
-                        <div class="tour-layer delay-1"></div>
-                    </a>
-                    <div class="hotel-desc">
-                        <h5>
-                            <span class="color-dark-2-light"><strong><s>$470</s></strong></span>
-                            <span class="color-red"><strong>$300</strong></span>
-                        </h5>
-                        <h4>mauritius from 5 days</h4>
-                        <div class="hotel-loc">Nunc cursus libero purus ac congue.</div>
-                    </div>
-                </div>
-                <div class="hotel-small style-2 clearfix">
-                    <a class="hotel-img black-hover" href="#">
-                        <img class="img-responsive radius-0" src="~/img/country/4.jpg" alt="">
-                        <div class="tour-layer delay-1"></div>
-                    </a>
-                    <div class="hotel-desc">
-                        <h5>
-                            <span class="color-dark-2-light"><strong><s>$470</s></strong></span>
-                            <span class="color-red"><strong>$300</strong></span>
-                        </h5>
-                        <h4>mauritius from 5 days</h4>
-                        <div class="hotel-loc">Nunc cursus libero purus ac congue.</div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

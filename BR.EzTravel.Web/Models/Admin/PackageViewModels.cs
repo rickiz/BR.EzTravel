@@ -26,8 +26,6 @@ namespace BR.EzTravel.Web.Models.Admin
 
         public string Description { get; set; }
 
-        public int Rate { get; set; }
-
         public int Days { get; set; }
 
         public int Nights { get; set; }
