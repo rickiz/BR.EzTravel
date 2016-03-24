@@ -30,7 +30,6 @@
             <div class="container">
                 <div class="left-col">
                     <a href="#"><i class="fa fa-envelope"></i>Contact Us</a>
-                    <a href="#"><i class="fa fa-suitcase"></i>Join the Travel</a>
                     <a href="#"><i class="fa fa-envelope"></i>Sign in</a>
                     <a href="@Url.Action("Index", "AdminBlog")"><i class="fa fa-cog"></i>Back Office</a>
                 </div>
@@ -39,10 +38,10 @@
                         <a href="#"><i class="fa fa-facebook"></i></a>
 
                     </div>
-                    <form action="?" class="serach-item">
+                    @*<form action="?" class="serach-item">
                         <button type="submit" class="fa fa-search"></button>
                         <input type="text" placeholder="Search...">
-                    </form>
+                    </form>*@
 
                 </div>
             </div>
@@ -64,7 +63,10 @@
 
                                 </li>
                                 <li class="type-1 @(Html.SetMenuActive("Package"))">
-                                    <a href="@Url.Action("Index", "Package")">Holidays<span class="fa fa-angle-down"></span></a>
+                                    <a href="@Url.Action("Index", "Package")">Packages<span class="fa fa-angle-down"></span></a>
+                                </li>
+                                <li class="type-1 @(Html.SetMenuActive("Blog"))">
+                                    <a href="@Url.Action("Index", "Blog")">Blogs<span class="fa fa-angle-down"></span></a>
                                 </li>
                                 @*<li class="type-1">
                                     <a href="#">Tours<span class="fa fa-angle-down"></span></a>
@@ -74,7 +76,7 @@
 
                                     </ul>
                                 </li>*@
-                                <li class="type-1">
+                                @*<li class="type-1">
                                     <a href="#">Flights<span class="fa fa-angle-down"></span></a>
 
                                 </li>
@@ -113,7 +115,7 @@
 
                                         <li><a href="login.html">Login</a></li>
                                     </ul>
-                                </li>
+                                </li>*@
 
                             </ul>
                         </nav>

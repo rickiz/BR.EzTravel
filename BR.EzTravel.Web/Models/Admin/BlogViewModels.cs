@@ -25,12 +25,12 @@ namespace BR.EzTravel.Web.Models.Admin
         public int ID { get; set; }
     }
 
-    public class BlogIndexViewModel
+    public class AdminBlogIndexViewModel
     {
-        public List<BlogIndexItem> Blogs { get; set; }
+        public List<AdminBlogIndexItem> Blogs { get; set; }
     }
 
-    public class BlogIndexItem
+    public class AdminBlogIndexItem
     {
         public string Title { get; set; }
         public int ID { get; set; }

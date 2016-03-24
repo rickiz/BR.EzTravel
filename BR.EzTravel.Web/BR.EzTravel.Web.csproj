@@ -185,6 +185,7 @@
     <Compile Include="Areas\EN\Controllers\AdminBlogController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminPackageController.cs" />
     <Compile Include="Areas\EN\Controllers\BaseEnController.cs" />
+    <Compile Include="Areas\EN\Controllers\BlogController.cs" />
     <Compile Include="Areas\EN\Controllers\HomeController.cs" />
     <Compile Include="Areas\EN\Controllers\PackageController.cs" />
     <Compile Include="Areas\EN\ENAreaRegistration.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Admin\BlogViewModels.cs" />
     <Compile Include="Models\Admin\PackageViewModels.cs" />
+    <Compile Include="Models\BlogViewModels.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\EzTravelModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1401,6 +1403,7 @@
     <Content Include="Areas\EN\Views\AdminPackage\Create.cshtml" />
     <Content Include="Areas\EN\Views\AdminPackage\Index.cshtml" />
     <Content Include="Areas\EN\Views\AdminPackage\Edit.cshtml" />
+    <Content Include="Areas\EN\Views\Blog\Index.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>

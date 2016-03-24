@@ -129,96 +129,105 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            @for (int i = 0; i < 4 && i < latestPackages.Count; i++)
-            {
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="hotel-item">
-                        <div class="radius-top">
-                            <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
-                            <div class="price price-s-1">RM @latestPackages[i].Price</div>
-                        </div>
-                        <div class="title clearfix">
-                            <h4><b>@latestPackages[i].Title</b></h4>
-                            <div class="rate-wrap">
-                                <div class="rate">
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                </div>
-                                @*<i>485 rewies</i>*@
+
+        @if (latestPackages.Count > 0)
+        {
+            <div class="row">
+
+                @for (int i = 0; i < 4 && i < latestPackages.Count; i++)
+                {
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="hotel-item">
+                            <div class="radius-top">
+                                <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
+                                <div class="price price-s-1">RM @latestPackages[i].Price</div>
                             </div>
-                            @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
-                            <p class="f-14">@latestPackages[i].Description</p>
-                            <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))' 
-                               class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                            <div class="title clearfix">
+                                <h4><b>@latestPackages[i].Title</b></h4>
+                                <div class="rate-wrap">
+                                    <div class="rate">
+                                        @for (int j = 1; j <= 5; j++)
+                                        {
+                                            <span class="fa @(j <= latestPackages[i].Rate ? "fa-star color-yellow" : "fa-star-o")"></span>
+                                        }
+                                    </div>
+                                    @*<i>485 rewies</i>*@
+                                </div>
+                                @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
+                                <p class="f-14">@latestPackages[i].Description</p>
+                                <br />
+                                <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))'
+                                   class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
-        <div class="row">
-            @for (int i = 4; i < 8 && i < latestPackages.Count; i++)
-            {
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="hotel-item">
-                        <div class="radius-top">
-                            <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
-                            <div class="price price-s-1">RM @latestPackages[i].Price</div>
-                        </div>
-                        <div class="title clearfix">
-                            <h4><b>@latestPackages[i].Title</b></h4>
-                            <div class="rate-wrap">
-                                <div class="rate">
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                </div>
-                                @*<i>485 rewies</i>*@
+                }
+
+            </div>
+            <div class="row">
+
+                @for (int i = 4; i < 8 && i < latestPackages.Count; i++)
+                {
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="hotel-item">
+                            <div class="radius-top">
+                                <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
+                                <div class="price price-s-1">RM @latestPackages[i].Price</div>
                             </div>
-                            @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
-                            <p class="f-14">@latestPackages[i].Description</p>
-                            <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))'
-                               class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                            <div class="title clearfix">
+                                <h4><b>@latestPackages[i].Title</b></h4>
+                                <div class="rate-wrap">
+                                    <div class="rate">
+                                        @for (int j = 1; j <= 5; j++)
+                                        {
+                                            <span class="fa @(j <= latestPackages[i].Rate ? "fa-star color-yellow" : "fa-star-o")"></span>
+                                        }
+                                    </div>
+                                </div>
+                                @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
+                                <p class="f-14">@latestPackages[i].Description</p>
+                                <br />
+                                <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))'
+                                   class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
-        <div class="row">
-            @for (int i = 8; i < 12 && i < latestPackages.Count; i++)
-            {
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="hotel-item">
-                        <div class="radius-top">
-                            <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
-                            <div class="price price-s-1">RM @latestPackages[i].Price</div>
-                        </div>
-                        <div class="title clearfix">
-                            <h4><b>@latestPackages[i].Title</b></h4>
-                            <div class="rate-wrap">
-                                <div class="rate">
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                    <span class="fa fa-star color-yellow"></span>
-                                </div>
-                                @*<i>485 rewies</i>*@
+                }
+
+            </div>
+            <div class="row">
+
+                @for (int i = 8; i < 12 && i < latestPackages.Count; i++)
+                {
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="hotel-item">
+                            <div class="radius-top">
+                                <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
+                                <div class="price price-s-1">RM @latestPackages[i].Price</div>
                             </div>
-                            @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
-                            <p class="f-14">@latestPackages[i].Description</p>
-                            <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))'
-                               class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                            <div class="title clearfix">
+                                <h4><b>@latestPackages[i].Title</b></h4>
+                                <div class="rate-wrap">
+                                    <div class="rate">
+                                        @for (int j = 1; j <= 5; j++)
+                                        {
+                                            <span class="fa @(j <= latestPackages[i].Rate ? "fa-star color-yellow" : "fa-star-o")"></span>
+                                        }
+                                    </div>
+                                </div>
+                                @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
+                                <p class="f-14">@latestPackages[i].Description</p>
+                                <br />
+                                <a href='@(Url.Action("Details", "Package", new { id = latestPackages[i].ID }))'
+                                   class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+
+            </div>
+        }
+
     </div>
 </div>
 <div class="main-wraper">
@@ -232,11 +241,14 @@
                 </div>
             </div>
         </div>
+
+@if (popularPackages.Count > 0)
+{
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4">
-                <div class="item-block style-3 hover-sea underline-block">
+                <div class="item-block style-3 hover-sea underline-block background-block">
+                    <img class="center-image" src="@(Url.UploadedImageContent(popularPackages[0].ThumbnailImagePath))" alt="">
                     <a href="@(Url.Action("Details", "Package", new { id = popularPackages[0].ID }))">
-                        <img class="center-image" src="@(Url.UploadedImageContent(popularPackages[0].ThumbnailImagePath))" alt="">
                         <div class="tour-layer delay-1"></div>
                         <div class="vertical-align">
                             <h3 class="ib-subtitle hover-it"><span class="color-sea">RM @popularPackages[0].Price</span></h3>
@@ -246,9 +258,11 @@
                     </a>
                 </div>
             </div>
+
+            
             <div class="col-xs-12 col-sm-6 col-md-4">
                 @for (int i = 1; i < 5 && i < popularPackages.Count; i++)
-                {
+            {
                     <div class="hotel-small style-2 clearfix">
                         <a class="hotel-img black-hover" href="#">
                             <img class="img-responsive radius-0" src="@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))" alt="">
@@ -266,7 +280,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 @for (int i = 5; i < 9 && i < popularPackages.Count; i++)
-                {
+            {
                     <div class="hotel-small style-2 clearfix">
                         <a class="hotel-img black-hover" href="#">
                             <img class="img-responsive radius-0" src="@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))" alt="">
@@ -282,7 +296,9 @@
                     </div>
                 }
             </div>
+           
         </div>
+}
     </div>
 </div>
 

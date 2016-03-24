@@ -17,14 +17,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .Where(a => a.Language == language.ToString() && !a.CancelDT.HasValue)
                     .OrderByDescending(a => a.ID)
                     .Take(20)
-                    .Select(a => new BlogIndexItem
+                    .Select(a => new AdminBlogIndexItem
                     {
                         ID = a.ID,
                         Title = a.Title,
                         LastUpdateDT = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT
                     })
                     .ToList();
-            var viewModel = new BlogIndexViewModel { Blogs = blogs };
+            var viewModel = new AdminBlogIndexViewModel { Blogs = blogs };
 
             return View(viewModel);
         }
