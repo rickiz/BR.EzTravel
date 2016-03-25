@@ -21,7 +21,7 @@ namespace BR.EzTravel.Web.Helpers
         public FIleUploadManager(HttpPostedFileBase file)
         {
             File = file;
-            ValidFileExtensions = new List<string>() { ".jpg", "png", "bmp", "gif", "tiff", "jpeg" };
+            ValidFileExtensions = new List<string>() { ".jpg", ".png", ".bmp", ".gif", ".tiff", ".jpeg" };
 
             if (Settings.Default.ImageUploadPath.StartsWith("~"))
                 UploadPath = HttpContext.Current.Server.MapPath(Settings.Default.ImageUploadPath);
