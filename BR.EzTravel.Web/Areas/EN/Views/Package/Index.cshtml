@@ -330,6 +330,7 @@
                                         </div>
                                         <h4><b>@item.Title</b></h4>
                                         <span class="f-14 color-dark-2 grid-hidden">2 Place de la Sans Défense, Puteaux</span>
+                                        <br />
                                         <p class="f-14">@item.Description</p>
 
                                         <a href="#" class="c-button bg-dr-blue hv-dr-blue-o b-40 fl list-hidden">select</a>
@@ -337,7 +338,7 @@
                                     </div>
                                     <div class="title hotel-right bg-dr-blue clearfix cell-view">
                                         <div class="hotel-person color-white">from <span>RM @item.Price</span></div>
-                                        <a class="c-button b-40 bg-white color-dark-2 hv-dark-2-o grid-hidden" href="#">view more</a>
+                                        <a class="c-button b-40 bg-white color-dark-2 hv-dark-2-o grid-hidden" href="@Url.Action("Details", "Package", new { id = item.ID })">view more</a>
                                     </div>
                                 </div>
                             </div>

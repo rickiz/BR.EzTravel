@@ -59,5 +59,28 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         {
             return View(viewModel);
         }
+
+        public ActionResult Details(int id)
+        {
+            var viewModel =
+                (from a in db.lnkmemberposts
+                 join b in db.refcategories on a.CategoryID equals b.ID
+                 where a.ID == id
+                 select new PackageDetailsViewModel
+                 {
+                     ID = a.ID,
+                     Category = b.Name,
+                     Description = a.Description,
+                     EndDT = a.EndDT,
+                     Price = a.Price,
+                     Rate = a.Rate, // TODO: add new column for total rate count as reviews count
+                     StartDT = a.StartDT,
+                     ThumbnailImagePath = a.ThumbnailImagePath,
+                     Title = a.Title,
+                     Days = a.Days
+                 }).Single();
+
+            return View(viewModel);
+        }
     }
 }

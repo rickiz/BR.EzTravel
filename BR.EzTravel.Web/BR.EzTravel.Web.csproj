@@ -1404,6 +1404,7 @@
     <Content Include="Areas\EN\Views\AdminPackage\Create.cshtml" />
     <Content Include="Areas\EN\Views\AdminPackage\Index.cshtml" />
     <Content Include="Areas\EN\Views\AdminPackage\Edit.cshtml" />
+    <Content Include="Areas\EN\Views\Package\Details.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
