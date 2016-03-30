@@ -25,7 +25,6 @@ namespace BR.EzTravel.Web.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<lnkblogcomment> lnkblogcomments { get; set; }
         public virtual DbSet<lnkmemberpackagetype> lnkmemberpackagetypes { get; set; }
         public virtual DbSet<lnkmemberpost> lnkmemberposts { get; set; }
         public virtual DbSet<lnkmemberpostcity> lnkmemberpostcities { get; set; }
@@ -47,5 +46,7 @@ namespace BR.EzTravel.Web.Models
         public virtual DbSet<trnmemberrenewal> trnmemberrenewals { get; set; }
         public virtual DbSet<trnroi> trnrois { get; set; }
         public virtual DbSet<trnblog> trnblogs { get; set; }
+        public virtual DbSet<lnkmemberpostcomment> lnkmemberpostcomments { get; set; }
+        public virtual DbSet<lnkblogcomment> lnkblogcomments { get; set; }
     }
 }

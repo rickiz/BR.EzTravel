@@ -236,6 +236,9 @@
     <Compile Include="Models\lnkmemberpostcity.cs">
       <DependentUpon>EzTravelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\lnkmemberpostcomment.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\lnkmemberpostcountry.cs">
       <DependentUpon>EzTravelModel.tt</DependentUpon>
     </Compile>

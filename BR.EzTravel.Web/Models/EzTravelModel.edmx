@@ -12,7 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BlogID" Type="int" Nullable="false" />
           <Property Name="MemberID" Type="int" Nullable="false" />
-          <Property Name="Comments" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="4000" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="UpdateDT" Type="datetime" Precision="0" />
           <Property Name="CancelDT" Type="datetime" Precision="0" />
@@ -49,6 +49,7 @@
           <Property Name="UpdateDT" Type="datetime" Precision="0" />
           <Property Name="CancelDT" Type="datetime" Precision="0" />
           <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="NoOfReviews" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="lnkmemberpostcity">
           <Key>
@@ -59,6 +60,19 @@
           <Property Name="CityID" Type="int" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostcomment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberPostID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UpdateDT" Type="datetime" Precision="0" />
+          <Property Name="CancelDT" Type="datetime" Precision="0" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="lnkmemberpostcountry">
           <Key>
@@ -240,6 +254,7 @@
           <Property Name="UpdateDT" Type="datetime" Precision="0" />
           <Property Name="CancelDT" Type="datetime" Precision="0" />
           <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="trnmemberrenewal">
           <Key>
@@ -273,6 +288,7 @@
           <EntitySet Name="lnkmemberpackagetype" EntityType="Self.lnkmemberpackagetype" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="lnkmemberpost" EntityType="Self.lnkmemberpost" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="lnkmemberpostcity" EntityType="Self.lnkmemberpostcity" Schema="exholiday" store:Type="Tables" />
+          <EntitySet Name="lnkmemberpostcomment" EntityType="Self.lnkmemberpostcomment" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="lnkmemberpostcountry" EntityType="Self.lnkmemberpostcountry" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="lnkmemberpostimage" EntityType="Self.lnkmemberpostimage" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="lnkmemberpostpackageactivity" EntityType="Self.lnkmemberpostpackageactivity" Schema="exholiday" store:Type="Tables" />
@@ -296,19 +312,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ExHolidayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="lnkblogcomment">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BlogID" Type="Int32" Nullable="false" />
-          <Property Name="MemberID" Type="Int32" Nullable="false" />
-          <Property Name="Comments" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
-          <Property Name="UpdateDT" Type="DateTime" />
-          <Property Name="CancelDT" Type="DateTime" />
-          <Property Name="Language" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="lnkmemberpackagetype">
           <Key>
             <PropertyRef Name="ID" />
@@ -340,6 +343,7 @@
           <Property Name="UpdateDT" Type="DateTime" />
           <Property Name="CancelDT" Type="DateTime" />
           <Property Name="Language" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NoOfReviews" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="lnkmemberpostcity">
           <Key>
@@ -546,7 +550,6 @@
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ExHolidayEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="lnkblogcomments" EntityType="Self.lnkblogcomment" />
           <EntitySet Name="lnkmemberpackagetypes" EntityType="Self.lnkmemberpackagetype" />
           <EntitySet Name="lnkmemberposts" EntityType="Self.lnkmemberpost" />
           <EntitySet Name="lnkmemberpostcities" EntityType="Self.lnkmemberpostcity" />
@@ -568,6 +571,8 @@
           <EntitySet Name="trnmemberrenewals" EntityType="Self.trnmemberrenewal" />
           <EntitySet Name="trnrois" EntityType="Self.trnroi" />
           <EntitySet Name="trnblogs" EntityType="ExHolidayModel.trnblog" />
+          <EntitySet Name="lnkmemberpostcomments" EntityType="ExHolidayModel.lnkmemberpostcomment" />
+          <EntitySet Name="lnkblogcomments" EntityType="ExHolidayModel.lnkblogcomment" />
         </EntityContainer>
         <EntityType Name="trnblog">
           <Key>
@@ -582,6 +587,33 @@
           <Property Name="UpdateDT" Type="DateTime" />
           <Property Name="CancelDT" Type="DateTime" />
           <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lnkmemberpostcomment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberPostID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateDT" Type="DateTime" />
+          <Property Name="CancelDT" Type="DateTime" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lnkblogcomment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateDT" Type="DateTime" />
+          <Property Name="CancelDT" Type="DateTime" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -589,20 +621,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ExHolidayModelStoreContainer" CdmEntityContainer="ExHolidayEntities">
-          <EntitySetMapping Name="lnkblogcomments">
-            <EntityTypeMapping TypeName="ExHolidayModel.lnkblogcomment">
-              <MappingFragment StoreEntitySet="lnkblogcomment">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
-                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
-                <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="lnkmemberpackagetypes">
             <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpackagetype">
               <MappingFragment StoreEntitySet="lnkmemberpackagetype">
@@ -617,6 +635,7 @@
           <EntitySetMapping Name="lnkmemberposts">
             <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpost">
               <MappingFragment StoreEntitySet="lnkmemberpost">
+                <ScalarProperty Name="NoOfReviews" ColumnName="NoOfReviews" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
@@ -862,6 +881,7 @@
           <EntitySetMapping Name="trnblogs">
             <EntityTypeMapping TypeName="ExHolidayModel.trnblog">
               <MappingFragment StoreEntitySet="trnblog">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
                 <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
@@ -870,6 +890,34 @@
                 <ScalarProperty Name="Body" ColumnName="Body" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkmemberpostcomments">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpostcomment">
+              <MappingFragment StoreEntitySet="lnkmemberpostcomment">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MemberPostID" ColumnName="MemberPostID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lnkblogcomments">
+            <EntityTypeMapping TypeName="ExHolidayModel.lnkblogcomment">
+              <MappingFragment StoreEntitySet="lnkblogcomment">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

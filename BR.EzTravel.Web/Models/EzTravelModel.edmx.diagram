@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9716c45f328146a48488e7874fb5e694" Name="Diagram1">
-        <EntityTypeShape EntityType="ExHolidayModel.lnkblogcomment" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.lnkmemberpackagetype" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.lnkmemberpost" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.lnkmemberpostcity" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -27,6 +26,8 @@
         <EntityTypeShape EntityType="ExHolidayModel.trnmemberrenewal" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.trnroi" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.trnblog" Width="1.5" PointX="13.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ExHolidayModel.lnkmemberpostcomment" Width="1.5" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="ExHolidayModel.lnkblogcomment" Width="1.5" PointX="9.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
