@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace BR.EzTravel.Web.Models
 {
+    #region Index
+
     public class BlogIndexViewModel
     {
         public List<BlogDetails> Blogs { get; set; }
@@ -28,6 +30,8 @@ namespace BR.EzTravel.Web.Models
         public string CreatedBy { get; set; }
 
         public int TotalComments { get; set; }
+
+        public string ThumbnailImagePath { get; set; }
     }
 
     public class PopularBlog
@@ -46,4 +50,25 @@ namespace BR.EzTravel.Web.Models
         public string Author { get; set; }
         public string Comment { get; set; }
     }
+
+    #endregion
+
+    #region Details
+
+    public class BlogDetailsViewModel : BlogDetails
+    {
+        public List<BlogCategory> Categories { get; set; }
+
+        public List<LatestBlogComment> Comments { get; set; }
+    }
+
+    public class BlogCategory
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+
+        public int Count { get; set; }
+    }
+
+    #endregion
 }

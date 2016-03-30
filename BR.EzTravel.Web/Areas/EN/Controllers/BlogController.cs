@@ -12,7 +12,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
     public class BlogController : BaseEnController
     {
-        // GET: EN/Blog
         public ActionResult Index(int categoryID = 0)
         {
             var viewModel = new BlogIndexViewModel();
@@ -35,6 +34,57 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .ToList();
 
             viewModel.Categories = db.refcategories.Where(a => a.Active).OrderBy(a => a.Name).ToList();
+
+            return View(viewModel);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var viewModel =
+                (from a in db.trnblogs
+                 join b in db.tblmembers on a.MemberID equals b.ID into tempB
+                 from bb in tempB.DefaultIfEmpty()
+                 where a.ID == id
+                 select new BlogDetailsViewModel
+                 {
+                     ID = a.ID,
+                     CategoryID = a.CategoryID,
+                     Title = a.Title,
+                     Body = a.Body,
+                     LastEditedDate = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT,
+                     CreatedBy = bb == null ? "EMMA STONE" : bb.PICName,
+                     TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.ID && !b.CancelDT.HasValue).Count(),
+                     ThumbnailImagePath = a.ThumbnailImagePath
+                 }).Single();
+
+            var comments =
+                (from a in db.lnkblogcomments
+                 join b in db.tblmembers on a.MemberID equals b.ID into tempb
+                 from bb in tempb.DefaultIfEmpty()
+                 where a.BlogID == id && !a.CancelDT.HasValue
+                 select new LatestBlogComment
+                 {
+                     Author = bb == null ? "" : bb.PICName,
+                     Comment = a.Comments,
+                     CreateDT = a.CreateDT,
+                     ID = a.ID
+                 }).ToList();
+
+            var lang = language.ToString();
+            var categories =
+                    (from a in db.trnblogs
+                     join b in db.refcategories on a.CategoryID equals b.ID
+                     where a.Language == lang && !a.CancelDT.HasValue && b.Active
+                     group b by new { Name = b.Name, ID = b.ID } into c
+                     select new BlogCategory()
+                     {
+                         Name = c.Key.Name,
+                         ID = c.Key.ID,
+                         Count = c.Count()
+                     }).ToList();
+
+            viewModel.Comments = comments;
+            viewModel.Categories = categories;
 
             return View(viewModel);
         }
