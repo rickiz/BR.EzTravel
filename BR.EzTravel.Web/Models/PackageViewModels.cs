@@ -9,6 +9,8 @@ using BR.EzTravel.Web.CustomAttributes;
 
 namespace BR.EzTravel.Web.Models
 {
+    #region Index
+
     public class PackageDetails
     {
         public int ID { get; set; }
@@ -17,8 +19,8 @@ namespace BR.EzTravel.Web.Models
         public int Rate { get; set; }
         public double Price { get; set; }
         public string ThumbnailImagePath { get; set; }
-        public int ReviewCount{ get; set; }
-    }  
+        public int ReviewCount { get; set; }
+    }
 
     public class PackageSearchCriteria
     {
@@ -56,4 +58,18 @@ namespace BR.EzTravel.Web.Models
 
         public PackageSearchCriteria Criteria { get; set; }
     }
+
+    #endregion
+
+    #region Details
+
+    public class PackageDetailsViewModel : PackageDetails
+    {
+        public string Category { get; set; }
+        public DateTime StartDT { get; set; }
+        public DateTime? EndDT { get; set; }
+        public int Days { get; set; }
+    }
+
+    #endregion
 }

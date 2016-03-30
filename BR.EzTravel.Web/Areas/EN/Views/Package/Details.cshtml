@@ -1,0 +1,398 @@
+﻿@using BR.EzTravel.Web.Helpers
+
+@model BR.EzTravel.Web.Models.PackageDetailsViewModel
+@{
+    ViewBag.Title = "Package";
+    Layout = "~/Areas/EN/Views/Shared/_Layout.cshtml";
+}
+
+<!-- INNER-BANNER -->
+<div class="inner-banner style-6 ">
+    <img class="center-image" src="~/img/country/europe.jpg" alt="">
+    <div class="vertical-align">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2">
+                    <ul class="banner-breadcrumb color-white clearfix">
+                        <li><a class="link-blue-2" href="#">home</a> /</li>
+                        <li><a class="link-blue-2" href="#">@ViewBag.Title</a> /</li>
+                        <li><span>detail</span></li>
+                    </ul>
+                    @*<h2 class="color-white shadow">Europe tours</h2>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="detail-wrapper">
+    <div class="container">
+        <div class="detail-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8">
+                    <h2 class="detail-title color-dark-2">@Model.Title</h2>
+                    <div class="detail-rate rate-wrap clearfix">
+                        <div class="rate">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <span class="fa @(i <= Model.Rate ? "fa-star color-yellow" : "fa-star-o")"></span>
+                            }
+                        </div>
+                        <i>@Model.ReviewCount Reviews</i>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="detail-price color-dark-2">price from  <span class="color-dr-blue"> RM @Model.Price</span> /person</div>
+                </div>
+            </div>
+        </div>
+        <div class="row padd-90">
+            <div class="col-xs-12 col-md-8">
+                <div class="detail-content">
+                    <div class="detail-top">
+                        <img class="img-responsive" src="@Url.UploadedImageContent(Model.ThumbnailImagePath)" alt="">
+                    </div>
+
+                    <div class="detail-content-block clearfix">
+                        <h3>General Information About @ViewBag.Title</h3>
+                        <p>@Model.Description</p>
+                        <img class="left-img" src="~/img/country/14.jpg" alt="">
+                        <ul>
+                            <li>Shopping history</li>
+                            <li>Hot offers according your settings</li>
+                            <li>Multi-product search</li>
+                            <li>Opportunity to share with friends</li>
+                            <li>Hot offers according your settings</li>
+                            <li>Multi-product search</li>
+                            <li>Opportunity to share with friends</li>
+                            <li>Multi-product search</li>
+                        </ul>
+                        <h5>interesting for you</h5>
+
+                        <p>Pellentesque ac turpis egestas, varius justo et, condimentum augue. Praesent aliquam, nisl feugiat vehicula condimentum, justo tellus scelerisque metus. Pellentesque varius justo et, condimentum augue.</p>
+
+                        <img class="right-img" src="~/img/country/15.jpg" alt="">
+                        <ul>
+                            <li>Shopping history</li>
+                            <li>Hot offers according your settings</li>
+                            <li>Multi-product search</li>
+                            <li>Opportunity to share with friends</li>
+                            <li>Hot offers according your settings</li>
+                            <li>Multi-product search</li>
+                            <li>Opportunity to share with friends</li>
+                            <li>Multi-product search</li>
+                        </ul>
+
+                        <h5>my listing deactivated</h5>
+
+                        <p>Pellentesque ac turpis egestas, varius justo et, condimentum augue. Praesent aliquam, nisl feugiat vehicula condimentum, justo tellus scelerisque metus. Pellentesque varius justo et, condimentum augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    <div class="detail-content-block">
+                        <h3>If You Have Any Questions</h3>
+                        <div class="accordion style-4">
+                            <div class="acc-panel">
+                                <div class="acc-title"><span class="acc-icon"></span>How can I manage Instant Book settings?</div>
+                                <div class="acc-body">
+                                    <h5>metus Aenean eget massa</h5>
+                                    <p>Mauris posuere diam at enim malesuada, ac malesuada erat auctor. Ut porta mattis tellus eu sagittis. Nunc maximus ipsum a mattis dignissim. Suspendisse id pharetra lacus, et hendrerit mi. Praesent at vestibulum tortor. Ut porta mattis tellus eu sagittis. Nunc maximus ipsum a mattis dignissim.</p>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <ul>
+                                                <li>Shopping history</li>
+                                                <li>Hot offers according your settings</li>
+                                                <li>Multi-product search</li>
+                                                <li>Opportunity to share with friends</li>
+                                                <li>User-friendly interface</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <ul>
+                                                <li>Shopping history</li>
+                                                <li>Hot offers according your settings</li>
+                                                <li>Multi-product search</li>
+                                                <li>Opportunity to share with friends</li>
+                                                <li>User-friendly interface</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="acc-panel">
+                                <div class="acc-title"><span class="acc-icon"></span>How do I list multiple rooms?</div>
+                                <div class="acc-body">
+                                    <h5>metus Aenean eget massa</h5>
+                                    <p>Mauris posuere diam at enim malesuada, ac malesuada erat auctor. Ut porta mattis tellus eu sagittis. Nunc maximus ipsum a mattis dignissim. Suspendisse id pharetra lacus, et hendrerit mi. Praesent at vestibulum tortor. Ut porta mattis tellus eu sagittis. Nunc maximus ipsum a mattis dignissim.</p>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <ul>
+                                                <li>Shopping history</li>
+                                                <li>Hot offers according your settings</li>
+                                                <li>Multi-product search</li>
+                                                <li>Opportunity to share with friends</li>
+                                                <li>User-friendly interface</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <ul>
+                                                <li>Shopping history</li>
+                                                <li>Hot offers according your settings</li>
+                                                <li>Multi-product search</li>
+                                                <li>Opportunity to share with friends</li>
+                                                <li>User-friendly interface</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="acc-panel">
+                                <div class="acc-title"><span class="acc-icon"></span>How do I use my calendar?</div>
+                                <div class="acc-body">
+                                    <h5>metus Aenean eget massa</h5>
+                                    <p>Mauris posuere diam at enim malesuada, ac malesuada erat auctor. Ut porta mattis tellus eu sagittis. Nunc maximus ipsum a mattis dignissim. Suspendisse id pharetra lacus, et hendrerit mi. Praesent at vestibulum tortor. Ut porta mattis tellus eu sagittis. Nunc maximus ipsum a mattis dignissim.</p>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <ul>
+                                                <li>Shopping history</li>
+                                                <li>Hot offers according your settings</li>
+                                                <li>Multi-product search</li>
+                                                <li>Opportunity to share with friends</li>
+                                                <li>User-friendly interface</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <ul>
+                                                <li>Shopping history</li>
+                                                <li>Hot offers according your settings</li>
+                                                <li>Multi-product search</li>
+                                                <li>Opportunity to share with friends</li>
+                                                <li>User-friendly interface</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="right-sidebar">
+
+                    <div class="detail-block bg-red-3">
+                        <h4 class="color-white">details</h4>
+                        <div class="details-desc">
+                            <p class="color-pink">Category:  <span class="color-white">@Model.Category</span></p>
+                            <p class="color-pink">price: <span class="color-white">RM @Model.Price / person</span></p>
+                            <p class="color-pink">AIRLINE: <span class="color-white">DELTA</span></p>
+                            <p class="color-pink">
+                                date: <span class="color-white">
+                                    @Model.StartDT.ToString("MMM dd") to @Model.StartDT.AddDays(Model.Days).ToString("MMM dd")
+                                </span>
+                            </p>
+                            <p class="color-pink">
+                                rate: 
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <span class="fa @(i <= Model.Rate ? "fa-star color-yellow" : "fa-star-o")"></span>
+                                }
+                            </p>
+                            <p class="color-pink">FARE TYPE: <span class="color-white">REFUNDABLE</span></p>
+                            <p class="color-pink">CANCELLATION: <span class="color-white">$780 / PERSON</span></p>
+                            <p class="color-pink">TOUR CHANGE: <span class="color-white">$53 / PERSON</span></p>
+                            <p class="color-pink">SEATS & BAGGAGE: <span class="color-white">EXTRA CHARGE</span></p>
+                            <p class="color-pink">INFLIGHT FEATURES: <span class="color-white">AVAILABLE</span></p>
+                            <p class="color-pink">BASE FARE: <span class="color-white">$320.00</span></p>
+                            <p class="color-pink">TAXES & FEES: <span class="color-white">$300.00</span></p>
+                            <p class="color-pink">TOTAL PRICE: <span class="color-white">$620.00</span></p>
+                        </div>
+                        <div class="details-btn">
+
+                            <a href="#" class="c-button b-40 bg-white hv-transparent"><span>book now</span></a>
+                        </div>
+                    </div>
+
+                    <div class="popular-tours bg-grey-2">
+                        <h4 class="color-dark-2">popular tours</h4>
+                        <div class="hotel-small style-2 clearfix">
+                            <a class="hotel-img black-hover" href="#">
+                                <img class="img-responsive radius-3" src="~/img/country/99.jpg" alt="">
+                                <div class="tour-layer delay-1 radius-3"></div>
+                            </a>
+                            <div class="hotel-desc">
+                                <h5><span class="color-dark-2">from <strong>RM 3999</strong></span></h5>
+                                <h4>Discover venice</h4>
+                                <div class="hotel-loc tt">8 days 7 nights</div>
+                            </div>
+                        </div>
+                        <div class="hotel-small style-2 clearfix">
+                            <a class="hotel-img black-hover" href="#">
+                                <img class="img-responsive radius-3" src="~/img/country/99.jpg" alt="">
+                                <div class="tour-layer delay-1 radius-3"></div>
+                            </a>
+                            <div class="hotel-desc">
+                                <h5><span class="color-dark-2">from <strong>RM 3999</strong></span></h5>
+                                <h4>Discover venice</h4>
+                                <div class="hotel-loc tt">8 days 7 nights</div>
+                            </div>
+                        </div>
+                        <div class="hotel-small style-2 clearfix">
+                            <a class="hotel-img black-hover" href="#">
+                                <img class="img-responsive radius-3" src="~/img/country/99.jpg" alt="">
+                                <div class="tour-layer delay-1 radius-3"></div>
+                            </a>
+                            <div class="hotel-desc">
+                                <h5><span class="color-dark-2">from <strong>RM 3999</strong></span></h5>
+                                <h4>Discover venice</h4>
+                                <div class="hotel-loc tt">8 days 7 nights</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-text-label bg-red-3 color-white">useful information</div>
+
+                    <div class="help-contact bg-grey-2">
+                        <h4 class="color-dark-2">Need Help?</h4>
+                        <p class="color-grey-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <a class="help-phone color-dark-2 link-red-3" href="tel:0200059600"><img src="~/img/detail/phone24-red.png" alt="">020 00 59 600</a>
+                        <a class="help-mail color-dark-2 link-red-3" href="mailto:let’s_travel@world.com"><img src="~/img/detail/letter-red.png" alt="">ez.travel@world.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="may-interested padd-90">
+            <div class="row">
+                <div class="top-baner arrows">
+                    <div class="swiper-container pad-15" data-autoplay="0" data-loop="1" data-speed="1000" data-slides-per-view="responsive" data-mob-slides="1" data-xs-slides="2" data-sm-slides="2" data-md-slides="3" data-lg-slides="4" data-add-slides="4">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="hotel-item style-7">
+                                    <div class="radius-top">
+                                        <img src="~/img/country/1.jpg" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5>from <strong class="color-red-3">RM 1999</strong> / person</h5>
+                                        <h6 class="color-grey-3">7 days</h6>
+                                        <h4><b>CReal Sydney Tours</b></h4>
+                                        <p>Book now and <span class="color-red-3">save 30%</span></p>
+                                        <a href="#" class="c-button b-40 bg-red-3 hv-red-3-o">book now</a>
+                                        <a href="#" class="c-button b-40 color-grey-3 hv-o fr"><img src="~/img/flag_icon_grey.png" alt="">view more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="hotel-item style-7">
+                                    <div class="radius-top">
+                                        <img src="~/img/country/10.jpg" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5>from <strong class="color-red-3">RM 1999</strong> / person</h5>
+                                        <h6 class="color-grey-3">7 days</h6>
+                                        <h4><b>CReal Sydney Tours</b></h4>
+                                        <p>Book now and <span class="color-red-3">save 30%</span></p>
+                                        <a href="#" class="c-button b-40 bg-red-3 hv-red-3-o">book now</a>
+                                        <a href="#" class="c-button b-40 color-grey-3 hv-o fr"><img src="~/img/flag_icon_grey.png" alt="">view more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="hotel-item style-7">
+                                    <div class="radius-top">
+                                        <img src="~/img/country/1.jpg" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5>from <strong class="color-red-3">RM 1999</strong> / person</h5>
+                                        <h6 class="color-grey-3">7 days</h6>
+                                        <h4><b>CReal Sydney Tours</b></h4>
+                                        <p>Book now and <span class="color-red-3">save 30%</span></p>
+                                        <a href="#" class="c-button b-40 bg-red-3 hv-red-3-o">book now</a>
+                                        <a href="#" class="c-button b-40 color-grey-3 hv-o fr"><img src="~/img/flag_icon_grey.png" alt="">view more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="hotel-item style-7">
+                                    <div class="radius-top">
+                                        <img src="~/img/country/10.jpg" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5>from <strong class="color-red-3">RM 1999</strong> / person</h5>
+                                        <h6 class="color-grey-3">7 days</h6>
+                                        <h4><b>CReal Sydney Tours</b></h4>
+                                        <p>Book now and <span class="color-red-3">save 30%</span></p>
+                                        <a href="#" class="c-button b-40 bg-red-3 hv-red-3-o">book now</a>
+                                        <a href="#" class="c-button b-40 color-grey-3 hv-o fr"><img src="~/img/flag_icon_grey.png" alt="">view more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="hotel-item style-7">
+                                    <div class="radius-top">
+                                        <img src="~/img/country/1.jpg" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5>from <strong class="color-red-3">RM 1999</strong> / person</h5>
+                                        <h6 class="color-grey-3">7 days</h6>
+                                        <h4><b>CReal Sydney Tours</b></h4>
+                                        <p>Book now and <span class="color-red-3">save 30%</span></p>
+                                        <a href="#" class="c-button b-40 bg-red-3 hv-red-3-o">book now</a>
+                                        <a href="#" class="c-button b-40 color-grey-3 hv-o fr"><img src="~/img/flag_icon_grey.png" alt="">view more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="hotel-item style-7">
+                                    <div class="radius-top">
+                                        <img src="~/img/country/10.jpg" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5>from <strong class="color-red-3">RM 1999</strong> / person</h5>
+                                        <h6 class="color-grey-3">7 days</h6>
+                                        <h4><b>CReal Sydney Tours</b></h4>
+                                        <p>Book now and <span class="color-red-3">save 30%</span></p>
+                                        <a href="#" class="c-button b-40 bg-red-3 hv-red-3-o">book now</a>
+                                        <a href="#" class="c-button b-40 color-grey-3 hv-o fr"><img src="~/img/flag_icon_grey.png" alt="">view more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="hotel-item style-7">
+                                    <div class="radius-top">
+                                        <img src="~/img/country/1.jpg" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5>from <strong class="color-red-3">RM 1999</strong> / person</h5>
+                                        <h6 class="color-grey-3">7 days</h6>
+                                        <h4><b>CReal Sydney Tours</b></h4>
+                                        <p>Book now and <span class="color-red-3">save 30%</span></p>
+                                        <a href="#" class="c-button b-40 bg-red-3 hv-red-3-o">book now</a>
+                                        <a href="#" class="c-button b-40 color-grey-3 hv-o fr"><img src="~/img/flag_icon_grey.png" alt="">view more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="hotel-item style-7">
+                                    <div class="radius-top">
+                                        <img src="~/img/country/10.jpg" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5>from <strong class="color-red-3">RM 1999</strong> / person</h5>
+                                        <h6 class="color-grey-3">7 days</h6>
+                                        <h4><b>CReal Sydney Tours</b></h4>
+                                        <p>Book now and <span class="color-red-3">save 30%</span></p>
+                                        <a href="#" class="c-button b-40 bg-red-3 hv-red-3-o">book now</a>
+                                        <a href="#" class="c-button b-40 color-grey-3 hv-o fr"><img src="~/img/flag_icon_grey.png" alt="">view more</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="pagination pagination-hidden"></div>
+                    </div>
+                    <div class="swiper-arrow-left offers-arrow color-4"><span class="fa fa-angle-left"></span></div>
+                    <div class="swiper-arrow-right offers-arrow color-4"><span class="fa fa-angle-right"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
