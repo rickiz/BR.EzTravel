@@ -85,7 +85,9 @@
                         <h4 class="sidebar-title color-dark-2">categories</h4>
                         <ul class="sidebar-category color-5">
                             <li>
-                                <a href="#">all <span class="fr">(@Model.Blogs.Count)</span></a>
+                                <a href="@(Url.Action("Index", "Blog"))">all 
+                                    <span class="fr">(@Model.Blogs.Count)</span>
+                                </a>
                             </li>
                             @foreach (var category in Model.Categories)
                             {

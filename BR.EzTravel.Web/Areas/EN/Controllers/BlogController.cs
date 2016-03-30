@@ -24,6 +24,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .Select(a => new BlogDetails
                     {
                         ID = a.ID,
+                        CategoryID = a.CategoryID,
                         Title = a.Title,
                         Body = a.Body,
                         LastEditedDate = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT,
