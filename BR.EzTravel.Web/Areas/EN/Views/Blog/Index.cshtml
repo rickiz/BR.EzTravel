@@ -71,7 +71,7 @@
             </div>
             <div class="col-xs-12 col-md-4">
                 <div class="right-sidebar">
-                    <div class="sidebar-block type-2">
+                    @*<div class="sidebar-block type-2">
                         <div class="widget-search clearfix">
                             <form>
                                 <div class="input-style-1 b-50 brd-0 type-2 color-3">
@@ -80,14 +80,24 @@
                                 <input class="widget-submit" type="submit" value="">
                             </form>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="sidebar-block type-2">
                         <h4 class="sidebar-title color-dark-2">categories</h4>
                         <ul class="sidebar-category color-5">
                             <li>
-                                <a href="#">all <span class="fr">(125)</span></a>
+                                <a href="#">all <span class="fr">(@Model.Blogs.Count)</span></a>
                             </li>
-                            <li>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <li>
+                                    <a href="@(Url.Action("Index", "Blog", new { categoryID = category.ID }))">@category.Name 
+                                        <span class="fr">
+                                            (@Model.Blogs.Where(a=>a.CategoryID == category.ID).ToList().Count)
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                            @*<li>
                                 <a href="#">family <span class="fr">(26)</span></a>
                             </li>
                             <li>
@@ -110,7 +120,7 @@
                             </li>
                             <li>
                                 <a href="#">parks  <span class="fr">(72)</span></a>
-                            </li>
+                            </li>*@
                         </ul>
                     </div>
                     <div class="sidebar-block type-2">
@@ -193,7 +203,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar-block type-2">
+                    @*<div class="sidebar-block type-2">
                         <div class="simple-tab tab-3 color-1 tab-wrapper">
                             <div class="tab-nav-wrapper">
                                 <div class="nav-tab  clearfix">
@@ -406,8 +416,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sidebar-block type-2">
+                    </div>*@
+                    @*<div class="sidebar-block type-2">
                         <div class="widget-slider arrows">
                             <div class="swiper-container" data-autoplay="0" data-loop="1" data-speed="900" data-center="0" data-slides-per-view="1">
                                 <div class="swiper-wrapper">
@@ -451,7 +461,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="sidebar-block type-2">
                         <h4 class="sidebar-title color-dark-2">latest comments</h4>
                         <div class="widget-comment">
@@ -472,7 +482,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar-block type-2">
+                    @*<div class="sidebar-block type-2">
                         <h4 class="sidebar-title color-dark-2">popular tags</h4>
                         <ul class="widget-tags clearfix">
                             <li><a class="c-button b-30 b-1 bg-grey-2 hv-dr-blue-2" href="#">flights</a></li>
@@ -502,7 +512,7 @@
                             <a href="#"><img class="img-responsive" src="~/img/detail/w_gal_11.jpg" alt=""></a>
                             <a href="#"><img class="img-responsive" src="~/img/detail/w_gal_12.jpg" alt=""></a>
                         </div>
-                    </div>
+                    </div>*@
 
                 </div>
             </div>

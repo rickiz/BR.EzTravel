@@ -9,6 +9,7 @@ namespace BR.EzTravel.Web.Models
     public class BlogIndexViewModel
     {
         public List<BlogDetails> Blogs { get; set; }
+        public List<refcategory> Categories { get; set; }
     }
 
     public class BlogDetails

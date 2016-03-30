@@ -13,13 +13,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
     public class BlogController : BaseEnController
     {
         // GET: EN/Blog
-        public ActionResult Index()
+        public ActionResult Index(int categoryID = 0)
         {
             var viewModel = new BlogIndexViewModel();
 
             viewModel.Blogs =
                 db.trnblogs
-                    .Where(a => !a.CancelDT.HasValue && a.Language == language.ToString())
+                    .Where(a => !a.CancelDT.HasValue && a.Language == language.ToString() &&
+                    (a.CategoryID == categoryID || categoryID == 0))
                     .Select(a => new BlogDetails
                     {
                         ID = a.ID,
@@ -32,6 +33,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .Take(Settings.Default.MaxListPerPage)
                     .ToList();
 
+            viewModel.Categories = db.refcategories.Where(a => a.Active).OrderBy(a => a.Name).ToList();
 
             return View(viewModel);
         }
