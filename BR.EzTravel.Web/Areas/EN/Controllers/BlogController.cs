@@ -35,13 +35,18 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.PopularBlogs =
                 db.trnblogs
-                    .GroupJoin(db.lnkblogcomments, a => a.ID, b => b.BlogID, (a, b) => new { Blog = a, BlogComments = b })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString() &&
-                        (a.Blog.CategoryID == categoryID || categoryID == 0))
+                    .GroupJoin(db.tblmembers,a=>a.MemberID, b=>b.ID, (a,b)=> new { Blog = a, Member = b })
+                    .GroupJoin(db.lnkblogcomments, a => a.Blog.ID, b => b.BlogID, (a, b) => new
+                    {
+                        Blog = a.Blog,
+                        Member = a.Member.FirstOrDefault(),
+                        BlogComments = b
+                    })
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
                     .Select(a => new PopularBlog
                     {
                         ID = a.Blog.ID,
-                        Author = "Tester", // TODO: Link to tblMember
+                        Author = a.Member == null? "EMMA STONE" : a.Member.PICName,
                         CreateDT = a.Blog.CreateDT,
                         NoOfComments = a.BlogComments.Count(),
                         Title = a.Blog.Title
@@ -53,12 +58,17 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             viewModel.LatestBlogComments =
                 db.trnblogs
                     .Join(db.lnkblogcomments, a => a.ID, b => b.BlogID, (a, b) => new { Blog = a, BlogComments = b })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString() &&
-                        (a.Blog.CategoryID == categoryID || categoryID == 0))
+                    .GroupJoin(db.tblmembers, a => a.BlogComments.MemberID, b => b.ID, (a, b) => new
+                    {
+                        Blog = a.Blog,
+                        BlogComments = a.BlogComments,
+                        Member = b.FirstOrDefault()
+                    })
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
                     .Select(a => new LatestBlogComment
                     {
                         ID = a.Blog.ID,
-                        Author = "Tester", // TODO: Link to tblMember
+                        Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
                         CreateDT = a.BlogComments.CreateDT,
                         Comment = a.BlogComments.Comments,
                         Title = a.Blog.Title
@@ -119,6 +129,69 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.Comments = comments;
             viewModel.Categories = categories;
+
+            viewModel.PopularBlogs =
+                db.trnblogs
+                    .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { Blog = a, Member = b })
+                    .GroupJoin(db.lnkblogcomments, a => a.Blog.ID, b => b.BlogID, (a, b) => new
+                    {
+                        Blog = a.Blog,
+                        Member = a.Member.FirstOrDefault(),
+                        BlogComments = b
+                    })
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
+                    .Select(a => new PopularBlog
+                    {
+                        ID = a.Blog.ID,
+                        Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
+                        CreateDT = a.Blog.CreateDT,
+                        NoOfComments = a.BlogComments.Count(),
+                        Title = a.Blog.Title
+                    })
+                    .OrderByDescending(a => a.NoOfComments)
+                    .Take(5)
+                    .ToList();
+
+            viewModel.LatestBlogComments =
+                db.trnblogs
+                    .Join(db.lnkblogcomments, a => a.ID, b => b.BlogID, (a, b) => new { Blog = a, BlogComments = b })
+                    .GroupJoin(db.tblmembers, a => a.BlogComments.MemberID, b => b.ID, (a, b) => new
+                    {
+                        Blog = a.Blog,
+                        BlogComments = a.BlogComments,
+                        Member = b.FirstOrDefault()
+                    })
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
+                    .Select(a => new LatestBlogComment
+                    {
+                        ID = a.Blog.ID,
+                        Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
+                        CreateDT = a.BlogComments.CreateDT,
+                        Comment = a.BlogComments.Comments,
+                        Title = a.Blog.Title
+                    })
+                    .OrderByDescending(a => a.CreateDT)
+                    .Take(5)
+                    .ToList();
+
+            viewModel.RelatedBlogs =
+                db.trnblogs
+                    .Where(a => !a.CancelDT.HasValue && a.Language == language.ToString() &&
+                    (a.CategoryID == viewModel.CategoryID))
+                    .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { Blog = a, Member = b.FirstOrDefault() })
+                    .Select(a => new BlogDetails
+                    {
+                        ID = a.Blog.ID,
+                        CategoryID = a.Blog.CategoryID,
+                        Title = a.Blog.Title,
+                        Body = a.Blog.Body,
+                        LastEditedDate = a.Blog.UpdateDT.HasValue ? a.Blog.UpdateDT.Value : a.Blog.CreateDT,
+                        CreatedBy = a.Member == null ? "EMMA STONE" : a.Member.PICName,
+                        TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.Blog.ID && !b.CancelDT.HasValue).Count()
+                    })
+                    .OrderByDescending(a => a.TotalComments)
+                    .Take(5)
+                    .ToList();
 
             return View(viewModel);
         }
