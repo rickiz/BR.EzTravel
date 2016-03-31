@@ -76,19 +76,17 @@
                         <ul class="sidebar-category color-5">
                             <li>
                                 <a href="@(Url.Action("Index", "Blog"))">all 
-                                    <span class="fr">(@Model.Blogs.Count)</span>
+                                    <span class="fr">(@Model.Categories.Sum(a => a.Count))</span>
                                 </a>
                             </li>
+
                             @foreach (var category in Model.Categories)
                             {
                                 <li>
-                                    <a href="@(Url.Action("Index", "Blog", new { categoryID = category.ID }))">@category.Name 
-                                        <span class="fr">
-                                            (@Model.Blogs.Where(a=>a.CategoryID == category.ID).ToList().Count)
-                                        </span>
-                                    </a>
+                                    <a class="cat-drop" href="#">@category.Name <span class="fr">(@category.Count)</span></a>
                                 </li>
                             }
+
                         </ul>
                     </div>
                     <div class="sidebar-block type-2">

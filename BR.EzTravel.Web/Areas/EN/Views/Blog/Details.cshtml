@@ -147,11 +147,11 @@
                                     <div class="tour-info-line clearfix">
                                         <div class="tour-info fl">
                                             <img src="~/img/calendar_icon_grey.png" alt="">
-                                            <span class="font-style-2 color-dark-2">@blog.CreateDT</span>
+                                            <span class="font-style-2 color-dark-2">@blog.LastEditedDate</span>
                                         </div>
                                         <div class="tour-info fl">
                                             <img src="~/img/calendar_icon_grey.png" alt="">
-                                            <span class="font-style-2 color-dark-2">By @blog.Author</span>
+                                            <span class="font-style-2 color-dark-2">By @blog.CreatedBy</span>
                                         </div>
                                         <div class="tour-info fl">
                                             <img src="~/img/comment_icon_grey.png" alt="">
@@ -223,6 +223,13 @@
                     <div class="sidebar-block type-2">
                         <h4 class="sidebar-title color-dark-2">categories</h4>
                         <ul class="sidebar-category color-5">
+
+                            <li class="@(Model.CategoryID == 0 ? "active" : "")">
+                                <a href="@(Url.Action("Index", "Blog"))">
+                                    all
+                                    <span class="fr">(@Model.Categories.Sum(a => a.Count))</span>
+                                </a>
+                            </li>
 
                             @foreach (var category in Model.Categories)
                             {

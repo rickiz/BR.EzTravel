@@ -56,28 +56,37 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .ToList();
 
             viewModel.LatestBlogComments =
-                db.trnblogs
-                    .Join(db.lnkblogcomments, a => a.ID, b => b.BlogID, (a, b) => new { Blog = a, BlogComments = b })
-                    .GroupJoin(db.tblmembers, a => a.BlogComments.MemberID, b => b.ID, (a, b) => new
+                db.lnkblogcomments
+                    .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { BlogComment = a, Member = b })
+                    .GroupJoin(db.trnblogs, a => a.BlogComment.BlogID, b => b.ID, (a, b) => new
                     {
-                        Blog = a.Blog,
-                        BlogComments = a.BlogComments,
-                        Member = b.FirstOrDefault()
+                        BlogComment = a.BlogComment,
+                        Member = a.Member.FirstOrDefault(),
+                        Blog = b.FirstOrDefault()
                     })
                     .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
                     .Select(a => new LatestBlogComment
                     {
-                        ID = a.Blog.ID,
-                        Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
-                        CreateDT = a.BlogComments.CreateDT,
-                        Comment = a.BlogComments.Comments,
+                        ID = a.Blog == null ? 0: a.Blog.ID,
+                        //Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
+                        CreateDT = a.BlogComment.CreateDT,
+                        Comment = a.BlogComment.Comments,
                         Title = a.Blog.Title
                     })
                     .OrderByDescending(a => a.CreateDT)
                     .Take(5)
                     .ToList();
 
-            viewModel.Categories = db.refcategories.Where(a => a.Active).OrderBy(a => a.Name).ToList();
+            viewModel.Categories = db.refcategories
+                                        .GroupJoin(db.trnblogs, a => a.ID, b => b.CategoryID, (a, b) => new { Category = a, Blogs = b })
+                                        .Where(a => a.Category.Active)
+                                        .OrderBy(a => a.Category.Name)
+                                        .Select(a => new BlogCategory()
+                                        {
+                                            ID = a.Category.ID,
+                                            Name = a.Category.Name,
+                                            Count = a.Blogs.Count()
+                                        }).ToList();
 
             return View(viewModel);
         }
@@ -115,20 +124,19 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                  }).ToList();
 
             var lang = language.ToString();
-            var categories =
-                    (from a in db.trnblogs
-                     join b in db.refcategories on a.CategoryID equals b.ID
-                     where a.Language == lang && !a.CancelDT.HasValue && b.Active
-                     group b by new { Name = b.Name, ID = b.ID } into c
-                     select new BlogCategory()
-                     {
-                         Name = c.Key.Name,
-                         ID = c.Key.ID,
-                         Count = c.Count()
-                     }).ToList();
-
+            viewModel.Categories = db.refcategories
+                                        .GroupJoin(db.trnblogs, a => a.ID, b => b.CategoryID, (a, b) => new { Category = a, Blogs = b })
+                                        .Where(a => a.Category.Active)
+                                        .OrderBy(a => a.Category.Name)
+                                        .Select(a => new BlogCategory()
+                                        {
+                                            ID = a.Category.ID,
+                                            Name = a.Category.Name,
+                                            Count = a.Blogs.Count()
+                                        }).ToList();
+            
             viewModel.Comments = comments;
-            viewModel.Categories = categories;
+            //viewModel.Categories = categories;
 
             viewModel.PopularBlogs =
                 db.trnblogs
@@ -153,21 +161,21 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .ToList();
 
             viewModel.LatestBlogComments =
-                db.trnblogs
-                    .Join(db.lnkblogcomments, a => a.ID, b => b.BlogID, (a, b) => new { Blog = a, BlogComments = b })
-                    .GroupJoin(db.tblmembers, a => a.BlogComments.MemberID, b => b.ID, (a, b) => new
+                db.lnkblogcomments
+                    .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { BlogComment = a, Member = b })
+                    .GroupJoin(db.trnblogs, a => a.BlogComment.BlogID, b => b.ID, (a, b) => new
                     {
-                        Blog = a.Blog,
-                        BlogComments = a.BlogComments,
-                        Member = b.FirstOrDefault()
+                        BlogComment = a.BlogComment,
+                        Member = a.Member.FirstOrDefault(),
+                        Blog = b.FirstOrDefault()
                     })
                     .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
                     .Select(a => new LatestBlogComment
                     {
-                        ID = a.Blog.ID,
-                        Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
-                        CreateDT = a.BlogComments.CreateDT,
-                        Comment = a.BlogComments.Comments,
+                        ID = a.Blog == null ? 0 : a.Blog.ID,
+                        //Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
+                        CreateDT = a.BlogComment.CreateDT,
+                        Comment = a.BlogComment.Comments,
                         Title = a.Blog.Title
                     })
                     .OrderByDescending(a => a.CreateDT)

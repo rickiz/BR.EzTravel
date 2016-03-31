@@ -11,7 +11,7 @@ namespace BR.EzTravel.Web.Models
     public class BlogIndexViewModel
     {
         public List<BlogDetails> Blogs { get; set; }
-        public List<refcategory> Categories { get; set; }
+        public List<BlogCategory> Categories { get; set; }
         public List<PopularBlog> PopularBlogs { get; set; }
         public List<LatestBlogComment> LatestBlogComments { get; set; }
     }
