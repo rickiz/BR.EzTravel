@@ -24,5 +24,6 @@ namespace BR.EzTravel.Web.Models
         public Nullable<System.DateTime> CancelDT { get; set; }
         public string Language { get; set; }
         public int CategoryID { get; set; }
+        public string ThumbnailImagePath { get; set; }
     }
 }
