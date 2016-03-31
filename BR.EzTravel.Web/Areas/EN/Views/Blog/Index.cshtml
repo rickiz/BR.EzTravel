@@ -126,9 +126,38 @@
                         </ul>
                     </div>
                     <div class="sidebar-block type-2">
-                        <h4 class="sidebar-title color-dark-2">popular posts</h4>
+                        <h4 class="sidebar-title color-dark-2">popular blogs</h4>
                         <div class="widget-popular">
-                            <div class="hotel-small style-2 clearfix">
+                            @foreach (var blog in Model.PopularBlogs)
+                            {
+                                <div class="hotel-small style-2 clearfix">
+                                    <a class="hotel-img black-hover" 
+                                       href="@(Url.Action("Details", "Blog", new { ID = blog.ID }))">
+                                        <img class="img-responsive radius-0" src="~/img/home_7/small_hotel_5.jpg" alt="">
+                                        <div class="tour-layer delay-1"></div>
+                                    </a>
+                                    <div class="hotel-desc">
+                                        <div class="tour-info-line">
+                                            <div class="tour-info">
+                                                <img src="~/img/calendar_icon_grey.png" alt="">
+                                                <span class="font-style-2 color-dark-2">@blog.CreateDT</span>
+                                            </div>
+                                            <div class="tour-info">
+                                                <img src="~/img/people_icon_grey.png" alt="">
+                                                <span class="font-style-2 color-dark-2">By @blog.Author</span>
+                                            </div>
+                                        </div>
+                                        <h4>@blog.Title</h4>
+                                        <div class="tour-info-line clearfix">
+                                            <div class="tour-info">
+                                                <img src="~/img/comment_icon_grey.png" alt="">
+                                                <span class="font-style-2 color-dark-2">@blog.NoOfComments comments</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            @*<div class="hotel-small style-2 clearfix">
                                 <a class="hotel-img black-hover" href="#">
                                     <img class="img-responsive radius-0" src="~/img/home_7/small_hotel_5.jpg" alt="">
                                     <div class="tour-layer delay-1"></div>
@@ -202,7 +231,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     @*<div class="sidebar-block type-2">
@@ -467,7 +496,23 @@
                     <div class="sidebar-block type-2">
                         <h4 class="sidebar-title color-dark-2">latest comments</h4>
                         <div class="widget-comment">
-                            <div class="w-comment-entry">
+                            @foreach (var blog in Model.LatestBlogComments)
+                            {
+                                <div class="w-comment-entry">
+                                    <div class="w-comment-date">
+                                        <img src="~/img/calendar_icon_grey.png" alt=""> 
+                                        <strong>@blog.CreateDT</strong>
+                                    </div>
+                                    <div class="w-comment-title color-grey-3">
+                                        <a class="color-dark-2" href="@(Url.Action("Details", "Blog", new { ID = blog.ID }))">
+                                        @blog.Title</a> by <span class="color-dark-2">@blog.Author</span>
+                                    </div>
+                                    <div class="w-comment-text color-grey-3">
+                                        @blog.Comment
+                                    </div>
+                                </div>
+                            }
+                            @*<div class="w-comment-entry">
                                 <div class="w-comment-date"><img src="~/img/calendar_icon_grey.png" alt=""> july <strong>19th 2015</strong></div>
                                 <div class="w-comment-title color-grey-3"><a class="color-dark-2" href="#">BEST HOTELS REVIEWS</a> by <span class="color-dark-2">Emma Stone</span></div>
                                 <div class="w-comment-text color-grey-3">Lorem ipsum dolor sit amet, eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
@@ -481,7 +526,7 @@
                                 <div class="w-comment-date"><img src="~/img/calendar_icon_grey.png" alt=""> july <strong>29th 2015</strong></div>
                                 <div class="w-comment-title color-grey-3"><a class="color-dark-2" href="#">TOP BEST HOTELS AND TOURS</a> by <span class="color-dark-2">Emma Stone</span></div>
                                 <div class="w-comment-text color-grey-3">Lorem ipsum dolor sit amet, eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     @*<div class="sidebar-block type-2">

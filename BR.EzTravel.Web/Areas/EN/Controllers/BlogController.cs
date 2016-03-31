@@ -34,6 +34,40 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .Take(Settings.Default.MaxListPerPage)
                     .ToList();
 
+            viewModel.PopularBlogs =
+                db.trnblogs
+                    .GroupJoin(db.lnkblogcomments, a => a.ID, b => b.BlogID, (a, b) => new { Blog = a, BlogComments = b })
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString() &&
+                        (a.Blog.CategoryID == categoryID || categoryID == 0))
+                    .Select(a => new PopularBlog
+                    {
+                        ID = a.Blog.ID,
+                        Author = "Tester", // TODO: Link to tblMember
+                        CreateDT = a.Blog.CreateDT,
+                        NoOfComments = a.BlogComments.Count(),
+                        Title = a.Blog.Title
+                    })
+                    .OrderByDescending(a => a.NoOfComments)
+                    .Take(5)
+                    .ToList();
+
+            viewModel.LatestBlogComments =
+                db.trnblogs
+                    .Join(db.lnkblogcomments, a => a.ID, b => b.BlogID, (a, b) => new { Blog = a, BlogComments = b })
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString() &&
+                        (a.Blog.CategoryID == categoryID || categoryID == 0))
+                    .Select(a => new LatestBlogComment
+                    {
+                        ID = a.Blog.ID,
+                        Author = "Tester", // TODO: Link to tblMember
+                        CreateDT = a.BlogComments.CreateDT,
+                        Comment = a.BlogComments.Comments,
+                        Title = a.Blog.Title
+                    })
+                    .OrderByDescending(a => a.CreateDT)
+                    .Take(5)
+                    .ToList();
+
             viewModel.Categories = db.refcategories.Where(a => a.Active).OrderBy(a => a.Name).ToList();
 
             return View(viewModel);
