@@ -33,6 +33,10 @@
                     @foreach (var item in Model.Blogs)
                     {
                         <div class="blog-list-entry">
+                            @if (!string.IsNullOrEmpty(item.ThumbnailImagePath))
+                            {
+                                <img class="img-responsive radius-0" src="@Url.UploadedImageContent(item.ThumbnailImagePath)" alt="">
+                            }
                             <h4 class="blog-list-title"><a class="color-dark-2 link-dr-blue-2" href="#">@item.Title</a></h4>
                             <div class="tour-info-line clearfix">
                                 <div class="tour-info fl">
@@ -97,7 +101,14 @@
                                 <div class="hotel-small style-2 clearfix">
                                     <a class="hotel-img black-hover" 
                                        href="@(Url.Action("Details", "Blog", new { ID = blog.ID }))">
-                                        <img class="img-responsive radius-0" src="~/img/home_7/small_hotel_5.jpg" alt="">
+                                        @if (!string.IsNullOrEmpty(blog.ThumbnailImagePath))
+                                        {
+                                            <img class="img-responsive radius-0" src="@Url.UploadedImageContent(blog.ThumbnailImagePath)" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img class="img-responsive radius-0" src="~/img/home_7/small_hotel_5.jpg" alt="">
+                                        }
                                         <div class="tour-layer delay-1"></div>
                                     </a>
                                     <div class="hotel-desc">

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using BR.EzTravel.Web.CustomAttributes;
 
 namespace BR.EzTravel.Web.Models.Admin
 {
@@ -17,12 +19,18 @@ namespace BR.EzTravel.Web.Models.Admin
         [Required]
         [AllowHtml]
         public string Body { get; set; }
+
+        [DisplayName("Category")]
+        public int CategoryID { get; set; }
+
+        public List<SelectListItem> Categories { get; set; }
     }
 
     public class BlogEditViewModel : BlogCreateViewModel
     {
         [Required]
         public int ID { get; set; }
+        public string ThumbnailImagePath { get; set; }
     }
 
     public class AdminBlogIndexViewModel

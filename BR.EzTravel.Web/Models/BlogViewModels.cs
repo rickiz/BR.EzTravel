@@ -41,6 +41,7 @@ namespace BR.EzTravel.Web.Models
         public string Author { get; set; }
         public string Title { get; set; }
         public int NoOfComments { get; set; }
+        public string ThumbnailImagePath { get; set; }
     }
 
     public class LatestBlogComment
@@ -50,6 +51,7 @@ namespace BR.EzTravel.Web.Models
         public string Author { get; set; }
         public string Comment { get; set; }
         public string Title { get; set; }
+        public string ThumbnailImagePath { get; set; }
     }
 
     #endregion

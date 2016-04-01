@@ -28,7 +28,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Body = a.Body,
                         LastEditedDate = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT,
                         CreatedBy = "Tester", // TODO: Link to tblMember
-                        TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.ID && !b.CancelDT.HasValue).Count()
+                        TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.ID && !b.CancelDT.HasValue).Count(),
+                        ThumbnailImagePath = a.ThumbnailImagePath
                     })
                     .Take(Settings.Default.MaxListPerPage)
                     .ToList();
@@ -49,7 +50,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Author = a.Member == null? "EMMA STONE" : a.Member.PICName,
                         CreateDT = a.Blog.CreateDT,
                         NoOfComments = a.BlogComments.Count(),
-                        Title = a.Blog.Title
+                        Title = a.Blog.Title,
+                        ThumbnailImagePath = a.Blog.ThumbnailImagePath
                     })
                     .OrderByDescending(a => a.NoOfComments)
                     .Take(5)
@@ -68,7 +70,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .Select(a => new LatestBlogComment
                     {
                         ID = a.Blog == null ? 0: a.Blog.ID,
-                        //Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
+                        Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
                         CreateDT = a.BlogComment.CreateDT,
                         Comment = a.BlogComment.Comments,
                         Title = a.Blog.Title
@@ -154,7 +156,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
                         CreateDT = a.Blog.CreateDT,
                         NoOfComments = a.BlogComments.Count(),
-                        Title = a.Blog.Title
+                        Title = a.Blog.Title,
+                        ThumbnailImagePath = a.Blog.ThumbnailImagePath
                     })
                     .OrderByDescending(a => a.NoOfComments)
                     .Take(5)
@@ -195,7 +198,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Body = a.Blog.Body,
                         LastEditedDate = a.Blog.UpdateDT.HasValue ? a.Blog.UpdateDT.Value : a.Blog.CreateDT,
                         CreatedBy = a.Member == null ? "EMMA STONE" : a.Member.PICName,
-                        TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.Blog.ID && !b.CancelDT.HasValue).Count()
+                        TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.Blog.ID && !b.CancelDT.HasValue).Count(),
+                        ThumbnailImagePath = a.Blog.ThumbnailImagePath
                     })
                     .OrderByDescending(a => a.TotalComments)
                     .Take(5)

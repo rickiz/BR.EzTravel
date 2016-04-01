@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using BR.EzTravel.Web.Models.Admin;
 using BR.EzTravel.Web.Models;
+using BR.EzTravel.Web.Helpers;
+using BR.EzTravel.Web.Properties;
+using System.IO;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
@@ -31,22 +34,32 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         public ActionResult Create()
         {
-            return View(new BlogCreateViewModel());
+            return View(new BlogCreateViewModel()
+            {
+                Categories = GetList(ListType.Category)
+            });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BlogCreateViewModel viewModel)
+        public ActionResult Create(HttpPostedFileBase file, BlogCreateViewModel viewModel)
         {
             var blog = new trnblog()
             {
                 Body = viewModel.Body,
                 CreateDT = DateTime.Now,
+                CategoryID = viewModel.CategoryID,
                 Language = language.ToString(),
                 MemberID = 1,
                 PublishDT = DateTime.Now,
                 Title = viewModel.Title,
             };
+
+            if (file != null)
+            {
+                var fileName = FIleUploadManager.UploadAndSave(file);
+                blog.ThumbnailImagePath = fileName;
+            }
 
             db.trnblogs.Add(blog);
             db.SaveChanges();
@@ -58,23 +71,34 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         {
             var blog = db.trnblogs.Single(a => a.ID == id);
             var viewModel = new BlogEditViewModel
-                {
-                    ID = blog.ID,
-                    Title = blog.Title,
-                    Body = blog.Body,
-                };
+            {
+                ID = blog.ID,
+                Title = blog.Title,
+                Body = blog.Body,
+                CategoryID = blog.CategoryID,
+                ThumbnailImagePath = string.IsNullOrEmpty(blog.ThumbnailImagePath) ?
+                                        "" : Path.Combine(Settings.Default.ImageUploadPath, blog.ThumbnailImagePath),
+                Categories = GetList(ListType.Category)
+            };
 
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(BlogEditViewModel viewModel)
+        public ActionResult Edit(HttpPostedFileBase file, BlogEditViewModel viewModel)
         {
             var blog = db.trnblogs.Single(a => a.ID == viewModel.ID);
+            blog.CategoryID = viewModel.CategoryID;
             blog.Title = viewModel.Title;
             blog.Body = viewModel.Body;
             blog.UpdateDT = DateTime.Now;
+
+            if (file != null)
+            {
+                var fileName = FIleUploadManager.UploadAndSave(file);
+                blog.ThumbnailImagePath = fileName;
+            }
 
             db.SaveChanges();
 

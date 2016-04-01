@@ -45,7 +45,10 @@
                         <div class="form-group">
                             <label for="file">Thumbnail</label>
                             <input type="file" id="file" name="file" />
-                            <img id="img-preview" src="@(Url.Content(Model.ThumbnailImagePath))" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
+                            @if (!string.IsNullOrEmpty(Model.ThumbnailImagePath))
+                            {
+                                <img id="img-preview" src="@(Url.Content(Model.ThumbnailImagePath))" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
+                            }
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Description, new { @class = "control-label" })

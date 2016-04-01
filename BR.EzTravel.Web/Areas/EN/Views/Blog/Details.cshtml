@@ -47,6 +47,9 @@
                     </div>
                 </div>
                 <div class="detail-content">
+                    <div class="detail-top">
+                        <img class="img-responsive" src="@Url.UploadedImageContent(Model.ThumbnailImagePath)" alt="">
+                    </div>
                     <div class="detail-content-block">
                         <div>
                             @Html.Raw(Model.Body)
@@ -137,7 +140,14 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="s_news-entry">
                                     <a href="@(Url.Action("Details", "Blog", new { ID = blog.ID }))">
-                                        <img class="s_news-img img-responsive" src="~/img/home_8/news_1.jpg" alt="">
+                                        @if (!string.IsNullOrEmpty(blog.ThumbnailImagePath))
+                                        {
+                                            <img class="s_news-img img-responsive" src="@Url.UploadedImageContent(blog.ThumbnailImagePath)" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img class="s_news-img img-responsive" src="~/img/home_8/news_1.jpg" alt="">
+                                        }
                                     </a>
                                     <h4 class="s_news-title">
                                         <a href="@(Url.Action("Details", "Blog", new { ID = blog.ID }))">
@@ -248,7 +258,14 @@
                                 <div class="hotel-small style-2 clearfix">
                                     <a class="hotel-img black-hover"
                                        href="@(Url.Action("Details", "Blog", new { ID = blog.ID }))">
-                                        <img class="img-responsive radius-0" src="~/img/home_7/small_hotel_5.jpg" alt="">
+                                        @if (!string.IsNullOrEmpty(blog.ThumbnailImagePath))
+                                        {
+                                            <img class="img-responsive radius-0" src="@Url.UploadedImageContent(blog.ThumbnailImagePath)" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img class="img-responsive radius-0" src="~/img/home_7/small_hotel_5.jpg" alt="">
+                                        }
                                         <div class="tour-layer delay-1"></div>
                                     </a>
                                     <div class="hotel-desc">

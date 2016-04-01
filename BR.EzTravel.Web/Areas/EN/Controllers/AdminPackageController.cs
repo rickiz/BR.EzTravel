@@ -99,7 +99,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 CategoryID = package.CategoryID,
                 Categories = GetList(ListType.Category),
                 Countries = GetList(ListType.Country),
-                ThumbnailImagePath = Path.Combine(Settings.Default.ImageUploadPath, package.ThumbnailImagePath),
+                ThumbnailImagePath = string.IsNullOrEmpty(package.ThumbnailImagePath) ?
+                                        "" : Path.Combine(Settings.Default.ImageUploadPath, package.ThumbnailImagePath),
                 Days = package.Days,
                 Nights = package.Nights,
                 StartDT = package.StartDT,
