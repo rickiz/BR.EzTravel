@@ -88,7 +88,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             viewModel.PopularPackages =
                 (from a in db.lnkmemberposts
                  join b in db.refcategories on a.CategoryID equals b.ID
-                 where a.ID == id
                  select new PopularPackage
                  {
                      ID = a.ID,
