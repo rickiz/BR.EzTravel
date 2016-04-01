@@ -183,6 +183,7 @@
                         <div class="details-desc">
                             <p class="color-pink">Category:  <span class="color-white">@Model.Category</span></p>
                             <p class="color-pink">price: <span class="color-white">RM @Model.Price / person</span></p>
+                            <p class="color-pink">Duration: <span class="color-white">@Model.Days Days @Model.Nights Nights</span></p>
                             @*<p class="color-pink">AIRLINE: <span class="color-white">DELTA</span></p>*@
                             <p class="color-pink">
                                 date: <span class="color-white">
@@ -213,7 +214,29 @@
 
                     <div class="popular-tours bg-grey-2">
                         <h4 class="color-dark-2">popular tours</h4>
-                        <div class="hotel-small style-2 clearfix">
+                        @foreach (var package in Model.PopularPackages)
+                        {
+                            <div class="hotel-small style-2 clearfix">
+                                <a class="hotel-img black-hover" href="@(Url.Action("Details", "Package", new { ID = package.ID }))">
+                                    @if (!string.IsNullOrEmpty(package.ThumbnailImagePath))
+                                    {
+                                        <img class="img-responsive radius-3" 
+                                             src="@Url.UploadedImageContent(package.ThumbnailImagePath)" alt="">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-responsive radius-3" src="~/img/country/99.jpg" alt="">
+                                    }
+                                    <div class="tour-layer delay-1 radius-3"></div>
+                                </a>
+                                <div class="hotel-desc">
+                                    <h5><span class="color-dark-2">from <strong>RM @package.Price</strong></span></h5>
+                                    <h4>@package.Title</h4>
+                                    <div class="hotel-loc tt">@package.Days days @package.Nights nights</div>
+                                </div>
+                            </div>
+                        }
+                        @*<div class="hotel-small style-2 clearfix">
                             <a class="hotel-img black-hover" href="#">
                                 <img class="img-responsive radius-3" src="~/img/country/99.jpg" alt="">
                                 <div class="tour-layer delay-1 radius-3"></div>
@@ -245,7 +268,7 @@
                                 <h4>Discover venice</h4>
                                 <div class="hotel-loc tt">8 days 7 nights</div>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
 
                     <div class="sidebar-text-label bg-red-3 color-white">useful information</div>

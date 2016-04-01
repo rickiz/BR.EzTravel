@@ -71,7 +71,8 @@ namespace BR.EzTravel.Web.Models
         public DateTime StartDT { get; set; }
         public DateTime? EndDT { get; set; }
         public int Days { get; set; }
-        public List<PopularPackage> PopularPackage { get; set; }
+        public int Nights { get; set; }
+        public List<PopularPackage> PopularPackages { get; set; }
     }
 
     public class PopularPackage

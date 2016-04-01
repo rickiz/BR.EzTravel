@@ -80,11 +80,12 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      StartDT = a.StartDT,
                      ThumbnailImagePath = a.ThumbnailImagePath,
                      Title = a.Title,
-                     Days = a.Days
+                     Days = a.Days,
+                     Nights = a.Nights
                  }).Single();
 
 
-            viewModel.PopularPackage =
+            viewModel.PopularPackages =
                 (from a in db.lnkmemberposts
                  join b in db.refcategories on a.CategoryID equals b.ID
                  where a.ID == id
