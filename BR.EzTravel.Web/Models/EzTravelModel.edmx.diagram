@@ -19,7 +19,7 @@
         <EntityTypeShape EntityType="ExHolidayModel.refcity" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.refcountry" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.refpackage" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ExHolidayModel.refpackageactivity" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExHolidayModel.refpackageactivity" Width="2" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.refpackagetype" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.refrewardscheme" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.tblmember" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />

@@ -40,6 +40,7 @@ namespace BR.EzTravel.Web.Models
         public double PriceTo { get; set; }
         public int[] Rates { get; set; }
         public int[] CityIDs { get; set; }
+        public int[] PackageActivityIDs { get; set; }
     }
 
     public class PackageCategory
@@ -57,6 +58,7 @@ namespace BR.EzTravel.Web.Models
         public List<PackageCategory> Categories { get; set; }
 
         public PackageSearchCriteria Criteria { get; set; }
+        
     }
 
     #endregion

@@ -66,6 +66,16 @@ namespace BR.EzTravel.Web.Controllers
                         }).OrderBy(a => a.Text).ToList();
                     break;
 
+                case ListType.PackageActivity:
+                    var packageActivities = db.refpackageactivities.Where(a => a.Active).ToList();
+                    resultList = packageActivities.Select(a =>
+                        new SelectListItem()
+                        {
+                            Text = a.Name,
+                            Value = a.ID.ToString()
+                        }).OrderBy(a => a.Text).ToList();
+                    break;
+
                 case ListType.PackageCategory:
                     var packageCategories =
                         (from a in db.lnkmemberposts

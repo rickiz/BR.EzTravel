@@ -13,6 +13,6 @@ namespace BR.EzTravel.Web.Models
 
     public enum ListType
     {
-        Country, Category, PackageCategory
+        Country, Category, PackageActivity, PackageCategory
     }
 }

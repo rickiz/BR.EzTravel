@@ -130,18 +130,6 @@
           <Property Name="RewardPoint" Type="int" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
-        <EntityType Name="lnkrating">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MemberPostID" Type="int" Nullable="false" />
-          <Property Name="MemberID" Type="int" Nullable="false" />
-          <Property Name="Subject" Type="varchar" MaxLength="200" />
-          <Property Name="Rate" Type="int" Nullable="false" />
-          <Property Name="Comments" Type="varchar" MaxLength="1000" />
-          <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
-        </EntityType>
         <EntityType Name="lnkrewardclaim">
           <Key>
             <PropertyRef Name="ID" />
@@ -159,6 +147,7 @@
           <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="refcity">
           <Key>
@@ -168,6 +157,7 @@
           <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="refcountry">
           <Key>
@@ -177,6 +167,7 @@
           <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="refpackage">
           <Key>
@@ -190,6 +181,7 @@
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="UpadteDT" Type="datetime" Precision="0" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="refpackageactivity">
           <Key>
@@ -199,6 +191,7 @@
           <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="refpackagetype">
           <Key>
@@ -208,6 +201,7 @@
           <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="refrewardscheme">
           <Key>
@@ -219,6 +213,7 @@
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="UpdateDT" Type="datetime" Precision="0" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="tblmember">
           <Key>
@@ -240,6 +235,7 @@
           <Property Name="Roles" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="ExpiryDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="trnblog">
           <Key>
@@ -254,8 +250,8 @@
           <Property Name="UpdateDT" Type="datetime" Precision="0" />
           <Property Name="CancelDT" Type="datetime" Precision="0" />
           <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="ThumbnailImagePath" Type="varchar" MaxLength="500" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="ThumbnailImagePath" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="trnmemberrenewal">
           <Key>
@@ -270,6 +266,7 @@
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="CancelDT" Type="datetime" Precision="0" />
           <Property Name="UpdateDT" Type="datetime" Precision="0" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="trnroi">
           <Key>
@@ -283,6 +280,7 @@
           <Property Name="Subject" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Comment" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ExHolidayModelStoreContainer">
           <EntitySet Name="lnkblogcomment" EntityType="Self.lnkblogcomment" Schema="exholiday" store:Type="Tables" />
@@ -295,7 +293,6 @@
           <EntitySet Name="lnkmemberpostpackageactivity" EntityType="Self.lnkmemberpostpackageactivity" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="lnkmemberrenewal" EntityType="Self.lnkmemberrenewal" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="lnkmemberreward" EntityType="Self.lnkmemberreward" Schema="exholiday" store:Type="Tables" />
-          <EntitySet Name="lnkrating" EntityType="Self.lnkrating" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="lnkrewardclaim" EntityType="Self.lnkrewardclaim" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="refcategory" EntityType="Self.refcategory" Schema="exholiday" store:Type="Tables" />
           <EntitySet Name="refcity" EntityType="Self.refcity" Schema="exholiday" store:Type="Tables" />
@@ -441,6 +438,7 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="refcity">
           <Key>
@@ -450,6 +448,7 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="refcountry">
           <Key>
@@ -459,6 +458,7 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="refpackage">
           <Key>
@@ -472,6 +472,7 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="UpadteDT" Type="DateTime" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="refpackageactivity">
           <Key>
@@ -481,6 +482,7 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="refpackagetype">
           <Key>
@@ -490,6 +492,7 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="refrewardscheme">
           <Key>
@@ -501,6 +504,7 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="UpdateDT" Type="DateTime" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblmember">
           <Key>
@@ -522,6 +526,7 @@
           <Property Name="Roles" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="ExpiryDT" Type="DateTime" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="trnmemberrenewal">
           <Key>
@@ -536,6 +541,7 @@
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
           <Property Name="CancelDT" Type="DateTime" />
           <Property Name="UpdateDT" Type="DateTime" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="trnroi">
           <Key>
@@ -549,6 +555,7 @@
           <Property Name="Subject" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="ExHolidayEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="lnkmemberpackagetypes" EntityType="Self.lnkmemberpackagetype" />
@@ -730,19 +737,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="lnkratings">
-            <EntityTypeMapping TypeName="ExHolidayModel.lnkrating">
-              <MappingFragment StoreEntitySet="lnkrating">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="MemberPostID" ColumnName="MemberPostID" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="lnkrewardclaims">
             <EntityTypeMapping TypeName="ExHolidayModel.lnkrewardclaim">
               <MappingFragment StoreEntitySet="lnkrewardclaim">
@@ -756,6 +750,7 @@
           <EntitySetMapping Name="refcategories">
             <EntityTypeMapping TypeName="ExHolidayModel.refcategory">
               <MappingFragment StoreEntitySet="refcategory">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
@@ -766,6 +761,7 @@
           <EntitySetMapping Name="refcities">
             <EntityTypeMapping TypeName="ExHolidayModel.refcity">
               <MappingFragment StoreEntitySet="refcity">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
@@ -776,6 +772,7 @@
           <EntitySetMapping Name="refcountries">
             <EntityTypeMapping TypeName="ExHolidayModel.refcountry">
               <MappingFragment StoreEntitySet="refcountry">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
@@ -786,6 +783,7 @@
           <EntitySetMapping Name="refpackages">
             <EntityTypeMapping TypeName="ExHolidayModel.refpackage">
               <MappingFragment StoreEntitySet="refpackage">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
@@ -800,6 +798,7 @@
           <EntitySetMapping Name="refpackageactivities">
             <EntityTypeMapping TypeName="ExHolidayModel.refpackageactivity">
               <MappingFragment StoreEntitySet="refpackageactivity">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
@@ -810,6 +809,7 @@
           <EntitySetMapping Name="refpackagetypes">
             <EntityTypeMapping TypeName="ExHolidayModel.refpackagetype">
               <MappingFragment StoreEntitySet="refpackagetype">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
@@ -820,6 +820,7 @@
           <EntitySetMapping Name="refrewardschemes">
             <EntityTypeMapping TypeName="ExHolidayModel.refrewardscheme">
               <MappingFragment StoreEntitySet="refrewardscheme">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RewardPoint" ColumnName="RewardPoint" />
                 <ScalarProperty Name="Rewards" ColumnName="Rewards" />
@@ -832,6 +833,7 @@
           <EntitySetMapping Name="tblmembers">
             <EntityTypeMapping TypeName="ExHolidayModel.tblmember">
               <MappingFragment StoreEntitySet="tblmember">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BusinessRegNo" ColumnName="BusinessRegNo" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
@@ -854,6 +856,7 @@
           <EntitySetMapping Name="trnmemberrenewals">
             <EntityTypeMapping TypeName="ExHolidayModel.trnmemberrenewal">
               <MappingFragment StoreEntitySet="trnmemberrenewal">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
@@ -869,6 +872,7 @@
           <EntitySetMapping Name="trnrois">
             <EntityTypeMapping TypeName="ExHolidayModel.trnroi">
               <MappingFragment StoreEntitySet="trnroi">
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

@@ -87,7 +87,9 @@
                             @foreach (var category in Model.Categories)
                             {
                                 <li>
-                                    <a class="cat-drop" href="#">@category.Name <span class="fr">(@category.Count)</span></a>
+                                    <a class="cat-drop" href="@(Url.Action("Index", "Blog", new { categoryID = category.ID }))">
+                                        @category.Name <span class="fr">(@category.Count)</span>
+                                    </a>
                                 </li>
                             }
 
