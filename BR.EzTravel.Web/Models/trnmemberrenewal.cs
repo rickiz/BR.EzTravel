@@ -23,5 +23,6 @@ namespace BR.EzTravel.Web.Models
         public System.DateTime CreateDT { get; set; }
         public Nullable<System.DateTime> CancelDT { get; set; }
         public Nullable<System.DateTime> UpdateDT { get; set; }
+        public string Language { get; set; }
     }
 }

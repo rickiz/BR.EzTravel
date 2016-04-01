@@ -17,7 +17,10 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             var viewModel = new PackageIndexViewModel
             {
                 Criteria = new PackageSearchCriteria(),
+                PackageActivities = GetList(ListType.PackageActivity)
             };
+
+            viewModel.PackageActivities.RemoveAt(0);
 
             var lang = language.ToString();
             var packageCategories =
@@ -79,6 +82,25 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      Title = a.Title,
                      Days = a.Days
                  }).Single();
+
+
+            viewModel.PopularPackage =
+                (from a in db.lnkmemberposts
+                 join b in db.refcategories on a.CategoryID equals b.ID
+                 where a.ID == id
+                 select new PopularPackage
+                 {
+                     ID = a.ID,
+                     Price = a.Price,
+                     ThumbnailImagePath = a.ThumbnailImagePath,
+                     Title = a.Title,
+                     Days = a.Days,
+                     Nights = a.Nights,
+                     Rate = a.Rate
+                 })
+                    .OrderByDescending(a => a.Rate)
+                    .Take(5)
+                    .ToList();
 
             return View(viewModel);
         }

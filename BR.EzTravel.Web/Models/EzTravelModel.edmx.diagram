@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="ExHolidayModel.lnkmemberpostpackageactivity" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.lnkmemberrenewal" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.lnkmemberreward" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ExHolidayModel.lnkrating" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.lnkrewardclaim" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.refcategory" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExHolidayModel.refcity" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />

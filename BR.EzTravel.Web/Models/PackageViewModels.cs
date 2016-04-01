@@ -58,7 +58,7 @@ namespace BR.EzTravel.Web.Models
         public List<PackageCategory> Categories { get; set; }
 
         public PackageSearchCriteria Criteria { get; set; }
-        
+        public List<SelectListItem> PackageActivities { get; set; }
     }
 
     #endregion
@@ -71,6 +71,18 @@ namespace BR.EzTravel.Web.Models
         public DateTime StartDT { get; set; }
         public DateTime? EndDT { get; set; }
         public int Days { get; set; }
+        public List<PopularPackage> PopularPackage { get; set; }
+    }
+
+    public class PopularPackage
+    {
+        public int ID { get; set; }
+        public string ThumbnailImagePath { get; set; }
+        public string Title { get; set; }
+        public int Rate { get; set; }
+        public double Price { get; set; }
+        public int Days { get; set; }
+        public int Nights { get; set; }
     }
 
     #endregion

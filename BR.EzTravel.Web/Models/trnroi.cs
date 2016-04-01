@@ -22,5 +22,6 @@ namespace BR.EzTravel.Web.Models
         public string Subject { get; set; }
         public string Comment { get; set; }
         public System.DateTime CreateDT { get; set; }
+        public string Language { get; set; }
     }
 }

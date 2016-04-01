@@ -33,7 +33,6 @@ namespace BR.EzTravel.Web.Models
         public virtual DbSet<lnkmemberpostpackageactivity> lnkmemberpostpackageactivities { get; set; }
         public virtual DbSet<lnkmemberrenewal> lnkmemberrenewals { get; set; }
         public virtual DbSet<lnkmemberreward> lnkmemberrewards { get; set; }
-        public virtual DbSet<lnkrating> lnkratings { get; set; }
         public virtual DbSet<lnkrewardclaim> lnkrewardclaims { get; set; }
         public virtual DbSet<refcategory> refcategories { get; set; }
         public virtual DbSet<refcity> refcities { get; set; }

@@ -254,9 +254,6 @@
     <Compile Include="Models\lnkmemberreward.cs">
       <DependentUpon>EzTravelModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\lnkrating.cs">
-      <DependentUpon>EzTravelModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\lnkrewardclaim.cs">
       <DependentUpon>EzTravelModel.tt</DependentUpon>
     </Compile>

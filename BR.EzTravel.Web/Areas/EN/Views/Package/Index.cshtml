@@ -138,7 +138,19 @@
                     <div class="sidebar-block">
                         <h4 class="sidebar-title color-dark-2">Activities</h4>
                         <div class="sidebar-rating">
-                            <div class="input-entry color-3">
+                            @foreach (var activity in Model.PackageActivities)
+                            {
+                                <div class="input-entry color-3">
+                                    <input class="checkbox-form" id="@string.Format("chk_{0}",activity.Value)" type="checkbox" 
+                                           name="@string.Format("chk_{0}",activity.Value)" 
+                                           value="climat control">
+                                    <label class="clearfix" for="@string.Format("chk_{0}",activity.Value)" >
+                                        <span class="sp-check"><i class="fa fa-check"></i></span>
+                                        <span class="checkbox-text">@activity.Text</span>
+                                    </label>
+                                </div>
+                            }
+                            @*<div class="input-entry color-3">
                                 <input class="checkbox-form" id="area-1" type="checkbox" name="checkbox" value="climat control">
                                 <label class="clearfix" for="area-1">
                                     <span class="sp-check"><i class="fa fa-check"></i></span>
@@ -179,7 +191,7 @@
                                     <span class="sp-check"><i class="fa fa-check"></i></span>
                                     <span class="checkbox-text">refPackageActivity 6</span>
                                 </label>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="sidebar-block">

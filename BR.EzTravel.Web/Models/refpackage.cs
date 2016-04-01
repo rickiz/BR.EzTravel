@@ -22,5 +22,6 @@ namespace BR.EzTravel.Web.Models
         public bool Active { get; set; }
         public System.DateTime CreateDT { get; set; }
         public Nullable<System.DateTime> UpadteDT { get; set; }
+        public string Language { get; set; }
     }
 }

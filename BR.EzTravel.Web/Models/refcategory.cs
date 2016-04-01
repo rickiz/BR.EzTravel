@@ -18,5 +18,6 @@ namespace BR.EzTravel.Web.Models
         public string Name { get; set; }
         public System.DateTime CreateDT { get; set; }
         public bool Active { get; set; }
+        public string Language { get; set; }
     }
 }
