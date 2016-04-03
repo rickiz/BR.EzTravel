@@ -22,7 +22,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.PackageActivities.RemoveAt(0);
 
-            var lang = language.ToString();
             var packageCategories =
                     (from a in db.lnkmemberposts
                      join b in db.refcategories on a.CategoryID equals b.ID
@@ -41,7 +40,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.SearchResults =
                 db.lnkmemberposts
-                    .Where(a => !a.CancelDT.HasValue && a.CategoryID == viewModel.Criteria.CategoryID)
+                    .Where(a => !a.CancelDT.HasValue && a.CategoryID == viewModel.Criteria.CategoryID && a.Language == lang)
                     .Select(a => new PackageDetails
                     {
                         Description = a.Description,
@@ -76,7 +75,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      Description = a.Description,
                      EndDT = a.EndDT,
                      Price = a.Price,
-                     Rate = a.Rate, // TODO: add new column for total rate count as reviews count
+                     Rate = a.NoOfReviews == 0 ? 0 : a.Rate / a.NoOfReviews,
+                     ReviewCount = a.NoOfReviews,
                      StartDT = a.StartDT,
                      ThumbnailImagePath = a.ThumbnailImagePath,
                      Title = a.Title,
@@ -84,10 +84,27 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      Nights = a.Nights
                  }).Single();
 
+            viewModel.Comments =
+                (from a in db.lnkmemberpostcomments
+                 join b in db.tblmembers on a.MemberID equals b.ID into tempb
+                 from bb in tempb.DefaultIfEmpty()
+                 where a.MemberPostID == id && !a.CancelDT.HasValue
+                 select new PackageComment
+                 {
+                     Author = bb == null ? "Anonymous" : bb.PICName,
+                     Comment = a.Comments,
+                     CreateDT = a.CreateDT,
+                     ID = a.ID
+                 })
+                 .OrderByDescending(a => a.ID)
+                 .Take(20)
+                 .ToList();
+            viewModel.TotalComments = viewModel.Comments.Count;
 
             viewModel.PopularPackages =
                 (from a in db.lnkmemberposts
                  join b in db.refcategories on a.CategoryID equals b.ID
+                 where a.Language == lang
                  select new PopularPackage
                  {
                      ID = a.ID,
@@ -96,13 +113,30 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      Title = a.Title,
                      Days = a.Days,
                      Nights = a.Nights,
-                     Rate = a.Rate
+                     Rate = a.NoOfReviews == 0 ? 0 : a.Rate / a.NoOfReviews
                  })
-                    .OrderByDescending(a => a.Rate)
-                    .Take(5)
-                    .ToList();
+                .OrderByDescending(a => a.Rate)
+                .Take(5)
+                .ToList();
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Details(PostComment commentPost)
+        {
+            var memberComment = new lnkmemberpostcomment
+            {
+                Comments = commentPost.Comment,
+                CreateDT = DateTime.Now,
+                Language = lang,
+                MemberID = 0, // TODO: Link up member
+                MemberPostID = commentPost.ID,
+            };
+            db.lnkmemberpostcomments.Add(memberComment);
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = commentPost.ID });
         }
     }
 }

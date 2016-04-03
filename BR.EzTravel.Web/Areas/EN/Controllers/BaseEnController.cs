@@ -12,6 +12,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         public BaseEnController()
         {
             language = Language.EN;
+            lang = Language.EN.ToString();
         }
     }
 }

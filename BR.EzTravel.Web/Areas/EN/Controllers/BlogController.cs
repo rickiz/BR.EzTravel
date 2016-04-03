@@ -14,12 +14,11 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
     {
         public ActionResult Index(int categoryID = 0)
         {
-            var viewModel = new BlogIndexViewModel();
+            var viewModel = new BlogIndexViewModel { CategoryID = categoryID };
 
             viewModel.Blogs =
                 db.trnblogs
-                    .Where(a => !a.CancelDT.HasValue && a.Language == language.ToString() &&
-                    (a.CategoryID == categoryID || categoryID == 0))
+                    .Where(a => !a.CancelDT.HasValue && a.Language == lang && (a.CategoryID == categoryID || categoryID == 0))
                     .Select(a => new BlogDetails
                     {
                         ID = a.ID,
@@ -36,18 +35,18 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.PopularBlogs =
                 db.trnblogs
-                    .GroupJoin(db.tblmembers,a=>a.MemberID, b=>b.ID, (a,b)=> new { Blog = a, Member = b })
+                    .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { Blog = a, Member = b })
                     .GroupJoin(db.lnkblogcomments, a => a.Blog.ID, b => b.BlogID, (a, b) => new
                     {
                         Blog = a.Blog,
                         Member = a.Member.FirstOrDefault(),
                         BlogComments = b
                     })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang)
                     .Select(a => new PopularBlog
                     {
                         ID = a.Blog.ID,
-                        Author = a.Member == null? "EMMA STONE" : a.Member.PICName,
+                        Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
                         CreateDT = a.Blog.CreateDT,
                         NoOfComments = a.BlogComments.Count(),
                         Title = a.Blog.Title,
@@ -66,7 +65,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Member = a.Member.FirstOrDefault(),
                         Blog = b.FirstOrDefault()
                     })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang)
                     .Select(a => new LatestBlogComment
                     {
                         ID = a.Blog == null ? 0: a.Blog.ID,
@@ -81,7 +80,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.Categories = db.refcategories
                                         .GroupJoin(db.trnblogs, a => a.ID, b => b.CategoryID, (a, b) => new { Category = a, Blogs = b })
-                                        .Where(a => a.Category.Active)
+                                        .Where(a => a.Category.Active && a.Category.Language == lang)
                                         .OrderBy(a => a.Category.Name)
                                         .Select(a => new BlogCategory()
                                         {
@@ -125,10 +124,9 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      ID = a.ID
                  }).ToList();
 
-            var lang = language.ToString();
             viewModel.Categories = db.refcategories
                                         .GroupJoin(db.trnblogs, a => a.ID, b => b.CategoryID, (a, b) => new { Category = a, Blogs = b })
-                                        .Where(a => a.Category.Active)
+                                        .Where(a => a.Category.Active && a.Category.Language == lang)
                                         .OrderBy(a => a.Category.Name)
                                         .Select(a => new BlogCategory()
                                         {
@@ -149,7 +147,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Member = a.Member.FirstOrDefault(),
                         BlogComments = b
                     })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang)
                     .Select(a => new PopularBlog
                     {
                         ID = a.Blog.ID,
@@ -172,7 +170,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Member = a.Member.FirstOrDefault(),
                         Blog = b.FirstOrDefault()
                     })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == language.ToString())
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang)
                     .Select(a => new LatestBlogComment
                     {
                         ID = a.Blog == null ? 0 : a.Blog.ID,
@@ -187,8 +185,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.RelatedBlogs =
                 db.trnblogs
-                    .Where(a => !a.CancelDT.HasValue && a.Language == language.ToString() &&
-                    (a.CategoryID == viewModel.CategoryID))
+                    .Where(a => !a.CancelDT.HasValue && a.Language == lang && a.CategoryID == viewModel.CategoryID)
                     .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { Blog = a, Member = b.FirstOrDefault() })
                     .Select(a => new BlogDetails
                     {
@@ -206,6 +203,23 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .ToList();
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Details(PostComment commentPost)
+        {
+            var memberComment = new lnkblogcomment
+            {
+                Comments = commentPost.Comment,
+                CreateDT = DateTime.Now,
+                Language = lang,
+                MemberID = 0, // TODO: Link up member
+                BlogID = commentPost.ID,
+            };
+            db.lnkblogcomments.Add(memberComment);
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = commentPost.ID });
         }
     }
 }

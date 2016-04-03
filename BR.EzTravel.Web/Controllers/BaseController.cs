@@ -12,6 +12,7 @@ namespace BR.EzTravel.Web.Controllers
     {
         protected ExHolidayEntities db = new ExHolidayEntities();
         protected Language language = Language.EN;
+        protected string lang = Language.EN.ToString();
 
         protected override void OnException(ExceptionContext filterContext)
         {
@@ -39,7 +40,6 @@ namespace BR.EzTravel.Web.Controllers
 
         protected List<SelectListItem> GetList(ListType type, string defaultValue = "", string defaultText = "default", bool defaultItem = true)
         {
-            var lang = language.ToString();
             var resultList = new List<SelectListItem>();
             if (defaultText == "default")
                 defaultText = "--Please select--";
@@ -47,7 +47,7 @@ namespace BR.EzTravel.Web.Controllers
             switch (type)
             {
                 case ListType.Category:
-                    var categories = db.refcategories.Where(a => a.Active).ToList();
+                    var categories = db.refcategories.Where(a => a.Active && a.Language == lang).ToList();
                     resultList = categories.Select(a =>
                         new SelectListItem()
                         {
@@ -57,7 +57,7 @@ namespace BR.EzTravel.Web.Controllers
                     break;
 
                 case ListType.Country:
-                    var countries = db.refcountries.Where(a => a.Active).ToList();
+                    var countries = db.refcountries.Where(a => a.Active && a.Language == lang).ToList();
                     resultList = countries.Select(a =>
                         new SelectListItem()
                         {
@@ -67,7 +67,7 @@ namespace BR.EzTravel.Web.Controllers
                     break;
 
                 case ListType.PackageActivity:
-                    var packageActivities = db.refpackageactivities.Where(a => a.Active).ToList();
+                    var packageActivities = db.refpackageactivities.Where(a => a.Active && a.Language == lang).ToList();
                     resultList = packageActivities.Select(a =>
                         new SelectListItem()
                         {
@@ -105,6 +105,29 @@ namespace BR.EzTravel.Web.Controllers
                     Selected = true
                 });
             }
+
+            return resultList;
+        }
+
+        protected List<SelectListItem> GetPackageActivities()
+        {
+            var resultList = 
+                db.refpackageactivities
+                    .Where(a => a.Language == lang && a.Active)
+                    .Select(a => new SelectListItem
+                    {
+                        Text = a.Name,
+                        Value = a.ID.ToString()
+                    }).ToList();
+
+            return resultList;
+        }
+
+        protected List<SelectListItem> GetPackageActivities(int[] selectedIDs)
+        {
+            var resultList = GetPackageActivities();
+
+            resultList.ForEach(a => a.Selected = selectedIDs.Any(b => b == int.Parse(a.Value)));
 
             return resultList;
         }

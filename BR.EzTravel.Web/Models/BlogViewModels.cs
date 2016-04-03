@@ -14,6 +14,7 @@ namespace BR.EzTravel.Web.Models
         public List<BlogCategory> Categories { get; set; }
         public List<PopularBlog> PopularBlogs { get; set; }
         public List<LatestBlogComment> LatestBlogComments { get; set; }
+        public int CategoryID { get; set; }
     }
 
     public class BlogDetails
@@ -66,6 +67,8 @@ namespace BR.EzTravel.Web.Models
         public List<PopularBlog> PopularBlogs { get; set; }
         public List<LatestBlogComment> LatestBlogComments { get; set; }
         public List<BlogDetails> RelatedBlogs { get; set; }
+
+        public PostComment CommentPost { get; set; }
     }
 
     public class BlogCategory

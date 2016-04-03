@@ -78,7 +78,7 @@
                     <div class="sidebar-block type-2">
                         <h4 class="sidebar-title color-dark-2">categories</h4>
                         <ul class="sidebar-category color-5">
-                            <li>
+                            <li class="@(Model.CategoryID == 0 ? "active" : "")">
                                 <a href="@(Url.Action("Index", "Blog"))">all 
                                     <span class="fr">(@Model.Categories.Sum(a => a.Count))</span>
                                 </a>
@@ -86,8 +86,8 @@
 
                             @foreach (var category in Model.Categories)
                             {
-                                <li>
-                                    <a class="cat-drop" href="@(Url.Action("Index", "Blog", new { categoryID = category.ID }))">
+                                <li class="@(category.ID == Model.CategoryID ? "active" : "")">
+                                    <a href="@(Url.Action("Index", "Blog", new { categoryID = category.ID }))">
                                         @category.Name <span class="fr">(@category.Count)</span>
                                     </a>
                                 </li>

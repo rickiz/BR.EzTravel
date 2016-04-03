@@ -73,6 +73,10 @@ namespace BR.EzTravel.Web.Models
         public int Days { get; set; }
         public int Nights { get; set; }
         public List<PopularPackage> PopularPackages { get; set; }
+        public List<PackageComment> Comments { get; set; }
+
+        public int TotalComments { get; set; }
+        public PostComment CommentPost { get; set; }
     }
 
     public class PopularPackage
@@ -84,6 +88,25 @@ namespace BR.EzTravel.Web.Models
         public double Price { get; set; }
         public int Days { get; set; }
         public int Nights { get; set; }
+    }
+
+    public class PackageComment
+    {
+        public int ID { get; set; }
+        public DateTime CreateDT { get; set; }
+        public string Author { get; set; }
+        public string Comment { get; set; }
+    }
+
+    public class PostComment
+    {
+        [Required]
+        public int ID { get; set; }
+
+        [Required]
+        public string Comment { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
     }
 
     #endregion

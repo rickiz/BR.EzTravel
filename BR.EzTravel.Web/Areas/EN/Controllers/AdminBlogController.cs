@@ -17,7 +17,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         {
             var blogs =
                 db.trnblogs
-                    .Where(a => a.Language == language.ToString() && !a.CancelDT.HasValue)
+                    .Where(a => a.Language == lang && !a.CancelDT.HasValue)
                     .OrderByDescending(a => a.ID)
                     .Take(20)
                     .Select(a => new AdminBlogIndexItem
@@ -49,7 +49,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Body = viewModel.Body,
                 CreateDT = DateTime.Now,
                 CategoryID = viewModel.CategoryID,
-                Language = language.ToString(),
+                Language = lang,
                 MemberID = 1,
                 PublishDT = DateTime.Now,
                 Title = viewModel.Title,

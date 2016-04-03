@@ -14,7 +14,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
     {
         public ActionResult Index()
         {
-            var lang = language.ToString();
             var latestPackages =
                 db.lnkmemberposts
                     .Where(a => !a.CancelDT.HasValue && a.Language == lang)

@@ -196,36 +196,40 @@
                                     <div class="comment-text color-grey">
                                         @comment.Comment
                                     </div>
-                                    <a class="comment-reply c-button b-26 bg-dr-blue-2 hv-dr-blue-2-o" href="#">Reply</a>
+                                    @*<a class="comment-reply c-button b-26 bg-dr-blue-2 hv-dr-blue-2-o" href="#">Reply</a>*@
                                 </div>
                             </li>
                         }
                     </ul>
-                    <form>
+                    
+                    @using (Html.BeginForm())
+                    {
+                        @Html.HiddenFor(m => m.CommentPost.ID, new { @Value = Model.ID })
+
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
                                 <div class="form-block type-2 clearfix">
                                     <div class="input-style-1 b-50 brd-0 type-2 color-3">
-                                        <input type="text" required="" placeholder="Enter your name">
+                                        @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your name" })
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <div class="form-block type-2 clearfix">
                                     <div class="input-style-1 b-50 brd-0 type-2 color-3">
-                                        <input type="text" required="" placeholder="Enter your email">
+                                        @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your email" })
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-12">
                                 <div class="form-block type-2 clearfix">
-                                    <textarea class="area-style-1 type-2 color-3" required="" placeholder="Write a comment..."></textarea>
+                                    @Html.TextAreaFor(m => m.CommentPost.Comment, new { @class = "area-style-1 type-2 color-3", placeholder = "Write a comment..." })
                                 </div>
                                 <input type="submit" class="c-button b-40 fr bg-dr-blue-2 hv-dr-blue-2-o" value="post comment">
                             </div>
 
                         </div>
-                    </form>
+                    }
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">

@@ -43,6 +43,11 @@ namespace BR.EzTravel.Web.Models.Admin
         public List<SelectListItem> Countries { get; set; }
 
         public List<SelectListItem> Categories { get; set; }
+
+        public List<SelectListItem> Activities { get; set; }
+
+        [Display(Name = "Activities")]
+        public int[] SelectedActivities { get; set; }
     }
 
     public class PackageEditViewModel : PackageCreateViewModel
