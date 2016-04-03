@@ -75,6 +75,9 @@ namespace BR.EzTravel.Web.Models
         public List<PopularPackage> PopularPackages { get; set; }
         public List<PackageComment> Comments { get; set; }
 
+        public string[] Images { get; set; }
+        public string[] Activities { get; set; }
+
         public int TotalComments { get; set; }
         public PostComment CommentPost { get; set; }
     }

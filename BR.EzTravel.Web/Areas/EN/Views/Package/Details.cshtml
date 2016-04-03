@@ -69,18 +69,16 @@
                             </ul>*@
                         <h5>interesting for you</h5>
 
-                        @*<p>Pellentesque ac turpis egestas, varius justo et, condimentum augue. Praesent aliquam, nisl feugiat vehicula condimentum, justo tellus scelerisque metus. Pellentesque varius justo et, condimentum augue.</p>*@
+                        @foreach (var image in Model.Images)
+                        {
+                            <img class="right-img" src="@(Url.UploadedImageContent(image))" alt="">
+                        }
 
-                        <img class="right-img" src="~/img/country/15.jpg" alt="">
-                        <img class="right-img" src="~/img/country/15.jpg" alt="">
-                        <img class="right-img" src="~/img/country/15.jpg" alt="">
                         <ul>
-                            <li>lnkMemberPostActivity 1</li>
-                            <li>lnkMemberPostActivity 2</li>
-                            <li>lnkMemberPostActivity 3</li>
-                            <li>lnkMemberPostActivity 4</li>
-                            <li>lnkMemberPostActivity 5</li>
-                            <li>lnkMemberPostActivity 6</li>
+                            @foreach (var activity in Model.Activities)
+                            {
+                                <li>@activity</li>
+                            }
                         </ul>
 
                         @*<h5>my listing deactivated</h5>

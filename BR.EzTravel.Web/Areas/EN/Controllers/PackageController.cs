@@ -119,6 +119,15 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 .Take(5)
                 .ToList();
 
+            viewModel.Images =
+                db.lnkmemberpostimages.Where(a => a.Active && a.MemberPostID == id).Select(a => a.ImagePath).ToArray();
+
+            viewModel.Activities =
+                (from a in db.lnkmemberpostpackageactivities
+                 join b in db.refpackageactivities on a.PackageActivityID equals b.ID
+                 where a.Active && a.MemberPostID == id
+                 select b.Name).ToArray();
+
             return View(viewModel);
         }
 
