@@ -1,4 +1,5 @@
-﻿@model BR.EzTravel.Web.Models.Admin.PackageEditViewModel
+﻿@using BR.EzTravel.Web.Helpers
+@model BR.EzTravel.Web.Models.Admin.PackageEditViewModel
 @{
     ViewBag.Title = "Edit Holiday Package";
     Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
@@ -47,8 +48,28 @@
                             <input type="file" id="file" name="file" />
                             @if (!string.IsNullOrEmpty(Model.ThumbnailImagePath))
                             {
-                                <img id="img-preview" src="@(Url.Content(Model.ThumbnailImagePath))" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
+                                <img id="img-preview" src="@(Url.UploadedImageContent(Model.ThumbnailImagePath))" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
                             }
+                        </div>
+                        <div id="multiple" class="form-group">
+                            <label for="file">Detail Images</label>
+                            <br />
+                            <input type="file" id="files" name="files" multiple />
+
+                            <div>
+                                @*TODO: Remove Image*@
+                                @foreach (var item in Model.Images)
+                                {
+                                    <div>
+                                        <img style='max-width: 300px; max-height: 200px;' src='@(Url.UploadedImageContent(item))' />
+                                    </div>
+                                }
+                            </div>
+                            
+
+                            <div id="img-preview-files">
+
+                            </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Description, new { @class = "control-label" })
@@ -115,6 +136,8 @@
                 $(endDateId).datepicker("option", "minDate", selectedDate);
                 $(this).valid();
             });
+
+            document.getElementById('files').addEventListener('change', handleFileSelect, false);
         });
 
         function readURL(input) {
@@ -126,6 +149,34 @@
                 }
 
                 reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function handleFileSelect() {
+            //Check File API support
+            if (window.File && window.FileList && window.FileReader) {
+
+                var files = event.target.files; //FileList object
+                var output = document.getElementById("img-preview-files");
+                output.innerHTML = "";
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    //Only pics
+                    if (!file.type.match('image')) continue;
+
+                    var picReader = new FileReader();
+                    picReader.addEventListener("load", function (event) {
+                        var picFile = event.target;
+                        var div = document.createElement("div");
+                        div.innerHTML = "<img style='max-width: 300px; max-height: 200px;' src='" + picFile.result + "'" + "title='" + picFile.name + "'/>";
+                        output.insertBefore(div, null);
+                    });
+                    //Read the image
+                    picReader.readAsDataURL(file);
+                }
+            } else {
+                console.log("Your browser does not support File API");
             }
         }
     </script>

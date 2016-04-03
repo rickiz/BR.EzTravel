@@ -54,6 +54,8 @@ namespace BR.EzTravel.Web.Models.Admin
     {
         public int ID { get; set; }
         public string ThumbnailImagePath { get; set; }
+
+        public string[] Images { get; set; }
     }
 
     public class AdminPackageIndexViewModel

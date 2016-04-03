@@ -47,7 +47,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HttpPostedFileBase file, PackageCreateViewModel viewModel)
+        public ActionResult Create(HttpPostedFileBase file, IEnumerable<HttpPostedFileBase> files, PackageCreateViewModel viewModel)
         {
             using (var trans = new TransactionScope())
             {
@@ -86,18 +86,41 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 db.lnkmemberpostcountries.Add(country);
                 db.SaveChanges();
 
-                foreach (var activityID in viewModel.SelectedActivities)
+                if(!viewModel.SelectedActivities.IsEmpty())
                 {
-                    var activity = new lnkmemberpostpackageactivity
+                    foreach (var activityID in viewModel.SelectedActivities)
                     {
-                        Active = true,
-                        CreateDT = DateTime.Now,
-                        MemberPostID = post.ID,
-                        PackageActivityID = activityID
-                    };
-                    db.lnkmemberpostpackageactivities.Add(activity);
+                        var activity = new lnkmemberpostpackageactivity
+                        {
+                            Active = true,
+                            CreateDT = DateTime.Now,
+                            MemberPostID = post.ID,
+                            PackageActivityID = activityID
+                        };
+                        db.lnkmemberpostpackageactivities.Add(activity);
+                    }
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
+
+                if(!files.IsEmpty())
+                {
+                    foreach (var image in files)
+                    {
+                        if (image != null)
+                        {
+                            var fileName = FIleUploadManager.UploadAndSave(image);
+                            var linkImage = new lnkmemberpostimage
+                            {
+                                Active = true,
+                                CreateDT = DateTime.Now,
+                                ImagePath = fileName,
+                                MemberPostID = post.ID,
+                            };
+                            db.lnkmemberpostimages.Add(linkImage);
+                        }
+                    }
+                    db.SaveChanges();
+                }                
 
                 trans.Complete();
             }
@@ -119,8 +142,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 CategoryID = package.CategoryID,
                 Categories = GetList(ListType.Category),
                 Countries = GetList(ListType.Country),
-                ThumbnailImagePath = string.IsNullOrEmpty(package.ThumbnailImagePath) ?
-                                        "" : Path.Combine(Settings.Default.ImageUploadPath, package.ThumbnailImagePath),
+                ThumbnailImagePath = package.ThumbnailImagePath,
                 Days = package.Days,
                 Nights = package.Nights,
                 StartDT = package.StartDT,
@@ -132,12 +154,15 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.Activities = GetPackageActivities(selectedActivities);
 
+            viewModel.Images = 
+                db.lnkmemberpostimages.Where(a => a.Active && a.MemberPostID == id).Select(a => a.ImagePath).ToArray();
+
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(HttpPostedFileBase file, PackageEditViewModel viewModel)
+        public ActionResult Edit(HttpPostedFileBase file, IEnumerable<HttpPostedFileBase> files, PackageEditViewModel viewModel)
         {
             using (var trans = new TransactionScope())
             {
@@ -165,28 +190,52 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 oldActivities.ForEach(a => a.Active = false);
                 db.SaveChanges();
 
-                foreach (var activityID in viewModel.SelectedActivities)
+                if(!viewModel.SelectedActivities.IsEmpty())
                 {
-                    var inactiveAct = db.lnkmemberpostpackageactivities
-                        .SingleOrDefault(a => a.PackageActivityID == activityID && a.MemberPostID == viewModel.ID);
+                    foreach (var activityID in viewModel.SelectedActivities)
+                    {
+                        var inactiveAct = db.lnkmemberpostpackageactivities
+                            .SingleOrDefault(a => a.PackageActivityID == activityID && a.MemberPostID == viewModel.ID);
 
-                    if (inactiveAct == null)
-                    {
-                        var activity = new lnkmemberpostpackageactivity
+                        if (inactiveAct == null)
                         {
-                            Active = true,
-                            CreateDT = DateTime.Now,
-                            MemberPostID = viewModel.ID,
-                            PackageActivityID = activityID
-                        };
-                        db.lnkmemberpostpackageactivities.Add(activity);
+                            var activity = new lnkmemberpostpackageactivity
+                            {
+                                Active = true,
+                                CreateDT = DateTime.Now,
+                                MemberPostID = viewModel.ID,
+                                PackageActivityID = activityID
+                            };
+                            db.lnkmemberpostpackageactivities.Add(activity);
+                        }
+                        else
+                        {
+                            inactiveAct.Active = true;
+                        }
                     }
-                    else
-                    {
-                        inactiveAct.Active = true;
-                    }
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
+
+                if (!files.IsEmpty())
+                {
+                    foreach (var image in files)
+                    {
+                        if (image != null)
+                        {
+                            var fileName = FIleUploadManager.UploadAndSave(image);
+                            var linkImage = new lnkmemberpostimage
+                            {
+                                Active = true,
+                                CreateDT = DateTime.Now,
+                                ImagePath = fileName,
+                                MemberPostID = viewModel.ID,
+                            };
+                            db.lnkmemberpostimages.Add(linkImage);
+                        }
+                    }
+                    db.SaveChanges();
+                }
+
 
                 trans.Complete();
             }

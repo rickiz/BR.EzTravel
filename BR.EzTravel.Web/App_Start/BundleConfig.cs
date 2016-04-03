@@ -40,6 +40,14 @@ namespace BR.EzTravel.Web
             bundles.Add(new ScriptBundle("~/bundles/eztravel").Include(
                       "~/Scripts/eztravel.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
+                "~/Scripts/jQuery.FileUpload/tmpl.min.js",
+                "~/Scripts/jQuery.FileUpload/load-image.all.min.js",
+                "~/Scripts/jQuery.FileUpload/jquery.fileupload.js",
+                "~/Scripts/jQuery.FileUpload/jquery.fileupload-process.js",
+                "~/Scripts/jQuery.FileUpload/jquery.fileupload-image.js",
+                "~/Scripts/jQuery.FileUpload/jquery.fileupload-ui.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/jquery-ui.structure.min.css",
@@ -58,6 +66,10 @@ namespace BR.EzTravel.Web
 
             bundles.Add(new StyleBundle("~/Content/validation").Include(
                       "~/Content/validation.css"));
+
+            bundles.Add(new StyleBundle("~/Content/fileupload").Include(
+                      "~/Content/jQuery.FileUpload/css/jquery.fileupload.css",
+                      "~/Content/jQuery.FileUpload/css/jquery.fileupload-ui.css"));
         }
     }
 }
