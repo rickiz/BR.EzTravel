@@ -24,6 +24,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     {
                         ID = a.ID,
                         Title = a.Title,
+                        Active = a.Active,
                         LastUpdateDT = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT
                     })
                     .ToList();
@@ -53,6 +54,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 MemberID = 1,
                 PublishDT = DateTime.Now,
                 Title = viewModel.Title,
+                Active = true
             };
 
             if (file != null)
@@ -78,7 +80,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 CategoryID = blog.CategoryID,
                 ThumbnailImagePath = string.IsNullOrEmpty(blog.ThumbnailImagePath) ?
                                         "" : Path.Combine(Settings.Default.ImageUploadPath, blog.ThumbnailImagePath),
-                Categories = GetList(ListType.Category)
+                Categories = GetList(ListType.Category),
+                Active = blog.Active
             };
 
             return View(viewModel);
@@ -93,6 +96,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             blog.Title = viewModel.Title;
             blog.Body = viewModel.Body;
             blog.UpdateDT = DateTime.Now;
+            blog.Active = viewModel.Active;
 
             if (file != null)
             {
@@ -108,7 +112,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         public ActionResult Delete(int id)
         {
             var blog = db.trnblogs.Single(a => a.ID == id);
-            blog.CancelDT = DateTime.Now;
+            blog.Active = false;
             blog.UpdateDT = DateTime.Now;
             //blog.MemberID = 1;
 

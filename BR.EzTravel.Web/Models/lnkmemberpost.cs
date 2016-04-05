@@ -32,5 +32,6 @@ namespace BR.EzTravel.Web.Models
         public Nullable<System.DateTime> CancelDT { get; set; }
         public string Language { get; set; }
         public int NoOfReviews { get; set; }
+        public bool Active { get; set; }
     }
 }

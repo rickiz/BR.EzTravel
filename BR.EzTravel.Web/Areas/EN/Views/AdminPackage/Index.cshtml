@@ -25,7 +25,7 @@
                         </th>
                         <th class="col-md-8">Title</th>
                         <th class="col-md-3">Last update</th>
-
+                        <th class="col-md-3">Active</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +40,7 @@
                                 @Html.ActionLink(item.Title, "Edit", new { id = item.ID })
                             </td>
                             <td>@item.LastUpdateDT.ToString("dd MMM yyyy")</td>
+                            <td>@item.Active</td>
                         </tr>
                     }
                 </tbody>

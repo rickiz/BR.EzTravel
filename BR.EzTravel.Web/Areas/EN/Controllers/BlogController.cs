@@ -18,7 +18,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.Blogs =
                 db.trnblogs
-                    .Where(a => !a.CancelDT.HasValue && a.Language == lang && (a.CategoryID == categoryID || categoryID == 0))
+                    .Where(a => !a.CancelDT.HasValue && a.Language == lang && (a.CategoryID == categoryID || categoryID == 0) && a.Active)
                     .Select(a => new BlogDetails
                     {
                         ID = a.ID,
@@ -42,7 +42,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Member = a.Member.FirstOrDefault(),
                         BlogComments = b
                     })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang)
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang && a.Blog.Active)
                     .Select(a => new PopularBlog
                     {
                         ID = a.Blog.ID,
@@ -65,7 +65,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Member = a.Member.FirstOrDefault(),
                         Blog = b.FirstOrDefault()
                     })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang)
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang && a.Blog.Active)
                     .Select(a => new LatestBlogComment
                     {
                         ID = a.Blog == null ? 0: a.Blog.ID,

@@ -31,6 +31,8 @@ namespace BR.EzTravel.Web.Models.Admin
         [Required]
         public int ID { get; set; }
         public string ThumbnailImagePath { get; set; }
+        [DisplayName("Active")]
+        public bool Active { get; set; }
     }
 
     public class AdminBlogIndexViewModel
@@ -43,5 +45,6 @@ namespace BR.EzTravel.Web.Models.Admin
         public string Title { get; set; }
         public int ID { get; set; }
         public DateTime LastUpdateDT { get; set; }
+        public bool Active { get; set; }
     }
 }

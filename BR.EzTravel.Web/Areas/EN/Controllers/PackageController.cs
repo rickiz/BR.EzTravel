@@ -7,6 +7,7 @@ using BR.EzTravel.Web.Models;
 using BR.EzTravel.Web.Helpers;
 using System.IO;
 using BR.EzTravel.Web.Properties;
+using System.Data.Entity;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
@@ -14,6 +15,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
     {
         public ActionResult Index()
         {
+            var yesterdayDT = DateTime.Now.AddDays(-1);
+
             var viewModel = new PackageIndexViewModel
             {
                 Criteria = new PackageSearchCriteria(),
@@ -40,7 +43,10 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.SearchResults =
                 db.lnkmemberposts
-                    .Where(a => !a.CancelDT.HasValue && a.CategoryID == viewModel.Criteria.CategoryID && a.Language == lang)
+                    .Where(a => !a.CancelDT.HasValue && a.CategoryID == viewModel.Criteria.CategoryID && a.Language == lang && a.Active
+                     //&& a.StartDT > yesterdayDT && (a.EndDT > yesterdayDT || a.EndDT == null))
+                     && DbFunctions.TruncateTime(a.StartDT)<= DbFunctions.TruncateTime(DateTime.Now)
+                     && (DbFunctions.TruncateTime(a.EndDT) >= DbFunctions.TruncateTime(DateTime.Now)|| a.EndDT == null))
                     .Select(a => new PackageDetails
                     {
                         Description = a.Description,
@@ -64,10 +70,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         public ActionResult Details(int id)
         {
+            var yesterdayDT = DateTime.Now.AddDays(-1);
+
             var viewModel =
                 (from a in db.lnkmemberposts
                  join b in db.refcategories on a.CategoryID equals b.ID
-                 where a.ID == id
+                 where a.ID == id && a.Active
+                     && DbFunctions.TruncateTime(a.StartDT) <= DbFunctions.TruncateTime(DateTime.Now)
+                     && (DbFunctions.TruncateTime(a.EndDT) >= DbFunctions.TruncateTime(DateTime.Now) || a.EndDT == null)
                  select new PackageDetailsViewModel
                  {
                      ID = a.ID,
@@ -88,7 +98,10 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 (from a in db.lnkmemberpostcomments
                  join b in db.tblmembers on a.MemberID equals b.ID into tempb
                  from bb in tempb.DefaultIfEmpty()
-                 where a.MemberPostID == id && !a.CancelDT.HasValue
+                 join c in db.lnkmemberposts on a.MemberPostID equals c.ID 
+                 where a.MemberPostID == id && !a.CancelDT.HasValue && c.Active
+                     && DbFunctions.TruncateTime(c.StartDT) <= DbFunctions.TruncateTime(DateTime.Now)
+                     && (DbFunctions.TruncateTime(c.EndDT) >= DbFunctions.TruncateTime(DateTime.Now) || c.EndDT == null)
                  select new PackageComment
                  {
                      Author = bb == null ? "Anonymous" : bb.PICName,
@@ -103,8 +116,9 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.PopularPackages =
                 (from a in db.lnkmemberposts
-                 //join b in db.refcategories on a.CategoryID equals b.ID
-                 where a.Language == lang && a.ID != id
+                 where a.Language == lang && a.ID != id && a.Active
+                     && DbFunctions.TruncateTime(a.StartDT) <= DbFunctions.TruncateTime(DateTime.Now)
+                     && (DbFunctions.TruncateTime(a.EndDT) >= DbFunctions.TruncateTime(DateTime.Now) || a.EndDT == null)
                  select new PopularPackage
                  {
                      ID = a.ID,
@@ -121,8 +135,9 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.RecommendedPackages =
                         (from a in db.lnkmemberposts
-                         //join b in db.refcategories on a.CategoryID equals b.ID
-                         where a.Language == lang && a.ID != id
+                         where a.Language == lang && a.ID != id && a.Active
+                     && DbFunctions.TruncateTime(a.StartDT) <= DbFunctions.TruncateTime(DateTime.Now)
+                     && (DbFunctions.TruncateTime(a.EndDT) >= DbFunctions.TruncateTime(DateTime.Now) || a.EndDT == null)
                          group a by new { a.ID, a.Price, a.ThumbnailImagePath, a.Title, a.Days, a.Nights, a.Rate, a.NoOfReviews } into aa
                          select new RecommendedPackage
                          {

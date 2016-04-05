@@ -7,6 +7,7 @@ using BR.EzTravel.Web.Models;
 using BR.EzTravel.Web.Helpers;
 using System.IO;
 using BR.EzTravel.Web.Properties;
+using System.Data.Entity;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
@@ -16,7 +17,9 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         {
             var latestPackages =
                 db.lnkmemberposts
-                    .Where(a => !a.CancelDT.HasValue && a.Language == lang)
+                    .Where(a => !a.CancelDT.HasValue && a.Language == lang
+                     && DbFunctions.TruncateTime(a.StartDT) <= DbFunctions.TruncateTime(DateTime.Now)
+                     && (DbFunctions.TruncateTime(a.EndDT) >= DbFunctions.TruncateTime(DateTime.Now) || a.EndDT == null))
                     .Select(a => new PackageDetails
                     {
                         Description = a.Description,
@@ -32,7 +35,9 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             var topPackages =
                 db.lnkmemberposts
-                    .Where(a => !a.CancelDT.HasValue && a.Language == lang)
+                    .Where(a => !a.CancelDT.HasValue && a.Language == lang
+                     && DbFunctions.TruncateTime(a.StartDT) <= DbFunctions.TruncateTime(DateTime.Now)
+                     && (DbFunctions.TruncateTime(a.EndDT) >= DbFunctions.TruncateTime(DateTime.Now) || a.EndDT == null))
                     .Select(a => new PackageDetails
                     {
                         Description = a.Description,

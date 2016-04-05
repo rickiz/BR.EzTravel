@@ -49,6 +49,9 @@ namespace BR.EzTravel.Web.Models.Admin
 
         [Display(Name = "Activities")]
         public int[] SelectedActivities { get; set; }
+
+        [DisplayName("Active")]
+        public bool Active { get; set; }
     }
 
     public class PackageEditViewModel : PackageCreateViewModel
@@ -69,5 +72,6 @@ namespace BR.EzTravel.Web.Models.Admin
         public string Title { get; set; }
         public int ID { get; set; }
         public DateTime LastUpdateDT { get; set; }
+        public bool Active { get; set; }
     }
 }
