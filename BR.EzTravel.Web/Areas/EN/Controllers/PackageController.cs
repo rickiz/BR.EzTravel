@@ -103,7 +103,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.PopularPackages =
                 (from a in db.lnkmemberposts
-                 join b in db.refcategories on a.CategoryID equals b.ID
+                 //join b in db.refcategories on a.CategoryID equals b.ID
                  where a.Language == lang && a.ID != id
                  select new PopularPackage
                  {
@@ -121,17 +121,18 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.RecommendedPackages =
                         (from a in db.lnkmemberposts
-                         join b in db.refcategories on a.CategoryID equals b.ID
+                         //join b in db.refcategories on a.CategoryID equals b.ID
                          where a.Language == lang && a.ID != id
+                         group a by new { a.ID, a.Price, a.ThumbnailImagePath, a.Title, a.Days, a.Nights, a.Rate, a.NoOfReviews } into aa
                          select new RecommendedPackage
                          {
-                             ID = a.ID,
-                             Price = a.Price,
-                             ThumbnailImagePath = a.ThumbnailImagePath,
-                             Title = a.Title,
-                             Days = a.Days,
-                             Nights = a.Nights,
-                             Rate = a.NoOfReviews == 0 ? 0 : a.Rate / a.NoOfReviews
+                             ID = aa.Key.ID,
+                             Price = aa.Key.Price,
+                             ThumbnailImagePath = aa.Key.ThumbnailImagePath,
+                             Title = aa.Key.Title,
+                             Days = aa.Key.Days,
+                             Nights = aa.Key.Nights,
+                             Rate = aa.Key.NoOfReviews == 0 ? 0 : aa.Key.Rate / aa.Key.NoOfReviews
                          })
                         .OrderBy(a => a.Rate)
                         .Take(10)
