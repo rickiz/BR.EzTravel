@@ -315,9 +315,36 @@
         </div>
     </div>
     <div class="arrows bg-bluejeans">
-        <div class="swiper-container main-slider-7" data-autoplay="0" data-loop="1" data-speed="900" data-center="0" data-slides-per-view="1">
+        <div class="swiper-container main-slider-7" data-autoplay="0" data-loop="0" data-speed="900" data-center="0" data-slides-per-view="1">
             <div class="swiper-wrapper">
-                <div class="swiper-slide active" data-val="0">
+                @foreach (var blog in Model.LatestBlogs)
+                {
+                    var count = 0;
+
+                    <div class="swiper-slide" data-val="@count">
+                        <div class="sl-bg">
+                            <img class="center-image" src="@Url.UploadedImageContent(blog.ThumbnailImagePath)" alt="">
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1">
+                                    <div class="sl-testimonals">
+                                        <div class="tour-info">
+                                            <img src="~/img/calendar_icon.png" alt="">
+                                            <span class="font-style-2 color-white"><b>@blog.LastEditedDate.ToFormatString("dd/MM/yyyy")</b></span>
+                                        </div>
+                                        <h3 class="color-white underline">@blog.CreatedBy</h3>
+                                        <br />
+                                        <p class="f-14 color-white">“@blog.Title”</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    count++;
+                }
+                @*<div class="swiper-slide active" data-val="0">
                     <div class="sl-bg">
                         <img class="center-image" src="~/img/country/3.jpg" alt="">
                     </div>
@@ -356,7 +383,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
             <div class="pagination pagination-hidden poin-style-1"></div>
             <div class="arrow-wrapp arr-s-4">

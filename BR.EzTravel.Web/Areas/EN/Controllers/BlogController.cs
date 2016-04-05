@@ -18,17 +18,18 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.Blogs =
                 db.trnblogs
-                    .Where(a => !a.CancelDT.HasValue && a.Language == lang && (a.CategoryID == categoryID || categoryID == 0) && a.Active)
+                    .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { Blog = a, Member = b.FirstOrDefault(), })
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang && (a.Blog.CategoryID == categoryID || categoryID == 0) && a.Blog.Active)
                     .Select(a => new BlogDetails
                     {
-                        ID = a.ID,
-                        CategoryID = a.CategoryID,
-                        Title = a.Title,
-                        Body = a.Body,
-                        LastEditedDate = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT,
-                        CreatedBy = "Tester", // TODO: Link to tblMember
-                        TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.ID && !b.CancelDT.HasValue).Count(),
-                        ThumbnailImagePath = a.ThumbnailImagePath
+                        ID = a.Blog.ID,
+                        CategoryID = a.Blog.CategoryID,
+                        Title = a.Blog.Title,
+                        Body = a.Blog.Body,
+                        LastEditedDate = a.Blog.UpdateDT.HasValue ? a.Blog.UpdateDT.Value : a.Blog.CreateDT,
+                        CreatedBy = a.Member == null ? "EMMA STONE" : a.Member.PICName,
+                        TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.Blog.ID && !b.CancelDT.HasValue).Count(),
+                        ThumbnailImagePath = a.Blog.ThumbnailImagePath
                     })
                     .Take(Settings.Default.MaxListPerPage)
                     .ToList();

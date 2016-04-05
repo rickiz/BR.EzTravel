@@ -10,5 +10,6 @@ namespace BR.EzTravel.Web.Models
         public List<PackageDetails> LatestPackages { get; set; }
 
         public List<PackageDetails> PopularPackages { get; set; }
+        public List<BlogDetails> LatestBlogs { get; set; }
     }
 }
