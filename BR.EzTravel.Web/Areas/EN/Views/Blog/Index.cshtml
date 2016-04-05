@@ -52,9 +52,9 @@
                                     <span class="font-style-2 color-dark-2">@item.TotalComments comments</span>
                                 </div>
                             </div>
-                            <div class="blog-list-text color-grey-3">
+                            @*<div class="blog-list-text color-grey-3">
                                 @Html.Raw(item.Body)
-                            </div>
+                            </div>*@
                             <a href="@(Url.Action("Details", "Blog", new { ID = item.ID }))" class="c-button small bg-dr-blue-2 hv-dr-blue-2-o"><span>read more</span></a>
                         </div>
                     }

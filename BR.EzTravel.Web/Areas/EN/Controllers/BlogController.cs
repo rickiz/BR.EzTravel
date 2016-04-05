@@ -147,7 +147,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Member = a.Member.FirstOrDefault(),
                         BlogComments = b
                     })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang)
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang && a.Blog.ID != id)
                     .Select(a => new PopularBlog
                     {
                         ID = a.Blog.ID,
@@ -185,7 +185,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.RelatedBlogs =
                 db.trnblogs
-                    .Where(a => !a.CancelDT.HasValue && a.Language == lang && a.CategoryID == viewModel.CategoryID)
+                    .Where(a => !a.CancelDT.HasValue && a.Language == lang && a.CategoryID == viewModel.CategoryID && a.ID != id)
                     .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { Blog = a, Member = b.FirstOrDefault() })
                     .Select(a => new BlogDetails
                     {

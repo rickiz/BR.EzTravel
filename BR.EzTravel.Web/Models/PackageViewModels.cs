@@ -73,6 +73,7 @@ namespace BR.EzTravel.Web.Models
         public int Days { get; set; }
         public int Nights { get; set; }
         public List<PopularPackage> PopularPackages { get; set; }
+        public List<RecommendedPackage> RecommendedPackages { get; set; }
         public List<PackageComment> Comments { get; set; }
 
         public string[] Images { get; set; }
@@ -92,6 +93,8 @@ namespace BR.EzTravel.Web.Models
         public int Days { get; set; }
         public int Nights { get; set; }
     }
+
+    public class RecommendedPackage : PopularPackage { }
 
     public class PackageComment
     {

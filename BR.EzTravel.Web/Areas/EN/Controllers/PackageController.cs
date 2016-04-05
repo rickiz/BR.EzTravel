@@ -104,7 +104,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             viewModel.PopularPackages =
                 (from a in db.lnkmemberposts
                  join b in db.refcategories on a.CategoryID equals b.ID
-                 where a.Language == lang
+                 where a.Language == lang && a.ID != id
                  select new PopularPackage
                  {
                      ID = a.ID,
@@ -118,6 +118,25 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 .OrderByDescending(a => a.Rate)
                 .Take(5)
                 .ToList();
+
+            viewModel.RecommendedPackages =
+                        (from a in db.lnkmemberposts
+                         join b in db.refcategories on a.CategoryID equals b.ID
+                         where a.Language == lang && a.ID != id
+                         select new RecommendedPackage
+                         {
+                             ID = a.ID,
+                             Price = a.Price,
+                             ThumbnailImagePath = a.ThumbnailImagePath,
+                             Title = a.Title,
+                             Days = a.Days,
+                             Nights = a.Nights,
+                             Rate = a.NoOfReviews == 0 ? 0 : a.Rate / a.NoOfReviews
+                         })
+                        .OrderBy(a => a.Rate)
+                        .Take(10)
+                        .ToList();
+
 
             viewModel.Images =
                 db.lnkmemberpostimages.Where(a => a.Active && a.MemberPostID == id).Select(a => a.ImagePath).ToArray();
