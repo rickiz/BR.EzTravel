@@ -24,6 +24,7 @@ namespace BR.EzTravel.Web.Models.Admin
         [DisplayName("Country")]
         public int CountryID { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         public int Days { get; set; }
