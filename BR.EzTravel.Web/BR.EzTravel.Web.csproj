@@ -184,6 +184,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\EN\Controllers\AdminBlogController.cs" />
+    <Compile Include="Areas\EN\Controllers\AdminMemberController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminPackageController.cs" />
     <Compile Include="Areas\EN\Controllers\BaseEnController.cs" />
     <Compile Include="Areas\EN\Controllers\BlogController.cs" />
@@ -1661,6 +1662,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\EN\Models\" />
+    <Folder Include="Areas\EN\Views\AdminMember\" />
     <Folder Include="Areas\EN\Views\BaseEn\" />
     <Folder Include="UploadedImages\" />
     <Folder Include="Views\Base\" />
