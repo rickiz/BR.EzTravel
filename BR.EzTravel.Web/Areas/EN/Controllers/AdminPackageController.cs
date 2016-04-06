@@ -48,7 +48,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HttpPostedFileBase file, IEnumerable<HttpPostedFileBase> files, PackageCreateViewModel viewModel)
+        public ActionResult Create(HttpPostedFileBase file, PackageCreateViewModel viewModel)
         {
             using (var trans = new TransactionScope())
             {
@@ -104,22 +104,20 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     db.SaveChanges();
                 }
 
-                if(!files.IsEmpty())
+                if(!string.IsNullOrEmpty(viewModel.DetailImageNames))
                 {
-                    foreach (var image in files)
+                    var detailImages = viewModel.DetailImageNames.Split(',');
+
+                    foreach (var image in detailImages)
                     {
-                        if (image != null)
+                        var linkImage = new lnkmemberpostimage
                         {
-                            var fileName = FileUploadManager.UploadAndSave(image);
-                            var linkImage = new lnkmemberpostimage
-                            {
-                                Active = true,
-                                CreateDT = DateTime.Now,
-                                ImagePath = fileName,
-                                MemberPostID = post.ID,
-                            };
-                            db.lnkmemberpostimages.Add(linkImage);
-                        }
+                            Active = true,
+                            CreateDT = DateTime.Now,
+                            ImagePath = image,
+                            MemberPostID = post.ID,
+                        };
+                        db.lnkmemberpostimages.Add(linkImage);
                     }
                     db.SaveChanges();
                 }                
@@ -295,11 +293,12 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             
         }
 
+        [HttpPost]
         public ActionResult DeleteFile(string fileName)
         {
             FileUploadManager.DeleteFile(fileName);
 
-            return View();
+            return new JsonResult();
         }
     }
 }

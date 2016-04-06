@@ -14,6 +14,9 @@
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
+                
+                @Html.HiddenFor(m => m.DetailImageNames)
+
                 <div class="bs-docs-section">
                     <h1 class="page-header">@ViewBag.Title</h1>
                     <p>
@@ -59,13 +62,10 @@
                         <div class="form-group">
                             <label for="file">Detail Images</label>
                             <br />
-                            <div id="dropzone">
-                                <div class="dropzone">
-                                    <div class="dz-message dropzone-previews">
-                                        Drop files here or click to upload.
-                                    </div>
+                            <div id="dropzone" class="dropzone">
+                                <div class="dz-message dropzone-previews">
+                                    Drop files here or click to upload.
                                 </div>
-                                
                             </div>
                         </div>
 
@@ -167,7 +167,7 @@
                 $(this).valid();
             });
 
-            // Dropzone configuration            
+            // Dropzone configuration
 
             // Now that the DOM is fully loaded, create the dropzone, and setup the
             // event listeners
@@ -184,13 +184,18 @@
                     else {
                         var imgName = response.FileNames[0];
                         file.previewElement.classList.add("dz-success");
-                        filesList.push(imgName);
+                        addDetailImage(imgName);
 
                         $(file.previewTemplate)
                             .find('a.dz-remove')
-                            .attr('href', '@(Url.Action("DeleteFile"))?fileName=' + imgName)
                             .on('click', function () {
-                                fileList = _.without(fileList, imgName);
+                                $.post({
+                                    url: '@(Url.Action("DeleteFile"))?fileName=' + imgName,
+                                    //data: { fileName: imgName },
+                                    complete: function (res) {
+                                        removeDetailImage(imgName);
+                                    }
+                                });
                             });
                     }
                 },
@@ -238,6 +243,16 @@
             } else {
                 console.log("Your browser does not support File API");
             }
+        }
+
+        function addDetailImage(imgName) {
+            filesList.push(imgName);
+            $('#DetailImageNames').val(filesList.join(','));
+        }
+
+        function removeDetailImage(imgName) {
+            filesList = _.without(filesList, imgName);
+            $('#DetailImageNames').val(filesList.join(','));
         }
     </script>
 }

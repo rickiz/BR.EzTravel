@@ -52,6 +52,8 @@ namespace BR.EzTravel.Web.Models.Admin
 
         [DisplayName("Active")]
         public bool Active { get; set; }
+
+        public string DetailImageNames { get; set; }
     }
 
     public class PackageEditViewModel : PackageCreateViewModel

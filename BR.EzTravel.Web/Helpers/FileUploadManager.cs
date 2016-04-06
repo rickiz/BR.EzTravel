@@ -8,7 +8,7 @@ namespace BR.EzTravel.Web.Helpers
 {
     public class FileUploadManager
     {
-        public HttpPostedFileBase File { get; set; }
+        public HttpPostedFileBase UploadedFile { get; set; }
         public string OriginalFileName { get; set; }
         public string NewFileName { get; set; }
         public List<string> ValidFileExtensions { get; set; }
@@ -17,7 +17,7 @@ namespace BR.EzTravel.Web.Helpers
 
         public FileUploadManager(HttpPostedFileBase file) : this()
         {
-            File = file;
+            UploadedFile = file;
         }
 
         public FileUploadManager()
@@ -32,12 +32,12 @@ namespace BR.EzTravel.Web.Helpers
 
         public void Save()
         {
-            if (File == null || File.ContentLength <= 0)
+            if (UploadedFile == null || UploadedFile.ContentLength <= 0)
                 return;
                 //throw new ApplicationException("File not found.");
 
-            OriginalFileName = Path.GetFileName(File.FileName);
-            var oriFileNameWithoutExtension = Path.GetFileNameWithoutExtension(File.FileName);
+            OriginalFileName = Path.GetFileName(UploadedFile.FileName);
+            var oriFileNameWithoutExtension = Path.GetFileNameWithoutExtension(UploadedFile.FileName);
             var extension = Path.GetExtension(OriginalFileName).ToLower();
 
             if (!ValidFileExtensions.Contains(extension))
@@ -48,12 +48,13 @@ namespace BR.EzTravel.Web.Helpers
 
             SavePathWithFileName = Path.Combine(UploadPath, NewFileName);
 
-            File.SaveAs(SavePathWithFileName);
+            UploadedFile.SaveAs(SavePathWithFileName);
         }
 
         public void Delete(string fileName)
         {
             var path = Path.Combine(UploadPath, fileName);
+            File.Delete(path);
         }
 
         public static string UploadAndSave(HttpPostedFileBase file)
