@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using BR.EzTravel.Web.Properties;
 
 namespace BR.EzTravel.Web.Helpers
 {
-    public class FIleUploadManager
+    public class FileUploadManager
     {
         public HttpPostedFileBase File { get; set; }
         public string OriginalFileName { get; set; }
@@ -18,9 +15,13 @@ namespace BR.EzTravel.Web.Helpers
         public string UploadPath { get; set; }
         public string SavePathWithFileName { get; set; }
 
-        public FIleUploadManager(HttpPostedFileBase file)
+        public FileUploadManager(HttpPostedFileBase file) : this()
         {
             File = file;
+        }
+
+        public FileUploadManager()
+        {
             ValidFileExtensions = new List<string>() { ".jpg", ".png", ".bmp", ".gif", ".tiff", ".jpeg" };
 
             if (Settings.Default.ImageUploadPath.StartsWith("~"))
@@ -50,12 +51,30 @@ namespace BR.EzTravel.Web.Helpers
             File.SaveAs(SavePathWithFileName);
         }
 
+        public void Delete(string fileName)
+        {
+            var path = Path.Combine(UploadPath, fileName);
+        }
+
         public static string UploadAndSave(HttpPostedFileBase file)
         {
-            var fileManger = new FIleUploadManager(file);
+            var fileManger = new FileUploadManager(file);
             fileManger.Save();
 
             return fileManger.NewFileName;
+        }
+
+        public static void DeleteFile(string fileName)
+        {
+            try
+            {
+                var fileManger = new FileUploadManager();
+                fileManger.Delete(fileName);
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }            
         }
     }
 }

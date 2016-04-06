@@ -71,7 +71,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
                 if (file != null)
                 {
-                    var fileName = FIleUploadManager.UploadAndSave(file);
+                    var fileName = FileUploadManager.UploadAndSave(file);
                     post.ThumbnailImagePath = fileName;
                 }
 
@@ -110,7 +110,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     {
                         if (image != null)
                         {
-                            var fileName = FIleUploadManager.UploadAndSave(image);
+                            var fileName = FileUploadManager.UploadAndSave(image);
                             var linkImage = new lnkmemberpostimage
                             {
                                 Active = true,
@@ -183,7 +183,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
                 if (file != null)
                 {
-                    var fileName = FIleUploadManager.UploadAndSave(file);
+                    var fileName = FileUploadManager.UploadAndSave(file);
                     package.ThumbnailImagePath = fileName;
                 }
 
@@ -226,7 +226,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     {
                         if (image != null)
                         {
-                            var fileName = FIleUploadManager.UploadAndSave(image);
+                            var fileName = FileUploadManager.UploadAndSave(image);
                             var linkImage = new lnkmemberpostimage
                             {
                                 Active = true,
@@ -258,6 +258,48 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult UploadImages()
+        {
+            var finalFileNames = new List<string>();
+
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    var image = Request.Files[fileName];
+                    var newFileName = FileUploadManager.UploadAndSave(image);
+
+                    finalFileNames.Add(newFileName);
+                }
+
+                return new JsonResult
+                {
+                    Data = new { FileNames = finalFileNames }
+                };
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+
+                finalFileNames.ForEach(a => FileUploadManager.DeleteFile(a));
+
+                return new JsonResult
+                {
+                    Data = new { Error = ex.Message }
+                };
+            }
+
+            
+        }
+
+        public ActionResult DeleteFile(string fileName)
+        {
+            FileUploadManager.DeleteFile(fileName);
+
+            return View();
         }
     }
 }

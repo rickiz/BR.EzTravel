@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using BR.EzTravel.Web.Helpers;
 using BR.EzTravel.Web.Models;
+using log4net;
+using System.Reflection;
 
 namespace BR.EzTravel.Web.Controllers
 {
@@ -13,6 +15,7 @@ namespace BR.EzTravel.Web.Controllers
         protected ExHolidayEntities db = new ExHolidayEntities();
         protected Language language = Language.EN;
         protected string lang = Language.EN.ToString();
+        protected static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType.Name);
 
         protected override void OnException(ExceptionContext filterContext)
         {
