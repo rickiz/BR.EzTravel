@@ -1,8 +1,10 @@
-﻿@model BR.EzTravel.Web.Models.Admin.BlogEditViewModel
+﻿@model BR.EzTravel.Web.Models.Admin.MemberCreateViewModel
 @{
-    ViewBag.Title = "Edit Blog";
+    ViewBag.Title = "Create Member";
+    ViewBag.Controller = "AdminMember";
     Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
 }
+
 
 <div class="col-xs-12 col-sm-9">
     <p class="pull-right visible-xs">
@@ -14,7 +16,6 @@
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(m => m.ID)
                 <div class="bs-docs-section">
                     <h1 class="page-header">@ViewBag.Title</h1>
                     <p>
@@ -26,10 +27,6 @@
                             <i class="glyphicon glyphicon-save"></i>
                             Save
                         </button>
-                        @*<a class="btn btn-danger" href="@Url.Action("Delete", new { id = Model.ID })" role="button">
-                            <i class="glyphicon glyphicon-trash"></i>
-                            Delete
-                        </a>*@
                     </p>
                     <div class="form-horizontal">
                         <div class="form-group">
@@ -44,18 +41,11 @@
                         <div class="form-group">
                             <label for="file">Thumbnail</label>
                             <input type="file" id="file" name="file" />
-                            @if (!string.IsNullOrEmpty(Model.ThumbnailImagePath))
-                            {
-                                <img id="img-preview" src="@(Url.Content(Model.ThumbnailImagePath))" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
-                            }
+                            <img id="img-preview" src="#" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
                         </div>
                         <div class="form-group">
                             @Html.TextAreaFor(m => m.Body, new { rows = "10", cols = "80" })
                             @Html.ValidationMessageFor(m => m.Body)
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Active, new { @class = "control-label" })
-                            @Html.CheckBoxFor(m => m.Active)
                         </div>
                     </div>
                 </div>
@@ -63,24 +53,3 @@
         </div>
     </div>
 </div>
-
-@section scripts
-{
-    @Scripts.Render("~/bundles/tinymce")
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Initialize your tinyMCE Editor with your preferred options
-            tinyMCE.init({
-                selector: "textarea",  // change this value according to your HTML
-                plugins: [
-                    'advlist autolink lists link image charmap print preview anchor',
-                    'searchreplace visualblocks code fullscreen',
-                    'insertdatetime media table contextmenu paste code'
-                ],
-                theme_advanced_buttons3_add: 'code',
-                toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                paste_data_images: true,
-            });
-        });
-    </script>
-}
