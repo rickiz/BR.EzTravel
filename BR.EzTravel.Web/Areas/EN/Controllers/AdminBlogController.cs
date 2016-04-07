@@ -66,6 +66,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             db.trnblogs.Add(blog);
             db.SaveChanges();
 
+            var emailBody = string.Format(@"Hi EZ Management, <br /><br />
+                    New blog <b>{0}</b> has been created. <br /><br />
+                    
+                    http://www.ezgoholiday.com/EN/Blog/Details/{1}",
+                    viewModel.Title, blog.ID);
+
+            Util.SendEmail("Welcome to EZ Go Holiday!", emailBody, Properties.Settings.Default.EmailFrom, "", "");
+
             return RedirectToAction("Index");
         }
 
@@ -105,6 +113,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             }
 
             db.SaveChanges();
+
+            var emailBody = string.Format(@"Hi EZ Management, <br /><br />
+                    Blog <b>{0}</b> has been updated. <br /><br />
+                    
+                    http://www.ezgoholiday.com/EN/Blog/Details/{1}",
+                    viewModel.Title, blog.ID);
+
+            Util.SendEmail("Welcome to EZ Go Holiday!", emailBody, Properties.Settings.Default.EmailFrom, "", "");
 
             return RedirectToAction("Index");
         }
