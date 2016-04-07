@@ -155,15 +155,28 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.Activities = GetPackageActivities(selectedActivities);
 
-            viewModel.Images = 
+            var detailImageNames = 
                 db.lnkmemberpostimages.Where(a => a.Active && a.MemberPostID == id).Select(a => a.ImagePath).ToArray();
+
+            viewModel.DetailImageNames = string.Join(",", detailImageNames);
+            viewModel.MockFiles = new List<PackageEditMockFile>();
+
+            foreach (var imageName in detailImageNames)
+            {
+                var mockFile = new PackageEditMockFile
+                {
+                    name = imageName,
+                    size = FileUploadManager.GetFileSize(imageName)
+                };
+                viewModel.MockFiles.Add(mockFile);
+            }
 
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(HttpPostedFileBase file, IEnumerable<HttpPostedFileBase> files, PackageEditViewModel viewModel)
+        public ActionResult Edit(HttpPostedFileBase file, PackageEditViewModel viewModel)
         {
             using (var trans = new TransactionScope())
             {
@@ -218,26 +231,34 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     db.SaveChanges();
                 }
 
-                if (!files.IsEmpty())
+                var existingDetailImages = db.lnkmemberpostimages.Where(a => a.Active && a.MemberPostID == viewModel.ID).ToList();
+                var detailImages = viewModel.DetailImageNames?.Split(',').ToList() ?? new List<string>();
+
+                foreach (var existingImage in existingDetailImages)
                 {
-                    foreach (var image in files)
+                    if(detailImages.Contains(existingImage.ImagePath))
                     {
-                        if (image != null)
-                        {
-                            var fileName = FileUploadManager.UploadAndSave(image);
-                            var linkImage = new lnkmemberpostimage
-                            {
-                                Active = true,
-                                CreateDT = DateTime.Now,
-                                ImagePath = fileName,
-                                MemberPostID = viewModel.ID,
-                            };
-                            db.lnkmemberpostimages.Add(linkImage);
-                        }
+                        detailImages.Remove(existingImage.ImagePath);
                     }
-                    db.SaveChanges();
+                    else
+                    {
+                        existingImage.Active = false;
+                        existingImage.UpdateDT = DateTime.Now;
+                    }
                 }
 
+                foreach (var image in detailImages)
+                {
+                    var linkImage = new lnkmemberpostimage
+                    {
+                        Active = true,
+                        CreateDT = DateTime.Now,
+                        ImagePath = image,
+                        MemberPostID = viewModel.ID,
+                    };
+                    db.lnkmemberpostimages.Add(linkImage);
+                }
+                db.SaveChanges();
 
                 trans.Complete();
             }

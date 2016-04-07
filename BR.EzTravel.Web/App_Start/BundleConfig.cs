@@ -66,6 +66,9 @@ namespace BR.EzTravel.Web
             bundles.Add(new StyleBundle("~/Content/dropzonescss").Include(
                      "~/Scripts/dropzone/basic.css",
                      "~/Scripts/dropzone/dropzone.css"));
+
+            bundles.Add(new StyleBundle("~/Content/siteadmin").Include(
+                      "~/Content/site-admin.css"));
         }
     }
 }

@@ -59,7 +59,7 @@ namespace BR.EzTravel.Web.Helpers
         public static string UploadedImageContent(this UrlHelper urlHelper, string contentPath)
         {
             if (string.IsNullOrEmpty(contentPath))
-                return "";
+                return urlHelper.Content(Settings.Default.ImageUploadPath);
 
             return urlHelper.Content(Path.Combine(Settings.Default.ImageUploadPath, contentPath));
         }
