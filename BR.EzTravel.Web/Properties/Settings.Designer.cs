@@ -49,5 +49,68 @@ namespace BR.EzTravel.Web.Properties {
                 return ((int)(this["MaxListPerPage"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("mail.ezgoholiday.com")]
+        public string EmailHost {
+            get {
+                return ((string)(this["EmailHost"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("465")]
+        public int EmailPort {
+            get {
+                return ((int)(this["EmailPort"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("notification@ezgoholiday.com")]
+        public string EmailUsername {
+            get {
+                return ((string)(this["EmailUsername"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ezgoholiday0-")]
+        public string EmailPassword {
+            get {
+                return ((string)(this["EmailPassword"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("notification@ezgoholiday.com")]
+        public string EmailFrom {
+            get {
+                return ((string)(this["EmailFrom"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EmailIsEnabledSSL {
+            get {
+                return ((bool)(this["EmailIsEnabledSSL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EmailDefaultCrudential {
+            get {
+                return ((bool)(this["EmailDefaultCrudential"]));
+            }
+        }
     }
 }

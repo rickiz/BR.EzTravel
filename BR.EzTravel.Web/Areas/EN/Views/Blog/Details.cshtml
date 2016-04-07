@@ -207,7 +207,7 @@
                         @Html.HiddenFor(m => m.CommentPost.ID, new { @Value = Model.ID })
 
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6">
+                            @*<div class="col-xs-12 col-sm-6">
                                 <div class="form-block type-2 clearfix">
                                     <div class="input-style-1 b-50 brd-0 type-2 color-3">
                                         @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your name" })
@@ -220,14 +220,13 @@
                                         @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your email" })
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                             <div class="col-xs-12">
                                 <div class="form-block type-2 clearfix">
                                     @Html.TextAreaFor(m => m.CommentPost.Comment, new { @class = "area-style-1 type-2 color-3", placeholder = "Write a comment..." })
                                 </div>
                                 <input type="submit" class="c-button b-40 fr bg-dr-blue-2 hv-dr-blue-2-o" value="post comment">
                             </div>
-
                         </div>
                     }
                 </div>

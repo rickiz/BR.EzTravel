@@ -43,22 +43,47 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MemberCreateViewModel viewModel)
         {
-            var Member = new tblmember()
+            try
             {
-                BusinessRegNo = viewModel.BusinessRegNo,
-                CompanyName = viewModel.CompanyName,
-                PICName = viewModel.PICName,
-                PICContact = viewModel.PICContact,
-                PICEmail = viewModel.PICEmail,
-                Address = viewModel.Address,
-                Postcode = viewModel.Postcode,
-                State = viewModel.State,
-                Country = viewModel.Country,
-                Active = true
-            };
+                var Member = new tblmember()
+                {
+                    BusinessRegNo = viewModel.BusinessRegNo,
+                    CompanyName = viewModel.CompanyName,
+                    PICName = viewModel.PICName,
+                    PICContact = viewModel.PICContact,
+                    PICEmail = viewModel.PICEmail,
+                    OfficeContact = "-",
+                    Address = viewModel.Address,
+                    Postcode = viewModel.Postcode,
+                    State = viewModel.State,
+                    Country = viewModel.Country,
+                    Roles = "SA",
+                    Password = RandomString(),
+                    CreateDT = DateTime.Now,
+                    Language = "EN",
+                    Active = true
+                };
 
-            db.tblmembers.Add(Member);
-            db.SaveChanges();
+                db.tblmembers.Add(Member);
+                db.SaveChanges();
+
+                var emailBody = string.Format(@"Hi {0}, <br /><br />
+                    Thanks for Subscribing to the EZ Go Holiday Website ! You’re joining an amazing community of folks who love nerding out about travelling. <br /><br />
+                    As you wait for the next issue, check out some of our most popular posts. They’re a great place to get started. <br /><br />
+                    Website: http://www.ezgoholiday.com <br />
+                    Username: {1} <br />
+                    Password: {2} <br /><br />
+
+                    Have an awesome day! <br />
+                    EZ Go Holiday Management",
+                    viewModel.PICName, viewModel.PICEmail, Member.Password);
+
+                Util.SendEmail("Welcome to EZ Go Holiday!", emailBody, viewModel.PICEmail, "", "");
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             return RedirectToAction("Index");
         }
@@ -118,6 +143,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        public string RandomString()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, 8)
+              .Select(s => s[random.Next(8)]).ToArray());
         }
     }
 }

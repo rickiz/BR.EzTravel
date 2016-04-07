@@ -32,5 +32,6 @@ namespace BR.EzTravel.Web.Models
         public System.DateTime ExpiryDT { get; set; }
         public string Language { get; set; }
         public bool Active { get; set; }
+        public string Password { get; set; }
     }
 }
