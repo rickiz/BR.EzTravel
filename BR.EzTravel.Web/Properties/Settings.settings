@@ -11,5 +11,26 @@
     <Setting Name="MaxListPerPage" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">12</Value>
     </Setting>
+    <Setting Name="EmailHost" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mail.ezgoholiday.com</Value>
+    </Setting>
+    <Setting Name="EmailPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">465</Value>
+    </Setting>
+    <Setting Name="EmailUsername" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">notification@ezgoholiday.com</Value>
+    </Setting>
+    <Setting Name="EmailPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ezgoholiday0-</Value>
+    </Setting>
+    <Setting Name="EmailFrom" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">notification@ezgoholiday.com</Value>
+    </Setting>
+    <Setting Name="EmailIsEnabledSSL" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EmailDefaultCrudential" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

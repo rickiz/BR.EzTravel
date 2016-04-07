@@ -36,8 +36,9 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    @Html.MenuLink("Blog", "Index", "AdminBlog", area: "EN")
-                    @Html.MenuLink("Package", "Index", "AdminPackage", area: "EN")
+                    @Html.MenuLink("Blogs", "Index", "AdminBlog", area: "EN")
+                                        @Html.MenuLink("Packages", "Index", "AdminPackage", area: "EN")
+                                        @Html.MenuLink("Members", "Index", "AdminMember", area: "EN")
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

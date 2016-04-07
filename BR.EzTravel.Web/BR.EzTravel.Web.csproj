@@ -200,12 +200,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EmailClient.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\FileUploadManager.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Admin\BlogViewModels.cs" />
+    <Compile Include="Models\Admin\MemberViewModels.cs" />
     <Compile Include="Models\Admin\PackageViewModels.cs" />
     <Compile Include="Models\BlogViewModels.cs" />
     <Compile Include="Models\Enums.cs" />
@@ -1417,6 +1419,9 @@
     <Content Include="Areas\EN\Views\AdminPackage\Edit.cshtml" />
     <Content Include="Areas\EN\Views\Package\Details.cshtml" />
     <Content Include="Areas\EN\Views\Blog\Details.cshtml" />
+    <Content Include="Areas\EN\Views\AdminMember\Index.cshtml" />
+    <Content Include="Areas\EN\Views\AdminMember\Create.cshtml" />
+    <Content Include="Areas\EN\Views\AdminMember\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -1654,7 +1659,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\EN\Models\" />
-    <Folder Include="Areas\EN\Views\AdminMember\" />
     <Folder Include="Areas\EN\Views\BaseEn\" />
     <Folder Include="UploadedImages\" />
     <Folder Include="Views\Base\" />
