@@ -38,15 +38,11 @@ namespace BR.EzTravel.Web
                      "~/Scripts/all.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/eztravel").Include(
-                      "~/Scripts/eztravel.js"));
+                "~/Scripts/underscore.js",
+                "~/Scripts/eztravel.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
-                "~/Scripts/jQuery.FileUpload/tmpl.min.js",
-                "~/Scripts/jQuery.FileUpload/load-image.all.min.js",
-                "~/Scripts/jQuery.FileUpload/jquery.fileupload.js",
-                "~/Scripts/jQuery.FileUpload/jquery.fileupload-process.js",
-                "~/Scripts/jQuery.FileUpload/jquery.fileupload-image.js",
-                "~/Scripts/jQuery.FileUpload/jquery.fileupload-ui.js"));
+            bundles.Add(new ScriptBundle("~/bundles/dropzonescripts").Include(
+                     "~/Scripts/dropzone/dropzone.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -67,9 +63,9 @@ namespace BR.EzTravel.Web
             bundles.Add(new StyleBundle("~/Content/validation").Include(
                       "~/Content/validation.css"));
 
-            bundles.Add(new StyleBundle("~/Content/fileupload").Include(
-                      "~/Content/jQuery.FileUpload/css/jquery.fileupload.css",
-                      "~/Content/jQuery.FileUpload/css/jquery.fileupload-ui.css"));
+            bundles.Add(new StyleBundle("~/Content/dropzonescss").Include(
+                     "~/Scripts/dropzone/basic.css",
+                     "~/Scripts/dropzone/dropzone.css"));
         }
     }
 }

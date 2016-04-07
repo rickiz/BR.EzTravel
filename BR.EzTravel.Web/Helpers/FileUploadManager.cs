@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using BR.EzTravel.Web.Properties;
 
 namespace BR.EzTravel.Web.Helpers
 {
-    public class FIleUploadManager
+    public class FileUploadManager
     {
-        public HttpPostedFileBase File { get; set; }
+        public HttpPostedFileBase UploadedFile { get; set; }
         public string OriginalFileName { get; set; }
         public string NewFileName { get; set; }
         public List<string> ValidFileExtensions { get; set; }
         public string UploadPath { get; set; }
         public string SavePathWithFileName { get; set; }
 
-        public FIleUploadManager(HttpPostedFileBase file)
+        public FileUploadManager(HttpPostedFileBase file) : this()
         {
-            File = file;
+            UploadedFile = file;
+        }
+
+        public FileUploadManager()
+        {
             ValidFileExtensions = new List<string>() { ".jpg", ".png", ".bmp", ".gif", ".tiff", ".jpeg" };
 
             if (Settings.Default.ImageUploadPath.StartsWith("~"))
@@ -31,12 +32,12 @@ namespace BR.EzTravel.Web.Helpers
 
         public void Save()
         {
-            if (File == null || File.ContentLength <= 0)
+            if (UploadedFile == null || UploadedFile.ContentLength <= 0)
                 return;
                 //throw new ApplicationException("File not found.");
 
-            OriginalFileName = Path.GetFileName(File.FileName);
-            var oriFileNameWithoutExtension = Path.GetFileNameWithoutExtension(File.FileName);
+            OriginalFileName = Path.GetFileName(UploadedFile.FileName);
+            var oriFileNameWithoutExtension = Path.GetFileNameWithoutExtension(UploadedFile.FileName);
             var extension = Path.GetExtension(OriginalFileName).ToLower();
 
             if (!ValidFileExtensions.Contains(extension))
@@ -47,15 +48,34 @@ namespace BR.EzTravel.Web.Helpers
 
             SavePathWithFileName = Path.Combine(UploadPath, NewFileName);
 
-            File.SaveAs(SavePathWithFileName);
+            UploadedFile.SaveAs(SavePathWithFileName);
+        }
+
+        public void Delete(string fileName)
+        {
+            var path = Path.Combine(UploadPath, fileName);
+            File.Delete(path);
         }
 
         public static string UploadAndSave(HttpPostedFileBase file)
         {
-            var fileManger = new FIleUploadManager(file);
+            var fileManger = new FileUploadManager(file);
             fileManger.Save();
 
             return fileManger.NewFileName;
+        }
+
+        public static void DeleteFile(string fileName)
+        {
+            try
+            {
+                var fileManger = new FileUploadManager();
+                fileManger.Delete(fileName);
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }            
         }
     }
 }

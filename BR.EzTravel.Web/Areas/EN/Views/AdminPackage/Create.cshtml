@@ -14,6 +14,9 @@
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
+                
+                @Html.HiddenFor(m => m.DetailImageNames)
+
                 <div class="bs-docs-section">
                     <h1 class="page-header">@ViewBag.Title</h1>
                     <p>
@@ -46,33 +49,26 @@
                             <input type="file" id="file" name="file" />
                             <img id="img-preview" src="#" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
                         </div>
-                        @*<div class="form-group" id="fileupload">
-                            <label>Detail Images</label>
-                            <br />
-                            <span class="btn btn-success fileinput-button">
-                                <i class="glyphicon glyphicon-plus"></i>
-                                <span>Add files...</span>
-                                <input type="file" name="files" id="files" multiple>
-                            </span>
 
-                            <!-- The table listing the files available for upload/download -->
-                            <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-                        </div>*@
-                        <div id="multiple" class="form-group">
+                        @*<div class="form-group">
                             <label for="file">Detail Images</label>
                             <br />
                             <input type="file" id="files" name="files" multiple />
                             <div id="img-preview-files">
 
                             </div>
-                        </div>
-                        @*<div id="single" class="form-group">
+                        </div>*@
+
+                        <div class="form-group">
                             <label for="file">Detail Images</label>
                             <br />
-                            <input type="file" class="single" name="images" /><br />
-                            <input type="file" class="single" name="images" /><br />
-                            <input type="file" class="single" name="images" /><br />
-                        </div>*@
+                            <div id="dropzone" class="dropzone">
+                                <div class="dz-message dropzone-previews">
+                                    Drop files here or click to upload.
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             @Html.LabelFor(m => m.Description, new { @class = "control-label" })
                             @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "15" })
@@ -124,87 +120,43 @@
 
 @section styles
 {
-    @Styles.Render("~/Content/fileupload")
+    @Styles.Render("~/Content/dropzonescss")
+
+    <style>
+        #dropzone {
+            margin-bottom: 3rem;
+            max-width: 720px;
+            margin-right: auto;
+        }
+
+        .dropzone {
+            text-align: center;
+            color: white;
+            border: 2px dashed #0087F7;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .dropzone .dz-message {
+            color: black;
+            font-weight: 400;
+        }
+    </style>
 }
 
 @section scripts
 {
-    <!-- The template to display files available for upload -->
-    <script id="template-upload" type="text/x-tmpl">
-        {% for (var i=0, file; file=o.files[i]; i++) { %}
-        <tr class="template-upload fade">
-            <td>
-                <span class="preview"></span>
-            </td>
-            <td>
-                <p class="name">{%=file.name%}</p>
-                <strong class="error text-danger"></strong>
-            </td>
-            <td>
-                {% if (!i) { %}
-                <button class="btn btn-warning cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
-                </button>
-                {% } %}
-            </td>
-        </tr>
-        {% } %}
-    </script>
-
-    <!-- The template to display files available for download -->
-    <script id="template-download" type="text/x-tmpl">
-        {% for (var i=0, file; file=o.files[i]; i++) { %}
-        <tr class="template-download fade">
-            {% if (file.error) { %}
-            <td></td>
-            <td class="name"><span>{%=file.name%}</span></td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
-            {% } else { %}
-            <td class="preview">
-                {% if (file.thumbnail_url) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
-                {% } %}
-            </td>
-            <td class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
-            </td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td colspan="2"></td>
-            {% } %}
-            <td class="delete">
-                <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}" {% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
-                    <i class="icon-trash icon-white"></i>
-                    <span>Delete</span>
-                </button>
-                <input type="checkbox" name="delete" value="1">
-            </td>
-        </tr>
-        {% } %}
-    </script>
-
-
-    @Scripts.Render("~/bundles/fileupload")
+    @Scripts.Render("~/bundles/dropzonescripts")
 
     <script type="text/javascript">
-        var filesList = new Array();
+        var filesList = [];
+        // Disable auto discover for all elements:
+        Dropzone.autoDiscover = false;
+
         $(document).ready(function () {
             $("#file").change(function () {
                 readURL(this);
             });
-
-
-            //$('#fileupload').fileupload({
-            //    acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
-            //    autoUpload: false,
-            //    replaceFileInput: false,
-            //    singleFileUploads: false,
-            //    sequentialUploads: true,
-            //    maxFileSize: 10240000,
-            //    maxNumberOfFiles: 20
-            //})
-            //;
 
             var startDateId = '#' + '@(Html.IdFor(m => m.StartDT))';
             var endDateId = '#' + '@(Html.IdFor(m => m.EndDT))';
@@ -215,15 +167,42 @@
                 $(this).valid();
             });
 
-            //if (window.FileReader != null) {
-            //    $('#single').hide();
-            //    $('.single').prop('disabled', true);
-            //} else {
-            //    $('#multiple').hide();
-            //    $('.multiple').prop('disabled', true);
-            //}
+            // Dropzone configuration
 
-            document.getElementById('files').addEventListener('change', handleFileSelect, false);
+            // Now that the DOM is fully loaded, create the dropzone, and setup the
+            // event listeners
+            $("div#dropzone").dropzone({
+                url: "@(Url.Action("UploadImages"))",
+                acceptedFiles: 'image/*',
+                previewsContainer: ".dropzone-previews",
+                addRemoveLinks: true,
+                success: function (file, response) {
+                    if (response.Error) {
+                        alert(response.Error);
+                        file.previewElement.classList.add("dz-error");
+                    }
+                    else {
+                        var imgName = response.FileNames[0];
+                        file.previewElement.classList.add("dz-success");
+                        addDetailImage(imgName);
+
+                        $(file.previewTemplate)
+                            .find('a.dz-remove')
+                            .on('click', function () {
+                                $.post({
+                                    url: '@(Url.Action("DeleteFile"))?fileName=' + imgName,
+                                    //data: { fileName: imgName },
+                                    complete: function (res) {
+                                        removeDetailImage(imgName);
+                                    }
+                                });
+                            });
+                    }
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                },
+            });
         });
 
         function readURL(input) {
@@ -264,6 +243,16 @@
             } else {
                 console.log("Your browser does not support File API");
             }
+        }
+
+        function addDetailImage(imgName) {
+            filesList.push(imgName);
+            $('#DetailImageNames').val(filesList.join(','));
+        }
+
+        function removeDetailImage(imgName) {
+            filesList = _.without(filesList, imgName);
+            $('#DetailImageNames').val(filesList.join(','));
         }
     </script>
 }

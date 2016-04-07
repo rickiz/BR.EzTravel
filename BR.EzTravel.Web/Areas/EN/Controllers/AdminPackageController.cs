@@ -48,7 +48,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HttpPostedFileBase file, IEnumerable<HttpPostedFileBase> files, PackageCreateViewModel viewModel)
+        public ActionResult Create(HttpPostedFileBase file, PackageCreateViewModel viewModel)
         {
             using (var trans = new TransactionScope())
             {
@@ -71,7 +71,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
                 if (file != null)
                 {
-                    var fileName = FIleUploadManager.UploadAndSave(file);
+                    var fileName = FileUploadManager.UploadAndSave(file);
                     post.ThumbnailImagePath = fileName;
                 }
 
@@ -104,22 +104,20 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     db.SaveChanges();
                 }
 
-                if(!files.IsEmpty())
+                if(!string.IsNullOrEmpty(viewModel.DetailImageNames))
                 {
-                    foreach (var image in files)
+                    var detailImages = viewModel.DetailImageNames.Split(',');
+
+                    foreach (var image in detailImages)
                     {
-                        if (image != null)
+                        var linkImage = new lnkmemberpostimage
                         {
-                            var fileName = FIleUploadManager.UploadAndSave(image);
-                            var linkImage = new lnkmemberpostimage
-                            {
-                                Active = true,
-                                CreateDT = DateTime.Now,
-                                ImagePath = fileName,
-                                MemberPostID = post.ID,
-                            };
-                            db.lnkmemberpostimages.Add(linkImage);
-                        }
+                            Active = true,
+                            CreateDT = DateTime.Now,
+                            ImagePath = image,
+                            MemberPostID = post.ID,
+                        };
+                        db.lnkmemberpostimages.Add(linkImage);
                     }
                     db.SaveChanges();
                 }                
@@ -183,7 +181,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
                 if (file != null)
                 {
-                    var fileName = FIleUploadManager.UploadAndSave(file);
+                    var fileName = FileUploadManager.UploadAndSave(file);
                     package.ThumbnailImagePath = fileName;
                 }
 
@@ -226,7 +224,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     {
                         if (image != null)
                         {
-                            var fileName = FIleUploadManager.UploadAndSave(image);
+                            var fileName = FileUploadManager.UploadAndSave(image);
                             var linkImage = new lnkmemberpostimage
                             {
                                 Active = true,
@@ -258,6 +256,49 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult UploadImages()
+        {
+            var finalFileNames = new List<string>();
+
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    var image = Request.Files[fileName];
+                    var newFileName = FileUploadManager.UploadAndSave(image);
+
+                    finalFileNames.Add(newFileName);
+                }
+
+                return new JsonResult
+                {
+                    Data = new { FileNames = finalFileNames }
+                };
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+
+                finalFileNames.ForEach(a => FileUploadManager.DeleteFile(a));
+
+                return new JsonResult
+                {
+                    Data = new { Error = ex.Message }
+                };
+            }
+
+            
+        }
+
+        [HttpPost]
+        public ActionResult DeleteFile(string fileName)
+        {
+            FileUploadManager.DeleteFile(fileName);
+
+            return new JsonResult();
         }
     }
 }

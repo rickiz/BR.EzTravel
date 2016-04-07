@@ -59,7 +59,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             if (file != null)
             {
-                var fileName = FIleUploadManager.UploadAndSave(file);
+                var fileName = FileUploadManager.UploadAndSave(file);
                 blog.ThumbnailImagePath = fileName;
             }
 
@@ -100,7 +100,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             if (file != null)
             {
-                var fileName = FIleUploadManager.UploadAndSave(file);
+                var fileName = FileUploadManager.UploadAndSave(file);
                 blog.ThumbnailImagePath = fileName;
             }
 
