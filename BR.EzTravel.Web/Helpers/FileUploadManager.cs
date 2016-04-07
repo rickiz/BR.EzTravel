@@ -77,5 +77,14 @@ namespace BR.EzTravel.Web.Helpers
                 ex.Log();
             }            
         }
+
+        public static long GetFileSize(string fileName)
+        {
+            var fileManger = new FileUploadManager();
+            var path = Path.Combine(fileManger.UploadPath, fileName);
+            var fileInfo = new FileInfo(path);
+
+            return fileInfo.Length;
+        }
     }
 }

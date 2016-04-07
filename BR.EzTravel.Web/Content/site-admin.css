@@ -1,0 +1,19 @@
+﻿
+#dropzone {
+    margin-bottom: 3rem;
+    max-width: 720px;
+    margin-right: auto;
+}
+
+.dropzone {
+    text-align: center;
+    color: white;
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+}
+
+.dropzone .dz-message {
+    color: black;
+    font-weight: 400;
+}
