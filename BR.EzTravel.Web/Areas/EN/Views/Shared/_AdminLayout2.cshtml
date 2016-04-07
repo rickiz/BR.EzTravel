@@ -1,0 +1,85 @@
+﻿@using BR.EzTravel.Web.Helpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    @Styles.Render("~/Content/validation")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/offcanvas")
+    @Styles.Render("~/Content/jqueryui")
+
+    @RenderSection("styles", required: false)
+
+    @Styles.Render("~/Content/siteadmin")
+    <title>EzGoHoliday > Admin > @ViewBag.Title</title>
+</head>
+<body>
+    <nav class="navbar navbar-fixed-top navbar-inverse blue">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Backoffice</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    @Html.MenuLink("Blogs", "Index", "AdminBlog", area: "EN")
+                    @Html.MenuLink("Packages", "Index", "AdminPackage", area: "EN")
+                    @Html.MenuLink("Members", "Index", "AdminMember", area: "EN")
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome Ben Ong <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="profile.html">Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Log out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-right">
+            @*<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                <div class="list-group">
+                    @Html.ListGroupLink("Create entry", "Create", area: "EN")
+                    @Html.ListGroupLink("Manage list", "Index", area: "EN")
+                </div>
+            </div>*@<!--/.sidebar-offcanvas-->
+
+            @RenderBody()
+        </div><!--/row-->
+
+        <hr>
+        <footer>
+            <p>&copy; EzGoHoliday@2015 </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/eztravel")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

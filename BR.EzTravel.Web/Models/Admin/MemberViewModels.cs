@@ -55,6 +55,7 @@ namespace BR.EzTravel.Web.Models.Admin
         public DateTime ExpiryDT { get; set; }
         public bool Active { get; set; }
         public string ErrorMessage { get; set; }
+        public string ProfileImagePath { get; set; }
     }
 
     public class MemberEditViewModel : MemberCreateViewModel

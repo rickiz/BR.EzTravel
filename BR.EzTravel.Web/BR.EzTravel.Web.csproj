@@ -186,6 +186,7 @@
     <Compile Include="Areas\EN\Controllers\AdminBlogController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminMemberController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminPackageController.cs" />
+    <Compile Include="Areas\EN\Controllers\AdminProfileController.cs" />
     <Compile Include="Areas\EN\Controllers\BaseEnController.cs" />
     <Compile Include="Areas\EN\Controllers\BlogController.cs" />
     <Compile Include="Areas\EN\Controllers\HomeController.cs" />
@@ -1422,6 +1423,8 @@
     <Content Include="Areas\EN\Views\AdminMember\Index.cshtml" />
     <Content Include="Areas\EN\Views\AdminMember\Create.cshtml" />
     <Content Include="Areas\EN\Views\AdminMember\Edit.cshtml" />
+    <Content Include="Areas\EN\Views\AdminProfile\Index.cshtml" />
+    <Content Include="Areas\EN\Views\Shared\_AdminLayout2.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>

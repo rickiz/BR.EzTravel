@@ -119,9 +119,10 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                  where a.BlogID == id && !a.CancelDT.HasValue
                  select new LatestBlogComment
                  {
-                     Author = bb == null ? "" : bb.PICName,
+                     Author = bb == null ? a.Name : bb.PICName,
                      Comment = a.Comments,
                      CreateDT = a.CreateDT,
+                     ProfileImagePath = bb == null ? "" : bb.ProfileImagePath,
                      ID = a.ID
                  }).ToList();
 
@@ -175,7 +176,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     .Select(a => new LatestBlogComment
                     {
                         ID = a.Blog == null ? 0 : a.Blog.ID,
-                        //Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
+                        Author = a.Member == null ? "EMMA STONE" : a.Member.PICName,
                         CreateDT = a.BlogComment.CreateDT,
                         Comment = a.BlogComment.Comments,
                         Title = a.Blog.Title
@@ -214,7 +215,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Comments = commentPost.Comment,
                 CreateDT = DateTime.Now,
                 Language = lang,
-                MemberID = 0, // TODO: Link up member
+                MemberID = 0, // TODO: Link up member,
+                Name = commentPost.Name == "" ? "Anonymous" : commentPost.Name,
                 BlogID = commentPost.ID,
             };
             db.lnkblogcomments.Add(memberComment);

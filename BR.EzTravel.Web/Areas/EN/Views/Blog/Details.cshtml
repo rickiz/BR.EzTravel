@@ -55,11 +55,11 @@
                             @Html.Raw(Model.Body)
                         </div>
 
-                        <h5>my listing deactivated</h5>
+                        @*<h5>my listing deactivated</h5>
 
-                        <p>Pellentesque ac turpis egestas, varius justo et, condimentum augue. Praesent aliquam, nisl feugiat vehicula condimentum, justo tellus scelerisque metus. Pellentesque varius justo et, condimentum augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Pellentesque ac turpis egestas, varius justo et, condimentum augue. Praesent aliquam, nisl feugiat vehicula condimentum, justo tellus scelerisque metus. Pellentesque varius justo et, condimentum augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>*@
 
-                        <div class="isotope-container row row10">
+                        @*<div class="isotope-container row row10">
                             <div class="grid-sizer col-mob-12 col-xs-6 col-sm-4"></div>
                             <div class="item gal-item col10 col-mob-12 col-xs-6 col-sm-4">
                                 <a class="black-hover" href="#">
@@ -121,8 +121,8 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>
-                        <p>Pellentesque ac turpis egestas, varius justo et, condimentum augue. Praesent aliquam, nisl feugiat vehicula condimentum, justo tellus scelerisque metus. Pellentesque ac turpis egestas, varius justo et, condimentum augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>*@
+                        @*<p>Pellentesque ac turpis egestas, varius justo et, condimentum augue. Praesent aliquam, nisl feugiat vehicula condimentum, justo tellus scelerisque metus. Pellentesque ac turpis egestas, varius justo et, condimentum augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>*@
 
                         <div class="share clearfix">
                             <div class="share-title color-dark-2">share:</div>
@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="additional-block padd-90">
-                    <h4 class="additional-title">related posts</h4>
+                    <h4 class="additional-title">related blogs</h4>
                     <div class="may-interested row">
                         @foreach (var blog in Model.RelatedBlogs)
                         {
@@ -181,7 +181,15 @@
                         @foreach (var comment in Model.Comments)
                         {
                             <li class="comment-entry clearfix">
-                                <img class="commnent-img" src="~/img/detail/comment_1.jpg" alt="">
+                                @if (!string.IsNullOrEmpty(comment.ProfileImagePath))
+                                {
+                                    <img class="commnent-img" src="@Url.UploadedImageContent(comment.ProfileImagePath)" alt="" width="50%" height="50%">
+                                }
+                                else
+                                {
+                                    <img class="commnent-img" src="~/img/detail/comment_1.jpg" alt="">
+                                }
+                                
                                 <div class="comment-content clearfix">
                                     <div class="tour-info-line">
                                         <div class="tour-info">
@@ -207,14 +215,14 @@
                         @Html.HiddenFor(m => m.CommentPost.ID, new { @Value = Model.ID })
 
                         <div class="row">
-                            @*<div class="col-xs-12 col-sm-6">
+                            <div class="col-xs-12 col-sm-6">
                                 <div class="form-block type-2 clearfix">
                                     <div class="input-style-1 b-50 brd-0 type-2 color-3">
                                         @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your name" })
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
+                            @*<div class="col-xs-12 col-sm-6">
                                 <div class="form-block type-2 clearfix">
                                     <div class="input-style-1 b-50 brd-0 type-2 color-3">
                                         @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your email" })
@@ -254,7 +262,7 @@
                         </ul>
                     </div>
                     <div class="sidebar-block type-2">
-                        <h4 class="sidebar-title color-dark-2">popular posts</h4>
+                        <h4 class="sidebar-title color-dark-2">popular blogs</h4>
                         <div class="widget-popular">
                             @foreach (var blog in Model.PopularBlogs)
                             {

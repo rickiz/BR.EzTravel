@@ -18,6 +18,7 @@
           <Property Name="CancelDT" Type="datetime" Precision="0" />
           <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="Active" Type="bool" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="lnkmemberpackagetype">
           <Key>
@@ -241,6 +242,7 @@
           <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="Active" Type="bool" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ProfileImagePath" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="trnblog">
           <Key>
@@ -524,6 +526,7 @@
           <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ProfileImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="trnmemberrenewal">
           <Key>
@@ -622,6 +625,7 @@
           <Property Name="CancelDT" Type="DateTime" />
           <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -833,6 +837,7 @@
           <EntitySetMapping Name="tblmembers">
             <EntityTypeMapping TypeName="ExHolidayModel.tblmember">
               <MappingFragment StoreEntitySet="tblmember">
+                <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
@@ -922,6 +927,7 @@
           <EntitySetMapping Name="lnkblogcomments">
             <EntityTypeMapping TypeName="ExHolidayModel.lnkblogcomment">
               <MappingFragment StoreEntitySet="lnkblogcomment">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="CancelDT" ColumnName="CancelDT" />

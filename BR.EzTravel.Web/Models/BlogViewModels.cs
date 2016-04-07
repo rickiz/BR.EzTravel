@@ -53,6 +53,7 @@ namespace BR.EzTravel.Web.Models
         public string Comment { get; set; }
         public string Title { get; set; }
         public string ThumbnailImagePath { get; set; }
+        public string ProfileImagePath { get; set; }
     }
 
     #endregion
