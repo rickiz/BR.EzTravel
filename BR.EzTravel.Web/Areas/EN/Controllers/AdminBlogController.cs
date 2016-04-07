@@ -72,7 +72,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     http://www.ezgoholiday.com/EN/Blog/Details/{1}",
                     viewModel.Title, blog.ID);
 
-            Util.SendEmail("Welcome to EZ Go Holiday!", emailBody, Properties.Settings.Default.EmailFrom, "", "");
+            Util.SendEmail(viewModel.Title, emailBody, Properties.Settings.Default.EmailFrom, "", "");
 
             return RedirectToAction("Index");
         }
@@ -120,7 +120,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     http://www.ezgoholiday.com/EN/Blog/Details/{1}",
                     viewModel.Title, blog.ID);
 
-            Util.SendEmail("Welcome to EZ Go Holiday!", emailBody, Properties.Settings.Default.EmailFrom, "", "");
+            Util.SendEmail(viewModel.Title, emailBody, Properties.Settings.Default.EmailFrom, "", "");
 
             return RedirectToAction("Index");
         }

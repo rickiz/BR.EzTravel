@@ -50,6 +50,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase file, PackageCreateViewModel viewModel)
         {
+            var postID = 0;
+
             using (var trans = new TransactionScope())
             {
                 var post = new lnkmemberpost()
@@ -123,7 +125,18 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 }                
 
                 trans.Complete();
+
+                postID = post.ID;
             }
+
+            var emailBody = string.Format(@"Hi EZ Management, <br /><br />
+                    Package <b>{0}</b> has been created. <br /><br />
+                    
+                    http://ezgoholiday.com/EN/Package/Details/{1}",
+                    viewModel.Title, postID);
+
+            Util.SendEmail(viewModel.Title, emailBody, Properties.Settings.Default.EmailFrom, "", "");
+
 
             return RedirectToAction("Index");
         }
@@ -262,6 +275,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
                 trans.Complete();
             }
+
+            var emailBody = string.Format(@"Hi EZ Management, <br /><br />
+                    Package <b>{0}</b> has been created. <br /><br />
+                    
+                    http://ezgoholiday.com/EN/Package/Details/{1}",
+                    viewModel.Title, viewModel.ID);
+
+            Util.SendEmail(viewModel.Title, emailBody, Properties.Settings.Default.EmailFrom, "", "");
 
             return RedirectToAction("Index");
         }
