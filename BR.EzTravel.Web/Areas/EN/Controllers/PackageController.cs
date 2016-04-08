@@ -49,11 +49,12 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                                         }).ToList();
 
             //if (!viewModel.Categories.IsEmpty())
-            //    viewModel.Criteria.CategoryID = viewModel.Categories[0].ID.ToInt();
+                //viewModel.Criteria.CategoryID = viewModel.Categories[0].ID.ToInt();
 
             viewModel.SearchResults =
                 db.lnkmemberposts
-                    .Where(a => !a.CancelDT.HasValue && a.CategoryID == viewModel.Criteria.CategoryID && a.Language == lang && a.Active
+                    .Where(a => !a.CancelDT.HasValue && (a.CategoryID == viewModel.Criteria.CategoryID || viewModel.Criteria.CategoryID == 0) 
+                     && a.Language == lang && a.Active
                      //&& a.StartDT > yesterdayDT && (a.EndDT > yesterdayDT || a.EndDT == null))
                      && DbFunctions.TruncateTime(a.StartDT)<= DbFunctions.TruncateTime(DateTime.Now)
                      && (DbFunctions.TruncateTime(a.EndDT) >= DbFunctions.TruncateTime(DateTime.Now)|| a.EndDT == null))
