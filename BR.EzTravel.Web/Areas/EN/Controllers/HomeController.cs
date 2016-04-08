@@ -11,10 +11,12 @@ using System.Data.Entity;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
+    //[Authorize]
     public class HomeController : BaseEnController
     {
         public ActionResult Index()
         {
+            //System.Web.Security.FormsAuthentication.SignOut();
             var latestPackages =
                 db.lnkmemberposts
                     .Where(a => !a.CancelDT.HasValue && a.Language == lang

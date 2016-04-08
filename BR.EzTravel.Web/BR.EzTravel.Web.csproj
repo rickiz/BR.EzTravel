@@ -183,6 +183,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\EN\Controllers\AccountController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminBlogController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminMemberController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminPackageController.cs" />
@@ -1425,6 +1426,7 @@
     <Content Include="Areas\EN\Views\AdminMember\Edit.cshtml" />
     <Content Include="Areas\EN\Views\AdminProfile\Index.cshtml" />
     <Content Include="Areas\EN\Views\Shared\_AdminLayout2.cshtml" />
+    <Content Include="Areas\EN\Views\Account\Login.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
