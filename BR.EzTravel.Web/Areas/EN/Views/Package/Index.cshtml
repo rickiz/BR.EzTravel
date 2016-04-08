@@ -51,18 +51,21 @@
                     <div class="sidebar-block">
                         <h4 class="sidebar-title color-dark-2">categories</h4>
                         <ul class="sidebar-category color-2">
+
+                            <li class="@(Model.Criteria.CategoryID == 0 ? "active" : "")">
+                                <a href="@(Url.Action("Index", "Package"))">
+                                    all
+                                    <span class="fr">(@Model.Categories.Sum(a => a.Count))</span>
+                                </a>
+                            </li>
+
                             @foreach (var category in Model.Categories)
                             {
-                            <li class="@(Model.Criteria.CategoryID == category.ID ? "active" : "")">
-                                <a class="cat-drop" href="#">@category.Name <span class="fr">(@category.Count)</span></a>
-                                @*<ul>
-                                        <li><a href="#">sea tours (785)</a></li>
-                                        <li><a href="#">food tours (85)</a></li>
-                                        <li><a href="#">romantic tours (125)</a></li>
-                                        <li><a href="#">honeymoon tours (70)</a></li>
-                                        <li><a href="#">mountain tours (159)</a></li>
-                                    </ul>*@
-                            </li>
+                                <li class="@(category.ID == Model.Criteria.CategoryID ? "active" : "")">
+                                    <a href="@(Url.Action("Index", "Package", new { categoryID = category.ID }))">
+                                        @category.Name <span class="fr">(@category.Count)</span>
+                                    </a>
+                                </li>
                             }
                         </ul>
                     </div>

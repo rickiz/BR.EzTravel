@@ -25,21 +25,31 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.PackageActivities.RemoveAt(0);
 
-            var packageCategories =
-                    (from a in db.lnkmemberposts
-                     join b in db.refcategories on a.CategoryID equals b.ID
-                     where a.Language == lang && !a.CancelDT.HasValue && b.Active
-                     group b by new { Name = b.Name, ID = b.ID } into c
-                     select new PackageCategory()
-                     {
-                         Name = c.Key.Name,
-                         ID = c.Key.ID,
-                         Count = c.Count()
-                     }).ToList();
-            viewModel.Categories = packageCategories;
+            //var packageCategories =
+            //        (from a in db.lnkmemberposts
+            //         join b in db.refcategories on a.CategoryID equals b.ID
+            //         where a.Language == lang && !a.CancelDT.HasValue && b.Active
+            //         group b by new { Name = b.Name, ID = b.ID } into c
+            //         select new PackageCategory()
+            //         {
+            //             Name = c.Key.Name,
+            //             ID = c.Key.ID,
+            //             Count = c.Count()
+            //         }).ToList();
+            //viewModel.Categories = packageCategories;
+            viewModel.Categories = db.refcategories
+                                        .GroupJoin(db.lnkmemberposts, a => a.ID, b => b.CategoryID, (a, b) => new { Category = a, MemberPost = b })
+                                        .Where(a => a.Category.Active && a.Category.Language == lang)
+                                        .OrderBy(a => a.Category.Name)
+                                        .Select(a => new PackageCategory()
+                                        {
+                                            ID = a.Category.ID,
+                                            Name = a.Category.Name,
+                                            Count = a.MemberPost.Count()
+                                        }).ToList();
 
-            if (!viewModel.Categories.IsEmpty())
-                viewModel.Criteria.CategoryID = viewModel.Categories[0].ID.ToInt();
+            //if (!viewModel.Categories.IsEmpty())
+            //    viewModel.Criteria.CategoryID = viewModel.Categories[0].ID.ToInt();
 
             viewModel.SearchResults =
                 db.lnkmemberposts
