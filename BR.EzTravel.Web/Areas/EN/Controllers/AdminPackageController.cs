@@ -60,7 +60,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     Description = viewModel.Description,
                     CreateDT = DateTime.Now,
                     Language = lang,
-                    MemberID = 1,
+                    MemberID = Util.SessionAccess.ID,
                     PublishDT = DateTime.Now,
                     Title = viewModel.Title,
                     CategoryID = viewModel.CategoryID,
@@ -69,7 +69,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     EndDT = viewModel.EndDT,
                     Days = viewModel.Days,
                     Nights = viewModel.Nights,
-                    Active = true
+                    Active = true,
                 };
 
                 if (file != null)

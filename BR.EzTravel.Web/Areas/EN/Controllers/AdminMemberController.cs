@@ -43,7 +43,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MemberCreateViewModel viewModel)
         {
-            var defaultPassword = RandomString();
+            var defaultPassword = Util.RandomString();
 
             var Member = new tblmember()
             {
@@ -138,14 +138,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
-        }
-
-        public string RandomString()
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var random = new Random();
-            return new string(Enumerable.Repeat(chars, 8)
-              .Select(s => s[random.Next(8)]).ToArray());
         }
     }
 }

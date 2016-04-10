@@ -101,5 +101,13 @@ namespace BR.EzTravel.Web.Helpers
         {
             return totalReviews == 0 ? 0 : (int)Math.Round((double)sumRate / totalReviews, MidpointRounding.AwayFromZero);
         }
+
+        public static string RandomString()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, 8)
+              .Select(s => s[random.Next(8)]).ToArray());
+        }
     }
 }

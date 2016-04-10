@@ -1433,6 +1433,11 @@
     <Content Include="Areas\EN\Views\AdminProfile\Index.cshtml" />
     <Content Include="Areas\EN\Views\Shared\_AdminLayout2.cshtml" />
     <Content Include="Areas\EN\Views\Account\Login.cshtml" />
+    <Content Include="Areas\EN\Views\Account\Register.cshtml" />
+    <Content Include="Areas\EN\Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Areas\EN\Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Areas\EN\Views\Account\ChangePassword.cshtml" />
+    <Content Include="Areas\EN\Views\Account\ChangePasswordConfirmation.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>

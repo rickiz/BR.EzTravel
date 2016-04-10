@@ -52,7 +52,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 CreateDT = DateTime.Now,
                 CategoryID = viewModel.CategoryID,
                 Language = lang,
-                MemberID = 1,
+                MemberID = Util.SessionAccess.ID,
                 PublishDT = DateTime.Now,
                 Title = viewModel.Title,
                 Active = true

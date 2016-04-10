@@ -35,8 +35,10 @@
                     }
                     <a href="#"><i class="fa fa-envelope"></i>Contact Us</a>
 
-                    @if (Request.IsAuthenticated){
-                        
+                    @if (Request.IsAuthenticated)
+                    {
+
+                        <a href="@Url.Action("ChangePassword", "Account")"><i class="fa fa-key"></i>Change Password</a>
                         <a href="@Url.Action("Logout", "Account")"><i class="fa fa-sign-out"></i>Log out</a>
                     }
                     else
