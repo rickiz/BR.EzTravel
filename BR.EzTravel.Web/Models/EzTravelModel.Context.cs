@@ -41,11 +41,12 @@ namespace BR.EzTravel.Web.Models
         public virtual DbSet<refpackageactivity> refpackageactivities { get; set; }
         public virtual DbSet<refpackagetype> refpackagetypes { get; set; }
         public virtual DbSet<refrewardscheme> refrewardschemes { get; set; }
-        public virtual DbSet<tblmember> tblmembers { get; set; }
         public virtual DbSet<trnmemberrenewal> trnmemberrenewals { get; set; }
         public virtual DbSet<trnroi> trnrois { get; set; }
         public virtual DbSet<trnblog> trnblogs { get; set; }
         public virtual DbSet<lnkmemberpostcomment> lnkmemberpostcomments { get; set; }
         public virtual DbSet<lnkblogcomment> lnkblogcomments { get; set; }
+        public virtual DbSet<refrole> refroles { get; set; }
+        public virtual DbSet<tblmember> tblmembers { get; set; }
     }
 }

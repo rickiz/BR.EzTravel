@@ -12,6 +12,7 @@ using System.Transactions;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
+    [Authorize(Roles = "SA")]
     public class AdminPackageController : BaseEnController
     {
         public ActionResult Index()

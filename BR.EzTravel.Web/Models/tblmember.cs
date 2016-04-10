@@ -29,7 +29,7 @@ namespace BR.EzTravel.Web.Models
         public int RewardPoints { get; set; }
         public string Roles { get; set; }
         public System.DateTime CreateDT { get; set; }
-        public System.DateTime ExpiryDT { get; set; }
+        public Nullable<System.DateTime> ExpiryDT { get; set; }
         public string Language { get; set; }
         public bool Active { get; set; }
         public string Password { get; set; }

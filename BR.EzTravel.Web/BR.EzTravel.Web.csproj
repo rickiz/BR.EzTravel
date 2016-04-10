@@ -286,6 +286,9 @@
     <Compile Include="Models\refrewardscheme.cs">
       <DependentUpon>EzTravelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\refrole.cs">
+      <DependentUpon>EzTravelModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblmember.cs">
       <DependentUpon>EzTravelModel.tt</DependentUpon>
     </Compile>
@@ -304,6 +307,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Providers\CustomRoleProvider.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +322,8 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\offcanvas.css" />
+    <Content Include="Content\rating.css" />
+    <Content Include="Content\rating.min.css" />
     <Content Include="Content\site-admin.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -1443,6 +1449,8 @@
     <Content Include="Scripts\jquery.viewportchecker.min.js" />
     <Content Include="Scripts\map.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\rating.js" />
+    <Content Include="Scripts\rating.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />

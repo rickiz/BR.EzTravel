@@ -10,11 +10,12 @@ using BR.EzTravel.Web.Properties;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
+    [Authorize(Roles = "SA")]
     public class AdminProfileController : BaseEnController
     {
         public ActionResult Index()
         {
-            var id = Session["MemberID"] == null ? 1 : Session["MemberID"].ToInt();
+            var id = Util.SessionAccess.ID;
 
             var member = db.tblmembers.Single(a => a.ID == id);
             var viewModel = new MemberEditViewModel
@@ -61,6 +62,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             }
 
             db.SaveChanges();
+
+            Util.SessionAccess = member;
 
             return RedirectToAction("Index");
         }

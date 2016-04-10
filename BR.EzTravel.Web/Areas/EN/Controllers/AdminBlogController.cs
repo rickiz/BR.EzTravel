@@ -11,6 +11,7 @@ using System.IO;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
+    [Authorize(Roles = "SA")]
     public class AdminBlogController : BaseEnController
     {
         public ActionResult Index()

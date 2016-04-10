@@ -10,9 +10,9 @@ using BR.EzTravel.Web.Properties;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
+    [Authorize(Roles = "SA")]
     public class AdminMemberController : BaseEnController
     {
-        // GET: EN/AdminMember
         public ActionResult Index()
         {
             var members =
@@ -43,31 +43,31 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MemberCreateViewModel viewModel)
         {
-            try
+            var defaultPassword = RandomString();
+
+            var Member = new tblmember()
             {
-                var Member = new tblmember()
-                {
-                    BusinessRegNo = viewModel.BusinessRegNo,
-                    CompanyName = viewModel.CompanyName,
-                    PICName = viewModel.PICName,
-                    PICContact = viewModel.PICContact,
-                    PICEmail = viewModel.PICEmail,
-                    OfficeContact = "-",
-                    Address = viewModel.Address,
-                    Postcode = viewModel.Postcode,
-                    State = viewModel.State,
-                    Country = viewModel.Country,
-                    Roles = "SA",
-                    Password = RandomString(),
-                    CreateDT = DateTime.Now,
-                    Language = "EN",
-                    Active = true
-                };
+                BusinessRegNo = viewModel.BusinessRegNo,
+                CompanyName = viewModel.CompanyName,
+                PICName = viewModel.PICName,
+                PICContact = viewModel.PICContact,
+                PICEmail = viewModel.PICEmail,
+                OfficeContact = "-",
+                Address = viewModel.Address,
+                Postcode = viewModel.Postcode,
+                State = viewModel.State,
+                Country = viewModel.Country,
+                Roles = "SA",
+                Password = Util.GetMD5Hash(defaultPassword),
+                CreateDT = DateTime.Now,
+                Language = "EN",
+                Active = true
+            };
 
-                db.tblmembers.Add(Member);
-                db.SaveChanges();
+            db.tblmembers.Add(Member);
+            db.SaveChanges();
 
-                var emailBody = string.Format(@"Hi {0}, <br /><br />
+            var emailBody = string.Format(@"Hi {0}, <br /><br />
                     Thanks for Subscribing to the EZ Go Holiday Website ! You’re joining an amazing community of folks who love nerding out about travelling. <br /><br />
                     As you wait for the next issue, check out some of our most popular posts. They’re a great place to get started. <br /><br />
                     Website: http://www.ezgoholiday.com <br />
@@ -76,14 +76,9 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
                     Have an awesome day! <br />
                     EZ Go Holiday Management",
-                    viewModel.PICName, viewModel.PICEmail, Member.Password);
+                viewModel.PICName, viewModel.PICEmail, defaultPassword);
 
-                Util.SendEmail("Welcome to EZ Go Holiday!", emailBody, viewModel.PICEmail, "", "");
-            }
-            catch (Exception ex)
-            {
-
-            }
+            Util.SendEmail("Welcome to EZ Go Holiday!", emailBody, viewModel.PICEmail, "", "");
 
             return RedirectToAction("Index");
         }

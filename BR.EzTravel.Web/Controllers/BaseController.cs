@@ -7,6 +7,7 @@ using BR.EzTravel.Web.Helpers;
 using BR.EzTravel.Web.Models;
 using log4net;
 using System.Reflection;
+using System.Web.Routing;
 
 namespace BR.EzTravel.Web.Controllers
 {
@@ -39,6 +40,12 @@ namespace BR.EzTravel.Web.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            Util.CheckSessionAccess(requestContext);
+            base.Initialize(requestContext);
         }
 
         protected List<SelectListItem> GetList(ListType type, string defaultValue = "", string defaultText = "default", bool defaultItem = true)

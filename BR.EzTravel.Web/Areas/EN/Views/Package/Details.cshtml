@@ -32,13 +32,17 @@
                 <div class="col-xs-12 col-sm-8">
                     <h2 class="detail-title color-dark-2">@Model.Title</h2>
                     <div class="detail-rate rate-wrap clearfix">
-                        <div class="rate">
+                        @*<div class="rate">
                             @for (int i = 1; i <= 5; i++)
                             {
                                 <span class="fa @(i <= Model.Rate ? "fa-star color-yellow" : "fa-star-o")"></span>
                             }
+                        </div>*@
+                        <div class="rate">
+                            <div class="ui star rating" data-rating="@(Model.Rate)" data-max-rating="5"></div>
                         </div>
-                        <i>@Model.ReviewCount Reviews</i>
+                        
+                        <i><span id="review-count">@Model.ReviewCount</span> Reviews</i>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4">
@@ -109,34 +113,38 @@
                         }
                     </ul>
 
-                    @using (Html.BeginForm())
+                    @if (Request.IsAuthenticated)
                     {
-                        @Html.HiddenFor(m => m.CommentPost.ID, new { @Value = Model.ID })
+                        using (Html.BeginForm())
+                        {
+                            @Html.HiddenFor(m => m.CommentPost.ID, new { @Value = Model.ID })
 
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-block type-2 clearfix">
-                                    <div class="input-style-1 b-50 brd-0 type-2 color-3">
-                                        @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your name" })
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-block type-2 clearfix">
+                                        <div class="input-style-1 b-50 brd-0 type-2 color-3">
+                                            @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your name" })
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-block type-2 clearfix">
-                                    <div class="input-style-1 b-50 brd-0 type-2 color-3">
-                                        @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your email" })
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-block type-2 clearfix">
+                                        <div class="input-style-1 b-50 brd-0 type-2 color-3">
+                                            @Html.TextBoxFor(m => m.CommentPost.Name, new { placeholder = "Enter your email" })
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="form-block type-2 clearfix">
-                                    @Html.TextAreaFor(m => m.CommentPost.Comment, new { @class = "area-style-1 type-2 color-3", placeholder = "Write a comment..." })
+                                <div class="col-xs-12">
+                                    <div class="form-block type-2 clearfix">
+                                        @Html.TextAreaFor(m => m.CommentPost.Comment, new { @class = "area-style-1 type-2 color-3", placeholder = "Write a comment..." })
+                                    </div>
+                                    <input type="submit" class="c-button b-40 fr bg-dr-blue-2 hv-dr-blue-2-o" value="post comment">
                                 </div>
-                                <input type="submit" class="c-button b-40 fr bg-dr-blue-2 hv-dr-blue-2-o" value="post comment">
-                            </div>
 
-                        </div>
+                            </div>
+                        }
                     }
+                    
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">
@@ -361,4 +369,23 @@
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        var isOnRate = false;
+        $(document).ready(function () {
+            //$('.ui.rating').rating();
+
+            $('.ui.rating')
+                .rating('setting', 'onRate', function (value) {
+                    $.post('@(Url.Action("Rate"))', { id: '@(Model.ID)', rate: value }, function (res) {
+                        var count = $('#review-count').html();
+
+                        $('#review-count').html(parseInt(count) + 1);
+                    });
+                });
+        });
+    </script>
+}
 

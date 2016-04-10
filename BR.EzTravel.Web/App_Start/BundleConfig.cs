@@ -39,6 +39,7 @@ namespace BR.EzTravel.Web
 
             bundles.Add(new ScriptBundle("~/bundles/eztravel").Include(
                 "~/Scripts/underscore.js",
+                "~/Scripts/rating.js",
                 "~/Scripts/eztravel.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/dropzonescripts").Include(
@@ -49,6 +50,7 @@ namespace BR.EzTravel.Web
                       "~/Content/jquery-ui.structure.min.css",
                       "~/Content/jquery-ui.min.css",
                       "~/Content/font-awesome.css",
+                      "~/Content/rating.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/jqueryui").Include(

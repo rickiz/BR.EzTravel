@@ -96,7 +96,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      Description = a.Description,
                      EndDT = a.EndDT,
                      Price = a.Price,
-                     Rate = a.NoOfReviews == 0 ? 0 : a.Rate / a.NoOfReviews,
+                     Rate = a.Rate,
                      ReviewCount = a.NoOfReviews,
                      StartDT = a.StartDT,
                      ThumbnailImagePath = a.ThumbnailImagePath,
@@ -104,6 +104,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      Days = a.Days,
                      Nights = a.Nights
                  }).Single();
+
+            viewModel.Rate = Util.CalculateAverageRating(viewModel.Rate, viewModel.ReviewCount);
 
             viewModel.Comments =
                 (from a in db.lnkmemberpostcomments
@@ -177,6 +179,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Details(PostComment commentPost)
         {
@@ -192,6 +195,20 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Details", new { id = commentPost.ID });
+        }
+
+        [HttpPost]
+        public ActionResult Rate(int id, int rate)
+        {
+            var package = db.lnkmemberposts.Single(a => a.ID == id);
+            package.NoOfReviews++;
+            package.Rate += rate;
+
+            db.SaveChanges();
+
+            var averageRating = Util.CalculateAverageRating(package.Rate, package.NoOfReviews);
+
+            return new JsonResult { Data = averageRating };
         }
     }
 }
