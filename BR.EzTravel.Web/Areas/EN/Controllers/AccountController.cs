@@ -71,6 +71,13 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
+            var exists = db.tblmembers.Any(a => a.Active && a.PICEmail == viewModel.Email);
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Invalid email.");
+                return View(viewModel);
+            }                
+
             var member = new tblmember()
             {
                 PICName = viewModel.Name,
