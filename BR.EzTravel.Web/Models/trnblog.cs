@@ -26,5 +26,6 @@ namespace BR.EzTravel.Web.Models
         public int CategoryID { get; set; }
         public string ThumbnailImagePath { get; set; }
         public bool Active { get; set; }
+        public int RewardPoints { get; set; }
     }
 }

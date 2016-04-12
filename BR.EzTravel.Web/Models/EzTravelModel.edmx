@@ -268,6 +268,7 @@
           <Property Name="ThumbnailImagePath" Type="varchar" MaxLength="500" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Active" Type="bool" Nullable="false" />
+          <Property Name="RewardPoints" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="trnmemberrenewal">
           <Key>
@@ -582,6 +583,7 @@
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="ThumbnailImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="RewardPoints" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="lnkmemberpostcomment">
           <Key>
@@ -886,6 +888,7 @@
           <EntitySetMapping Name="trnblogs">
             <EntityTypeMapping TypeName="ExHolidayModel.trnblog">
               <MappingFragment StoreEntitySet="trnblog">
+                <ScalarProperty Name="RewardPoints" ColumnName="RewardPoints" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="ThumbnailImagePath" ColumnName="ThumbnailImagePath" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />

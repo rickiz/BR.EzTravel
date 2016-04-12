@@ -33,6 +33,8 @@ namespace BR.EzTravel.Web.Models
         public int TotalComments { get; set; }
 
         public string ThumbnailImagePath { get; set; }
+
+        public int RewardPoints { get; set; }
     }
 
     public class PopularBlog

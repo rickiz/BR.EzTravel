@@ -109,7 +109,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      LastEditedDate = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT,
                      CreatedBy = bb == null ? "EMMA STONE" : bb.PICName,
                      TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.ID && !b.CancelDT.HasValue).Count(),
-                     ThumbnailImagePath = a.ThumbnailImagePath
+                     ThumbnailImagePath = a.ThumbnailImagePath,
+                     RewardPoints = a.RewardPoints
                  }).Single();
 
             var comments =
@@ -223,6 +224,20 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Details", new { id = commentPost.ID });
+        }
+        
+        [HttpPost]
+        public ActionResult AddRewardPoints(int id)
+        {
+            var blog = db.trnblogs.Single(a => a.Active && a.ID == id);
+            var member = db.tblmembers.Single(a => a.ID == blog.MemberID);
+
+            blog.RewardPoints++;
+            member.RewardPoints++;
+
+            db.SaveChanges();
+
+            return new JsonResult { Data = blog.RewardPoints };
         }
     }
 }
