@@ -30,7 +30,9 @@
         <div class="row padd-90">
             <div class="col-xs-12 col-md-8">
                 <div class="detail-header style-2">
-                    <h2 class="detail-title color-dark-2">@Model.Title <button class="btn btn-default fa fa-thumbs-o-up"> <span class="badge">42</span></button></h2> 
+                    <h2 class="detail-title color-dark-2">
+                        @Model.Title <button class="btn btn-default fa fa-thumbs-o-up" onclick="addRewardPoints(@(Model.ID))"> <span class="badge" id="reward-points">@Model.RewardPoints</span></button>
+                    </h2> 
                     <div class="tour-info-line clearfix">
                         <div class="tour-info fl">
                             <img src="~/img/calendar_icon_grey.png" alt="">
@@ -331,3 +333,14 @@
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        function addRewardPoints(id) {
+            $.post("@(Url.Action("AddRewardPoints"))", { id: id }, function (res) {
+                $("#reward-points").html(res);
+            });
+        }
+    </script>
+}
