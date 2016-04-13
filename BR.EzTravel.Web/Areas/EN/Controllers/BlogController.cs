@@ -215,7 +215,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Comments = commentPost.Comment,
                 CreateDT = DateTime.Now,
                 Language = lang,
-                MemberID = 0, // TODO: Link up member,
+                MemberID = Util.SessionAccess.ID, // TODO: Link up member,
                 Name = commentPost.Name == "" ? "Anonymous" : commentPost.Name,
                 BlogID = commentPost.ID,
             };

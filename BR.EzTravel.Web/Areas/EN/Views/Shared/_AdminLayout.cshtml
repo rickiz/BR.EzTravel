@@ -36,9 +36,18 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    @Html.MenuLink("Blogs", "Index", "AdminBlog", area: "EN")
-                    @Html.MenuLink("Packages", "Index", "AdminPackage", area: "EN")
-                    @Html.MenuLink("Members", "Index", "AdminMember", area: "EN")
+                    @if (Request.IsAuthenticated && User.IsInRole("BG"))
+                    {
+                        @Html.MenuLink("Blogs", "Index", "AdminBlog", area: "EN")
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("AG"))
+                    {
+                        @Html.MenuLink("Packages", "Index", "AdminPackage", area: "EN")
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("SA"))
+                    {
+                        @Html.MenuLink("Members", "Index", "AdminMember", area: "EN")
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
