@@ -31,10 +31,8 @@
                 <div class="left-col">
                     @if (Request.IsAuthenticated)
                     {
-                        @Html.Raw("Welcome") <a href="@Url.Action("Index", "AdminProfile")">@(Util.SessionAccess.PICName)</a>
+                        Welcome <a href="@Url.Action("Index", "AdminProfile")">@(Util.SessionAccess.PICName)</a>
                     }
-                    <a href="#"><i class="fa fa-envelope"></i>Contact Us</a>
-
                     @if (Request.IsAuthenticated)
                     {
                         <a href="@Url.Action("ChangePassword", "Account")"><i class="fa fa-key"></i>Change Password</a>
@@ -56,6 +54,7 @@
                 <div class="right-col">                    
                     <div class="folow">
                         <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-envelope"></i>Contact Us</a>
                     </div>
 
                     @*<form action="?" class="serach-item">
