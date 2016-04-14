@@ -53,7 +53,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             member.Postcode = viewModel.Postcode;
             member.State = viewModel.State;
             member.Country = viewModel.Country;
-            member.Active = viewModel.Active;
+            //member.Active = viewModel.Active;
 
             if (file != null)
             {
