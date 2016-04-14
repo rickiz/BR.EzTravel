@@ -15,7 +15,7 @@
 
 <div class="list-wrapper bg-grey-2">
     <div class="container">
-        <div class="row">
+        @*<div class="row">
             <div class="col-md-8">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
@@ -60,6 +60,69 @@
                         </div>
                     </div>
                 }
+            </div>
+        </div>*@
+        <div class="login-fullpage">
+            <div class="row">
+                <div class="login-logo"><img class="center-image" src="img/special/login.jpg" alt=""></div>
+                <div class="col-xs-12 col-sm-7">
+                    <div class="f-login-content">
+                        <div class="f-login-header">
+                            <div class="f-login-title color-dr-blue-2">Welcome back!</div>
+                            <div class="f-login-desc color-grey">Please login to your account</div>
+                        </div>
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "f-login-form", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="input-style-1 b-50 type-2 color-5">
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder= "Enter your email or username" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                @*<input type="text" placeholder="Enter your email or username" required>*@
+                            </div>
+                            <div class="input-style-1 b-50 type-2 color-5">
+                                @Html.PasswordFor(m => m.Password, new { @placeholder = "Enter your password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                @*<input type="text" placeholder="Enter your password" required>*@
+                            </div>
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                                @*<div class="checkbox-group">
+                                        <div class="input-entry color-3">
+                                            <input class="checkbox-form" id="text-1" type="checkbox" name="checkbox" value="climat control">
+                                            <label class="clearfix" for="text-1">
+                                                <span class="sp-check"><i class="fa fa-check"></i></span>
+                                                <span class="checkbox-text">Register now</span>
+                                            </label>
+                                        </div>
+                                        <div class="input-entry color-3">
+                                            <input class="checkbox-form" id="text-2" type="checkbox" name="checkbox" value="climat control">
+                                            <label class="clearfix" for="text-2">
+                                                <span class="sp-check"><i class="fa fa-check"></i></span>
+                                                <span class="checkbox-text">Remember me</span>
+                                            </label>
+                                        </div>
+                                    </div>*@
+                                <input type="submit" value="LOGIN TO YOUR ACCOUNT" class="login-btn c-button full b-60 bg-dr-blue-2 hv-dr-blue-2-o" />
+                                @*<input type="submit" class="login-btn c-button full b-60 bg-dr-blue-2 hv-dr-blue-2-o" value="LOGIN TO YOUR ACCOUNT">*@
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <a href="@Url.Action("Register", "Account")"><i class="fa fa-user-plus"></i> Register as a new user</a>
+                                        @*<a href="#" class="c-button full b-60 bg-blue-7 hv-blue-7-o"><i class="fa fa-facebook"></i><span>login via facebook</span></a>*@
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <a href="@Url.Action("ForgotPassword", "Account")"><i class="fa fa-key"></i> Forgot your password?</a>
+                                        @*<a href="#" class="c-button full b-60 bg-blue-8 hv-blue-8-o"><i class="fa fa-twitter"></i><span>login via facebook</span></a>*@
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                </div>
             </div>
         </div>
     </div>

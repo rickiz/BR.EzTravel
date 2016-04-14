@@ -33,9 +33,15 @@
                     {
                         <a href="@Url.Action("Index", "AdminProfile")">Welcome @(Util.SessionAccess.PICName)</a>
                     }
-                    @if (Request.IsAuthenticated)
+
+                    @if (Request.IsAuthenticated &&
+                            (User.IsInRole("SA") || User.IsInRole("AG") || User.IsInRole("BG")))
                     {
                         <a href="@Url.Action("Index", "AdminProfile")"><i class="fa fa-cog"></i>Back Office</a>
+                    }
+
+                    @if (Request.IsAuthenticated)
+                    {
                         <a href="@Url.Action("ChangePassword", "Account")"><i class="fa fa-key"></i>Change Password</a>
                         <a href="@Url.Action("Logout", "Account")"><i class="fa fa-sign-out"></i>Log out</a>
                     }
@@ -44,6 +50,8 @@
                         <a href="@Url.Action("Login", "Account")"><i class="fa fa-sign-in"></i>Sign in</a>
                         <a href="@Url.Action("Register", "Account")"><i class="fa fa-user-plus"></i>Register</a>
                     }
+
+
                     <a href="#"><i class="fa fa-envelope"></i>Contact Us</a>
                     
                 </div>
