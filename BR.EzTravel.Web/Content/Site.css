@@ -5141,11 +5141,11 @@ border-color: transparent transparent #222222 transparent; position: absolute; t
 
 header.menu-3 {background: #fff;}
 .menu-3 .top-header-bar {background: #000; padding: 0px; }
-.left-col {position: relative; float: left; width: 50%;}
+.left-col {position: relative; float: left; width: auto;}
 .left-col a {font-size: 13px; color: #fff; padding: 20px 12px; position: relative; float: left; display: block;}
 .left-col a:hover {background: rgba(0,0,0,0.4);}
 .left-col a i {padding-right: 10px;}
-.right-col {position: relative; float: left; width: 50%;}
+.right-col {position: relative; float: right; width: auto;}
 .serach-item {float: right; position: relative;}
 .serach-item button {font-size: 13px; color: #fff; line-height: 24px; padding: 17px 18px; position: absolute; right: 0px; border-right: 1px solid rgba(255,255,255,0.5); height: 60px; z-index: 50;}
 .serach-item input {height: 60px; min-width: 220px; width: 100%; background: rgba(0,0,0,0.4); color: #fff; padding: 0px 15px; transform: scaleX(0); -webkit-transform: scaleX(0);-moz-transform: scaleX(0);-ms-transform: scaleX(0); transform-origin: top right; transition: all 0.35s ease-in; -webkit-transition: all 0.35s ease-in;-moz-transition: all 0.35s ease-in;-ms-transition: all 0.35s ease-in;}
