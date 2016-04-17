@@ -10,7 +10,7 @@ using BR.EzTravel.Web.Properties;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
-    [Authorize(Roles = "SA")]
+    [Authorize(Roles = "SA,NU,AG,BG")]
     public class AdminProfileController : BaseEnController
     {
         public ActionResult Index()

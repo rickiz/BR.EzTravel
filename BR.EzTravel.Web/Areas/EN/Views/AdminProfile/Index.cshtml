@@ -33,6 +33,19 @@
                     <label for="file">Profile Image</label>
                     <input type="file" id="file" name="file" />
                 </div>
+                <br /><br /><br />
+                <div class="form-group">
+                    <label class = "control-label">Available Post:</label> 10
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Posted:</label> 4
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Remaining:</label> 6
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Reward Points:</label> 6
+                </div>
             </div>
             <div class="col-sm-9 text-center">
                 <div class="col-xs-6">
@@ -65,7 +78,7 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Address, new { @class = "control-label" })<br />
-                        @Html.TextAreaFor(m => m.Address, new { rows = "5", cols = "80" })
+                        @Html.TextAreaFor(m => m.Address, new { rows = "3", cols = "50" })
                         @*@Html.TextBoxFor(m => m.Address, new { @class = "form-control col-md-12", placeholder = "Address" })*@
                         @Html.ValidationMessageFor(m => m.Address)
                     </div>

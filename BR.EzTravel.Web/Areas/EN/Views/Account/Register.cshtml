@@ -16,55 +16,70 @@
 
 <div class="list-wrapper bg-grey-2">
     <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
+        
 
-                    <div class="form-group">
-                        <h4>Create a new account.</h4>
-                        <hr />
-                    </div>
+        <div class="login-fullpage">
+            <div class="row">
+                <div class="login-logo"><img class="center-image" src="img/special/login.jpg" alt=""></div>
+                <div class="col-xs-12 col-sm-7">
+                    <div class="f-login-content">
+                        <div class="f-login-header">
+                            <div class="f-login-title color-dr-blue-2">Welcome!</div>
+                            <div class="f-login-desc color-grey">Please Register Your Account Here</div>
+                        </div>
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
 
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        </div>
+                            @*<div class="form-group">
+                                <h4>Create a new account.</h4>
+                                <hr />
+                            </div>*@
+
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @*@Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })*@
+                                <div class="input-style-1 b-50 type-2 color-5">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter Your Email" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })*@
+                                <div class="input-style-1 b-50 type-2 color-5">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter Your Password" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @*@Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })*@
+                                <div class="input-style-1 b-50 type-2 color-5">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @*@Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })*@
+                                <div class="input-style-1 b-50 type-2 color-5">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter Your Name" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @*<label for="file" class="col-md-2 control-label">Profile Image</label>*@
+                                <div class="input-style-1 b-50 type-2 color-5">
+                                    <input type="file" id="file" name="file" class="form-control" />
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                <input type="submit" class="c-button bg-dr-blue-2 hv-dr-blue-2-o" value="Register New Account" />
+                                <div class="col-md-offset-2 col-md-10">
+
+                                </div>
+                            </div>*@
+                            
+                            <input type="submit" value="REGISTER YOUR NEW ACCOUNT" class="login-btn c-button full b-60 bg-dr-blue-2 hv-dr-blue-2-o" />
+                        }
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="file" class="col-md-2 control-label">Profile Image</label>
-                        <div class="col-md-10">
-                            <input type="file" id="file" name="file" class = "form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" class="btn btn-default" value="Register" />
-                        </div>
-                    </div>
-                }
+                </div>
             </div>
         </div>
+
     </div>
 </div>
