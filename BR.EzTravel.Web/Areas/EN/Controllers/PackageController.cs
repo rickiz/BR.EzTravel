@@ -60,13 +60,13 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             if (!criteria.PriceFrom.IsStringEmpty())
             {
-                var priceFrom = double.Parse(criteria.PriceFrom.Replace("$", ""));
+                var priceFrom = Util.ConvertPriceSearch(criteria.PriceFrom);
                 query = query.Where(a => a.Price >= priceFrom);
             }
 
             if (!criteria.PriceTo.IsStringEmpty())
             {
-                var priceTo = double.Parse(criteria.PriceTo.Replace("$", ""));
+                var priceTo = Util.ConvertPriceSearch(criteria.PriceTo);
                 query = query.Where(a => a.Price <= priceTo);
             }
 
@@ -137,7 +137,6 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Criteria = new PackageSearchCriteria
                 {
                     CategoryID = categoryID, Rates = new int[] { }, PackageActivityIDs = new int[] { },
-                    PriceFrom = "0", PriceTo = "1500",
                     SortOrder = sort, PageNum = p
                 },
                 PackageActivities = GetPackageActivities(),
@@ -175,6 +174,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.SearchGuid = sid;
             viewModel.SearchResults = SeacrhPackages(viewModel.Criteria);
+
+            viewModel.Criteria.PriceTo = viewModel.Criteria.PriceTo.IsStringEmpty() ? "1500" : viewModel.Criteria.PriceTo;
 
             return View(viewModel);
         }
