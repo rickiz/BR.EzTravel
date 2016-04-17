@@ -13,6 +13,29 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
     public class PackageController : BaseEnController
     {
+        public string OldSearchGuid
+        {
+            get
+            {
+                return Session["Package_Search_OldGuid"] as string;
+            }
+
+            set
+            {
+                Session["Package_Search_OldGuid"] = value;
+            }
+        }
+
+        private PackageSearchCriteria GetSessionSearchCriteria(string guid)
+        {
+            return Session[guid] as PackageSearchCriteria;
+        }
+        private string SetSessionSearchCriteria(PackageSearchCriteria criteria)
+        {
+            var guid = Guid.NewGuid().ToString();
+            Session[guid] = criteria;
+            return guid;
+        }
         private List<PackageDetails> SeacrhPackages(PackageSearchCriteria criteria)
         {
             var query =
@@ -52,6 +75,40 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 query = query.Where(a => criteria.Rates.Contains(a.LatestRate));
             }
 
+            var pageSize = Settings.Default.MaxListPerPage;
+            var rowsCount = query.Count();
+
+            criteria.TotalPage = rowsCount / pageSize;
+            if (rowsCount % pageSize > 0)
+                criteria.TotalPage++;
+
+            //If page number should be > 0 else set to first page
+            if (rowsCount <= pageSize || criteria.PageNum <= 0) criteria.PageNum = 1;
+
+            //Calculate nunber of rows to skip on pagesize
+            int excludedRows = (criteria.PageNum - 1) * pageSize;
+
+            switch (criteria.SortOrder)
+            {
+                case PackageIndexSort.None:
+                    query = query.OrderByDescending(a => a.ID);
+                    break;
+                case PackageIndexSort.Price_Asc:
+                    query = query.OrderBy(a => a.Price);
+                    break;
+                case PackageIndexSort.Price_Desc:
+                    query = query.OrderByDescending(a => a.Price);
+                    break;
+                case PackageIndexSort.Ranking_Asc:
+                    query = query.OrderBy(a => a.LatestRate);
+                    break;
+                case PackageIndexSort.Ranking_Desc:
+                    query = query.OrderByDescending(a => a.LatestRate);
+                    break;
+                default:
+                    break;
+            }
+
             var results =
                 query.Select(a =>
                     new PackageDetails
@@ -64,14 +121,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         Title = a.Title,
                         ReviewCount = a.NoOfReviews
                     })
-                    .OrderByDescending(a => a.ID)
-                    .Take(Settings.Default.MaxListPerPage)
+                    .Skip(excludedRows)
+                    .Take(pageSize)
                     .ToList();
 
             return results;
         }
 
-        public ActionResult Index(int categoryID = 0)
+        public ActionResult Index(int categoryID = 0, PackageIndexSort sort = PackageIndexSort.None, int p = 0, string sid = "")
         {
             var yesterdayDT = DateTime.Now.AddDays(-1);
 
@@ -79,12 +136,44 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             {
                 Criteria = new PackageSearchCriteria
                 {
-                    CategoryID = categoryID, Rates = new int[] { }, PackageActivityIDs = new int[] { }
+                    CategoryID = categoryID, Rates = new int[] { }, PackageActivityIDs = new int[] { },
+                    PriceFrom = "0", PriceTo = "1500",
+                    SortOrder = sort, PageNum = p
                 },
                 PackageActivities = GetPackageActivities(),
                 Categories = GetPackageCategories(),
             };
 
+            // Continue with previous search criteria
+            if (!sid.IsStringEmpty())
+                viewModel.Criteria = GetSessionSearchCriteria(sid);
+
+            var newSearchGUID = false;
+
+            if(categoryID > 0)
+            {
+                viewModel.Criteria.CategoryID = categoryID;
+                newSearchGUID = true;
+            }
+            if (sort != PackageIndexSort.None)
+            {
+                viewModel.Criteria.SortOrder = sort;
+                newSearchGUID = true;
+            }
+            if (p > 0)
+            {
+                viewModel.Criteria.PageNum = p;
+                newSearchGUID = true;
+            }
+
+            if (newSearchGUID)
+            {
+                Session.Remove(OldSearchGuid);
+                sid = SetSessionSearchCriteria(viewModel.Criteria);
+                OldSearchGuid = viewModel.SearchGuid;
+            }
+
+            viewModel.SearchGuid = sid;
             viewModel.SearchResults = SeacrhPackages(viewModel.Criteria);
 
             return View(viewModel);
@@ -102,6 +191,10 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             if (viewModel.Criteria.PackageActivityIDs == null)
                 viewModel.Criteria.PackageActivityIDs = new int[] { };
+
+            Session.Remove(OldSearchGuid);
+            viewModel.SearchGuid = SetSessionSearchCriteria(viewModel.Criteria);
+            OldSearchGuid = viewModel.SearchGuid;
 
             return View(viewModel);
         }

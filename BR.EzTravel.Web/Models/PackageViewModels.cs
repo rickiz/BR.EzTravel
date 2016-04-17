@@ -41,6 +41,9 @@ namespace BR.EzTravel.Web.Models
         public int[] Rates { get; set; }
         public int[] CityIDs { get; set; }
         public int[] PackageActivityIDs { get; set; }
+        public PackageIndexSort SortOrder { get; set; }
+        public int PageNum { get; set; }
+        public int TotalPage { get; set; }
     }
 
     public class PackageCategory
@@ -59,6 +62,17 @@ namespace BR.EzTravel.Web.Models
 
         public PackageSearchCriteria Criteria { get; set; }
         public List<SelectListItem> PackageActivities { get; set; }
+
+        public string SearchGuid { get; set; }
+    }
+
+    public enum PackageIndexSort
+    {
+        None,
+        Price_Asc,
+        Price_Desc,
+        Ranking_Asc,
+        Ranking_Desc
     }
 
     #endregion

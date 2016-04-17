@@ -1,8 +1,12 @@
 ﻿@using BR.EzTravel.Web.Helpers
-@model BR.EzTravel.Web.Models.PackageIndexViewModel
+@using BR.EzTravel.Web.Models
+@model PackageIndexViewModel
 @{
     ViewBag.Title = "Packages";
     Layout = "~/Areas/EN/Views/Shared/_Layout.cshtml";
+
+    var priceFrom = Util.ConvertPriceSearch(Model.Criteria.PriceFrom);
+    var priceTo = Util.ConvertPriceSearch(Model.Criteria.PriceTo);
 }
 
 <div class="inner-banner style-2">
@@ -76,7 +80,7 @@
                         @Html.ValidationSummary()
                         <div class="sidebar-block">
                             <h4 class="sidebar-title color-dark-2">price range</h4>
-                            <div class="slider-range color-2 clearfix" data-counter="$" data-position="start" data-from="0" data-to="1500" data-min="0" data-max="2000">
+                            <div class="slider-range color-2 clearfix" data-counter="$" data-position="start" data-from="@(priceFrom)" data-to="@(priceTo)" data-min="0" data-max="2000">
                                 <div class="range"></div>
                                 @Html.TextBoxFor(m => m.Criteria.PriceFrom, new { @class = "amount-start", @readonly = true })
                                 @Html.TextBoxFor(m => m.Criteria.PriceTo, new { @class = "amount-end", @readonly = true })
@@ -88,8 +92,8 @@
                                 @for (int i = 5; i > 0; i--)
                                 {
                                     <div class="input-entry color-3">
-                                        <input class="checkbox-form" 
-                                               id="@Html.IdFor(m => m.Criteria.Rates)" type="checkbox" 
+                                        <input class="checkbox-form"
+                                               id="@Html.IdFor(m => m.Criteria.Rates)" type="checkbox"
                                                name="@Html.NameFor(m => m.Criteria.Rates)" value="@(i)"
                                                @(Model.Criteria.Rates.Contains(i) ? "checked" : "")>
                                         <label class="clearfix checkbox-selector">
@@ -111,8 +115,8 @@
                                 @foreach (var activity in Model.PackageActivities)
                                 {
                                     <div class="input-entry color-3">
-                                        <input class="checkbox-form" 
-                                               id="@Html.IdFor(m => m.Criteria.PackageActivityIDs)" type="checkbox" 
+                                        <input class="checkbox-form"
+                                               id="@Html.IdFor(m => m.Criteria.PackageActivityIDs)" type="checkbox"
                                                name="@Html.NameFor(m => m.Criteria.PackageActivityIDs)" value="@(activity.Value)"
                                                @(Model.Criteria.PackageActivityIDs.Contains(int.Parse(activity.Value)) ? "checked" : "")>
                                         <label class="clearfix checkbox-selector">
@@ -127,7 +131,7 @@
                         </div>
                     }
 
-                    
+
                     <div class="sidebar-block">
                         @*<h4 class="sidebar-title color-dark-2">Review Score</h4>
                             <div class="sidebar-score">
@@ -201,21 +205,43 @@
                 <div class="list-header clearfix">
                     <div class="drop-wrap drop-wrap-s-4 color-4 list-sort">
                         <div class="drop">
-                            <b>Sort by price</b>
+                           @if (Model.Criteria.SortOrder == PackageIndexSort.Price_Asc)
+                           {
+                                <b>Price ASC</b>
+                           }
+                           else if (Model.Criteria.SortOrder == PackageIndexSort.Price_Desc)
+                           {
+                                <b>Price DESC</b>
+                           }
+                           else
+                           {
+                                <b>Sort by price</b>
+                           }
                             <a href="#" class="drop-list"><i class="fa fa-angle-down"></i></a>
                             <span>
-                                <a href="#">ASC</a>
-                                <a href="#">DESC</a>
+                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Price_Asc)')">ASC</a>
+                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Price_Desc)')">DESC</a>
                             </span>
                         </div>
                     </div>
                     <div class="drop-wrap drop-wrap-s-4 color-4 list-sort">
                         <div class="drop">
-                            <b>Sort by ranking</b>
+                            @if (Model.Criteria.SortOrder == PackageIndexSort.Ranking_Asc)
+                            {
+                                <b>Rank ASC</b>
+                            }
+                            else if (Model.Criteria.SortOrder == PackageIndexSort.Ranking_Desc)
+                            {
+                                <b>Rank DESC</b>
+                            }
+                            else
+                            {
+                                <b>Sort by ranking</b>
+                            }
                             <a href="#" class="drop-list"><i class="fa fa-angle-down"></i></a>
                             <span>
-                                <a href="#">ASC</a>
-                                <a href="#">DESC</a>
+                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Ranking_Asc)')">ASC</a>
+                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Ranking_Desc)')">DESC</a>
                             </span>
                         </div>
                     </div>
@@ -264,15 +290,24 @@
                 </div>
 
                 <div class="c_pagination clearfix padd-120">
-                    <a href="#" class="c-button b-40 bg-dr-blue hv-dr-blue-o fl">prev page</a>
-                    <a href="#" class="c-button b-40 bg-dr-blue hv-dr-blue-o fr">next page</a>
+                    @if (Model.Criteria.PageNum > 1)
+                    {
+                        <a href='@(Url.Action("Index", "Package", new { sid = Model.SearchGuid, p = Model.Criteria.PageNum - 1 }))' class="c-button b-40 bg-dr-blue hv-dr-blue-o fl">prev page</a>
+                    }
+                    @if (Model.Criteria.PageNum < Model.Criteria.TotalPage)
+                    {
+                        <a href='@(Url.Action("Index", "Package", new { sid = Model.SearchGuid, p = Model.Criteria.PageNum + 1 }))' class="c-button b-40 bg-dr-blue hv-dr-blue-o fr">next page</a>
+                    }
+
                     <ul class="cp_content color-2">
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">10</a></li>
+
+                        @for (int i = 1; i <= Model.Criteria.TotalPage; i++)
+                        {
+                            <li class='@(Model.Criteria.PageNum == i ? "active" : "")'>
+                                <a href='@(Url.Action("Index", "Package", new { sid = Model.SearchGuid, p = i }))'>@i</a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -289,5 +324,9 @@
                 chb.prop('checked', !chb.prop('checked')); //inverses checked state
             });
         });
+
+        function sortGoto(sort) {
+            window.location.href = '@(Url.Action("Index", "Package"))?sid=@(Model.SearchGuid)&sort=' + sort;
+        }
     </script>
 }
