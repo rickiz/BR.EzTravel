@@ -109,5 +109,10 @@ namespace BR.EzTravel.Web.Helpers
             return new string(Enumerable.Repeat(chars, 8)
               .Select(s => s[random.Next(8)]).ToArray());
         }
+
+        public static int ConvertPriceSearch(string price)
+        {
+            return price.IsStringEmpty() ? 0 : int.Parse(price.Replace("$", ""));
+        }
     }
 }

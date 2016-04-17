@@ -33,5 +33,6 @@ namespace BR.EzTravel.Web.Models
         public string Language { get; set; }
         public int NoOfReviews { get; set; }
         public bool Active { get; set; }
+        public int LatestRate { get; set; }
     }
 }
