@@ -53,6 +53,7 @@
           <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="NoOfReviews" Type="int" Nullable="false" />
           <Property Name="Active" Type="bool" Nullable="false" />
+          <Property Name="LatestRate" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="lnkmemberpostcity">
           <Key>
@@ -265,8 +266,8 @@
           <Property Name="UpdateDT" Type="datetime" Precision="0" />
           <Property Name="CancelDT" Type="datetime" Precision="0" />
           <Property Name="Language" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="ThumbnailImagePath" Type="varchar" MaxLength="500" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Active" Type="bool" Nullable="false" />
           <Property Name="RewardPoints" Type="int" Nullable="false" />
         </EntityType>
@@ -361,6 +362,7 @@
           <Property Name="Language" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NoOfReviews" Type="Int32" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="LatestRate" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="lnkmemberpostcity">
           <Key>
@@ -667,6 +669,7 @@
           <EntitySetMapping Name="lnkmemberposts">
             <EntityTypeMapping TypeName="ExHolidayModel.lnkmemberpost">
               <MappingFragment StoreEntitySet="lnkmemberpost">
+                <ScalarProperty Name="LatestRate" ColumnName="LatestRate" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="NoOfReviews" ColumnName="NoOfReviews" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

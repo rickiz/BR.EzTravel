@@ -36,8 +36,8 @@ namespace BR.EzTravel.Web.Models
         [CustomDateDisplayFormat(ApplyFormatInEditMode = true)]
         public DateTime? CheckOutDate { get; set; }
         public int CategoryID { get; set; }
-        public double PriceFrom { get; set; }
-        public double PriceTo { get; set; }
+        public string PriceFrom { get; set; }
+        public string PriceTo { get; set; }
         public int[] Rates { get; set; }
         public int[] CityIDs { get; set; }
         public int[] PackageActivityIDs { get; set; }

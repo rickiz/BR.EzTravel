@@ -8,6 +8,7 @@ using BR.EzTravel.Web.Models;
 using log4net;
 using System.Reflection;
 using System.Web.Routing;
+using System.Data.Entity;
 
 namespace BR.EzTravel.Web.Controllers
 {
@@ -128,7 +129,7 @@ namespace BR.EzTravel.Web.Controllers
                     {
                         Text = a.Name,
                         Value = a.ID.ToString()
-                    }).ToList();
+                    }).OrderBy(a => a.Text).ToList();
 
             return resultList;
         }
@@ -140,6 +141,26 @@ namespace BR.EzTravel.Web.Controllers
             resultList.ForEach(a => a.Selected = selectedIDs.Any(b => b == int.Parse(a.Value)));
 
             return resultList;
+        }
+
+        protected List<PackageCategory> GetPackageCategories()
+        {
+            var packageCategories =
+                (from b in db.refcategories
+                    join a in db.lnkmemberposts on b.ID equals a.CategoryID into tempA
+                    where b.Active && b.Language == lang
+                    select new PackageCategory()
+                    {
+                        Name = b.Name,
+                        ID = b.ID,
+                        Count = tempA
+                            .Where(x => !x.CancelDT.HasValue
+                                && DbFunctions.TruncateTime(x.StartDT) <= DbFunctions.TruncateTime(DateTime.Now)
+                                && (DbFunctions.TruncateTime(x.EndDT) >= DbFunctions.TruncateTime(DateTime.Now) || x.EndDT == null))
+                            .Count()
+                    }).OrderBy(a => a.Name).ToList();
+
+            return packageCategories;
         }
     }
 }
