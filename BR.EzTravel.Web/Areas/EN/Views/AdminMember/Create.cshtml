@@ -34,6 +34,11 @@
                     </p>
                     <div class="form-horizontal">
                         <div class="form-group">
+                            @Html.LabelFor(m => m.Roles, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Roles, new { @class = "form-control col-md-12", placeholder = "Roles" })
+                            @Html.ValidationMessageFor(m => m.Roles)
+                        </div>
+                        <div class="form-group">
                             @Html.LabelFor(m => m.BusinessRegNo, new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.BusinessRegNo, new { @class = "form-control col-md-12", placeholder = "BusinessRegNo" })
                             @Html.ValidationMessageFor(m => m.BusinessRegNo)

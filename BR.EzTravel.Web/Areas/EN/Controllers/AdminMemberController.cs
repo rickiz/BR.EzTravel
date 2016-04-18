@@ -36,7 +36,10 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         public ActionResult Create()
         {
-            return View(new MemberCreateViewModel());
+            return View(new MemberCreateViewModel()
+            {
+
+            });
         }
 
         [HttpPost]
@@ -57,7 +60,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Postcode = viewModel.Postcode,
                 State = viewModel.State,
                 Country = viewModel.Country,
-                Roles = "SA",
+                Roles = viewModel.Roles,
                 Password = Util.GetMD5Hash(defaultPassword),
                 CreateDT = DateTime.Now,
                 Language = "EN",
@@ -124,6 +127,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 }
             }
 
+            member.Roles = viewModel.Roles;
             member.BusinessRegNo = viewModel.BusinessRegNo;
             member.CompanyName = viewModel.CompanyName;
             member.PICName = viewModel.PICName;

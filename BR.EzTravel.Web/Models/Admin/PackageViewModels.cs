@@ -81,5 +81,6 @@ namespace BR.EzTravel.Web.Models.Admin
         public int ID { get; set; }
         public DateTime LastUpdateDT { get; set; }
         public bool Active { get; set; }
+        public int MemberID { get; set; }
     }
 }

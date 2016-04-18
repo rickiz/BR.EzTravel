@@ -12,12 +12,12 @@ using System.Transactions;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
-    [Authorize(Roles = "SA")]
+    [Authorize(Roles = "AG")]
     public class AdminPackageController : BaseEnController
     {
         public ActionResult Index()
         {
-            var packages =
+            var query =
                 db.lnkmemberposts
                     .Where(a => a.Language == lang && !a.CancelDT.HasValue)
                     .OrderByDescending(a => a.ID)
@@ -27,9 +27,15 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         ID = a.ID,
                         Title = a.Title,
                         Active = a.Active,
+                        MemberID = a.MemberID,
                         LastUpdateDT = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT
-                    })
-                    .ToList();
+                    });
+
+            if (!User.IsInRole("SA"))
+                query = query.Where(a => a.MemberID == Util.SessionAccess.ID);
+
+            var packages = query.ToList();
+
             var viewModel = new AdminPackageIndexViewModel { Packages = packages };
 
             return View(viewModel);

@@ -11,12 +11,14 @@ using System.IO;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
-    [Authorize(Roles = "SA")]
+    [Authorize(Roles = "BG")]
     public class AdminBlogController : BaseEnController
     {
         public ActionResult Index()
         {
-            var blogs =
+            var isSA = User.IsInRole("SA") ? true : false;
+
+            var query =
                 db.trnblogs
                     .Where(a => a.Language == lang && !a.CancelDT.HasValue)
                     .OrderByDescending(a => a.ID)
@@ -26,9 +28,15 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         ID = a.ID,
                         Title = a.Title,
                         Active = a.Active,
+                        MemberID = a.MemberID,
                         LastUpdateDT = a.UpdateDT.HasValue ? a.UpdateDT.Value : a.CreateDT
-                    })
-                    .ToList();
+                    });
+
+            if (!User.IsInRole("SA"))
+                query = query.Where(a => a.MemberID == Util.SessionAccess.ID);
+
+            var blogs = query.ToList();
+
             var viewModel = new AdminBlogIndexViewModel { Blogs = blogs };
 
             return View(viewModel);
