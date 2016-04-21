@@ -190,6 +190,7 @@
     <Compile Include="Areas\EN\Controllers\AdminProfileController.cs" />
     <Compile Include="Areas\EN\Controllers\BaseEnController.cs" />
     <Compile Include="Areas\EN\Controllers\BlogController.cs" />
+    <Compile Include="Areas\EN\Controllers\ContactUsController.cs" />
     <Compile Include="Areas\EN\Controllers\HomeController.cs" />
     <Compile Include="Areas\EN\Controllers\PackageController.cs" />
     <Compile Include="Areas\EN\ENAreaRegistration.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Models\Admin\MemberViewModels.cs" />
     <Compile Include="Models\Admin\PackageViewModels.cs" />
     <Compile Include="Models\BlogViewModels.cs" />
+    <Compile Include="Models\ContactUsViewModels.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\EzTravelModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1438,6 +1440,7 @@
     <Content Include="Areas\EN\Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Areas\EN\Views\Account\ChangePassword.cshtml" />
     <Content Include="Areas\EN\Views\Account\ChangePasswordConfirmation.cshtml" />
+    <Content Include="Areas\EN\Views\ContactUs\Index.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
