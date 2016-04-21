@@ -5,9 +5,10 @@ using System.Web;
 
 namespace BR.EzTravel.Web.Models
 {
-    public class ContactUsViewModels
+    public class ContactUsIndexViewModel
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Contact { get; set; }
         public string Comments { get; set; }
