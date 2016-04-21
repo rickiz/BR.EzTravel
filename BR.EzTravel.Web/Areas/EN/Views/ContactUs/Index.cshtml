@@ -27,21 +27,21 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
                     <div class="contact-entry">
-                        <img class="contact-icon" src="img/loc_icon_2_dark.png" alt="">
+                        <img class="contact-icon" src="~/img/loc_icon_2_dark.png" alt="">
                         <div class="contact-label color-grey-3">Address:</div>
                         <div class="contact-text color-dark-2">Aenean vulputate porttitor</div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4">
                     <div class="contact-entry">
-                        <img class="contact-icon" src="img/mail_icon_l_dark.png" alt="">
+                        <img class="contact-icon" src="~/img/mail_icon_l_dark.png" alt="">
                         <div class="contact-label color-grey-3">Email us:</div>
                         <a class="contact-text color-dark-2 link-dr-blue-2" href="sales@ezgoholiday.com">sales@ezgoholiday.com</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4">
                     <div class="contact-entry">
-                        <img class="contact-icon" src="img/phone_icon_3_dark.png" alt="">
+                        <img class="contact-icon" src="~/img/phone_icon_3_dark.png" alt="">
                         <div class="contact-label color-grey-3">Phone:</div>
                         <a class="contact-text color-dark-2 link-dr-blue-2" href="tel:">+603 7788 12345</a>
                     </div>
@@ -79,7 +79,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);" }))
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", @class= "contact-form" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="row">

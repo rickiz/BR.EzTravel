@@ -34,7 +34,8 @@ namespace BR.EzTravel.Web
                      "~/Scripts/jquery.viewportchecker.min.js",
                      "~/Scripts/isotope.pkgd.min.js",
                      "~/Scripts/jquery.mousewheel.min.js",
-                     //"~/Scripts/map.js",
+                     "~/Scripts/jquery.circliful.min.js",
+                     "~/Scripts/map.js",
                      "~/Scripts/all.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/eztravel").Include(
