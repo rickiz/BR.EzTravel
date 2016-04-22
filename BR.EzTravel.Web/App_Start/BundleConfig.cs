@@ -35,6 +35,9 @@ namespace BR.EzTravel.Web
                      "~/Scripts/isotope.pkgd.min.js",
                      "~/Scripts/jquery.mousewheel.min.js",
                      "~/Scripts/jquery.circliful.min.js",
+                     "~/Scripts/jquery.classycountdown.min.js",
+                     "~/Scripts/jquery.throttle.min.js",
+                     "~/Scripts/jquery.knob.min.js",
                      "~/Scripts/map.js",
                      "~/Scripts/all.js"));
 
