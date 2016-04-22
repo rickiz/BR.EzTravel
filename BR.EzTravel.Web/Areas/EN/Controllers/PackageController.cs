@@ -169,13 +169,11 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             {
                 Session.Remove(OldSearchGuid);
                 sid = SetSessionSearchCriteria(viewModel.Criteria);
-                OldSearchGuid = viewModel.SearchGuid;
+                OldSearchGuid = sid;
             }
 
             viewModel.SearchGuid = sid;
             viewModel.SearchResults = SeacrhPackages(viewModel.Criteria);
-
-            viewModel.Criteria.PriceTo = viewModel.Criteria.PriceTo.IsStringEmpty() ? "1500" : viewModel.Criteria.PriceTo;
 
             return View(viewModel);
         }
