@@ -12,18 +12,22 @@ namespace BR.EzTravel.Web.Models.Admin
 {
     public class MemberCreateViewModel
     {
+        [DisplayName("Business Reg No")]
         [StringLength(20)]
         [Required]
         public string BusinessRegNo { get; set; }
 
+        [DisplayName("Company Name")]
         [StringLength(200)]
         [Required]
         public string CompanyName { get; set; }
 
+        [DisplayName("PIC Name")]
         [StringLength(200)]
         [Required]
         public string PICName { get; set; }
 
+        [DisplayName("Email")]
         [StringLength(250)]
         [Required]
         public string PICEmail { get; set; }
@@ -32,22 +36,27 @@ namespace BR.EzTravel.Web.Models.Admin
         [Required]
         public string PICContact { get; set; }
 
+        [DisplayName("Contact No.")]
         [StringLength(500)]
         [Required]
         public string Address { get; set; }
 
+        [DisplayName("Postcode")]
         [StringLength(10)]
         [Required]
         public string Postcode { get; set; }
 
+        [DisplayName("State")]
         [StringLength(50)]
         [Required]
         public string State { get; set; }
 
+        [DisplayName("Country")]
         [StringLength(50)]
         [Required]
         public string Country { get; set; }
 
+        [DisplayName("Roles")]
         [StringLength(50)]
         [Required]
         public string Roles { get; set; }

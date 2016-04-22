@@ -207,6 +207,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             var viewModel =
                 (from a in db.lnkmemberposts
                  join b in db.refcategories on a.CategoryID equals b.ID
+                 join c in db.tblmembers on a.MemberID equals c.ID
                  where a.ID == id && a.Active
                      && DbFunctions.TruncateTime(a.StartDT) <= DbFunctions.TruncateTime(DateTime.Now)
                      && (DbFunctions.TruncateTime(a.EndDT) >= DbFunctions.TruncateTime(DateTime.Now) || a.EndDT == null)
@@ -223,7 +224,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                      ThumbnailImagePath = a.ThumbnailImagePath,
                      Title = a.Title,
                      Days = a.Days,
-                     Nights = a.Nights
+                     Nights = a.Nights,
+                     PackageAgency = c
                  }).Single();
 
             viewModel.Comments =

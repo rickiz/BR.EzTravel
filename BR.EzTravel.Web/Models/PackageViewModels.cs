@@ -95,6 +95,7 @@ namespace BR.EzTravel.Web.Models
 
         public int TotalComments { get; set; }
         public PostComment CommentPost { get; set; }
+        public tblmember PackageAgency { get; set; }
     }
 
     public class PopularPackage

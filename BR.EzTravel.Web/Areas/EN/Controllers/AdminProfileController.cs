@@ -48,7 +48,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             member.CompanyName = viewModel.CompanyName;
             member.PICName = viewModel.PICName;
             member.PICContact = viewModel.PICContact;
-            member.PICEmail = viewModel.PICEmail;
+            //member.PICEmail = viewModel.PICEmail;
             member.Address = viewModel.Address;
             member.Postcode = viewModel.Postcode;
             member.State = viewModel.State;

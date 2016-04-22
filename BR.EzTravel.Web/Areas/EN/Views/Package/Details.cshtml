@@ -201,9 +201,10 @@
 
                     <div class="help-contact bg-grey-2">
                         <h4 class="color-dark-2">Need Help?</h4>
-                        <p class="color-grey-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <a class="help-phone color-dark-2 link-red-3" href="tel:0200059600"><img src="~/img/detail/phone24-red.png" alt="">020 00 59 600</a>
-                        <a class="help-mail color-dark-2 link-red-3" href="mailto:let’s_travel@world.com"><img src="~/img/detail/letter-red.png" alt="">ez.travel@world.com</a>
+                        <p class="color-grey-2">Something on your mind? Wish to know more about <b>@(Model.Title)</b>?</p>
+                        <a class="help-phone color-dark-2 link-red-3" href="#"><img src="~/img/marker_5.png" alt="" height="12%" width="12%">@Model.PackageAgency.CompanyName</a>
+                        <a class="help-phone color-dark-2 link-red-3" href="tel:0200059600"><img src="~/img/detail/phone24-red.png" alt="">@Model.PackageAgency.PICContact</a>
+                        <a class="help-mail color-dark-2 link-red-3" href="@Model.PackageAgency.PICEmail"><img src="~/img/detail/letter-red.png" alt="">@Model.PackageAgency.PICEmail</a>
                     </div>
                 </div>
             </div>

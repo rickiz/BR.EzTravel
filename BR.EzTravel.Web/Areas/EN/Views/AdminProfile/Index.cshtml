@@ -50,6 +50,11 @@
             <div class="col-sm-9 text-center">
                 <div class="col-xs-6">
                     <div class="form-group">
+                        @Html.LabelFor(m => m.PICEmail, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.PICEmail, new { @class = "form-control col-md-12", placeholder = "PICEmail", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.PICEmail)
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(m => m.BusinessRegNo, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.BusinessRegNo, new { @class = "form-control col-md-12", placeholder = "BusinessRegNo" })
                         @Html.ValidationMessageFor(m => m.BusinessRegNo)
@@ -68,11 +73,6 @@
                         @Html.LabelFor(m => m.PICContact, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.PICContact, new { @class = "form-control col-md-12", placeholder = "PICContact" })
                         @Html.ValidationMessageFor(m => m.PICContact)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.PICEmail, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.PICEmail, new { @class = "form-control col-md-12", placeholder = "PICEmail" })
-                        @Html.ValidationMessageFor(m => m.PICEmail)
                     </div>
                 </div>
                 <div class="col-xs-6">
