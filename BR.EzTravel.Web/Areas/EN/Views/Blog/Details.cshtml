@@ -347,3 +347,11 @@
         }
     </script>
 }
+
+@section fbheader
+{
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:url" content="@(Request.Url.ToString())" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="@Url.ContentAbsUrl(Url.UploadedImageContent(Model.ThumbnailImagePath))" />
+}

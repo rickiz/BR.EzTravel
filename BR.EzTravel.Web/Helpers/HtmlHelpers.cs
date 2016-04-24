@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using BR.EzTravel.Web.Properties;
@@ -72,6 +73,16 @@ namespace BR.EzTravel.Web.Helpers
             var currentController = htmlHelper.ViewContext.RouteData.GetRequiredString("controller");
 
             return menuController.ToLower() == currentController.ToLower() ? "active" : "";
+        }
+
+        public static string ContentAbsUrl(this UrlHelper url, string relativeContentPath)
+        {
+            Uri contextUri = HttpContext.Current.Request.Url;
+
+            var baseUri = string.Format("{0}://{1}{2}", contextUri.Scheme,
+               contextUri.Host, contextUri.Port == 80 ? string.Empty : ":" + contextUri.Port);
+
+            return string.Format("{0}{1}", baseUri, VirtualPathUtility.ToAbsolute(relativeContentPath));
         }
     }
 }
