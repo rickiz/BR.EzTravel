@@ -84,5 +84,21 @@ namespace BR.EzTravel.Web.Helpers
 
             return string.Format("{0}{1}", baseUri, VirtualPathUtility.ToAbsolute(relativeContentPath));
         }
+
+        public static string CurrentDomainWithArea(this HtmlHelper htmlHelper)
+        {
+            var contextUri = HttpContext.Current.Request.Url;
+            var area = (htmlHelper.ViewContext.RouteData.DataTokens["area"] ?? "en").ToString().ToLower();
+
+            var domain = 
+                contextUri.Scheme + 
+                System.Uri.SchemeDelimiter + 
+                contextUri.Host +
+                (contextUri.IsDefaultPort ? "" : ":" + contextUri.Port);
+            var baseUri = new Uri(domain);
+            var resultUri = new Uri(baseUri, area);
+
+            return resultUri.ToString();
+        }
     }
 }

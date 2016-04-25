@@ -62,8 +62,8 @@
                 </div>
                 <div class="right-col">                    
                     <div class="folow">
-                        <a href="#" onclick="shareFB('@(Request.Url.ToString())')"><i class="fa fa-facebook"></i></a>
-                        @*<a href="#" onclick="shareFB('http://www.ezgoholiday.com/en/')"><i class="fa fa-facebook"></i></a>*@
+                        @*<a href="#" onclick="shareFB('@(Request.Url.ToString())')"><i class="fa fa-facebook"></i></a>*@
+                        <a href="#" onclick="shareFB('@(Html.CurrentDomainWithArea())')"><i class="fa fa-facebook"></i></a>
                         <a href="@Url.Action("Index", "Home")">EN</a>
                         <a href="@Url.Action("Index", "ComingSoon")">CN</a>
                     </div>

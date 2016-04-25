@@ -31,11 +31,14 @@
             <div class="col-xs-12 col-md-8">
                 <div class="detail-header style-2">
                     <h2 class="detail-title color-dark-2">
-                        @Model.Title 
-                        <button class="btn btn-default fa fa-thumbs-o-up" onclick="addRewardPoints(@(Model.ID))"> 
+                        @Model.Title
+
+                        <button class="btn btn-sm btn-default fa fa-thumbs-o-up" onclick="addRewardPoints(@(Model.ID))" style="font-size: x-small">
                             <span class="badge" id="reward-points">@Model.RewardPoints</span>
                         </button>
+
                     </h2> 
+                    
                     <div class="tour-info-line clearfix">
                         <div class="tour-info fl">
                             <img src="~/img/calendar_icon_grey.png" alt="">
@@ -131,9 +134,13 @@
 
                         <div class="share clearfix">
                             <div class="share-title color-dark-2">share:</div>
-                            <ul>
+                            <div class="fb-share-button"
+                                 data-href="@(Request.Url.ToString())"
+                                 data-layout="button_count">
+                            </div>
+                            @*<ul>
                                 <li class="color-fb"><a href=""><i class="fa fa-facebook"></i>facebook<span class="color-fb-2">12</span></a></li>
-                            </ul>
+                            </ul>*@
                         </div>
                     </div>
                 </div>
