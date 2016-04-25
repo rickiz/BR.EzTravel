@@ -52,23 +52,29 @@
                                     <span class="font-style-2 color-dark-2">@item.TotalComments comments</span>
                                 </div>
                             </div>
-                            @*<div class="blog-list-text color-grey-3">
-                                @Html.Raw(item.Body)
-                            </div>*@
                             <a href="@(Url.Action("Details", "Blog", new { ID = item.ID }))" class="c-button small bg-dr-blue-2 hv-dr-blue-2-o"><span>read more</span></a>
                         </div>
                     }
 
                     <div class="c_pagination clearfix">
-                        <a href="#" class="c-button b-40 bg-dr-blue-2 hv-dr-blue-2-o fl">prev page</a>
-                        <a href="#" class="c-button b-40 bg-dr-blue-2 hv-dr-blue-2-o fr">next page</a>
+                        @if (Model.PageNum > 1)
+                        {
+                            <a href='@(Url.Action("Index", "Blog", new { p = Model.PageNum - 1, categoryID = Model.CategoryID }))' class="c-button b-40 bg-dr-blue-2 hv-dr-blue-2-o fl">prev page</a>
+                        }
+                        @if (Model.PageNum < Model.TotalPage)
+                        {
+                            <a href='@(Url.Action("Index", "Blog", new { p = Model.PageNum + 1, categoryID = Model.CategoryID }))' class="c-button b-40 bg-dr-blue-2 hv-dr-blue-2-o fr">next page</a>
+                        }
+
                         <ul class="cp_content color-3">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">10</a></li>
+
+                            @for (int i = 1; i <= Model.TotalPage; i++)
+                            {
+                                <li class='@(Model.PageNum == i ? "active" : "")'>
+                                    <a href='@(Url.Action("Index", "Blog", new { p = i, categoryID = Model.CategoryID }))'>@i</a>
+                                </li>
+                            }
+
                         </ul>
                     </div>
                 </div>

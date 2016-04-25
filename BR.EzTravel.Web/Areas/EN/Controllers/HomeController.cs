@@ -11,7 +11,6 @@ using System.Data.Entity;
 
 namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
-    //[Authorize]
     public class HomeController : BaseEnController
     {
         public ActionResult Index()
@@ -74,10 +73,36 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             {
                 LatestPackages = latestPackages,
                 PopularPackages = topPackages,
-                LatestBlogs = latestBlogs
+                LatestBlogs = latestBlogs,
+                Countries = GetList(ListType.Country, defaultItem: false),
+                PackageActivities = GetList(ListType.PackageActivity, defaultItem: false),
+                Categories = GetList(ListType.Category, defaultItem: false),
+                Criteria = new PackageSearchCriteria
+                {
+                    PriceFrom = "0",
+                    PriceTo = "9999",
+                }
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(HomeViewModel viewModel)
+        {
+            if (viewModel.Criteria.Rates == null)
+                viewModel.Criteria.Rates = new int[] { };
+
+            if (viewModel.Criteria.PackageActivityIDs == null)
+                viewModel.Criteria.PackageActivityIDs = new int[] { };
+
+            viewModel.Criteria.PackageActivityIDs = viewModel.Criteria.PackageActivityIDs.Where(a => a > 0).ToArray();
+
+            Session.Remove(OldSearchGuid);
+            var sid = SetSessionSearchCriteria(viewModel.Criteria);
+            OldSearchGuid = sid;
+
+            return RedirectToAction("Index", "Package", new { sid = sid });
         }
     }
 }

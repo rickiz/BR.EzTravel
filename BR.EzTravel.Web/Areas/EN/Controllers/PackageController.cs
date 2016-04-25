@@ -13,29 +13,13 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
     public class PackageController : BaseEnController
     {
-        public string OldSearchGuid
-        {
-            get
-            {
-                return Session["Package_Search_OldGuid"] as string;
-            }
-
-            set
-            {
-                Session["Package_Search_OldGuid"] = value;
-            }
-        }
+        
 
         private PackageSearchCriteria GetSessionSearchCriteria(string guid)
         {
             return Session[guid] as PackageSearchCriteria;
         }
-        private string SetSessionSearchCriteria(PackageSearchCriteria criteria)
-        {
-            var guid = Guid.NewGuid().ToString();
-            Session[guid] = criteria;
-            return guid;
-        }
+        
         private List<PackageDetails> SeacrhPackages(PackageSearchCriteria criteria)
         {
             var query =
@@ -54,6 +38,15 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 query = query.Where(a =>
                     db.lnkmemberpostpackageactivities
                         .Any(b => criteria.PackageActivityIDs.Contains(b.PackageActivityID)
+                                && b.MemberPostID == a.ID
+                                && b.Active));
+            }
+
+            if (criteria.CountryID > 0)
+            {
+                query = query.Where(a =>
+                    db.lnkmemberpostcountries
+                        .Any(b => b.CountryID == criteria.CountryID
                                 && b.MemberPostID == a.ID
                                 && b.Active));
             }
@@ -141,6 +134,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 },
                 PackageActivities = GetPackageActivities(),
                 Categories = GetPackageCategories(),
+                Countries = GetList(ListType.Country, defaultText: "All")
             };
 
             // Continue with previous search criteria
@@ -184,6 +178,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             viewModel.SearchResults = SeacrhPackages(viewModel.Criteria);
             viewModel.PackageActivities = GetList(ListType.PackageActivity, defaultItem: false);
             viewModel.Categories = GetPackageCategories();
+            viewModel.Countries = GetList(ListType.Country , defaultText: "All");
 
             if (viewModel.Criteria.Rates == null)
                 viewModel.Criteria.Rates = new int[] { };

@@ -6,6 +6,8 @@
 
     var latestPackages = Model.LatestPackages;
     var popularPackages = Model.PopularPackages;
+    var priceFrom = Util.ConvertPriceSearch(Model.Criteria.PriceFrom);
+    var priceTo = Util.ConvertPriceSearch(Model.Criteria.PriceTo);
 }
 
 <div class="full-height">
@@ -18,23 +20,26 @@
         <!-- search form -->
         <div class="vertical-align">
             <div class="container">
-                <form action="#" class="hotel-filter">
+                @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "hotel-filter" }))
+                {
+                    @Html.HiddenFor(m => m.Criteria.CountryID)
+                    @Html.HiddenFor(m => m.Criteria.CategoryID)
+                    @Html.HiddenFor(m => m.Criteria.PackageActivityIDs)
+
                     <div class="baner-bar">
                         <div class="row">
-
                             <div class="col-md-4">
                                 <div class="hotels-block">
                                     <h4>Country & Destination</h4>
                                     <div class="drop-wrap drop-wrap-s-4 color-2">
                                         <div class="drop">
-                                            <b>Malaysia</b>
+                                            <b>-- Please Select --</b>
                                             <a href="#" class="drop-list"><i class="fa fa-angle-down"></i></a>
                                             <span style="display: none;">
-                                                <a href="#">Penang</a>
-                                                <a href="#">Sabah</a>
-                                                <a href="#">Sarawak</a>
-                                                <a href="#">Ipoh</a>
-                                                <a href="#">kuantan</a>
+                                                @foreach (var country in Model.Countries)
+                                                {
+                                                    <a href="#" onclick="setCountry(@country.Value)">@country.Text</a>
+                                                }
                                             </span>
                                         </div>
                                     </div>
@@ -45,12 +50,13 @@
                                     <h4>Package Type</h4>
                                     <div class="drop-wrap drop-wrap-s-4 color-2">
                                         <div class="drop">
-                                            <b>Groups tour</b>
+                                            <b>-- Please Select --</b>
                                             <a href="#" class="drop-list"><i class="fa fa-angle-down"></i></a>
                                             <span style="display: none;">
-                                                <a href="#">Family tour</a>
-                                                <a href="#">Honeymoon</a>
-                                                <a href="#">Budget tour</a>
+                                                @foreach (var category in Model.Categories)
+                                                {
+                                                    <a href="#" onclick="setCategory(@category.Value)">@category.Text</a>
+                                                }
                                             </span>
                                         </div>
                                     </div>
@@ -61,47 +67,28 @@
                                     <h4>Activity</h4>
                                     <div class="drop-wrap drop-wrap-s-4 color-2">
                                         <div class="drop">
-                                            <b>Malaysia</b>
+                                            <b>-- Please Select --</b>
                                             <a href="#" class="drop-list"><i class="fa fa-angle-down"></i></a>
                                             <span style="display: none;">
-                                                <a href="#">Adventure</a>
-                                                <a href="#">Island hoping</a>
-                                                <a href="#">City hoping</a>
+                                                @foreach (var activity in Model.PackageActivities)
+                                                {
+                                                    <a href="#" onclick="setActivity(@activity.Value)">@activity.Text</a>
+                                                }
 
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @*<div class="col-md-2">
-                                <div class="hotels-block">
-                                    <h4>Duration</h4>
-                                    <div class="drop-wrap drop-wrap-s-4 color-2">
-                                        <div class="drop">
-
-                                            <a href="#" class="drop-list"><i class="fa fa-angle-down"></i></a>
-                                            <span style="display: none;">
-                                                <a href="#">1</a>
-                                                <a href="#">2</a>
-                                                <a href="#">3</a>
-                                                <a href="#">4</a>
-                                                <a href="#">5</a>
-
-
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
                         </div>
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="range-wrapp">
                                     <h4>Price range</h4>
-                                    <div class="slider-range" data-counter="RM" data-position="start" data-from="0" data-to="5000" data-min="0" data-max="5000">
+                                    <div class="slider-range" data-counter="RM " data-position="start" data-from="@(priceFrom)" data-to="@(priceTo)" data-min="0" data-max="9999">
                                         <div class="range"></div>
-                                        <input type="text" class="amount-start" readonly value="RM 0">
-                                        <input type="text" class="amount-end" readonly value="RM 5000">
+                                        @Html.TextBoxFor(m => m.Criteria.PriceFrom, new { @class = "amount-start", @readonly = true })
+                                        @Html.TextBoxFor(m => m.Criteria.PriceTo, new { @class = "amount-end", @readonly = true })
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                }
             </div>
         </div>
         <!-- end search form -->
@@ -402,4 +389,21 @@
     <meta property="og:url" content="@(Request.Url.ToString())" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="@Url.ContentAbsUrl("~/img/theme-1/logo2.png")" />
+}
+
+@section scripts
+{
+    <script>
+        function setCountry(countryID) {
+            $("#@(Html.IdFor(m => m.Criteria.CountryID))").val(countryID);
+        }
+
+        function setCategory(categoryID) {
+            $("#@(Html.IdFor(m => m.Criteria.CategoryID))").val(categoryID);
+        }
+
+        function setActivity(activityID) {
+            $("#@(Html.IdFor(m => m.Criteria.PackageActivityIDs))").val(activityID);
+        }
+    </script>
 }

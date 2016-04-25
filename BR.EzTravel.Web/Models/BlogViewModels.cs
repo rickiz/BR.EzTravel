@@ -15,6 +15,8 @@ namespace BR.EzTravel.Web.Models
         public List<PopularBlog> PopularBlogs { get; set; }
         public List<LatestBlogComment> LatestBlogComments { get; set; }
         public int CategoryID { get; set; }
+        public int PageNum { get; set; }
+        public int TotalPage { get; set; }
     }
 
     public class BlogDetails

@@ -19,6 +19,19 @@ namespace BR.EzTravel.Web.Controllers
         protected string lang = Language.EN.ToString();
         protected static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType.Name);
 
+        public string OldSearchGuid
+        {
+            get
+            {
+                return Session["Package_Search_OldGuid"] as string;
+            }
+
+            set
+            {
+                Session["Package_Search_OldGuid"] = value;
+            }
+        }
+
         protected override void OnException(ExceptionContext filterContext)
         {
             var exception = filterContext.Exception;
@@ -161,6 +174,13 @@ namespace BR.EzTravel.Web.Controllers
                     }).OrderBy(a => a.Name).ToList();
 
             return packageCategories;
+        }
+
+        protected string SetSessionSearchCriteria(PackageSearchCriteria criteria)
+        {
+            var guid = Guid.NewGuid().ToString();
+            Session[guid] = criteria;
+            return guid;
         }
     }
 }
