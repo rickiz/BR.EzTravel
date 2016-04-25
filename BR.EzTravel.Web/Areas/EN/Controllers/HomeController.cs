@@ -74,7 +74,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 LatestPackages = latestPackages,
                 PopularPackages = topPackages,
                 LatestBlogs = latestBlogs,
-                Countries = GetList(ListType.Country, defaultItem: false),
+                Countries = GetList(ListType.PackageCountry, defaultItem: false),
                 PackageActivities = GetList(ListType.PackageActivity, defaultItem: false),
                 Categories = GetList(ListType.Category, defaultItem: false),
                 Criteria = new PackageSearchCriteria

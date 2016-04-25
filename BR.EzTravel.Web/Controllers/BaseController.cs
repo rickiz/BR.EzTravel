@@ -115,6 +115,24 @@ namespace BR.EzTravel.Web.Controllers
                         }).OrderBy(a => a.Text).ToList();
                     break;
 
+                case ListType.PackageCountry:
+                    var packageCountries =
+                        (from b in db.refcountries
+                         join a in db.lnkmemberpostcountries on b.ID equals a.CountryID
+                         where b.Active && b.Language == lang && a.Active
+                         select new 
+                         {
+                             Name = b.Name,
+                             ID = b.ID,
+                         }).Distinct().ToList();
+                    resultList = packageCountries.Select(a =>
+                        new SelectListItem()
+                        {
+                            Text = a.Name,
+                            Value = a.ID.ToString()
+                        }).OrderBy(a => a.Text).ToList();
+                    break;
+
                 default:
                     break;
             }
@@ -175,6 +193,7 @@ namespace BR.EzTravel.Web.Controllers
 
             return packageCategories;
         }
+
 
         protected string SetSessionSearchCriteria(PackageSearchCriteria criteria)
         {

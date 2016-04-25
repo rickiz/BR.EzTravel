@@ -134,7 +134,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 },
                 PackageActivities = GetPackageActivities(),
                 Categories = GetPackageCategories(),
-                Countries = GetList(ListType.Country, defaultText: "All")
+                Countries = GetList(ListType.PackageCountry, defaultText: "All")
             };
 
             // Continue with previous search criteria
@@ -178,7 +178,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             viewModel.SearchResults = SeacrhPackages(viewModel.Criteria);
             viewModel.PackageActivities = GetList(ListType.PackageActivity, defaultItem: false);
             viewModel.Categories = GetPackageCategories();
-            viewModel.Countries = GetList(ListType.Country , defaultText: "All");
+            viewModel.Countries = GetList(ListType.PackageCountry , defaultText: "All");
 
             if (viewModel.Criteria.Rates == null)
                 viewModel.Criteria.Rates = new int[] { };
