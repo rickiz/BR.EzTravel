@@ -63,7 +63,13 @@
                 <div class="right-col">                    
                     <div class="folow">
                         @*<a href="#" onclick="shareFB('@(Request.Url.ToString())')"><i class="fa fa-facebook"></i></a>*@
-                        <a href="#" onclick="shareFB('@(Html.CurrentDomainWithArea())')"><i class="fa fa-facebook"></i></a>
+                        @*<a href="#" onclick="shareFB('@(Html.CurrentDomainWithArea())')"><i class="fa fa-facebook"></i></a>*@
+                        <a style="width: 100px;">
+                            <div class="fb-share-button"
+                                 data-href="@(Html.CurrentDomainWithArea())"
+                                 data-layout="button_count">
+                            </div>
+                        </a>
                         <a href="@Url.Action("Index", "Home")">EN</a>
                         <a href="@Url.Action("Index", "ComingSoon")">CN</a>
                     </div>
