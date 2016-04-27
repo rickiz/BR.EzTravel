@@ -51,16 +51,16 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                                 && b.Active));
             }
 
-            if (!criteria.PriceFrom.IsStringEmpty())
-            {
-                var priceFrom = Util.ConvertPriceSearch(criteria.PriceFrom);
-                query = query.Where(a => a.Price >= priceFrom);
-            }
+            var priceFrom = Util.ConvertPriceSearch(criteria.PriceFrom);
+            var priceTo = Util.ConvertPriceSearch(criteria.PriceTo);
 
-            if (!criteria.PriceTo.IsStringEmpty())
+            if(priceFrom > 0 || priceTo > 0)
             {
-                var priceTo = Util.ConvertPriceSearch(criteria.PriceTo);
-                query = query.Where(a => a.Price <= priceTo);
+                if(priceFrom > 0)
+                    query = query.Where(a => a.Price >= priceFrom);
+
+                if(priceTo > 0)
+                    query = query.Where(a => a.Price <= priceTo);
             }
 
             if (!criteria.Rates.IsEmpty())
@@ -134,7 +134,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 },
                 PackageActivities = GetPackageActivities(),
                 Categories = GetPackageCategories(),
-                Countries = GetList(ListType.PackageCountry, defaultText: "All")
+                Countries = GetList(ListType.PackageCountry, defaultText: "All", defaultValue: "0")
             };
 
             // Continue with previous search criteria
@@ -178,7 +178,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             viewModel.SearchResults = SeacrhPackages(viewModel.Criteria);
             viewModel.PackageActivities = GetList(ListType.PackageActivity, defaultItem: false);
             viewModel.Categories = GetPackageCategories();
-            viewModel.Countries = GetList(ListType.PackageCountry , defaultText: "All");
+            viewModel.Countries = GetList(ListType.PackageCountry , defaultText: "All", defaultValue: "0");
 
             if (viewModel.Criteria.Rates == null)
                 viewModel.Criteria.Rates = new int[] { };
