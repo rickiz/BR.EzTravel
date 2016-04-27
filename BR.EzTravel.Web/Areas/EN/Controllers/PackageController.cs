@@ -130,7 +130,9 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Criteria = new PackageSearchCriteria
                 {
                     CategoryID = categoryID, Rates = new int[] { }, PackageActivityIDs = new int[] { },
-                    SortOrder = sort, PageNum = p
+                    SortOrder = sort, PageNum = p,
+                    PriceFrom = "0",
+                    PriceTo = "9999"
                 },
                 PackageActivities = GetPackageActivities(),
                 Categories = GetPackageCategories(),
