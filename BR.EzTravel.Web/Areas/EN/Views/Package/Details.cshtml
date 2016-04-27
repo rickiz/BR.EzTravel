@@ -84,6 +84,14 @@
                                 <li>@activity</li>
                             }
                         </ul>
+
+                        <div class="share clearfix">
+                            <div class="share-title color-dark-2">share:</div>
+                            <div class="fb-share-button"
+                                 data-href="@(Request.Url.ToString())"
+                                 data-layout="button_count">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="additional-block">
@@ -390,3 +398,10 @@
     </script>
 }
 
+@section fbheader
+{
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:url" content="@(Request.Url.ToString())" />
+    <meta property="og:description" content="@Model.Description" />
+    <meta property="og:image" content="@Url.ContentAbsUrl(Url.UploadedImageContent(Model.ThumbnailImagePath))" />
+}

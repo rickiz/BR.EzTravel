@@ -12,14 +12,32 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 {
     public class BlogController : BaseEnController
     {
-        public ActionResult Index(int categoryID = 0)
+        public ActionResult Index(int categoryID = 0, int p = 0)
         {
-            var viewModel = new BlogIndexViewModel { CategoryID = categoryID };
+            var viewModel = new BlogIndexViewModel { CategoryID = categoryID, PageNum = p };
 
-            viewModel.Blogs =
+            var query =
                 db.trnblogs
                     .GroupJoin(db.tblmembers, a => a.MemberID, b => b.ID, (a, b) => new { Blog = a, Member = b.FirstOrDefault(), })
-                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang && (a.Blog.CategoryID == categoryID || categoryID == 0) && a.Blog.Active)
+                    .Where(a => !a.Blog.CancelDT.HasValue && a.Blog.Language == lang
+                        && (a.Blog.CategoryID == categoryID || categoryID == 0) && a.Blog.Active)
+                    .OrderByDescending(a => a.Blog.ID);
+
+            var pageSize = Settings.Default.MaxListPerPage;
+            var rowsCount = query.Count();
+
+            viewModel.TotalPage = rowsCount / pageSize;
+            if (rowsCount % pageSize > 0)
+                viewModel.TotalPage++;
+
+            //If page number should be > 0 else set to first page
+            if (rowsCount <= pageSize || viewModel.PageNum <= 0) viewModel.PageNum = 1;
+
+            //Calculate nunber of rows to skip on pagesize
+            int excludedRows = (viewModel.PageNum - 1) * pageSize;
+
+            viewModel.Blogs =
+                query
                     .Select(a => new BlogDetails
                     {
                         ID = a.Blog.ID,
@@ -31,7 +49,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         TotalComments = db.lnkblogcomments.Where(b => b.BlogID == a.Blog.ID && !b.CancelDT.HasValue).Count(),
                         ThumbnailImagePath = a.Blog.ThumbnailImagePath
                     })
-                    .Take(Settings.Default.MaxListPerPage)
+                    .Skip(excludedRows)
+                    .Take(pageSize)
                     .ToList();
 
             viewModel.PopularBlogs =

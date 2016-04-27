@@ -29,6 +29,9 @@ namespace BR.EzTravel.Web
             bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
                       "~/Scripts/tinymce/tinymce.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/map").Include(
+                      "~/Scripts/map.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/all").Include(
                      "~/Scripts/idangerous.swiper.min.js",
                      "~/Scripts/jquery.viewportchecker.min.js",
@@ -38,7 +41,7 @@ namespace BR.EzTravel.Web
                      "~/Scripts/jquery.classycountdown.min.js",
                      "~/Scripts/jquery.throttle.min.js",
                      "~/Scripts/jquery.knob.min.js",
-                     "~/Scripts/map.js",
+                     //"~/Scripts/map.js",
                      "~/Scripts/all.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/eztravel").Include(

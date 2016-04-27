@@ -112,7 +112,7 @@ namespace BR.EzTravel.Web.Helpers
 
         public static int ConvertPriceSearch(string price)
         {
-            return price.IsStringEmpty() ? 0 : int.Parse(price.Replace("$", ""));
+            return price.IsStringEmpty() ? 0 : int.Parse(price.Replace("RM", "").Trim());
         }
     }
 }

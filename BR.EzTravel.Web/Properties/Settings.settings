@@ -8,14 +8,8 @@
     <Setting Name="DateFormat" Type="System.String" Scope="Application">
       <Value Profile="(Default)">dd/MM/yyyy</Value>
     </Setting>
-    <Setting Name="MaxListPerPage" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">12</Value>
-    </Setting>
     <Setting Name="EmailHost" Type="System.String" Scope="Application">
       <Value Profile="(Default)">mail.ezgoholiday.com</Value>
-    </Setting>
-    <Setting Name="EmailPort" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">465</Value>
     </Setting>
     <Setting Name="EmailUsername" Type="System.String" Scope="Application">
       <Value Profile="(Default)">notification@ezgoholiday.com</Value>
@@ -31,6 +25,15 @@
     </Setting>
     <Setting Name="EmailDefaultCrudential" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MaxListPerPage" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="EmailPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="FBAppID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1583867081942226</Value>
     </Setting>
   </Settings>
 </SettingsFile>

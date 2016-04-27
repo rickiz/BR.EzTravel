@@ -1,12 +1,17 @@
 ﻿@using BR.EzTravel.Web.Helpers
+@using BR.EzTravel.Web.Properties
 
 <!DOCTYPE html>
 <html>
-<head>
+<head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
+    <meta property="fb:app_id" content="@Settings.Default.FBAppID" />
+    <meta property="og:type" content="website" />
+    @RenderSection("fbheader", required: false)
+
     @Styles.Render("~/Content/css")
 
     @RenderSection("styles", required: false)
@@ -57,7 +62,8 @@
                 </div>
                 <div class="right-col">                    
                     <div class="folow">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        @*<a href="#" onclick="shareFB('@(Request.Url.ToString())')"><i class="fa fa-facebook"></i></a>*@
+                        <a href="#" onclick="shareFB('@(Html.CurrentDomainWithArea())')"><i class="fa fa-facebook"></i></a>
                         <a href="@Url.Action("Index", "Home")">EN</a>
                         <a href="@Url.Action("Index", "ComingSoon")">CN</a>
                     </div>
@@ -73,7 +79,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="nav">
-                        <a href="index.html" class="logo">
+                        <a href="@(Url.Action("Index", "Home"))" class="logo">
                             <img src="~/img/theme-1/logo2.png" alt="ez travel">
                         </a>
                         <div class="nav-menu-icon">
@@ -279,7 +285,33 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/all")
     @Scripts.Render("~/bundles/eztravel")
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;language=en"></script>	
+    
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '@(Settings.Default.FBAppID)',
+          xfbml      : true,
+          version    : 'v2.6'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+      function shareFB(url) {
+          FB.ui({
+              method: 'share',
+              href: url,
+          }, function (response) { });
+      }
+    </script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

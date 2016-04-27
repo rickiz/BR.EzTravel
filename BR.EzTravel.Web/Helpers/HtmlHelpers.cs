@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using BR.EzTravel.Web.Properties;
@@ -58,8 +59,11 @@ namespace BR.EzTravel.Web.Helpers
 
         public static string UploadedImageContent(this UrlHelper urlHelper, string contentPath)
         {
+            //if (string.IsNullOrEmpty(contentPath))
+            //    return urlHelper.Content(Settings.Default.ImageUploadPath);
+
             if (string.IsNullOrEmpty(contentPath))
-                return urlHelper.Content(Settings.Default.ImageUploadPath);
+                return "";
 
             return urlHelper.Content(Path.Combine(Settings.Default.ImageUploadPath, contentPath));
         }
@@ -69,6 +73,32 @@ namespace BR.EzTravel.Web.Helpers
             var currentController = htmlHelper.ViewContext.RouteData.GetRequiredString("controller");
 
             return menuController.ToLower() == currentController.ToLower() ? "active" : "";
+        }
+
+        public static string ContentAbsUrl(this UrlHelper url, string relativeContentPath)
+        {
+            Uri contextUri = HttpContext.Current.Request.Url;
+
+            var baseUri = string.Format("{0}://{1}{2}", contextUri.Scheme,
+               contextUri.Host, contextUri.Port == 80 ? string.Empty : ":" + contextUri.Port);
+
+            return string.Format("{0}{1}", baseUri, VirtualPathUtility.ToAbsolute(relativeContentPath));
+        }
+
+        public static string CurrentDomainWithArea(this HtmlHelper htmlHelper)
+        {
+            var contextUri = HttpContext.Current.Request.Url;
+            var area = (htmlHelper.ViewContext.RouteData.DataTokens["area"] ?? "en").ToString().ToLower();
+
+            var domain = 
+                contextUri.Scheme + 
+                System.Uri.SchemeDelimiter + 
+                contextUri.Host +
+                (contextUri.IsDefaultPort ? "" : ":" + contextUri.Port);
+            var baseUri = new Uri(domain);
+            var resultUri = new Uri(baseUri, area);
+
+            return resultUri.ToString();
         }
     }
 }

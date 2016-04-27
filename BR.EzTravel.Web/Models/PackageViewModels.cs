@@ -36,6 +36,7 @@ namespace BR.EzTravel.Web.Models
         [CustomDateDisplayFormat(ApplyFormatInEditMode = true)]
         public DateTime? CheckOutDate { get; set; }
         public int CategoryID { get; set; }
+        public int CountryID { get; set; }
         public string PriceFrom { get; set; }
         public string PriceTo { get; set; }
         public int[] Rates { get; set; }
@@ -57,7 +58,7 @@ namespace BR.EzTravel.Web.Models
     public class PackageIndexViewModel
     {
         public List<PackageDetails> SearchResults { get; set; }
-
+        public List<SelectListItem> Countries { get; set; }
         public List<PackageCategory> Categories { get; set; }
 
         public PackageSearchCriteria Criteria { get; set; }

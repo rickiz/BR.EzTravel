@@ -43,28 +43,10 @@ namespace BR.EzTravel.Web.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("12")]
-        public int MaxListPerPage {
-            get {
-                return ((int)(this["MaxListPerPage"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("mail.ezgoholiday.com")]
         public string EmailHost {
             get {
                 return ((string)(this["EmailHost"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("465")]
-        public int EmailPort {
-            get {
-                return ((int)(this["EmailPort"]));
             }
         }
         
@@ -110,6 +92,33 @@ namespace BR.EzTravel.Web.Properties {
         public bool EmailDefaultCrudential {
             get {
                 return ((bool)(this["EmailDefaultCrudential"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int MaxListPerPage {
+            get {
+                return ((int)(this["MaxListPerPage"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("587")]
+        public int EmailPort {
+            get {
+                return ((int)(this["EmailPort"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1583867081942226")]
+        public string FBAppID {
+            get {
+                return ((string)(this["FBAppID"]));
             }
         }
     }
