@@ -41,14 +41,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(PackageCreateViewModel viewModel = null)
         {
-            var viewModel = new PackageCreateViewModel
-            {
-                Categories = GetList(ListType.Category),
-                Countries = GetList(ListType.Country),
-                Activities = GetPackageActivities()
-            };
+            if (viewModel == null)
+                viewModel = new PackageCreateViewModel();
+
+            viewModel.Categories = GetList(ListType.Category);
+            viewModel.Countries = GetList(ListType.Country);
+            viewModel.Activities = GetPackageActivities();
 
             return View(viewModel);
         }
@@ -58,6 +58,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         public ActionResult Create(HttpPostedFileBase file, PackageCreateViewModel viewModel)
         {
             var postID = 0;
+
+            var isAvailable = CheckAvailablePost(Util.SessionAccess.ID);
 
             using (var trans = new TransactionScope())
             {
@@ -75,7 +77,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     EndDT = viewModel.EndDT,
                     Days = viewModel.Days,
                     Nights = viewModel.Nights,
-                    Active = true,
+                    Active = viewModel.Active ? isAvailable : viewModel.Active,
                 };
 
                 if (file != null)
@@ -97,7 +99,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 db.lnkmemberpostcountries.Add(country);
                 db.SaveChanges();
 
-                if(!viewModel.SelectedActivities.IsEmpty())
+                if (!viewModel.SelectedActivities.IsEmpty())
                 {
                     foreach (var activityID in viewModel.SelectedActivities)
                     {
@@ -113,7 +115,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     db.SaveChanges();
                 }
 
-                if(!string.IsNullOrEmpty(viewModel.DetailImageNames))
+                if (!string.IsNullOrEmpty(viewModel.DetailImageNames))
                 {
                     var detailImages = viewModel.DetailImageNames.Split(',');
 
@@ -129,7 +131,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                         db.lnkmemberpostimages.Add(linkImage);
                     }
                     db.SaveChanges();
-                }                
+                }
 
                 trans.Complete();
 
@@ -139,16 +141,35 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
             var emailBody = string.Format(@"Hi EZ Management, <br /><br />
                     Package <b>{0}</b> has been created. <br /><br />
                     
-                    http://ezgoholiday.com/EN/Package/Details/{1}",
-                    viewModel.Title, postID);
+                    http://ezgoholiday.com/EN/Package/Details/{1} <br /><br />
+                    Posted: {2}",
+                    viewModel.Title, postID, isAvailable);
 
             Util.SendEmail(viewModel.Title, emailBody, Properties.Settings.Default.EmailFrom, "", "");
 
 
-            return RedirectToAction("Index");
+            if (viewModel.Active && !isAvailable)
+                return RedirectToAction("Edit", new
+                {
+                    id = postID,
+                    errorMessage = "Insufficient available Post.\nPost created but failed to be published to website."
+                });
+            else
+                return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(int id)
+        private bool CheckAvailablePost(int memberID)
+        {
+            var availablePost = db.tblmembers.Where(a => a.ID == memberID).Single().AvailablePost;
+            var postedQty = db.lnkmemberposts.Where(a => a.Active && a.MemberID == memberID).Count();
+
+            if (availablePost <= postedQty)
+                return false;
+            else
+                return true;
+        }
+
+        public ActionResult Edit(int id, string errorMessage = "")
         {
             var package = db.lnkmemberposts.Single(a => a.ID == id);
             var country = db.lnkmemberpostcountries.First(a => a.MemberPostID == package.ID && a.Active);
@@ -167,7 +188,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Nights = package.Nights,
                 StartDT = package.StartDT,
                 EndDT = package.EndDT,
-                Active = package.Active
+                Active = package.Active,
+                ErrorMessage = errorMessage
             };
 
             var selectedActivities = 
@@ -198,6 +220,9 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HttpPostedFileBase file, PackageEditViewModel viewModel)
         {
+
+            var isAvailable = CheckAvailablePost(Util.SessionAccess.ID);
+
             using (var trans = new TransactionScope())
             {
                 var package = db.lnkmemberposts.Single(a => a.ID == viewModel.ID);
@@ -210,7 +235,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 package.EndDT = viewModel.EndDT;
                 package.Days = viewModel.Days;
                 package.Nights = viewModel.Nights;
-                package.Active = viewModel.Active;
+                package.Active = viewModel.Active? isAvailable: viewModel.Active;
 
                 if (file != null)
                 {
@@ -291,7 +316,14 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             Util.SendEmail(viewModel.Title, emailBody, Properties.Settings.Default.EmailFrom, "", "");
 
-            return RedirectToAction("Index");
+            if (viewModel.Active && !isAvailable)
+                return RedirectToAction("Edit", new
+                {
+                    id = viewModel.ID,
+                    errorMessage = "Insufficient available Post.\nPost updated but failed to be published to website."
+                });
+            else
+                return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)

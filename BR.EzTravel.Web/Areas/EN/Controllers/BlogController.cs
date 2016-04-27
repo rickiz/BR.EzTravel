@@ -106,7 +106,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                                         {
                                             ID = a.Category.ID,
                                             Name = a.Category.Name,
-                                            Count = a.Blogs.Count()
+                                            Count = a.Blogs.Where(bb => bb.Active).Count()
                                         }).ToList();
 
             return View(viewModel);

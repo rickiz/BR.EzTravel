@@ -12,6 +12,8 @@ namespace BR.EzTravel.Web.Models.Admin
 {
     public class PackageCreateViewModel
     {
+        public string ErrorMessage { get; set; }
+    
         [Required, StringLength(200)]
         public string Title { get; set; }
 
