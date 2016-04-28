@@ -11,101 +11,145 @@
         <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
     </p>
 
-    <div class="row vdivide">
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ID)
+        if (@Model.ErrorMessage != "")
         {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.ID)
-            if (@Model.ErrorMessage != "")
-            {
-                <label style="color:red;font-weight:bold;">@Model.ErrorMessage</label>
-            }
-            <div class="col-sm-3 text-center">
-                <h3 class="page-header">My Profile</h3>
+            <label style="color:red;font-weight:bold;">@Model.ErrorMessage</label>
+        }
+
+        <div class="col-md-3">
+            <div class="text-center margin-bottom-15px">
                 @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
                 {
-                    <img id="img-preview" class="commnent-img img-rounded img-circle" width="150px" height="150px"
-                         src="@Url.UploadedImageContent(Model.ProfileImagePath)" alt="your profile picture">
-                    @*<img id="img-preview" src="@(Url.Content(Model.ProfileImagePath))" alt="your profile picture" style="max-width: 700px; max-height: 500px;" />*@
+                    <img data-src="holder.js/140x140" class="img-circle" alt="140x140" style="width: 140px; height: 140px;" 
+                         src="@Url.UploadedImageContent(Model.ProfileImagePath)" data-holder-rendered="true">
                 }
-                <div style="margin-top: 15px">
-                    @*<br /><br />*@
-                    <label for="file">Profile Image</label>
-                    <input type="file" id="file" name="file" />
-                </div>
-                <br /><br /><br />
-                <div class="form-group">
-                    <label class = "control-label">Available Post:</label> 10
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Posted:</label> 4
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Remaining:</label> 6
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Reward Points:</label> 6
-                </div>
+                <h2><strong> @Util.SessionAccess.RewardPoints  </strong><small>p</small></h2>
+                <p><small>Reward Point</small></p>
+                <input type="file" id="file" name="file" class="btn btn-success btn-block" /><span class="fa fa-plus-circle"></span>
+                @*<button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Edit Profile Picture </button>*@
             </div>
-            <div class="col-sm-9 text-center">
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.PICEmail, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.PICEmail, new { @class = "form-control col-md-12", placeholder = "PICEmail", @readonly = "readonly" })
-                        @Html.ValidationMessageFor(m => m.PICEmail)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.BusinessRegNo, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.BusinessRegNo, new { @class = "form-control col-md-12", placeholder = "BusinessRegNo" })
-                        @Html.ValidationMessageFor(m => m.BusinessRegNo)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.CompanyName, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control col-md-12", placeholder = "CompanyName" })
-                        @Html.ValidationMessageFor(m => m.CompanyName)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.PICName, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.PICName, new { @class = "form-control col-md-12", placeholder = "PICName" })
-                        @Html.ValidationMessageFor(m => m.PICName)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.PICContact, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.PICContact, new { @class = "form-control col-md-12", placeholder = "PICContact" })
-                        @Html.ValidationMessageFor(m => m.PICContact)
-                    </div>
+            <div class="margin-bottom-15px">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge badge-primary">@Util.SessionAccess.AvailablePost</span>
+                        Available Post
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge badge-success">0000</span>
+                        Posted
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge badge-warning-alt">0000</span>
+                        Remaining
+                    </li>
+                    <!--<li class="list-group-item">-->
+                    <!--<span class="badge badge-danger">1000</span>-->
+                    <!-- -->
+                    <!--</li>-->
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-9 bg-white ">
+            <h1 id="forms" class="page-header">Profile Details</h1>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    @Html.TextBoxFor(m => m.PICEmail, new { @class = "form-control col-md-12", placeholder = "PICEmail", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PICEmail)
                 </div>
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Address, new { @class = "control-label" })<br />
-                        @Html.TextAreaFor(m => m.Address, new { rows = "3", cols = "50" })
-                        @*@Html.TextBoxFor(m => m.Address, new { @class = "form-control col-md-12", placeholder = "Address" })*@
-                        @Html.ValidationMessageFor(m => m.Address)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Postcode, new { @class = "control-label" })
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Business Registration No.</label>
+                    @Html.TextBoxFor(m => m.BusinessRegNo, new { @class = "form-control col-md-12", placeholder = "BusinessRegNo" })
+                    @Html.ValidationMessageFor(m => m.BusinessRegNo)
+                    @*<label for="exampleInputEmail1">Business Registration Number</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Business Registration Number">*@
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Company Name</label>
+                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control col-md-12", placeholder = "CompanyName" })
+                    @Html.ValidationMessageFor(m => m.CompanyName)
+                    @*<label for="exampleInputEmail1">Company Name</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Company Name">*@
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    @Html.TextBoxFor(m => m.PICName, new { @class = "form-control col-md-12", placeholder = "PICName" })
+                    @Html.ValidationMessageFor(m => m.PICName)
+                    @*<label for="exampleInputEmail1">Contact Person</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Contact Person">*@
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Contact</label>
+                    @Html.TextBoxFor(m => m.PICContact, new { @class = "form-control col-md-12", placeholder = "PICContact" })
+                    @Html.ValidationMessageFor(m => m.PICContact)
+                    @*<label for="exampleInputEmail1">Contact Number</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Contact Number">*@
+                </div>
+                @*<div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                </div>*@
+                <br /><br />
+                <legend>Address Details</legend>
+                <div class="form-group">
+                    @*<label for="exampleInputEmail1">Address</label>
+                    <textarea class="form-control" rows="2"></textarea>*@
+                    <label for="exampleInputEmail1">Address</label><br />
+                    @Html.TextAreaFor(m => m.Address, new { rows = "2", cols = "92" })
+                    @Html.ValidationMessageFor(m => m.Address)
+                </div>
+
+                <div class="form-group clearfix margin-bottom-30px">
+
+                    <div class="col-sm-4">
+                        <label for="exampleInputEmail1">Postcode</label>
                         @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control col-md-12", placeholder = "Postcode" })
                         @Html.ValidationMessageFor(m => m.Postcode)
+                        @*<label for="exampleInputEmail1">Postcode</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">*@
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.State, new { @class = "control-label" })
+
+                    <div class="col-sm-4">
+                        <label for="exampleInputEmail1">State</label>
                         @Html.TextBoxFor(m => m.State, new { @class = "form-control col-md-12", placeholder = "State" })
                         @Html.ValidationMessageFor(m => m.State)
+                        @*<label for="exampleInputEmail1">State</label>
+                        <select class="form-control">
+                            <option>Perak</option>
+                            <option>Sarawak</option>
+                            <option>Sabah</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>*@
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Country, new { @class = "control-label" })
+                    <div class="col-sm-4">
+                        <label for="exampleInputEmail1">Country</label>
                         @Html.TextBoxFor(m => m.Country, new { @class = "form-control col-md-12", placeholder = "Country" })
                         @Html.ValidationMessageFor(m => m.Country)
-                    </div>
-                    <div class="form-group">
-                        <br /><br />
-                        <button type="submit" class="btn btn-primary">
-                            <i class="glyphicon glyphicon-save"></i>
-                            Save
-                        </button>
+                        @*<label for="exampleInputEmail1">Country</label>
+                        <select class="form-control">
+                            <option>England</option>
+                            <option>New Zealand</option>
+                            <option>Korea</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>*@
                     </div>
                 </div>
+
+
+            </form>
+            <hr>
+            <div class="form-group text-center">
+
+                <input type="submit" value="Save" class="btn btn-success btn-lg">
             </div>
-        }
-    </div>
+
+        </div>
+    }
 </div>
