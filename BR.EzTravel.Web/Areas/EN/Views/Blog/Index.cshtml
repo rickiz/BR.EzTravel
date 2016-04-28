@@ -157,7 +157,14 @@
                                         @blog.Title</a> by <span class="color-dark-2">@blog.Author</span>
                                     </div>
                                     <div class="w-comment-text color-grey-3">
-                                        @blog.Comment
+                                        @if (blog.Comment.Length > 50)
+                                        {
+                                            @(blog.Comment.Substring(0, 50) + "....");
+                                        }
+                                        else
+                                        {
+                                            @blog.Comment
+                                        }
                                     </div>
                                 </div>
                             }

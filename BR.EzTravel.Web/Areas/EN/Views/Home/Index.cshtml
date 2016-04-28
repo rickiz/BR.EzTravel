@@ -141,7 +141,16 @@
                                     @*<i>485 rewies</i>*@
                                 </div>
                                 @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
-                                <p class="f-14">@latestPackages[i].Description</p>
+                                <p class="f-14">
+                                    @if (latestPackages[i].Description.Length > 200)
+                                    {
+                                        @(latestPackages[i].Description.Substring(0, 200) + "....");
+                                    }
+                                    else
+                                    {
+                                        @latestPackages[i].Description
+                                    }
+                                </p>
                                 <br />
                                 <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))'
                                    class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">view more</a>
@@ -172,7 +181,16 @@
                                     </div>
                                 </div>
                                 @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
-                                <p class="f-14">@latestPackages[i].Description</p>
+                                <p class="f-14">
+                                    @if (latestPackages[i].Description.Length > 200)
+                                    {
+                                        @(latestPackages[i].Description.Substring(0, 200) + "....");
+                                    }
+                                    else
+                                    {
+                                        @latestPackages[i].Description
+                                    }
+                                </p>
                                 <br />
                                 <a href='@(Url.Action("Details", "Package", new { id = @latestPackages[i].ID }))'
                                    class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
@@ -203,7 +221,16 @@
                                     </div>
                                 </div>
                                 @*<span class="f-14 color-dark-2">2 Place de la Sans Défense, Puteaux</span>*@
-                                <p class="f-14">@latestPackages[i].Description</p>
+                                <p class="f-14">
+                                    @if (latestPackages[i].Description.Length > 200)
+                                    {
+                                        @(latestPackages[i].Description.Substring(0, 200) + "....");
+                                    }
+                                    else
+                                    {
+                                        @latestPackages[i].Description
+                                    }
+                                </p>
                                 <br />
                                 <a href='@(Url.Action("Details", "Package", new { id = latestPackages[i].ID }))'
                                    class="c-button bg-dr-blue hv-dr-blue-o b-50 fl">book now</a>
@@ -240,7 +267,16 @@
                         <div class="vertical-align">
                             <h3 class="ib-subtitle hover-it"><span class="color-sea">RM @popularPackages[0].Price</span></h3>
                             <h3 class="hover-it underline">@popularPackages[0].Title</h3>
-                            <p>@popularPackages[0].Description</p>
+                            <p>
+                                @if (popularPackages[0].Description.Length > 200)
+                                {
+                                    @(popularPackages[0].Description.Substring(0, 200) + "....");
+                                }
+                                else
+                                {
+                                    @popularPackages[0].Description
+                                }
+                            </p>
                         </div>
                     </a>
                 </div>
@@ -260,28 +296,46 @@
                                 <span class="color-red"><strong>RM @popularPackages[i].Price</strong></span>
                             </h5>
                             <h4>@popularPackages[i].Title</h4>
-                            <div class="hotel-loc">@popularPackages[i].Description</div>
+                            @*<div class="hotel-loc">
+                                @if (popularPackages[i].Description.Length > 200)
+                                {
+                                    @(popularPackages[i].Description.Substring(0, 200) + "....");
+                                }
+                                else
+                                {
+                                    @popularPackages[i].Description
+                                }
+                            </div>*@
                         </div>
                     </div>
                 }
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 @for (int i = 5; i < 9 && i < popularPackages.Count; i++)
-            {
-                    <div class="hotel-small style-2 clearfix">
-                        <a class="hotel-img black-hover" href="#">
-                            <img class="img-responsive radius-0" src="@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))" alt="">
-                            <div class="tour-layer delay-1"></div>
-                        </a>
-                        <div class="hotel-desc">
-                            <h5>
-                                <span class="color-red"><strong>RM @popularPackages[i].Price</strong></span>
-                            </h5>
-                            <h4>@popularPackages[i].Title</h4>
-                            <div class="hotel-loc">@popularPackages[i].Description</div>
+                {
+                        <div class="hotel-small style-2 clearfix">
+                            <a class="hotel-img black-hover" href="#">
+                                <img class="img-responsive radius-0" src="@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))" alt="">
+                                <div class="tour-layer delay-1"></div>
+                            </a>
+                            <div class="hotel-desc">
+                                <h5>
+                                    <span class="color-red"><strong>RM @popularPackages[i].Price</strong></span>
+                                </h5>
+                                <h4>@popularPackages[i].Title</h4>
+                                @*<div class="hotel-loc">
+                                    @if (popularPackages[i].Description.Length > 200)
+                                    {
+                                        @(popularPackages[i].Description.Substring(0, 200) + "....");
+                                    }
+                                    else
+                                    {
+                                        @popularPackages[i].Description
+                                    }
+                                </div>*@
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
             </div>
            
         </div>
@@ -296,7 +350,7 @@
                 <div class="second-title">
                     <h4 class="subtitle color-dark-2-light">Our Blogs</h4>
                     <h2>Every adventure is a story to tell</h2>
-                    <p class="color-grey">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id tor.</p>
+                    @*<p class="color-grey">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id tor.</p>*@
                 </div>
             </div>
         </div>

@@ -227,11 +227,11 @@
                         <div class="drop">
                            @if (Model.Criteria.SortOrder == PackageIndexSort.Price_Asc)
                            {
-                                <b>Price ASC</b>
+                                <b>Price Lowest</b>
                            }
                            else if (Model.Criteria.SortOrder == PackageIndexSort.Price_Desc)
                            {
-                                <b>Price DESC</b>
+                                <b>Price Highest</b>
                            }
                            else
                            {
@@ -239,8 +239,8 @@
                            }
                             <a href="#" class="drop-list"><i class="fa fa-angle-down"></i></a>
                             <span>
-                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Price_Asc)')">ASC</a>
-                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Price_Desc)')">DESC</a>
+                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Price_Asc)')">Lowest</a>
+                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Price_Desc)')">Highest</a>
                             </span>
                         </div>
                     </div>
@@ -248,11 +248,11 @@
                         <div class="drop">
                             @if (Model.Criteria.SortOrder == PackageIndexSort.Ranking_Asc)
                             {
-                                <b>Rank ASC</b>
+                                <b>Rank Lowest</b>
                             }
                             else if (Model.Criteria.SortOrder == PackageIndexSort.Ranking_Desc)
                             {
-                                <b>Rank DESC</b>
+                                <b>Rank Highest</b>
                             }
                             else
                             {
@@ -260,8 +260,8 @@
                             }
                             <a href="#" class="drop-list"><i class="fa fa-angle-down"></i></a>
                             <span>
-                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Ranking_Asc)')">ASC</a>
-                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Ranking_Desc)')">DESC</a>
+                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Ranking_Asc)')">Lowest</a>
+                                <a href="#" onclick="sortGoto('@(PackageIndexSort.Ranking_Desc)')">Highest</a>
                             </span>
                         </div>
                     </div>
@@ -278,7 +278,7 @@
                             <div class="hotel-item style-8 bg-white">
                                 <div class="table-view">
                                     <div class="radius-top cell-view">
-                                        <img src="@Url.UploadedImageContent(item.ThumbnailImagePath)" alt="">
+                                        <img src="@Url.UploadedImageContent(item.ThumbnailImagePath)" alt="" height="">
                                         <div class="price price-s-3 red tt">hot price</div>
                                     </div>
                                     <div class="title hotel-middle clearfix cell-view">
@@ -294,7 +294,16 @@
                                         <h4><b>@item.Title</b></h4>
                                         <span class="f-14 color-dark-2 grid-hidden">2 Place de la Sans Défense, Puteaux</span>
                                         <br />
-                                        <p class="f-14">@item.Description</p>
+                                        <p class="f-14">
+                                            @if (item.Description.Length > 200)
+                                            {
+                                                @(item.Description.Substring(0, 200) +"....");
+                                            }
+                                            else
+                                            {
+                                                @item.Description
+                                            }
+                                        </p>
 
                                         <a href="#" class="c-button bg-dr-blue hv-dr-blue-o b-40 fl list-hidden">select</a>
                                         <a href="#" class="c-button color-dr-blue hv-o b-40 fr list-hidden"><img src="~/img/loc_icon_small_drak.png" alt="">view on map</a>

@@ -58,6 +58,7 @@ namespace BR.EzTravel.Web
                       "~/Content/jquery-ui.min.css",
                       "~/Content/font-awesome.css",
                       "~/Content/rating.css",
+                      "~/Content/custom.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/jqueryui").Include(
