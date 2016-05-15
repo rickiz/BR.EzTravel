@@ -36,47 +36,45 @@
                 <div class="left-col">
                     @if (Request.IsAuthenticated)
                     {
-                        <a href="@Url.Action("Index", "AdminProfile")">Welcome @(Util.SessionAccess.PICName)</a>
+                        <a href="@Url.Action("Index", "AdminProfile", new { @area = "CN" })">欢迎 @(Util.SessionAccess.PICName)</a>
                     }
 
                     @if (Request.IsAuthenticated &&
-                            (User.IsInRole("SA") || User.IsInRole("AG") || User.IsInRole("BG")))
+                    (User.IsInRole("SA") || User.IsInRole("AG") || User.IsInRole("BG")))
                     {
-                        <a href="@Url.Action("Index", "AdminProfile")"><i class="fa fa-cog"></i>Back Office</a>
+                        <a href="@Url.Action("Index", "AdminProfile", new { @area = "CN" })"><i class="fa fa-cog"></i>管理</a>
                     }
 
                     @if (Request.IsAuthenticated)
                     {
-                        <a href="@Url.Action("ChangePassword", "Account")"><i class="fa fa-key"></i>Change Password</a>
-                        <a href="@Url.Action("Logout", "Account")"><i class="fa fa-sign-out"></i>Log out</a>
+                        <a href="@Url.Action("ChangePassword", "Account", new { @area = "CN" })"><i class="fa fa-key"></i>更改密码</a>
+                        <a href="@Url.Action("Logout", "Account", new { @area = "CN" })"><i class="fa fa-sign-out"></i>登出</a>
                     }
                     else
                     {
-                        <a href="@Url.Action("Login", "Account")"><i class="fa fa-sign-in"></i>Sign in</a>
-                        <a href="@Url.Action("Register", "Account")"><i class="fa fa-user-plus"></i>Join the Holiday</a>
+                        <a href="@Url.Action("Login", "Account", new { @area = "CN" })"><i class="fa fa-sign-in"></i>登录</a>
+                        <a href="@Url.Action("Register", "Account", new { @area = "CN" })"><i class="fa fa-user-plus"></i>注册</a>
                     }
 
 
-                    <a href="@Url.Action("Index", "ContactUs")"><i class="fa fa-envelope"></i>Contact Us</a>
-                    
+                    <a href="@Url.Action("Index", "ContactUs", new { @area = "CN" })"><i class="fa fa-envelope"></i>联系我们</a>
+
                 </div>
-                <div class="right-col">                    
+                <div class="right-col">
                     <div class="folow">
-                        @*<a href="#" onclick="shareFB('@(Request.Url.ToString())')"><i class="fa fa-facebook"></i></a>*@
-                        @*<a href="#" onclick="shareFB('@(Html.CurrentDomainWithArea())')"><i class="fa fa-facebook"></i></a>*@
                         <a style="width: 100px;">
                             <div class="fb-share-button"
                                  data-href="@(Html.CurrentDomainWithArea())"
                                  data-layout="button_count">
                             </div>
                         </a>
-                        <a href="@Url.Action("Index", "Home")">EN</a>
+                        <a href="@Url.Action("Index", "Home", new { @area = "EN" })">EN</a>
                         <a href="@Url.Action("Index", "Home", new { @area = "CN" })">CN</a>
                     </div>
                     @*<form action="?" class="serach-item">
-                        <button type="submit" class="fa fa-search"></button>
-                        <input type="text" placeholder="Search...">
-                    </form>*@
+                            <button type="submit" class="fa fa-search"></button>
+                            <input type="text" placeholder="Search...">
+                        </form>*@
 
                 </div>
             </div>
@@ -94,63 +92,16 @@
                         <nav class="menu">
                             <ul>
                                 <li class="type-1 @(Html.SetMenuActive("Home"))">
-                                    <a href="@Url.Action("Index", "Home")">home<span class="fa fa-angle-down"></span></a>
+                                    <a href="@Url.Action("Index", "Home")">主页<span class="fa fa-angle-down"></span></a>
 
                                 </li>
-                                <li class="type-1 @(Html.SetMenuActive("Package"))">
+                                @*<li class="type-1 @(Html.SetMenuActive("Package"))">
                                     <a href="@Url.Action("Index", "Package")">Packages<span class="fa fa-angle-down"></span></a>
                                 </li>
                                 <li class="type-1 @(Html.SetMenuActive("Blog"))">
                                     <a href="@Url.Action("Index", "Blog")">Blogs<span class="fa fa-angle-down"></span></a>
-                                </li>
-                                @*<li class="type-1">
-                                    <a href="#">Tours<span class="fa fa-angle-down"></span></a>
-                                    <ul class="dropmenu">
-                                        <li><a href="detail_4.html">Tour Details </a></li>
-                                        <li><a href="hotel_list_2.html">Tour listing</a></li>
-
-                                    </ul>
                                 </li>*@
-                                @*<li class="type-1">
-                                    <a href="#">Flights<span class="fa fa-angle-down"></span></a>
-
-                                </li>
-
-                                <li class="type-1">
-                                    <a href="#">Cruises<span class="fa fa-angle-down"></span></a>
-
-                                </li>
-                                <li class="type-1">
-                                    <a href="#">Pages<span class="fa fa-angle-down"></span></a>
-                                    <ul class="dropmenu">
-                                        <li>
-                                            <a href="about_us.html">About <span class="fa fa-chevron-right"></span></a>
-
-                                        </li>
-
-                                        <li>
-                                            <a href="blog.html">Blog <span class="fa fa-chevron-right"></span></a>
-
-                                        </li>
-                                        <li>
-                                            <a href="faq.html">FAQ <span class="fa fa-chevron-right"></span></a>
-
-                                        </li>
-
-                                        <li>
-                                            <a href="contact_us.html">Contact <span class="fa fa-chevron-right"></span></a>
-
-                                        </li>
-                                        <li><a href="policies.html">Policies</a></li>
-                                        <li><a href="sitemap.html">Site Map</a></li>
-                                        <li>
-                                            <a href="404.html">404 page <span class="fa fa-chevron-right"></span></a>
-
-                                        </li>
-
-                                        <li><a href="login.html">Login</a></li>
-                                    </ul>
-                                </li>*@
+                                
 
                             </ul>
                         </nav>
@@ -291,7 +242,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/all")
     @Scripts.Render("~/bundles/eztravel")
-    
+
     <div id="fb-root"></div>
     <script>
       window.fbAsyncInit = function() {

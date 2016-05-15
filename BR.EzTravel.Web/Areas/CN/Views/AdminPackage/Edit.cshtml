@@ -1,0 +1,256 @@
+﻿@using BR.EzTravel.Web.Helpers
+@model BR.EzTravel.Web.Models.Admin.PackageEditViewModel
+@{
+    ViewBag.Title = "Edit Holiday Package";
+    Layout = "~/Areas/CN/Views/Shared/_AdminLayout.cshtml";
+
+    var countryCol = 3;
+    var parentCountries = Model.Countries.GroupBy(a => Model.Countries.IndexOf(a) / countryCol).ToList();
+}
+
+<div class="col-xs-12 col-sm-9">
+    <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+
+    <div class="row">
+        <div class="col-md-12" role="main">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.ID)
+                @Html.HiddenFor(m => m.DetailImageNames)
+                <div class="bs-docs-section">
+                    <h1 class="page-header">@ViewBag.Title</h1>
+                    @if (@Model.ErrorMessage != "")
+                    {
+                        <label style="color:red;font-weight:bold;">@Model.ErrorMessage</label>
+                    }
+                    <p>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-save"></i>
+                            保存
+                        </button>
+                    </p>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Title, "标题", new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control col-md-12" })
+                            @Html.ValidationMessageFor(m => m.Title)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Price, "价钱", new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Price, new { @class = "form-control col-md-12 numbersonly" })
+                            @Html.ValidationMessageFor(m => m.Price)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CategoryID, "类别", new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.CategoryID, Model.Categories, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="file">缩略图</label>
+                            <input type="file" id="file" name="file" />
+                            @if (!string.IsNullOrEmpty(Model.ThumbnailImagePath))
+                            {
+                                <img id="img-preview" src="@(Url.UploadedImageContent(Model.ThumbnailImagePath))" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label for="file">细节图片</label>
+                            <br />
+                            <div id="dropzone" class="dropzone">
+                                <div class="dz-message dropzone-previews">
+                                    将文件拖放这里 或 单击上传
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description, "描述", new { @class = "control-label" })
+                            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "15" })
+                            @Html.ValidationMessageFor(m => m.Description)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Days, "天", new { @class = "control-label" })
+                            @Html.EditorFor(m => m.Days, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            @Html.ValidationMessageFor(m => m.Days)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Nights, "夜", new { @class = "control-label" })
+                            @Html.EditorFor(m => m.Nights, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            @Html.ValidationMessageFor(m => m.Nights)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.StartDT, "开始日期", new { @class = "control-label" })
+                            @Html.EditorFor(m => m.StartDT)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.EndDT, "结束日期", new { @class = "control-label" })
+                            @Html.EditorFor(m => m.EndDT)
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">活动</label>
+
+                            @foreach (var item in Model.Activities)
+                            {
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" @(item.Selected ? "checked" : "") value="@item.Value" id="SelectedActivities" name="SelectedActivities" /> @item.Text
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">国家</label>
+
+                            @foreach (var parentItem in parentCountries)
+                            {
+                                <div class="row">
+                                    @foreach (var item in parentItem)
+                                    {
+                                        <div class="col-md-4 checkbox">
+                                            <label>
+                                                <input type="checkbox" @(item.Selected ? "checked" : "") value="@item.Value" id="CountryIDs" name="CountryIDs" /> @item.Text
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Active, "活跃", new { @class = "control-label" })
+                            @Html.CheckBoxFor(m => m.Active)
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-save"></i>
+                        保存
+                    </button>
+                </p>
+            }
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/dropzonescss")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dropzonescripts")
+
+    <script type="text/javascript">
+        var mockFiles = JSON.parse('@(Html.Raw(Json.Encode(Model.MockFiles)))');
+        var filesList = JSON.parse('@(Html.Raw(Json.Encode(Model.DetailImageNames.Split(','))))');
+        // Disable auto discover for all elements:
+        Dropzone.autoDiscover = false;
+
+        $(document).ready(function () {
+            $("#file").change(function () {
+                readURL(this);
+            });
+
+            var startDateId = '#' + '@(Html.IdFor(m => m.StartDT))';
+            var endDateId = '#' + '@(Html.IdFor(m => m.EndDT))';
+
+            // Select a Date Range with datepicker
+            $(startDateId).datepicker("option", "onClose", function (selectedDate) {
+                $(endDateId).datepicker("option", "minDate", selectedDate);
+                $(this).valid();
+            });
+
+            // Dropzone configuration
+
+            // Now that the DOM is fully loaded, create the dropzone, and setup the
+            // event listeners
+            $("div#dropzone").dropzone({
+                url: "@(Url.Action("UploadImages"))",
+                acceptedFiles: 'image/*',
+                previewsContainer: ".dropzone-previews",
+                addRemoveLinks: true,
+                success: function (file, response) {
+                    if (response.Error) {
+                        alert(response.Error);
+                        file.previewElement.classList.add("dz-error");
+                    }
+                    else {
+                        var imgName = response.FileNames[0];
+                        file.previewElement.classList.add("dz-success");
+                        addDetailImage(imgName);
+                    }
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                },
+                init: function () {
+                    var myDropzone = this;
+                    $.each(mockFiles, function (i, mockFile) {
+                        myDropzone.emit("addedfile", mockFile);
+                        myDropzone.createThumbnailFromUrl(mockFile, '@(Url.UploadedImageContent(""))/' + mockFile.name);
+                        myDropzone.emit("complete", mockFile);
+                    });
+                }
+            });
+
+            $(".dz-remove").on("click", function (e) {
+                var imgName = $(this).parent().find(".dz-filename > span").text();
+                removeDetailImage(imgName);
+            });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function handleFileSelect() {
+            //Check File API support
+            if (window.File && window.FileList && window.FileReader) {
+
+                var files = event.target.files; //FileList object
+                var output = document.getElementById("img-preview-files");
+                output.innerHTML = "";
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    //Only pics
+                    if (!file.type.match('image')) continue;
+
+                    var picReader = new FileReader();
+                    picReader.addEventListener("load", function (event) {
+                        var picFile = event.target;
+                        var div = document.createElement("div");
+                        div.innerHTML = "<img style='max-width: 300px; max-height: 200px;' src='" + picFile.result + "'" + "title='" + picFile.name + "'/>";
+                        output.insertBefore(div, null);
+                    });
+                    //Read the image
+                    picReader.readAsDataURL(file);
+                }
+            } else {
+                console.log("Your browser does not support File API");
+            }
+        }
+
+        function addDetailImage(imgName) {
+            filesList.push(imgName);
+            $('#DetailImageNames').val(filesList.join(','));
+        }
+
+        function removeDetailImage(imgName) {
+            filesList = _.without(filesList, imgName);
+            $('#DetailImageNames').val(filesList.join(','));
+        }
+    </script>
+}
+

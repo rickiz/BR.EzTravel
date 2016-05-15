@@ -49,14 +49,16 @@
             </div>
         </div>
         <div class="share style-2 clearfix">
-            <ul>
-                @*<li class="color-in"><a href=""><i class="fa fa-linkedin"></i>linkedin<span class="color-in-2">19</span></a></li>*@
-                <li class="color-fb"><a href=""><i class="fa fa-facebook"></i>facebook<span class="color-fb-2">12</span></a></li>
-                @*<li class="color-tw"><a href=""><i class="fa fa-twitter"></i>twitter<span class="color-tw-2">27</span></a></li>
-                <li class="color-gg"><a href=""><i class="fa fa-google-plus"></i>google +<span class="color-gg-2">51</span></a></li>
-                <li class="color-pin"><a href=""><i class="fa fa-pinterest"></i>pinterest<span class="color-pin-2">70</span></a></li>*@
-            </ul>
+            <div class="fb-share-button"
+                 data-href="@(Request.Url.ToString())"
+                 data-layout="button_count">
+            </div>
         </div>
+                @*<div class="share style-2 clearfix">
+            <ul>
+                <li class="color-fb"><a href=""><i class="fa fa-facebook"></i>facebook<span class="color-fb-2">12</span></a></li>
+            </ul>
+        </div>*@
     </div>
 </div>
 
@@ -130,4 +132,12 @@
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;language=en"></script>	
     @Scripts.Render("~/bundles/map")
 
+}
+
+@section fbheader
+{
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:url" content="@(Request.Url.ToString())" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="@Url.ContentAbsUrl("~/img/theme-1/logo2.png")" />
 }

@@ -10,10 +10,10 @@ using BR.EzTravel.Web.Properties;
 using System.IO;
 using System.Transactions;
 
-namespace BR.EzTravel.Web.Areas.EN.Controllers
+namespace BR.EzTravel.Web.Areas.CN.Controllers
 {
     [Authorize(Roles = "AG")]
-    public class AdminPackageController : BaseEnController
+    public class AdminPackageController : BaseCnController
     {
         public ActionResult Index()
         {
@@ -158,7 +158,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 return RedirectToAction("Edit", new
                 {
                     id = postID,
-                    errorMessage = "Insufficient available Post.\nPost created but failed to be published to website."
+                    errorMessage = "不足够可发布数量.\n帖子成功保存，但无法发布到网站."
                 });
             else
                 return RedirectToAction("Index");
@@ -177,7 +177,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
         public ActionResult Edit(int id, string errorMessage = "")
         {
-            var package = db.lnkmemberposts.Single(a => a.ID == id);            
+            var package = db.lnkmemberposts.Single(a => a.ID == id);
             var viewModel = new PackageEditViewModel
             {
                 ID = package.ID,
@@ -195,7 +195,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 ErrorMessage = errorMessage
             };
 
-            var selectedActivities = 
+            var selectedActivities =
                 db.lnkmemberpostpackageactivities.Where(a => a.MemberPostID == id && a.Active).Select(a => a.PackageActivityID).ToArray();
 
             viewModel.Activities = GetPackageActivities(selectedActivities);
@@ -207,7 +207,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
             viewModel.Countries = countries;
 
-            var detailImageNames = 
+            var detailImageNames =
                 db.lnkmemberpostimages.Where(a => a.Active && a.MemberPostID == id).Select(a => a.ImagePath).ToArray();
 
             viewModel.DetailImageNames = string.Join(",", detailImageNames);
@@ -245,7 +245,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 package.EndDT = viewModel.EndDT;
                 package.Days = viewModel.Days;
                 package.Nights = viewModel.Nights;
-                package.Active = viewModel.Active? isAvailable: viewModel.Active;
+                package.Active = viewModel.Active ? isAvailable : viewModel.Active;
 
                 if (file != null)
                 {
@@ -287,7 +287,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 oldActivities.ForEach(a => a.Active = false);
                 db.SaveChanges();
 
-                if(!viewModel.SelectedActivities.IsEmpty())
+                if (!viewModel.SelectedActivities.IsEmpty())
                 {
                     foreach (var activityID in viewModel.SelectedActivities)
                     {
@@ -318,7 +318,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
 
                 foreach (var existingImage in existingDetailImages)
                 {
-                    if(detailImages.Contains(existingImage.ImagePath))
+                    if (detailImages.Contains(existingImage.ImagePath))
                     {
                         detailImages.Remove(existingImage.ImagePath);
                     }
@@ -357,7 +357,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 return RedirectToAction("Edit", new
                 {
                     id = viewModel.ID,
-                    errorMessage = "Insufficient available Post.\nPost updated but failed to be published to website."
+                    errorMessage = "不足够可发布数量.\n帖子成功保存，但无法发布到网站."
                 });
             else
                 return RedirectToAction("Index");
@@ -408,7 +408,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 };
             }
 
-            
+
         }
 
         [HttpPost]

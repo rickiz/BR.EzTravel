@@ -1,0 +1,121 @@
+﻿@using BR.EzTravel.Web.Helpers
+
+@model BR.EzTravel.Web.Models.Admin.MemberEditViewModel
+@{
+    ViewBag.Title = "Edit Member";
+    Layout = "~/Areas/CN/Views/Shared/_AdminLayout2.cshtml";
+}
+
+<div class="col-xs-12 col-sm-9">
+    <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ID)
+        if (@Model.ErrorMessage != "")
+        {
+            <label style="color:red;font-weight:bold;">@Model.ErrorMessage</label>
+        }
+
+        <div class="col-md-3">
+            <div class="text-center margin-bottom-15px">
+                @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+                {
+                    <img data-src="holder.js/140x140" class="img-circle" alt="140x140" style="width: 140px; height: 140px;"
+                         src="@Url.UploadedImageContent(Model.ProfileImagePath)" data-holder-rendered="true">
+                }
+                <h2><strong> @Util.SessionAccess.RewardPoints  </strong><small>p</small></h2>
+                <p><small>奖励积分</small></p>
+
+                <div class="btn btn-success btn-block btn-file">
+                    + 编辑个人资料图片 <input type="file" id="file" name="file">
+                </div>
+            </div>
+            <div class="margin-bottom-15px">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge badge-primary">@Util.SessionAccess.AvailablePost</span>
+                        可发布数量
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge badge-success">0000</span>
+                        发布
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge badge-warning-alt">0000</span>
+                        剩余
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-9 bg-white ">
+            <h1 id="forms" class="page-header">档案资料</h1>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">电子邮件</label>
+                    @Html.TextBoxFor(m => m.PICEmail, new { @class = "form-control", placeholder = "PICEmail", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PICEmail)
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">商业登记号码</label>
+                    @Html.TextBoxFor(m => m.BusinessRegNo, new { @class = "form-control", placeholder = "BusinessRegNo" })
+                    @Html.ValidationMessageFor(m => m.BusinessRegNo)
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">公司</label>
+                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", placeholder = "CompanyName" })
+                    @Html.ValidationMessageFor(m => m.CompanyName)
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">名字</label>
+                    @Html.TextBoxFor(m => m.PICName, new { @class = "form-control", placeholder = "PICName" })
+                    @Html.ValidationMessageFor(m => m.PICName)
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">电话</label>
+                    @Html.TextBoxFor(m => m.PICContact, new { @class = "form-control", placeholder = "PICContact" })
+                    @Html.ValidationMessageFor(m => m.PICContact)
+                </div>
+                <br /><br />
+                <legend>详细地址</legend>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">地址</label><br />
+                    @Html.TextAreaFor(m => m.Address, new { rows = "2", cols = "92" })
+                    @Html.ValidationMessageFor(m => m.Address)
+                </div>
+
+                <div class="form-group clearfix margin-bottom-30px">
+
+                    <div class="col-sm-4">
+                        <label for="exampleInputEmail1">邮编</label>
+                        @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control", placeholder = "Postcode" })
+                        @Html.ValidationMessageFor(m => m.Postcode)
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="exampleInputEmail1">州</label>
+                        @Html.TextBoxFor(m => m.State, new { @class = "form-control", placeholder = "State" })
+                        @Html.ValidationMessageFor(m => m.State)
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="exampleInputEmail1">国家</label>
+                        @Html.TextBoxFor(m => m.Country, new { @class = "form-control", placeholder = "Country" })
+                        @Html.ValidationMessageFor(m => m.Country)
+                    </div>
+                </div>
+
+
+            </form>
+            <hr>
+            <div class="form-group text-center">
+
+                <input type="submit" value="保存" class="btn btn-success btn-lg">
+            </div>
+
+        </div>
+    }
+</div>

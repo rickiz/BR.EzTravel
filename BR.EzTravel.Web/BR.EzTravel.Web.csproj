@@ -183,6 +183,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\CN\Controllers\AdminPackageController.cs" />
+    <Compile Include="Areas\CN\Controllers\AdminProfileController.cs" />
     <Compile Include="Areas\EN\Controllers\AccountController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminBlogController.cs" />
     <Compile Include="Areas\EN\Controllers\AdminMemberController.cs" />
@@ -195,6 +197,9 @@
     <Compile Include="Areas\EN\Controllers\HomeController.cs" />
     <Compile Include="Areas\EN\Controllers\PackageController.cs" />
     <Compile Include="Areas\EN\ENAreaRegistration.cs" />
+    <Compile Include="Areas\CN\Controllers\BaseCnController.cs" />
+    <Compile Include="Areas\CN\Controllers\HomeController.cs" />
+    <Compile Include="Areas\CN\CNAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1444,6 +1449,16 @@
     <Content Include="Areas\EN\Views\Account\ChangePasswordConfirmation.cshtml" />
     <Content Include="Areas\EN\Views\ContactUs\Index.cshtml" />
     <Content Include="Areas\EN\Views\ComingSoon\Index.cshtml" />
+    <Content Include="Areas\CN\Views\web.config" />
+    <Content Include="Areas\CN\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CN\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CN\Views\Home\Index.cshtml" />
+    <Content Include="Areas\CN\Views\AdminProfile\Index.cshtml" />
+    <Content Include="Areas\CN\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\CN\Views\AdminPackage\Index.cshtml" />
+    <Content Include="Areas\CN\Views\Shared\_AdminLayout2.cshtml" />
+    <Content Include="Areas\CN\Views\AdminPackage\Create.cshtml" />
+    <Content Include="Areas\CN\Views\AdminPackage\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -1686,6 +1701,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\CN\Models\" />
     <Folder Include="Areas\EN\Models\" />
     <Folder Include="Areas\EN\Views\BaseEn\" />
     <Folder Include="UploadedImages\" />
