@@ -47,7 +47,7 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 viewModel = new PackageCreateViewModel();
 
             viewModel.Categories = GetList(ListType.Category);
-            viewModel.Countries = GetList(ListType.Country);
+            viewModel.Countries = GetList(ListType.Country, defaultItem: false);
             viewModel.Activities = GetPackageActivities();
 
             return View(viewModel);
@@ -89,15 +89,22 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 db.lnkmemberposts.Add(post);
                 db.SaveChanges();
 
-                var country = new lnkmemberpostcountry
+                if (!viewModel.CountryIDs.IsEmpty())
                 {
-                    Active = true,
-                    CountryID = viewModel.CountryID,
-                    CreateDT = DateTime.Now,
-                    MemberPostID = post.ID
-                };
-                db.lnkmemberpostcountries.Add(country);
-                db.SaveChanges();
+                    var memberCountries =
+                        viewModel.CountryIDs
+                            .Select(a =>
+                                new lnkmemberpostcountry
+                                {
+                                    Active = true,
+                                    CountryID = a,
+                                    CreateDT = DateTime.Now,
+                                    MemberPostID = post.ID
+                                })
+                            .ToArray();
+
+                    db.lnkmemberpostcountries.AddRange(memberCountries);
+                }
 
                 if (!viewModel.SelectedActivities.IsEmpty())
                 {
@@ -179,10 +186,8 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 Title = package.Title,
                 Description = package.Description,
                 Price = package.Price,
-                CountryID = country.CountryID,
                 CategoryID = package.CategoryID,
                 Categories = GetList(ListType.Category),
-                Countries = GetList(ListType.Country),
                 ThumbnailImagePath = package.ThumbnailImagePath,
                 Days = package.Days,
                 Nights = package.Nights,
@@ -196,6 +201,13 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                 db.lnkmemberpostpackageactivities.Where(a => a.MemberPostID == id && a.Active).Select(a => a.PackageActivityID).ToArray();
 
             viewModel.Activities = GetPackageActivities(selectedActivities);
+
+            var selectedCountryIDs =
+                db.lnkmemberpostcountries.Where(a => a.MemberPostID == id && a.Active).Select(a => a.CountryID).ToArray();
+            var countries = GetList(ListType.Country, defaultItem: false);
+            countries.ForEach(a => a.Selected = selectedCountryIDs.Any(b => b == int.Parse(a.Value)));
+
+            viewModel.Countries = countries;
 
             var detailImageNames = 
                 db.lnkmemberpostimages.Where(a => a.Active && a.MemberPostID == id).Select(a => a.ImagePath).ToArray();
@@ -243,8 +255,35 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
                     package.ThumbnailImagePath = fileName;
                 }
 
-                var country = db.lnkmemberpostcountries.First(a => a.MemberPostID == viewModel.ID && a.Active);
-                country.CountryID = viewModel.CountryID;
+                var oldCountries = db.lnkmemberpostcountries.Where(a => a.MemberPostID == viewModel.ID && a.Active).ToList();
+                oldCountries.ForEach(a => a.Active = false);
+                db.SaveChanges();
+
+                if (!viewModel.CountryIDs.IsEmpty())
+                {
+                    foreach (var countryID in viewModel.CountryIDs)
+                    {
+                        var inactiveAct = db.lnkmemberpostcountries
+                            .SingleOrDefault(a => a.CountryID == countryID && a.MemberPostID == viewModel.ID);
+
+                        if (inactiveAct == null)
+                        {
+                            var country = new lnkmemberpostcountry
+                            {
+                                Active = true,
+                                CreateDT = DateTime.Now,
+                                MemberPostID = viewModel.ID,
+                                CountryID = countryID
+                            };
+                            db.lnkmemberpostcountries.Add(country);
+                        }
+                        else
+                        {
+                            inactiveAct.Active = true;
+                        }
+                    }
+                    db.SaveChanges();
+                }
 
                 var oldActivities = db.lnkmemberpostpackageactivities.Where(a => a.MemberPostID == viewModel.ID && a.Active).ToList();
                 oldActivities.ForEach(a => a.Active = false);

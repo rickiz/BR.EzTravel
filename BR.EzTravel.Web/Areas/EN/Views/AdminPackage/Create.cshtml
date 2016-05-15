@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Create a Holiday Package";
     Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
+
+    var countryCol = 3;
+    var parentCountries = Model.Countries.GroupBy(a => Model.Countries.IndexOf(a) / countryCol).ToList();
+
 }
 
 <div class="col-xs-12 col-sm-9">
@@ -14,7 +18,7 @@
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate", onsubmit = "disableSubmit(this);", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
-                
+
                 @Html.HiddenFor(m => m.DetailImageNames)
 
                 <div class="bs-docs-section">
@@ -37,10 +41,6 @@
                             @Html.ValidationMessageFor(m => m.Price)
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.CountryID, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.CountryID, Model.Countries, new { @class = "form-control" })
-                        </div>
-                        <div class="form-group">
                             @Html.LabelFor(m => m.CategoryID, new { @class = "control-label" })
                             @Html.DropDownListFor(m => m.CategoryID, Model.Categories, new { @class = "form-control" })
                         </div>
@@ -49,16 +49,6 @@
                             <input type="file" id="file" name="file" />
                             <img id="img-preview" src="#" alt="your thumbnail" style="max-width: 700px; max-height: 500px;" />
                         </div>
-
-                        @*<div class="form-group">
-                            <label for="file">Detail Images</label>
-                            <br />
-                            <input type="file" id="files" name="files" multiple />
-                            <div id="img-preview-files">
-
-                            </div>
-                        </div>*@
-
                         <div class="form-group">
                             <label for="file">Detail Images</label>
                             <br />
@@ -93,7 +83,7 @@
                             @Html.EditorFor(m => m.EndDT)
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.SelectedActivities, new { @class = "control-label" })
+                            <label class="control-label">@Html.DisplayNameFor(m => m.SelectedActivities)</label>
 
                             @foreach (var item in Model.Activities)
                             {
@@ -101,6 +91,23 @@
                                     <label>
                                         <input type="checkbox" value="@item.Value" id="SelectedActivities" name="SelectedActivities" /> @item.Text
                                     </label>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">@Html.DisplayNameFor(m => m.CountryIDs)</label>
+
+                            @foreach (var parentItem in parentCountries)
+                            {
+                                <div class="row">
+                                    @foreach (var item in parentItem)
+                                    {
+                                        <div class="col-md-4 checkbox">
+                                            <label>
+                                                <input type="checkbox" value="@item.Value" id="CountryIDs" name="CountryIDs" /> @item.Text
+                                            </label>
+                                        </div>
+                                    }
                                 </div>
                             }
                         </div>

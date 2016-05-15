@@ -23,9 +23,6 @@ namespace BR.EzTravel.Web.Models.Admin
         [DisplayName("Category")]
         public int CategoryID { get; set; }
 
-        [DisplayName("Country")]
-        public int CountryID { get; set; }
-
         [Required]
         public string Description { get; set; }
 
@@ -51,6 +48,9 @@ namespace BR.EzTravel.Web.Models.Admin
 
         [Display(Name = "Activities")]
         public int[] SelectedActivities { get; set; }
+
+        [Display(Name = "Countries")]
+        public int[] CountryIDs { get; set; }
 
         [DisplayName("Active")]
         public bool Active { get; set; }

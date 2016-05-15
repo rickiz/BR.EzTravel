@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Edit Holiday Package";
     Layout = "~/Areas/EN/Views/Shared/_AdminLayout.cshtml";
+
+    var countryCol = 3;
+    var parentCountries = Model.Countries.GroupBy(a => Model.Countries.IndexOf(a) / countryCol).ToList();
 }
 
 <div class="col-xs-12 col-sm-9">
@@ -39,10 +42,6 @@
                             @Html.LabelFor(m => m.Price, new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.Price, new { @class = "form-control col-md-12 numbersonly" })
                             @Html.ValidationMessageFor(m => m.Price)
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.CountryID, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.CountryID, Model.Countries, new { @class = "form-control" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.CategoryID, new { @class = "control-label" })
@@ -98,6 +97,23 @@
                                     <label>
                                         <input type="checkbox" @(item.Selected ? "checked" : "") value="@item.Value" id="SelectedActivities" name="SelectedActivities" /> @item.Text
                                     </label>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">@Html.DisplayNameFor(m => m.CountryIDs)</label>
+
+                            @foreach (var parentItem in parentCountries)
+                            {
+                                <div class="row">
+                                    @foreach (var item in parentItem)
+                                    {
+                                        <div class="col-md-4 checkbox">
+                                            <label>
+                                                <input type="checkbox" @(item.Selected ? "checked" : "") value="@item.Value" id="CountryIDs" name="CountryIDs" /> @item.Text
+                                            </label>
+                                        </div>
+                                    }
                                 </div>
                             }
                         </div>
