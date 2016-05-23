@@ -287,10 +287,22 @@
                 @for (int i = 1; i < 5 && i < popularPackages.Count; i++)
             {
                     <div class="hotel-small style-2 clearfix">
-                        <a class="hotel-img black-hover" href="#">
+                        <a href="#">
+                            <div class="hotel-img black-hover img-bg-list background-block img-responsive"
+                                 style="background-image: url('@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))')">
+
+                                <div class="tour-layer delay-1"></div>
+                            </div>
+                        </a>
+                        
+                        @*<a class="hotel-img black-hover" href="#">
+                            <div class="background-block img-responsive"
+                                 style="background-image: url('@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))')">
+
+                            </div>
                             <img class="img-responsive radius-0" src="@(Url.UploadedImageContent(popularPackages[i].ThumbnailImagePath))" alt="">
                             <div class="tour-layer delay-1"></div>
-                        </a>
+                        </a>*@
                         <div class="hotel-desc">
                             <h5>
                                 <span class="color-red"><strong>RM @popularPackages[i].Price</strong></span>

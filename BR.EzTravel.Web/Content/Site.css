@@ -7443,3 +7443,7 @@ footer {
     width: 660px;
     height: 300px;
 }
+
+.hotel-small .img-bg-list{
+    min-height: 120px;
+}
