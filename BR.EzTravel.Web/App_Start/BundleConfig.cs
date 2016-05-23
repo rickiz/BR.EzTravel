@@ -39,8 +39,8 @@ namespace BR.EzTravel.Web
                      "~/Scripts/jquery.mousewheel.min.js",
                      "~/Scripts/jquery.circliful.min.js",
                      "~/Scripts/jquery.classycountdown.min.js",
-                     "~/Scripts/jquery.throttle.min.js",
-                     "~/Scripts/jquery.knob.min.js",
+                     "~/Scripts/jquery.throttle.js",
+                     "~/Scripts/jquery.knob.js",
                      //"~/Scripts/map.js",
                      "~/Scripts/all.js"));
 
@@ -56,6 +56,7 @@ namespace BR.EzTravel.Web
                       "~/Content/bootstrap.css",
                       "~/Content/jquery-ui.structure.min.css",
                       "~/Content/jquery-ui.min.css",
+                      "~/Content/jquery.classycountdown.min.css",
                       "~/Content/font-awesome.css",
                       "~/Content/rating.css",
                       "~/Content/custom.css",

@@ -330,6 +330,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery.classycountdown.min.css" />
     <Content Include="Content\offcanvas.css" />
     <Content Include="Content\rating.css" />
     <Content Include="Content\rating.min.css" />
