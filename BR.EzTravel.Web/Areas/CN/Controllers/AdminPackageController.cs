@@ -56,6 +56,21 @@ namespace BR.EzTravel.Web.Areas.CN.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase file, PackageCreateViewModel viewModel)
         {
+            if (!ModelState.IsValid || file == null)
+            {
+                if (file == null)
+                {
+                    ModelState.AddModelError("", "Thumbnail is required.");
+                }
+
+                viewModel.Categories = GetList(ListType.Category);
+                viewModel.Countries = GetList(ListType.Country, defaultItem: false);
+                viewModel.Activities = GetPackageActivities();
+                viewModel.DetailImageNames = "";
+
+                return View(viewModel);
+            }
+
             var postID = 0;
 
             var isAvailable = CheckAvailablePost(Util.SessionAccess.ID);

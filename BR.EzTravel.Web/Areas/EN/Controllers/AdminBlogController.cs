@@ -54,6 +54,17 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase file, BlogCreateViewModel viewModel)
         {
+            if (!ModelState.IsValid || file == null)
+            {
+                if(file == null)
+                {
+                    ModelState.AddModelError("", "Thumbnail is required.");
+                }
+
+                viewModel.Categories = GetList(ListType.Category);
+                return View(viewModel);
+            }
+
             var blog = new trnblog()
             {
                 Body = viewModel.Body,
@@ -109,6 +120,16 @@ namespace BR.EzTravel.Web.Areas.EN.Controllers
         public ActionResult Edit(HttpPostedFileBase file, BlogEditViewModel viewModel)
         {
             var blog = db.trnblogs.Single(a => a.ID == viewModel.ID);
+
+            if (!ModelState.IsValid)
+            {
+                viewModel.ThumbnailImagePath =
+                    string.IsNullOrEmpty(blog.ThumbnailImagePath) ?
+                        "" : Path.Combine(Settings.Default.ImageUploadPath, blog.ThumbnailImagePath);
+                viewModel.Categories = GetList(ListType.Category);
+                return View(viewModel);
+            }
+            
             blog.CategoryID = viewModel.CategoryID;
             blog.Title = viewModel.Title;
             blog.Body = viewModel.Body;
