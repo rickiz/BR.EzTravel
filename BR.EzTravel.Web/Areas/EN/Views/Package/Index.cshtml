@@ -277,8 +277,9 @@
                         <div class="list-item-entry">
                             <div class="hotel-item style-8 bg-white">
                                 <div class="table-view">
-                                    <div class="radius-top cell-view">
-                                        <img src="@Url.UploadedImageContent(item.ThumbnailImagePath)" alt="" style="height: 200px;">
+                                    <div class="radius-top cell-view background-block img-bg-list" 
+                                         style="background-image: url('@(Url.UploadedImageContent(item.ThumbnailImagePath))')">
+                                        @*<img src="@Url.UploadedImageContent(item.ThumbnailImagePath)" alt="" style="height: 200px;">*@
                                         <div class="price price-s-3 red tt">hot price</div>
                                     </div>
                                     <div class="title hotel-middle clearfix cell-view">

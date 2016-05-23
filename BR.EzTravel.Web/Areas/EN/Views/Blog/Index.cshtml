@@ -35,7 +35,12 @@
                         <div class="blog-list-entry">
                             @if (!string.IsNullOrEmpty(item.ThumbnailImagePath))
                             {
-                                <img class="img-responsive radius-0" src="@Url.UploadedImageContent(item.ThumbnailImagePath)" alt="" style="width: 660px;">
+                                @*<img class="img-responsive radius-0" src="@Url.UploadedImageContent(item.ThumbnailImagePath)" alt="" style="width: 660px;">*@
+
+                                <div class="background-block img-bg-bloglist img-responsive"
+                                     style="background-image: url('@(Url.UploadedImageContent(item.ThumbnailImagePath))')">
+
+                                </div>
                             }
                             <h4 class="blog-list-title"><a class="color-dark-2 link-dr-blue-2" href="#">@item.Title</a></h4>
                             <div class="tour-info-line clearfix">

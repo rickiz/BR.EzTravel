@@ -125,8 +125,8 @@
                 {
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="hotel-item">
-                            <div class="radius-top">
-                                <img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">
+                            <div class="radius-top background-block img-bg-list" style="background-image: url('@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))')">
+                                @*<img src="@(Url.UploadedImageContent(latestPackages[i].ThumbnailImagePath))" alt="">*@
                                 <div class="price price-s-1">RM @latestPackages[i].Price</div>
                             </div>
                             <div class="title clearfix">
